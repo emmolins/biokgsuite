@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "biokgsuite"
+version = "1.0.0"
+description = "A systematic evaluation framework for biomedical knowledge graphs"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["biokgsuite*"]
+
+[tool.pytest.ini_options]
+# The notebooks put src/ on sys.path themselves during their bootstrap cell;
+# pytest does not, so `python -m pytest tests` failed with
+# ModuleNotFoundError: No module named 'biokgsuite' on any checkout that had not
+# been pip-installed. This makes the test suite runnable from a clean clone with
+# no install step. `pip install -e .` also works and is the better choice if you
+# want biokgsuite importable from anywhere.
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

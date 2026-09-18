@@ -1,0 +1,37 @@
+drug_id,drug_name,disease_name,disease_id,source_agencies,approval_date,therapeutic_area,year_set,Pair_ID,step,reason
+DB00028,immune globulin IV (human-slra),Primary humoral immunodeficiency pediatric 2-11yr,DOID:0111941,FDA,2019,Immunology,2024-2026,81,0_duplicate,"same (drug, disease) as a retained row"
+DB09037,pembrolizumab,Biliary tract cancer,DOID:4607,PMDA,2014,Oncology,2024-2026,39,0_duplicate,"same (drug, disease) as a retained row"
+DB11714,durvalumab,Gastric/GEJ adenocarcinoma,DOID:3717,"FDA, EMA",2017,Oncology,2024-2026,61,0_duplicate,"same (drug, disease) as a retained row"
+DB11714,durvalumab,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),DOID:3717,EMA,2018,Oncology,2024-2026,61,0_duplicate,"same (drug, disease) as a retained row"
+DB11834,guselkumab,"Crohn's disease (moderate-severe, refractory)",DOID:8778,PMDA,2019,Immunology,2024-2026,146,0_duplicate,"same (drug, disease) as a retained row"
+DB12159,dupilumab,COPD (EMA 2025),DOID:3083,EMA,2017,Immunology,2024-2026,154,0_duplicate,"same (drug, disease) as a retained row"
+DB12281,luspatercept,First-line anemia in lower-risk MDS,DOID:0050908,EMA,2020,Oncology,2024-2026,29,0_duplicate,"same (drug, disease) as a retained row"
+DB12597,asciminib,Ph+ CML-CP frontline (EMA Feb 2026),DOID:0081088,EMA,2021,Oncology,2024-2026,144,0_duplicate,"same (drug, disease) as a retained row"
+DB12893,sacituzumab govitecan,HR+/HER2- breast cancer,DOID:1612,EMA+PMDA,2020,Oncology,2024-2026,4,0_duplicate,"same (drug, disease) as a retained row"
+DB14761,remdesivir,COVID-19 (expanded population),DOID:0080599,EMA,2020,Infectious,2024-2026,24,0_duplicate,"same (drug, disease) as a retained row"
+DB14962,trastuzumab deruxtecan,HER2+ early-stage BC (neoadjuvant + adjuvant),DOID:1612,FDA+EMA,2019,Oncology,2024-2026,99,0_duplicate,"same (drug, disease) as a retained row"
+DB14962,trastuzumab deruxtecan,HER2-mutant NSCLC (PMDA),DOID:3908,PMDA,2020,Oncology,2023,87,0_duplicate,"same (drug, disease) as a retained row"
+DB15233,avapritinib,Indolent systemic mastocytosis (EMA),DOID:349,EMA,2020,Hematology,2023,18,0_duplicate,"same (drug, disease) as a retained row"
+DB15303,faricimab,Retinal vein occlusion,DOID:1727,EMA,2022,Ophthalmology,2024-2026,38,0_duplicate,"same (drug, disease) as a retained row"
+DB15354,evinacumab,HoFH pediatric (EMA),DOID:0090105,EMA,2021,Metabolic,2023,10,0_duplicate,"same (drug, disease) as a retained row"
+DB15627,dostarlimab,dMMR/MSI-H primary advanced endometrial cancer (+chemo),DOID:1380,FDA,2021,Oncology,2023,6,0_duplicate,"same (drug, disease) as a retained row"
+DB15627,dostarlimab,dMMR/MSI-H primary advanced endometrial cancer,DOID:1380,EMA,2021,Oncology,2023,6,0_duplicate,"same (drug, disease) as a retained row"
+DB00028,immune globulin IV,Measles prophylaxis post-exposure,DOID:8622,EMA,2008,Infectious,2024-2026,238,1_factual,measles prophylaxis is absent from the full EMA indication text; pair is EMA-only
+DB00043,omalizumab,EGPA,DOID:3049,PMDA,2009,Immunology,2024-2026,158,1_factual,EGPA in Japan belongs to benralizumab/mepolizumab; omalizumab has no such approval
+DB09078,lenvatinib,Unresectable thymic carcinoma (PMDA),DOID:3284,PMDA,2015,Oncology,2023,96,1_factual,"PMDA approval 23 Mar 2021, outside the window"
+DB09222,fibrinogen,Acquired hypofibrinogenemia in cardiovascular surgery,DOID:2219,PMDA,1996,Hematology,2024-2026,252,1_factual,"PMDA approval 28 Mar 2022, outside the window, and a different indication"
+DB11834,guselkumab,Palmoplantar pustulosis (PMDA),DOID:4398,PMDA,2019,Immunology,2023,95,1_factual,"PMDA approval 21 Nov 2018, outside the window"
+DB09029,secukinumab,IV formulation for rheumatic diseases (EMA),DOID:1575,EMA,2015,Immunology,2023,75,2_not_an_indication_change,new IV formulation; the diseases were already authorised
+DB09037,pembrolizumab,MSI-H/dMMR solid tumors (full approval conversion),DOID:7360,FDA,2014,Oncology,2023,11,2_not_an_indication_change,"accelerated-to-full approval conversion, same indication"
+DB13928,semaglutide,Oral tablet formulation for weight management,DOID:9970,FDA+EMA,2021,Metabolic,2024-2026,213,2_not_an_indication_change,new oral formulation; obesity already authorised
+DB15654,mRNA-1273,COVID-19 updated strain,DOID:0080599,EMA,2022,Infectious,2023,78,2_not_an_indication_change,"vaccine strain update, same disease"
+DB00028,immune globulin subcutaneous,Primary immunodeficiency pediatric (EMA),DOID:0111941,EMA,2014,Immunology,2023,81,3_population_expansion,"primary immunodeficiency, paediatric"
+DB01656,roflumilast,Psoriasis in children 6-11 (cream),DOID:8893,FDA,2011,Immunology,2023,51,3_population_expansion,psoriasis in children 6-11
+DB06606,teplizumab-mzwv,Delay T1D onset in children ≥1yr,DOID:9744,FDA,2022,Metabolic,2024-2026,206,3_population_expansion,delay of T1D onset extended to children
+DB09299,tenofovir alafenamide,Chronic hepatitis B (pediatric),DOID:2043,EMA,2016,Infectious,2023,79,3_population_expansion,"chronic hepatitis B, paediatric"
+DB09302,alirocumab,Heterozygous familial hypercholesterolemia,DOID:13810,EMA,2015,Cardiovascular,2023,63,3_population_expansion,"heterozygous familial hypercholesterolaemia, flagged non-strict"
+DB12839,pegvaliase-pqpz,PKU expanded to ≥12yr,DOID:9281,FDA+EMA,2018,Metabolic,2024-2026,211,3_population_expansion,PKU extended to 12 years and older
+DB14761,remdesivir,COVID-19 in severe renal impairment/dialysis,DOID:0080599,FDA,2020,Infectious,2023,24,3_population_expansion,"COVID-19 in renal impairment, severity subgroup"
+DB14901,inclisiran,High LDL-C with increased CV risk (expanded),DOID:13810,FDA,2021,Cardiovascular,2023,54,3_population_expansion,"LDL-C, expanded risk population"
+DB15091,upadacitinib,Pediatric atopic dermatitis,DOID:0110098,PMDA,2019,Immunology,2024-2026,163,3_population_expansion,"atopic dermatitis, paediatric"
+DB15305,risdiplam,Spinal muscular atrophy (pediatric expansion),DOID:12377,EMA,2020,CNS,2023,71,3_population_expansion,SMA paediatric expansion

@@ -1,0 +1,215 @@
+No,Drug Name (Brand),Active Ingredient,Approval Date,Year,Indication,DrugBank_ID,DrugBank_Name,ChEMBL_ID,PubChem_CID,UNII,In_PrimeKG,PrimeKG_Name,Combo_Flag,Match_Type
+1,Brexafemme,ibrexafungerp,2021-06-01,2021,Vulvovaginal candidiasis,DB12471,Ibrexafungerp,CHEMBL4297513,46871657,A92JFM5XNU,False,,,exact
+2,Aduhelm,aducanumab-avwa,2021-06-07,2021,Alzheimer's disease,DB12274,Aducanumab,,,105J35OE21,True,Aducanumab,,exact
+3,Rylaze,asparaginase erwinia chrysanthemi (recombinant)-rywn,2021-06-30,2021,Acute lymphoblastic leukemia / lymphoblastic lymphoma,DB08886,Asparaginase Erwinia chrysanthemi,CHEMBL1863514,,D733ET3F9O,False,,,exact
+4,Kerendia,finerenone,2021-07-09,2021,Chronic kidney disease with type 2 diabetes,DB16165,Finerenone,CHEMBL2181927,,DE2O63YV8R,False,,,exact
+5,Fexinidazole,fexinidazole,2021-07-16,2021,Human African trypanosomiasis,DB12265,Fexinidazole,CHEMBL1631694,68792,306ERL82IR,False,,,exact
+6,Rezurock,belumosudil,2021-07-16,2021,Chronic graft-versus-host disease,DB16703,Belumosudil,CHEMBL2005186,,834YJF89WO,False,,,exact
+7,Bylvay,odevixibat,2021-07-20,2021,Pruritus (PFIC),DB16261,Odevixibat,CHEMBL4297588,,2W150K0UUC,False,,,exact
+8,Saphnelo,anifrolumab-fnia,2021-07-30,2021,Systemic lupus erythematosus,DB11976,Anifrolumab,,,38RL9AE51Q,True,Anifrolumab,,exact
+9,Nexviazyme,avalglucosidase alfa-ngpt,2021-08-06,2021,Late-onset Pompe disease,DB16099,Avalglucosidase alfa,,,EO144CP0X9,False,,,exact
+10,Welireg,belzutifan,2021-08-13,2021,Von Hippel-Lindau disease,DB15463,Belzutifan,CHEMBL4585668,,7K28NB895L,False,,,exact
+11,Korsuva,difelikefalin,2021-08-23,2021,Pruritus in chronic kidney disease,DB11938,Difelikefalin,CHEMBL3989915,24794466,NA1U919MRO,False,,,exact
+12,Skytrofa,lonapegsomatropin-tcgd,2021-08-25,2021,Short stature (growth hormone deficiency),DB16220,Lonapegsomatropin,,,OP35X9610Y,False,,,exact
+13,Exkivity,mobocertinib,2021-09-15,2021,NSCLC (EGFR exon 20 insertion),DB16390,Mobocertinib,CHEMBL4650319,,39HBQ4A67L,False,,,exact
+14,Tivdak,tisotumab vedotin-tftv,2021-09-20,2021,Recurrent/metastatic cervical cancer,DB16732,Tisotumab vedotin,,,T41737F88A,False,,,exact
+15,Qulipta,atogepant,2021-09-28,2021,Episodic migraine prevention,DB16098,Atogepant,CHEMBL3991065,,7CRV8RR151,False,,,exact
+16,Livmarli,maralixibat,2021-09-29,2021,Alagille syndrome pruritus,DB16226,Maralixibat,CHEMBL363392,,UYB6UOF69L,False,,,exact
+17,Tavneos,avacopan,2021-10-07,2021,ANCA-associated vasculitis,DB15011,Avacopan,CHEMBL3989871,,O880NM097T,False,,,exact
+18,Scemblix,asciminib,2021-10-29,2021,Philadelphia chromosome-positive CML,DB12597,Asciminib,CHEMBL4208229,72165228,L1F3R18W77,False,,,exact
+19,Besremi,ropeginterferon alfa-2b-njft,2021-11-12,2021,Polycythemia vera,DB15119,Ropeginterferon alfa-2b,,,981TME683S,True,Ropeginterferon alfa-2b,,exact
+20,Voxzogo,vosoritide,2021-11-19,2021,Achondroplasia,DB11928,Vosoritide,,,7SE5582Q2P,False,,,exact
+21,Livtencity,maribavir,2021-11-23,2021,Post-transplant CMV infection,DB06234,Maribavir,CHEMBL515408,,PTB4X93HE1,True,Maribavir,,exact
+22,Cytalux,pafolacianine,2021-11-29,2021,Ovarian cancer lesion identification,DB15413,Pafolacianine,CHEMBL4297412,,F7BD3Z4X8L,False,,,exact
+23,Tezspire,tezepelumab-ekko,2021-12-17,2021,Severe asthma,DB15090,Tezepelumab,,,RJ1IW3B4QX,True,Tezepelumab,,exact
+24,Vyvgart,efgartigimod alfa-fcab,2021-12-17,2021,Generalized myasthenia gravis,DB15270,Efgartigimod alfa,,,961YV2O515,False,,,exact
+25,Leqvio,inclisiran,2021-12-22,2021,Familial hypercholesterolemia / ASCVD,DB14901,Inclisiran,,,UOW2C71PG5,True,Inclisiran,,exact
+26,Adbry,tralokinumab-ldrm,2021-12-27,2021,Moderate-to-severe atopic dermatitis,DB12169,Tralokinumab,,,GK1LYB375A,True,Tralokinumab,,exact
+27,Quviviq,daridorexant,2022-01-07,2022,Insomnia,DB15031,Daridorexant,CHEMBL4297590,,LMQ24G57E9,False,,,exact
+28,Cibinqo,abrocitinib,2022-01-14,2022,Moderate-to-severe atopic dermatitis,DB14973,Abrocitinib,CHEMBL3655081,,73SM5SF3OR,False,,,exact
+29,Kimmtrak,tebentafusp-tebn,2022-01-25,2022,Unresectable/metastatic uveal melanoma,DB15283,Tebentafusp,,,N658GY6L3E,False,,,exact
+30,Vabysmo,faricimab-svoa,2022-01-28,2022,Neovascular AMD / diabetic macular edema,DB15303,Faricimab,,,QC4F7FKK7I,True,Faricimab,,exact
+31,Enjaymo,sutimlimab-jome,2022-02-04,2022,Cold agglutinin disease,DB14996,Sutimlimab,,,GNWE7KJ995,False,,,exact
+32,Pyrukynd,mitapivat,2022-02-17,2022,Hemolytic anemia in pyruvate kinase deficiency,DB16236,Mitapivat,CHEMBL4299940,,2WTV10SIKH,False,,,exact
+33,Vonjo,pacritinib,2022-02-28,2022,Myelofibrosis,DB11697,Pacritinib,CHEMBL2035187,46216796,G22N65IL3O,True,Pacritinib,,exact
+34,Ztalmy,ganaxolone,2022-03-18,2022,CDKL5 deficiency disorder seizures,DB05087,Ganaxolone,CHEMBL1568698,6918305,98WI44OHIQ,True,Ganaxolone,,exact
+35,Opdualag,nivolumab and relatlimab-rmbw,2022-03-18,2022,Unresectable/metastatic melanoma,DB09035,Nivolumab,CHEMBL2108738,,31YO63LBSN,True,Nivolumab,Opdualag matched on nivolumab (pre-existing) — relatlimab is the novel component,exact
+36,Pluvicto,lutetium (177Lu) vipivotide tetraxetan,2022-03-23,2022,Metastatic castration-resistant prostate cancer,DB28386,Vipivotide tetraxetan,CHEMBL4594280,,4YM1W0EGQ5,False,,,manual_alt
+37,Vivjoa,oteseconazole,2022-04-26,2022,Recurrent vulvovaginal candidiasis,DB13055,Oteseconazole,CHEMBL3311228,77050711,VHH774W97N,False,,,exact
+38,Camzyos,mavacamten,2022-04-28,2022,Obstructive hypertrophic cardiomyopathy,DB14921,Mavacamten,CHEMBL4297517,,QX45B99R3J,False,,,exact
+39,Voquezna,vonoprazan/amoxicillin/clarithromycin,2022-05-03,2022,H. pylori infection,DB11739,Vonoprazan,CHEMBL2079130,15981397,1R5L3J156G,True,Vonoprazan,Voquezna matched on vonoprazan — amoxicillin/clarithromycin are pre-existing antibiotics,exact
+40,Mounjaro,tirzepatide,2022-05-13,2022,Type 2 diabetes mellitus,DB15171,Tirzepatide,,,OYN3CCI6QE,True,Tirzepatide,,exact
+41,Vtama,tapinarof,2022-05-23,2022,Plaque psoriasis,DB06083,Tapinarof,CHEMBL259571,,84HW7D0V04,True,Tapinarof,,exact
+42,Amvuttra,vutrisiran,2022-06-13,2022,Hereditary transthyretin-mediated amyloidosis polyneuropathy,DB16699,Vutrisiran,,,GB4I2JI8UI,False,,,exact
+43,Xenpozyme,olipudase alfa,2022-08-31,2022,Acid sphingomyelinase deficiency,DB12835,Olipudase alfa,,,6D5766Q4OP,False,,,exact
+44,Spevigo,spesolimab-sbzo,2022-09-01,2022,Generalized pustular psoriasis,DB15626,Spesolimab,,,5IB2J79MCX,False,,,exact
+45,Daxxify,daxibotulinumtoxinA-lanm,2022-09-07,2022,Moderate-to-severe glabellar lines,DB17929,DaxibotulinumtoxinA,,,,False,,,exact
+46,Sotyktu,deucravacitinib,2022-09-09,2022,Moderate-to-severe plaque psoriasis,DB16650,Deucravacitinib,CHEMBL4435170,,N0A21N6RAU,False,,,exact
+47,Rolvedon,eflapegrastim,2022-09-09,2022,Febrile neutropenia prevention,DB15001,Eflapegrastim,,,UT99UG9QJX,False,,,exact
+48,Terlivaz,terlipressin,2022-09-14,2022,Hepatorenal syndrome,DB02638,Terlipressin,CHEMBL2135460,72081,7Z5X49W53P,True,Terlipressin,,exact
+49,Elucirem,gadopiclenol,2022-09-21,2022,MRI contrast agent,DB17084,Gadopiclenol,,,S276568KOY,False,,,exact
+50,Omlonti,oomidenepag isopropyl,2022-09-22,2022,Open-angle glaucoma / ocular hypertension,DB15071,Omidenepag isopropyl,CHEMBL4297666,,G0G0H52U6K,False,,,manual_alt
+51,Relyvrio,sodium phenylbutyrate/taurursodiol,2022-09-29,2022,Amyotrophic lateral sclerosis (ALS),,,,,,False,,,combo_not_found
+52,Lytgobi,futibatinib,2022-09-30,2022,Intrahepatic cholangiocarcinoma (FGFR2),DB15149,Futibatinib,CHEMBL3701238,,4B93MGE4AL,False,,,exact
+53,Imjudo,tremelimumab,2022-10-21,2022,Unresectable hepatocellular carcinoma,DB11771,Tremelimumab,,,QEN1X95CIX,True,Tremelimumab,,exact
+54,Tecvayli,teclistamab-cqyv,2022-10-25,2022,Relapsed/refractory multiple myeloma,DB16655,Teclistamab,,,54534MX6Z9,False,,,exact
+55,Elahere,mirvetuximab soravtansine-gynx,2022-11-14,2022,Recurrent platinum-resistant ovarian cancer,DB12489,Mirvetuximab soravtansine,,131704323,98DE7VN88D,True,Mirvetuximab Soravtansine,,exact
+56,Tzield,teplizumab-mzwv,2022-11-18,2022,Delay onset of stage 3 type 1 diabetes,DB06606,Teplizumab,,,S4M959U2IJ,True,Teplizumab,,exact
+57,Rezlidhia,olutasidenib,2022-12-01,2022,Relapsed/refractory AML (IDH1 mutation),DB16267,Olutasidenib,CHEMBL4297610,,0T4IMT8S5Z,False,,,exact
+58,Krazati,adagrasib,2022-12-12,2022,KRAS G12C-mutated NSCLC,DB15568,Adagrasib,CHEMBL4594350,,8EOO6HQF8Y,False,,,exact
+59,Lunsumio,mosunetuzumab-axgb,2022-12-22,2022,Relapsed/refractory follicular lymphoma,DB15434,Mosunetuzumab,,,LDJ89SS0YG,False,,,exact
+60,Sunlenca,lenacapavir,2022-12-22,2022,HIV (multidrug-resistant),DB15673,Lenacapavir,CHEMBL4594438,,A9A0O6FB4H,False,,,exact
+61,Xenoview,hyperpolarized Xe-129,2022-12-23,2022,Pulmonary function evaluation,,,,,,False,,,not_found
+62,Briumvi,ublituximab-xiiy,2022-12-28,2022,Relapsing multiple sclerosis,DB11850,Ublituximab,,,U59UGK3IPC,True,Ublituximab,,exact
+63,NexoBrid,anacaulase-bcdb,2022-12-28,2022,Thermal burn eschar removal,DB17449,Anacaulase,,,JD24M53P9U,False,,,exact
+64,Leqembi,lecanemab-irmb,2023-01-06,2023,Alzheimer's disease,DB14580,Lecanemab,,,12PYH0FTU9,True,Lecanemab,,exact
+65,Brenzavvy,bexagliflozin,2023-01-20,2023,Type 2 diabetes mellitus,DB12236,Bexagliflozin,CHEMBL1808388,25195624,EY00JF42FV,False,,,exact
+66,Orserdu,elacestrant,2023-01-27,2023,ER+/HER2- ESR1-mutated advanced breast cancer,DB06374,Elacestrant,CHEMBL4297509,,FM6A2627A8,True,Elacestrant,,exact
+67,Jaypirca,pirtobrutinib,2023-01-27,2023,Relapsed/refractory mantle cell lymphoma,DB17472,Pirtobrutinib,CHEMBL4650485,,JNA39I7ZVB,False,,,exact
+68,Jesduvroq,daprodustat,2023-02-01,2023,Anemia in CKD (dialysis),DB11682,Daprodustat,CHEMBL3544988,91617630,JVR38ZM64B,False,,,exact
+69,Lamzede,velmanase alfa-tycv,2023-02-16,2023,Alpha-mannosidosis,DB12374,Velmanase alfa,,,M91TG242P2,False,,,exact
+70,Filspari,sparsentan,2023-02-17,2023,IgA nephropathy,DB12548,Sparsentan,CHEMBL539423,10257882,9242RO5URM,True,Sparsentan,,exact
+71,Skyclarys,omaveloxolone,2023-02-28,2023,Friedreich's ataxia,DB12513,Omaveloxolone,CHEMBL4303525,71811910,G69Z98951Q,False,,,exact
+72,Zavzpret,zavegepant,2023-03-09,2023,Migraine,DB15688,Zavegepant,CHEMBL2397415,,ODU3ZAZ94J,False,,,exact
+73,Daybue,trofinetide,2023-03-10,2023,Rett syndrome,DB06045,Trofinetide,CHEMBL197084,,Z2ME8F52QL,False,,,exact
+74,Zynyz,retifanlimab-dlwr,2023-03-22,2023,Merkel cell carcinoma,DB15766,Retifanlimab,,,2Y3T5IF01Z,False,,,exact
+75,Rezzayo,rezafungin,2023-03-22,2023,Candidemia / invasive candidiasis,DB16310,Rezafungin,CHEMBL3989945,,G013B5478J,False,,,exact
+76,Joenja,leniolisib,2023-03-24,2023,Activated PI3K delta syndrome,DB16217,Leniolisib,CHEMBL3643413,,L22772Z9CP,False,,,exact
+77,Qalsody,tofersen,2023-04-25,2023,ALS (SOD1 mutation),DB14782,Tofersen,,,2NU6F9601K,False,,,exact
+78,Elfabrio,pegunigalsidase alfa-iwxj,2023-05-09,2023,Fabry disease,DB14992,Pegunigalsidase alfa,,,8M7V7Q6537,False,,,exact
+79,Veozah,fezolinetant,2023-05-12,2023,Menopausal hot flashes,DB15669,Fezolinetant,CHEMBL3608680,,83VNE45KXX,False,,,exact
+80,Miebo,perfluorhexyloctane,2023-05-18,2023,Dry eye disease,DB17823,Perfluorohexyloctane,,,7VYX4ELWQM,False,,,manual_alt
+81,Epkinly,epcoritamab-bysp,2023-05-19,2023,Relapsed/refractory DLBCL,DB16672,Epcoritamab,,,D6OMY2L0WA,False,,,exact
+82,Xacduro,sulbactam/durlobactam,2023-05-23,2023,Hospital-acquired bacterial pneumonia (Acinetobacter),DB09324,Sulbactam,CHEMBL403,130313,S4TF6I2330,True,Sulbactam,Xacduro matched on sulbactam (pre-existing) — durlobactam is the novel component,exact
+83,Paxlovid,nirmatrelvir/ritonavir,2023-05-25,2023,Mild-to-moderate COVID-19,DB16691,Nirmatrelvir,CHEMBL4802135,,7R9A5P7H32,True,Ritonavir,Paxlovid matched on ritonavir (pre-existing) — nirmatrelvir is the novel component,exact
+84,Posluma,flotufolastat F 18,2023-05-25,2023,Prostate cancer PET imaging,DB17851,Flotufolastat F-18,,,811W19E3OL,False,,,manual_alt
+85,Inpefa,sotagliflozin,2023-05-26,2023,Heart failure,DB12713,Sotagliflozin,CHEMBL3039507,24831714,6B4ZBS263Y,True,Sotagliflozin,,exact
+86,Columvi,glofitamab-gxbm,2023-06-15,2023,Relapsed/refractory DLBCL,DB16371,Glofitamab,,,06P3KLK2J8,False,,,exact
+87,Litfulo,ritlecitinib,2023-06-23,2023,Severe alopecia areata,DB14924,Ritlecitinib,CHEMBL4085457,,2OYE00PC25,False,,,exact
+88,Rystiggo,rozanolixizumab-noli,2023-06-26,2023,Generalized myasthenia gravis,DB14919,Rozanolixizumab,,,P7186074QC,True,Rozanolixizumab,,exact
+89,Ngenla,somatrogon-ghla,2023-06-27,2023,Growth failure (GH deficiency),DB14960,Somatrogon,,,6D848RA61B,False,,,exact
+90,Beyfortus,nirsevimab-alip,2023-07-17,2023,RSV prevention in infants,DB16258,Nirsevimab,,,VRN8S9CW5V,False,,,exact
+91,Vanflyta,quizartinib,2023-07-20,2023,Newly diagnosed AML (FLT3-ITD),DB12874,Quizartinib,CHEMBL576982,24889392,7LA4O6Q0D3,True,Quizartinib,,exact
+92,Xdemvy,lotilaner,2023-07-25,2023,Demodex blepharitis,DB17992,Lotilaner,CHEMBL3707310,,HEH4938D7K,False,,,exact
+93,Izervay,avacincaptad pegol,2023-08-04,2023,Geographic atrophy (AMD),DB15165,Avacincaptad pegol,,,TT0V5JLG5B,False,,,exact
+94,Zurzuvae,zuranolone,2023-08-04,2023,Postpartum depression,DB15490,Zuranolone,CHEMBL4105630,,7ZW49N180B,False,,,exact
+95,Talvey,talquetamab-tgvs,2023-08-09,2023,Relapsed/refractory multiple myeloma,DB16678,Talquetamab,,,4W3KFI3TN3,False,,,exact
+96,Elrexfio,elranatamab-bcmm,2023-08-14,2023,Relapsed/refractory multiple myeloma,DB15395,Elranatamab,,,L0HR9A577V,False,,,exact
+97,Sohonos,palovarotene,2023-08-16,2023,Fibrodysplasia ossificans progressiva,DB05467,Palovarotene,CHEMBL2105648,,28K6I5M16G,False,,,exact
+98,Veopoz,pozelimab-bbfg,2023-08-18,2023,CHAPLE disease (CD55 deficiency),DB15218,Pozelimab,,,0JJ21K6L2I,False,,,exact
+99,Aphexda,motixafortide,2023-09-08,2023,Hematopoietic stem cell mobilization (multiple myeloma),DB14939,Motixafortide,CHEMBL6067714,,DA9G065962,False,,,exact
+100,Ojjaara,momelotinib,2023-09-15,2023,Myelofibrosis with anemia,DB11763,Momelotinib,CHEMBL1078178,25062766,6O01GMS00P,False,,,exact
+101,Exxua,gepirone,2023-09-22,2023,Major depressive disorder,DB12184,Gepirone,CHEMBL284092,55191,JW5Y7B8Z18,True,Gepirone,,exact
+102,Pombiliti,cipaglucosidase alfa-atga,2023-09-28,2023,Late-onset Pompe disease,DB16708,Cipaglucosidase alfa,,,4SED7F4BSG,False,,,exact
+103,Rivfloza,nedosiran,2023-09-29,2023,Primary hyperoxaluria type 1,DB17635,Nedosiran,,,13U9R5J3WL,False,,,exact
+104,Velsipity,etrasimod,2023-10-12,2023,Ulcerative colitis,DB14766,Etrasimod,CHEMBL3358920,,6WH8495MMH,False,,,exact
+105,Bimzelx,bimekizumab,2023-10-17,2023,Moderate-to-severe plaque psoriasis,DB12917,Bimekizumab,,,09495UIM6V,True,Bimekizumab,,exact
+106,Zilbrysq,zilucoplan,2023-10-17,2023,Generalized myasthenia gravis (AChR+),DB15636,Zilucoplan,,,YG391PK0CC,False,,,exact
+107,Omvoh,mirikizumab-mrkz,2023-10-26,2023,Ulcerative colitis,DB14910,Mirikizumab,,,Z7HVY03PHP,False,,,exact
+108,Agamree,vamorolone,2023-10-26,2023,Duchenne muscular dystrophy,DB15114,Vamorolone,CHEMBL2348780,,8XP29XMB43,False,,,exact
+109,Loqtorzi,toripalimab-tpzi,2023-10-27,2023,Recurrent/metastatic nasopharyngeal carcinoma,DB15043,Toripalimab,,,8JXN261VVA,True,Toripalimab,,exact
+110,Fruzaqla,fruquintinib,2023-11-08,2023,Refractory metastatic colorectal cancer,DB11679,Fruquintinib,CHEMBL4303214,44480399,49DXG3M5ZW,False,,,exact
+111,Defencath,taurolidine/heparin,2023-11-15,2023,Catheter-related bloodstream infections (hemodialysis),DB12473,Taurolidine,CHEMBL2105420,29566,8OBZ1M4V3V,True,Taurolidine,Defencath matched on taurolidine — heparin is pre-existing,exact
+112,Augtyro,repotrectinib,2023-11-15,2023,ROS1-positive NSCLC,DB16826,Repotrectinib,CHEMBL4298138,,08O3FQ4UNP,False,,,exact
+113,Ryzneuta,efbemalenograstim alfa-vuxw,2023-11-16,2023,Neutropenia,DB18704,Efbemalenograstim alfa,,,5UPW5HJW3O,False,,,exact
+114,Truqap,capivasertib,2023-11-16,2023,Breast cancer (AKT pathway),DB12218,Capivasertib,CHEMBL2325741,25227436,WFR23M21IE,False,,,exact
+115,Ogsiveo,nirogacestat,2023-11-27,2023,Desmoid tumors,DB12005,Nirogacestat,CHEMBL1770916,46224413,QZ62892OFJ,False,,,exact
+116,Fabhalta,iptacopan,2023-12-05,2023,Paroxysmal nocturnal hemoglobinuria,DB16200,Iptacopan,CHEMBL4594448,,8E05T07Z6W,False,,,exact
+117,Filsuvez,birch triterpenes,2023-12-18,2023,Epidermolysis bullosa wounds,,,,,,False,,,not_found
+118,Wainua,eplontersen,2023-12-21,2023,Hereditary transthyretin-mediated amyloidosis polyneuropathy,DB16199,Eplontersen,,,0GRZ0F5XJ6,False,,,exact
+119,Zelsuvmi,berdazimer,2024-01-05,2024,Molluscum contagiosum,DB18712,Berdazimer,,,B23P7SM943,False,,,exact
+120,Exblifep,cefepime/enmetazobactam,2024-02-22,2024,Complicated urinary tract infections,DB01413,Cefepime,CHEMBL186,5479537,807PW4VQE3,True,Cefepime,Exblifep matched on cefepime (pre-existing) — enmetazobactam is the novel component,exact
+121,Letybo,letibotulinumtoxinA-wlbg,2024-02-29,2024,Moderate-to-severe glabellar lines,DB16820,LetibotulinumtoxinA,,,W5O50S8A59,False,,,exact
+122,Tevimbra,tislelizumab-jsgr,2024-03-13,2024,Esophageal squamous cell carcinoma,DB14922,Tislelizumab,,,0KVO411B3N,True,Tislelizumab,,exact
+123,Rezdiffra,resmetirom,2024-03-14,2024,NASH with moderate-to-advanced liver fibrosis,DB12914,Resmetirom,CHEMBL3261331,15981237,RE0V0T1ES0,False,,,exact
+124,Tryvio,aprocitentan,2024-03-19,2024,Hypertension,DB15059,Aprocitentan,CHEMBL2165326,,MZI81HV01P,False,,,exact
+125,Duvyzat,givinostat,2024-03-21,2024,Duchenne muscular dystrophy,DB12645,Givinostat,CHEMBL1213492,9804992,5P60F84FBH,True,Givinostat,,exact
+126,Winrevair,sotatercept-csrk,2024-03-26,2024,Pulmonary arterial hypertension,DB12118,Sotatercept,,,0QI90BTJ37,True,Sotatercept,,exact
+127,Vafseo,vadadustat,2024-03-27,2024,Anemia in CKD,DB12255,Vadadustat,CHEMBL3646221,23634441,I60W9520VV,False,,,exact
+128,Voydeya,danicopan,2024-03-29,2024,Paroxysmal nocturnal hemoglobinuria (extravascular hemolysis),DB15401,Danicopan,CHEMBL4250860,,JM8C1SFX0U,False,,,exact
+129,Zevtera,ceftobiprole medocaril sodium,2024-04-03,2024,Bloodstream infections / bacterial pneumonia,DB14733,Ceftobiprole medocaril,,,YXV28V1B07,True,Ceftobiprole medocaril,Zevtera matched on ceftobiprole medocaril — this was previously approved in other countries,exact
+130,Lumisight,pegulicianine,2024-04-17,2024,Optical imaging for cancer detection,DB18731,Pegulicianine,,,T6HE85WN0Q,False,,,exact
+131,Anktiva,nogapendekin alfa inbakicept-pmln,2024-04-22,2024,Bladder cancer,DB18740,Nogapendekin alfa,,,EW92EB4VEN,False,,,manual_alt
+132,Ojemda,tovorafenib,2024-04-23,2024,Pediatric low-grade glioma,DB15266,Tovorafenib,CHEMBL3348923,,ZN90E4027M,False,,,exact
+133,Xolremdi,mavorixafor,2024-04-26,2024,WHIM syndrome,DB05501,Mavorixafor,CHEMBL518924,11256587,0G9LGB5O2W,False,,,exact
+134,Imdelltra,tarlatamab-dlle,2024-05-16,2024,Extensive stage small cell lung cancer,DB17256,Tarlatamab,,,74X82ST8Q1,False,,,exact
+135,Rytelo,imetelstat,2024-06-06,2024,Low-to-intermediate risk myelodysplastic syndromes,DB14909,Imetelstat,,,F60NE4XB53,False,,,exact
+136,Iqirvo,elafibranor,2024-06-10,2024,Primary biliary cholangitis,DB05187,Elafibranor,CHEMBL3707395,9864881,2J3H5C81A5,True,Elafibranor,,exact
+137,Sofdra,sofpironium,2024-06-18,2024,Primary axillary hyperhidrosis,DB19325,Sofpironium,CHEMBL3707224,,00Y6A5AJU6,False,,,exact
+138,Piasky,crovalimab-akkz,2024-06-20,2024,Paroxysmal nocturnal hemoglobinuria,DB16128,Crovalimab,,,H9KH1GP3UU,False,,,exact
+139,Ohtuvayre,ensifentrine,2024-06-26,2024,Chronic obstructive pulmonary disease,DB16157,Ensifentrine,CHEMBL4594287,,3E3D8T1GIX,False,,,exact
+140,Kisunla,donanemab-azbt,2024-07-02,2024,Alzheimer's disease,DB16647,Donanemab,,,1ADB65P1KK,False,,,exact
+141,Leqselvi,deuruxolitinib,2024-07-25,2024,Severe alopecia areata,DB18847,Deuruxolitinib,CHEMBL4594381,,0CA0VSF91Y,False,,,exact
+142,Voranigo,vorasidenib,2024-08-06,2024,Grade 2 astrocytoma / oligodendroglioma,DB17097,Vorasidenib,CHEMBL4279047,,789Q85GA8P,False,,,exact
+143,Yorvipath,palopegteriparatide,2024-08-09,2024,Hypoparathyroidism,DB18676,Palopegteriparatide,,,G2N64C3385,False,,,exact
+144,Nemluvio,nemolizumab-ilto,2024-08-12,2024,Prurigo nodularis,DB15252,Nemolizumab,,,GN465U8B72,True,Nemolizumab,,exact
+145,Niktimvo,axatilimab-csfr,2024-08-14,2024,Chronic graft-versus-host disease,DB16388,Axatilimab,,,R96Z451BMC,False,,,exact
+146,Livdelzi,seladelpar,2024-08-14,2024,Primary biliary cholangitis,DB12390,Seladelpar,CHEMBL230158,11236126,7C00L34NB9,False,,,exact
+147,Lazcluze,lazertinib,2024-08-19,2024,NSCLC,DB16216,Lazertinib,CHEMBL4558324,,4A2Y23XK11,False,,,exact
+148,Ebglyss,lebrikizumab-lbkz,2024-09-13,2024,Moderate-to-severe atopic dermatitis,DB11914,Lebrikizumab,,,U9JLP7V031,True,Lebrikizumab,,exact
+149,Miplyffa,arimoclomol,2024-09-20,2024,Niemann-Pick disease type C,DB05025,Arimoclomol,CHEMBL4760607,208924,EUT3557RT5,True,Arimoclomol,,exact
+150,Aqneursa,levacetylleucine,2024-09-24,2024,Niemann-Pick disease type C,DB16956,L-Acetylleucine,CHEMBL56021,,E915HL7K2O,False,,,manual_alt
+151,Cobenfy,xanomeline/trospium chloride,2024-09-26,2024,Schizophrenia,DB15357,Xanomeline,CHEMBL21536,,9ORI6L73CJ,True,Xanomeline,,exact
+152,Flyrcado,flurpiridaz F 18,2024-09-27,2024,Myocardial ischemia/infarction (PET),DB18773,Flurpiridaz F-18,CHEMBL2107799,,TY3V24C029,False,,,manual_alt
+153,Itovebi,inavolisib,2024-10-10,2024,Locally advanced/metastatic breast cancer,DB15275,Inavolisib,CHEMBL4650215,,L4C1UY2NYH,False,,,exact
+154,Hympavzi,marstacimab-hncq,2024-10-11,2024,Hemophilia A or B,DB17725,Marstacimab,,,0UB3OA67O7,False,,,exact
+155,Vyloy,zolbetuximab-clzb,2024-10-18,2024,Gastric/GEJ adenocarcinoma,DB15118,Zolbetuximab,,,TF5MPQ8WGY,True,Zolbetuximab,,exact
+156,Orlynvah,sulopenem etzadroxil/probenecid,2024-10-25,2024,Uncomplicated urinary tract infections,DB16335,Sulopenem etzadroxil,,,492M3I304T,True,Probenecid,Orlynvah matched on probenecid (pre-existing) — sulopenem etzadroxil is the novel component,exact
+157,Revuforj,revumenib,2024-11-15,2024,Relapsed/refractory acute leukemia,DB18515,Revumenib,CHEMBL4650827,,LZ0M43NNF2,False,,,exact
+158,Ziihera,zanidatamab-hrii,2024-11-20,2024,HER2-positive biliary tract cancer,DB15471,Zanidatamab,,,Z20OC92TDI,False,,,exact
+159,Rapiblyk,landiolol,2024-11-22,2024,Supraventricular tachycardia,DB12212,Landiolol,CHEMBL1742466,114905,62NWQ924LH,True,Landiolol,,exact
+160,Attruby,acoramidis,2024-11-22,2024,Transthyretin-mediated amyloid cardiomyopathy,DB17999,Acoramidis,CHEMBL3940890,,T12B44A1OE,False,,,exact
+161,Iomervu,iomeprol,2024-11-27,2024,Radiographic contrast agent,DB11705,Iomeprol,CHEMBL2107214,3731,17E17JBP8L,False,,,exact
+162,Bizengri,zenocutuzumab-zbco,2024-12-04,2024,NSCLC and pancreatic adenocarcinoma (NRG1 fusion),DB15559,Zenocutuzumab,,,AE72RB1W1X,True,Zenocutuzumab,,exact
+163,Unloxcyt,cosibelimab-ipdl,2024-12-13,2024,Cutaneous squamous cell carcinoma,DB15770,Cosibelimab,,,PNW7GBB44P,False,,,exact
+164,Crenessity,crinecerfont,2024-12-13,2024,Classic congenital adrenal hyperplasia,DB18518,Crinecerfont,CHEMBL291657,,MFT24BX55I,False,,,exact
+165,Ensacove,ensartinib,2024-12-18,2024,ALK-positive NSCLC,DB14860,Ensartinib,CHEMBL4113131,,SMA5ZS5B22,True,Ensartinib,,exact
+166,Tryngolza,olezarsen,2024-12-19,2024,Familial chylomicronemia syndrome,DB18728,Olezarsen,,,S3RS2SA30L,False,,,exact
+167,Alyftrek,vanzacaftor/tezacaftor/deutivacaftor,2024-12-20,2024,Cystic fibrosis,DB18373,Vanzacaftor,CHEMBL5314934,,COM1POP492,True,Tezacaftor,Alyftrek matched on tezacaftor (pre-existing) — vanzacaftor/deutivacaftor are novel,exact
+168,Alhemo,concizumab-mtci,2024-12-20,2024,Hemophilia A and B,DB12820,Concizumab,,,68603V9EAF,True,Concizumab,,exact
+169,Datroway,datopotamab deruxtecan-dlnk,2025-01-17,2025,HR+/HER2- metastatic breast cancer,DB16410,Datopotamab deruxtecan,,,GD2OWY1DTK,False,,,exact
+170,Grafapex,treosulfan,2025-01-21,2025,AML/MDS (HSCT preparative regimen),DB11678,Treosulfan,CHEMBL455186,9882105,CO61ER3EPI,True,Treosulfan,,exact
+171,Journavx,suzetrigine,2025-01-30,2025,Moderate-to-severe acute pain,DB18927,Suzetrigine,CHEMBL5314487,,LOG73M21H5,False,,,exact
+172,Gomekli,mirdametinib,2025-02-11,2025,Neurofibromatosis type 1 (plexiform neurofibromas),DB07101,Mirdametinib,CHEMBL507361,9826528,86K0J5AK6M,False,,,exact
+173,Romvimza,vimseltinib,2025-02-14,2025,Tenosynovial giant cell tumor,DB17520,Vimseltinib,CHEMBL5095202,,PX9FTM69BF,False,,,exact
+174,Blujepa,gepotidacin,2025-03-25,2025,Uncomplicated urinary tract infections,DB12134,Gepotidacin,CHEMBL3317856,25101874,DVF0PR037D,False,,,exact
+175,Qfitlia,fitusiran,2025-03-28,2025,Hemophilia A or B,DB15002,Fitusiran,,,SV9W47ZLE1,False,,,exact
+176,Vanrafia,atrasentan,2025-04-02,2025,IgA nephropathy,DB06199,Atrasentan,CHEMBL9194,159594,V6D7VK2215,True,Atrasentan,,exact
+177,penpulimab-kcqx,penpulimab-kcqx,2025-04-23,2025,Nasopharyngeal carcinoma,DB16747,Penpulimab,,,IBS1BZ4E4I,False,,,exact
+178,Imaavy,nipocalimab-aahu,2025-04-29,2025,Generalized myasthenia gravis,DB16257,Nipocalimab,,,87M90CV8NC,False,,,exact
+179,Avmapki Fakzynja Co-Pack,avutometinib/defactinib,2025-05-08,2025,KRAS-mutated recurrent low-grade serous ovarian cancer,DB15254,Avutometinib,CHEMBL3264002,,D0D4252V97,False,,,exact
+180,Emrelis,telisotuzumab vedotin-tllv,2025-05-14,2025,c-Met overexpressing NSCLC,DB15104,Telisotuzumab vedotin,,,976X9VXC3Z,True,Telisotuzumab vedotin,,exact
+181,Tryptyr,acoltremon,2025-05-28,2025,Dry eye disease,DB19202,Acoltremon,CHEMBL2441929,,1L7BVT4Z4Z,False,,,exact
+182,Enflonsia,clesrovimab-cfor,2025-06-09,2025,RSV prevention in neonates/infants,DB18877,Clesrovimab,,,VJO29R4CP9,False,,,exact
+183,Ibtrozi,taletrectinib,2025-06-11,2025,ROS1-positive NSCLC,DB18711,Taletrectinib,CHEMBL4650989,,W4141180YD,False,,,exact
+184,Andembry,garadacimab-gxii,2025-06-16,2025,Hereditary angioedema prevention,DB15629,Garadacimab,,,32W6AJL0DY,False,,,exact
+185,Lynozyfic,linvoseltamab-gcpt,2025-07-02,2025,Relapsed/refractory multiple myeloma,DB17447,Linvoseltamab,,,M3CPC50MZS,False,,,exact
+186,Zegfrovy,sunvozertinib,2025-07-02,2025,NSCLC (EGFR exon 20 insertion),DB18925,Sunvozertinib,CHEMBL5314564,,L1Q2K5JYO8,False,,,exact
+187,Ekterly,sebetralstat,2025-07-03,2025,Hereditary angioedema (acute attacks),DB18305,Sebetralstat,CHEMBL5095248,,O5ZD2TU2B7,False,,,exact
+188,Anzupgo,delgocitinib,2025-07-23,2025,Chronic hand eczema,DB16133,Delgocitinib,CHEMBL4297507,,9L0Q8KK220,False,,,exact
+189,Sephience,sepiapterin,2025-07-28,2025,Sepiapterin-responsive PKU,DB16326,Sepiapterin,CHEMBL1255653,,CJQ26KO7HP,False,,,exact
+190,Vizz,aceclidine,2025-07-31,2025,Presbyopia,DB13262,Aceclidine,CHEMBL20835,,0578K3ELIO,True,Aceclidine,,exact
+191,Modeyso,dordaviprone,2025-08-06,2025,Diffuse midline glioma (H3 K27M),DB14844,Dordaviprone,CHEMBL4297310,,9U35A31JAI,False,,,exact
+192,Hernexeos,zongertinib,2025-08-08,2025,HER2-mutated NSCLC,DB18762,Zongertinib,CHEMBL5314498,,DRH7R67UVL,False,,,exact
+193,Brinsupri,brensocatib,2025-08-12,2025,Non-cystic fibrosis bronchiectasis,DB15638,Brensocatib,CHEMBL3900409,,25CG88L0BB,False,,,exact
+194,Dawnzera,donidalorsen,2025-08-21,2025,Hereditary angioedema prevention,DB18751,Donidalorsen,,,ZD4D8M32TL,False,,,exact
+195,Wayrilz,rilzabrutinib,2025-08-29,2025,Immune thrombocytopenia,DB17709,Rilzabrutinib,CHEMBL3702854,,5G1WE425BI,False,,,exact
+196,Keytruda Qlex,pembrolizumab/berahyaluronidase alfa-pmph,2025-09-19,2025,Multiple solid tumor indications,DB09037,Pembrolizumab,CHEMBL3137343,,DPT0O3T46P,True,Pembrolizumab,Keytruda Qlex matched on pembrolizumab (pre-existing) — berahyaluronidase is the novel component,exact
+197,Forzinity,elamipretide,2025-09-19,2025,Barth syndrome,DB11981,Elamipretide,CHEMBL3833370,11764719,87GWG91S09,False,,,exact
+198,Inluriyo,imlunestrant,2025-09-25,2025,ER+/HER2- ESR1-mutated advanced breast cancer,DB19043,Imlunestrant,CHEMBL5095183,,9CXQ3PF69U,False,,,exact
+199,Palsonify,paltusotine,2025-09-25,2025,Acromegaly,DB16277,Paltusotine,CHEMBL5267842,,F2IBD1GMD3,False,,,exact
+200,Rhapsido,remibrutinib,2025-09-30,2025,Chronic spontaneous urticaria,DB16852,Remibrutinib,CHEMBL4483575,,I7MVZ8HDNU,False,,,exact
+201,Jascayd,nerandomilast,2025-10-07,2025,Idiopathic pulmonary fibrosis,DB18237,Nerandomilast,,,I5DGT51IB8,False,,,exact
+202,Lynkuet,elinzanetant,2025-10-24,2025,Menopausal vasomotor symptoms,DB18968,Elinzanetant,CHEMBL4802157,,NZW2BOW35N,False,,,exact
+203,Kygevvi,doxecitine/doxribtimine,2025-11-03,2025,Thymidine kinase 2 deficiency,DB02594,Doxecitine,CHEMBL66115,13711,0W860991D6,False,,,exact
+204,Komzifti,ziftomenib,2025-11-13,2025,Relapsed/refractory AML (NPM1 mutation),DB17171,Ziftomenib,CHEMBL5095038,,4MOD1F4ENC,False,,,exact
+205,Redemplo,plozasiran,2025-11-18,2025,Familial chylomicronemia syndrome,DB18997,Plozasiran,,,XG9ARL6P25,False,,,exact
+206,Hyrnuo,sevabertinib,2025-11-19,2025,HER2-mutated NSCLC,DB21667,Sevabertinib,CHEMBL6068074,,2A7VPM5RWH,False,,,exact
+207,Voyxact,sibeprenlimab-szsi,2025-11-25,2025,IgA nephropathy,DB18919,Sibeprenlimab,,,GHX28QZ7DD,False,,,exact
+208,Lerochol,lerodalcibep-liga,2025-12-12,2025,Hypercholesterolemia / HeFH,DB19071,Lerodalcibep,,,1PHP3QG5PZ,False,,,exact
+209,Cardamyst,etripamil,2025-12-12,2025,Paroxysmal supraventricular tachycardia,DB12605,Etripamil,CHEMBL3707312,91824132,S82A18Y42P,False,,,exact
+210,Nuzolvence,zoliflodacin,2025-12-12,2025,Uncomplicated urogenital gonorrhea,DB12817,Zoliflodacin,CHEMBL3544978,76685216,FWL2263R77,False,,,exact
+211,Exdensur,depemokimab-ulaa,2025-12-16,2025,Severe eosinophilic asthma,DB18846,Depemokimab,,,D16EQP0KKH,False,,,exact
+212,Myqorzo,aficamten,2025-12-19,2025,Symptomatic obstructive HCM,DB18490,Aficamten,CHEMBL4847050,,B1I77MH6K1,False,,,exact
+213,Yartemlea,narsoplimab-wuug,2025-12-23,2025,HSCT-associated thrombotic microangiopathy,DB16418,Narsoplimab,,,FT24ZQQ5RP,False,,,exact
+214,Nereus,tradipitant,2025-12-30,2025,Motion sickness-associated vomiting,DB12580,Tradipitant,CHEMBL3544984,9916461,NY0COC51FI,False,,,exact

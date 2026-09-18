@@ -1,0 +1,929 @@
+seed,disease,kg,condition,model,shuffle,pool_size,positive_letter,rank,reciprocal_rank,hit@1,hit@3,hit@5,parsed,error,pos_basis,pos_agreement,pos_confidence,pos_rationale,frac_basis_kg,mean_confidence
+1,TRD monotherapy,none,no_kg,llama3.2:1b,0,8,D,6,0.16666666666666666,0,0,0,1,,kg,uncertain,3.0,"The knowledge graph reports evidence from Drug-7, but the pathway and disease relationship is unclear. Without further mechanistic information, I cannot confidently rank this candidate.",1.0,2.625
+1,TRD monotherapy,none,no_kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,,,,,,
+1,ILD-associated pulmonary hypertension,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,ILD-associated pulmonary hypertension,none,no_kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,kg,insufficient,3.0,"KG evidence of ILD-associated PH pathway is sparse and inconsistent with known disease mechanisms, but prior knowledge on pulmonary hypertension makes this candidate plausible.",1.0,3.875
+1,Indolent systemic mastocytosis (EMA),none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Indolent systemic mastocytosis (EMA),none,no_kg,llama3.2:1b,1,8,H,5,0.2,0,0,1,1,,both,sufficient,3.0,"Drug-4 has an association with mast cell degranulation via drug -> target -> pathway connections, although less clear than the other candidates.",0.8571428571428571,3.0
+1,Hidradenitis suppurativa,none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,Hidradenitis suppurativa,none,no_kg,llama3.2:1b,1,8,F,2,0.5,0,1,1,1,,prior,consistent,4.0,Drug-7 is also associated with Hidradenitis suppurativa and has mechanisms of action that could plausibly contribute to its pathogenesis.,0.625,2.625
+1,Chronic hepatitis B (pediatric),none,no_kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,both,insufficient,2.0,Insufficient evidence from the biomedical knowledge graph to confirm mechanistic links and lower confidence in prior knowledge for Drug-8.,0.8571428571428571,2.2857142857142856
+1,Chronic hepatitis B (pediatric),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,HoFH pediatric (EMA),none,no_kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,prior,insufficient,1.0,I do not have sufficient knowledge to evaluate the mechanistic plausibility of Drug-8 for this disease.,0.8571428571428571,1.5714285714285714
+1,HoFH pediatric (EMA),none,no_kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,consistent,4.0,"The provided evidence retrieved from the knowledge graph indicates a mechanistic link between Drug-8 and HoFH pediatric (EMA), supporting its ranking.",0.6,3.3333333333333335
+1,Nephrotic syndrome,none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.5,4.0
+1,Nephrotic syndrome,none,no_kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.6,3.0
+1,Follicular lymphoma,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,prior,insufficient,3.0,The provided evidence from the biomedical knowledge graph is insufficient and conflicting for Drug-8.,0.5,3.1666666666666665
+1,Follicular lymphoma,none,no_kg,llama3.2:1b,1,8,F,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,"The mechanistic link between Drug-8 and Follicular lymphoma is unclear, as the evidence from the biomedical knowledge graph is sparse on direct links. However, prior studies suggest a role for this pathway in follicular lymphoma.",1.0,2.625
+1,Retinal vein occlusion,none,no_kg,llama3.2:1b,0,8,G,3,0.3333333333333333,0,1,1,1,,kg,insufficient,1.0,"KG evidence suggests a pathway involving the complement system, but prior knowledge of DOID:1727 indicates that retinal vein occlusion is not primarily associated with this mechanism.",0.8333333333333334,3.6666666666666665
+1,Retinal vein occlusion,none,no_kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,kg,insufficient,3.0,"While Drug-8 shows some mechanistic links to Retinal vein occlusion, the knowledge graph is sparse and its evidence conflicts with what I know about this disease.",0.7142857142857143,3.0
+1,Agitation associated with Alzheimer's dementia,none,no_kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,insufficient,2.0,"The biomedical knowledge graph reports evidence of mechanistic links between Drug-2 and Alzheimer's dementia, but this is the only provided evidence. No prior pharmacological research establishes a clear pathway from these drugs to this disease state.",1.0,2.75
+1,Agitation associated with Alzheimer's dementia,none,no_kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,both,conflicting and inconsistent,2.0,"Evidence from the DOID:10652 pathway is inconsistent with some targets of drugs in this class (e.g., Aβ), but aligns with some pathways (e.g., tau phosphorylation).",1.0,2.5
+1,High LDL-C with increased CV risk (expanded),none,no_kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,prior,insufficient,3.0,Evidence from the biomedical knowledge graph is sparse and conflicts with my prior knowledge of the target disease.,0.875,3.25
+1,High LDL-C with increased CV risk (expanded),none,no_kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Indolent systemic mastocytosis,none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Indolent systemic mastocytosis,none,no_kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,EGPA (expanded),none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.3333333333333335
+1,EGPA (expanded),none,no_kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,kg,insufficient,2.0,The KG evidence is sparse and lacks clear mechanistic links.,0.75,4.25
+1,COVID-19 (expanded population),none,no_kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,The evidence from the biomedical knowledge graph is insufficient to judge this candidate with confidence.,0.75,3.0
+1,COVID-19 (expanded population),none,no_kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.5,2.5
+1,Obstructive sleep apnea with obesity,none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Obstructive sleep apnea with obesity,none,no_kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,KRAS G12C+ mCRC,none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,insufficient,3.0,Sparse knowledge graph evidence on KRAS G12C+ mCRC mechanism.,1.0,3.0
+1,KRAS G12C+ mCRC,none,no_kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,consistent,3.0,"The mechanism links provide a clear mechanistic explanation for how Drug-8 could be beneficial in KRAS G12C+ mCRC, and the prior knowledge of its relevance to this disease is consistent with these findings.",0.75,3.0
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),none,no_kg,llama3.2:1b,0,8,B,4,0.25,0,0,1,1,,both,conflicting,2.0,"The evidence from the biomedical knowledge graph for Drug-8 is inconsistent with prior mechanistic plausibility, making it uncertain as a candidate.",0.875,1.875
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.5,4.5
+1,Chorea associated with Huntington's disease,none,no_kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,prior,insufficient,2.0,Prior knowledge on mechanism but lacks evidence from the graph.,0.625,2.5
+1,Chorea associated with Huntington's disease,none,no_kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Heart failure (broadened),none,no_kg,llama3.2:1b,0,8,D,6,0.16666666666666666,0,0,0,1,,prior,conflicting,2.0,Conflicting evidence from the biomedical knowledge graph and prior pharmacological research suggests that this candidate may not be mechanistically plausible for heart failure.,0.625,3.375
+1,Heart failure (broadened),none,no_kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,prior,consistent,4.0,"The evidence from the knowledge graph supports a mechanistic link between drug-1 and heart failure, particularly in relation to its anti-inflammatory properties.",0.625,3.125
+1,Acquired hypofibrinogenemia in cardiovascular surgery,none,no_kg,llama3.2:1b,0,8,G,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Acquired hypofibrinogenemia in cardiovascular surgery,none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Pediatric atopic dermatitis,none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Pediatric atopic dermatitis,none,no_kg,llama3.2:1b,1,8,E,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,COVID-19 updated strain,none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,COVID-19 updated strain,none,no_kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Delay T1D onset in children ≥1yr,none,no_kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Delay T1D onset in children ≥1yr,none,no_kg,llama3.2:1b,1,8,D,8,0.125,0,0,0,1,,both,consistent,4.0,"The evidence for Drug-7 is consistent and it's possible that this drug could have a mechanistic role in T1D onset. However, the lack of specificity about pathway or disease mechanism raises concerns.",0.75,3.75
+1,Unresectable thymic carcinoma (PMDA),none,no_kg,llama3.2:1b,0,8,G,5,0.2,0,0,1,1,,,,,,,
+1,Unresectable thymic carcinoma (PMDA),none,no_kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,kg,,5.0,"Evidence retrieved directly from the biomedical graph supports Drug-6 as a potential therapeutic target, whereas prior knowledge about thymic carcinoma and its treatment implies that Drug-7 is less likely to be effective.",0.75,2.375
+1,Retinal vein occlusion,none,no_kg,llama3.2:1b,0,8,H,1,1.0,1,1,1,1,,prior,insufficient,3.0,KG does not provide mechanistic links for H. pylori and no evidence of involvement in DOID:1727,0.5,3.5
+1,Retinal vein occlusion,none,no_kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Spinal muscular atrophy (pediatric expansion),none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Spinal muscular atrophy (pediatric expansion),none,no_kg,llama3.2:1b,1,8,C,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,Drug-5 offers a plausible mechanistic link from drug to pathway and has some evidence supporting its association with SMA (pediatric expansion).,0.8571428571428571,2.7142857142857144
+1,Chronic thromboembolic pulmonary hypertension,none,no_kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The provided evidence for Drug-7 is sufficient to support its mechanistic plausibility, but the relationship with DOID:6432 needs more robust evidence.",0.8571428571428571,2.857142857142857
+1,Chronic thromboembolic pulmonary hypertension,none,no_kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,,,,,,
+1,Polycythaemia vera and essential thrombocytopenia,none,no_kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Polycythaemia vera and essential thrombocytopenia,none,no_kg,llama3.2:1b,1,8,H,6,0.16666666666666666,0,0,0,1,,kg,insufficient,2.0,KG evidence is sparse; prior knowledge is consistent with DOID:8997 but does not provide mechanistic links,0.875,3.0
+1,Generalized myasthenia gravis,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,insufficient,2.0,Uncertain due to sparse evidence and conflicting mechanisms reported in the knowledge graph.,0.75,3.5
+1,Generalized myasthenia gravis,none,no_kg,llama3.2:1b,1,8,G,6,0.16666666666666666,0,0,0,1,,prior,consistent,4.0,"The prior pharmacological research on the treatment of generalized myasthenia gravis has shown that drugs targeting different pathways can be effective, suggesting a mechanistic plausibility for Drug-3.",0.875,3.375
+1,Invasive fungal infections pediatric ≥2yr,none,no_kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.5,2.25
+1,Invasive fungal infections pediatric ≥2yr,none,no_kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,both,consistent,4.0,"Both the evidence graph and prior knowledge suggest a plausible mechanistic link between Drug-5 and invasive fungal infections in pediatric patients ≥2yr, with potential involvement of antifungal drugs targeting the fungal cell wall.",0.625,3.375
+1,PKU expanded to ≥12yr,none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.5
+1,PKU expanded to ≥12yr,none,no_kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,,,,,,
+1,IDH1-mutated relapsed/refractory MDS,none,no_kg,llama3.2:1b,0,8,A,8,0.125,0,0,0,1,,kg,insufficient,3.0,"KG evidence on specific pathway suggests IDH1-mutated relapsed/refractory MDS is associated with hypomethylation, but Drug-8's target pathway (IDH1-related pathways) does not directly support this association.",0.75,4.125
+1,IDH1-mutated relapsed/refractory MDS,none,no_kg,llama3.2:1b,1,8,H,8,0.125,0,0,0,1,,both,sufficient,4.0,"Drug-8 has evidence from multiple pathways, including oxygenation and DNA repair mechanisms.",0.75,2.625
+1,Retinopathy of prematurity,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Retinopathy of prematurity,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Agitation associated with Alzheimer's dementia,none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,2.2857142857142856
+1,Agitation associated with Alzheimer's dementia,none,no_kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,LDL-C elevation in statin-intolerant dyslipidemia,none,no_kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,3.5
+1,LDL-C elevation in statin-intolerant dyslipidemia,none,no_kg,llama3.2:1b,1,8,C,1,1.0,1,1,1,1,,,,,,,
+1,First-line anemia in lower-risk MDS,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,First-line anemia in lower-risk MDS,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Atopic dermatitis,none,no_kg,llama3.2:1b,0,8,E,2,0.5,0,1,1,1,,,,,,,
+1,Atopic dermatitis,none,no_kg,llama3.2:1b,1,8,C,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,Drug-7 has mechanistic plausibility for atopic dermatitis in both the knowledge graph and prior pharmacological evidence.,0.875,3.0
+1,Acute HCV pediatric,none,no_kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The knowledge graph reports Drug-7 as a potential target, and the provided annotations provide consistent evidence that it is involved in HCV.",1.0,3.625
+1,Acute HCV pediatric,none,no_kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.5
+1,HoFH in children,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,HoFH in children,none,no_kg,llama3.2:1b,1,8,A,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),none,no_kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,insufficient,2.0,"The evidence from the knowledge graph is lacking, and there are significant conflicts with prior pharmacological understanding of dMMR/MSI-H primary advanced endometrial cancer (+chemo).",0.875,3.0
+1,Cerebral folate transport deficiency,none,no_kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.1428571428571428
+1,Cerebral folate transport deficiency,none,no_kg,llama3.2:1b,1,8,A,7,0.14285714285714285,0,0,0,1,,prior,insufficient,2.0,"The evidence for Drug-1 is sparse and lacks consistency with what we know about the disease, particularly regarding folate transport. The knowledge graph reports some associations with targets related to folate metabolism (G), but these are not well-defined or consistent across different studies.",0.7142857142857143,3.4285714285714284
+1,Reduce MACE in CVD + obesity/overweight,none,no_kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,1.4285714285714286
+1,Reduce MACE in CVD + obesity/overweight,none,no_kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,inconsistent,2.0,"Evidence from the DOID graph links Drug-8 to pathways involved in reducing MACE in CVD, but its direct impact on the target is unclear.",1.0,2.142857142857143
+1,Palmoplantar pustulosis (PMDA),none,no_kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,prior,insufficient,3.0,Insufficient evidence from the knowledge graph to judge Drug-7's mechanistic plausibility for PMDA.,0.75,3.0
+1,Palmoplantar pustulosis (PMDA),none,no_kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Measles prophylaxis post-exposure,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,insufficient,3.0,"Drug-1 and Drug-6 have pathways to Measles, but their effects are unclear, with only Drug-6 having a clear mechanism.",0.875,3.25
+1,Measles prophylaxis post-exposure,none,no_kg,llama3.2:1b,1,8,E,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"The knowledge graph shows potential interactions between Drug-1 and measles in terms of immune system modulation. This is a plausible mechanism for post-exposure prophylaxis, but the evidence provided does not strongly support it.",0.5714285714285714,3.4285714285714284
+1,CKD in T2D,none,no_kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,prior,consistent,5.0,"Drug-8 has been shown to affect insulin/IGF-1 signaling in cell lines and animal models, consistent with prior knowledge.",0.875,3.25
+1,CKD in T2D,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,HER2-mutant NSCLC (PMDA),none,no_kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,HER2-mutant NSCLC (PMDA),none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.5
+1,Heterozygous familial hypercholesterolemia,none,no_kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,,,,,,
+1,Heterozygous familial hypercholesterolemia,none,no_kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,kg-vs-knowledge conflicts and Drug-4's sparse evidence make it unlikely,0.5,3.0
+1,Crohn's disease,none,no_kg,llama3.2:1b,0,8,D,5,0.2,0,0,1,1,,prior,uncertain,2.0,"There are limited mechanistic links provided for Drug-1, making it uncertain whether this candidate is a suitable repurposing drug for Crohn's disease.",0.75,3.375
+1,Crohn's disease,none,no_kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,COVID-19 in severe renal impairment/dialysis,none,no_kg,llama3.2:1b,0,8,F,4,0.25,0,0,1,1,,both,consistent,4.0,"KG evidence supports the drug's role in DOID, but some pathways are uncertain or lack consistency",0.875,3.75
+1,COVID-19 in severe renal impairment/dialysis,none,no_kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,both,insufficient,2.0,"The knowledge graph mentions associations between drug to target, but does not provide clear mechanistic links.",1.0,2.875
+1,MASH with fibrosis,none,no_kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,,,,,,
+1,MASH with fibrosis,none,no_kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,both,consistent,4.0,Conflicting evidence with kg; consistent with prior knowledge of disease mechanisms.,0.42857142857142855,2.5714285714285716
+1,mHSPC + ADT,none,no_kg,llama3.2:1b,0,8,F,5,0.2,0,0,1,1,,both,insufficient,1.0,limited knowledge graph evidence does not support direct association with mHSPC or ADT,0.6666666666666666,1.8333333333333333
+1,mHSPC + ADT,none,no_kg,llama3.2:1b,1,8,B,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,The evidence graph does not provide sufficient information to determine the mechanistic plausibility of BARD1 inhibitors for this disease.,0.75,3.75
+1,Chronic kidney disease,none,no_kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,conflicting,3.0,Evidence from the biomedical knowledge graph links Drug-8 to pathways related to kidney function and shows conflicting agreement with prior evidence.,0.8571428571428571,3.857142857142857
+1,Chronic kidney disease,none,no_kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,consistent,3.0,"The mechanistic link between Drug-8 and DOID:784 is consistent with the targets being involved in kidney function, which aligns with the disease's characteristics. However, my prior knowledge on this pathway is not as strong.",1.0,2.7142857142857144
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,none,no_kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Acquired hypothalamic obesity,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.0
+1,Acquired hypothalamic obesity,none,no_kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"Both sources agree that Drug-8's mechanism is unclear, but my prior knowledge on this point is uncertain.",0.625,2.0
+1,Pediatric glioma (EMA),none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Pediatric glioma (EMA),none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),none,no_kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,2.0,EVA supports mechanistic link to IV formulation for rheumatic diseases,0.6,2.8
+1,Oral tablet formulation for weight management,none,no_kg,llama3.2:1b,0,8,C,7,0.14285714285714285,0,0,0,1,,prior,consistent,4.0,"Strong associations with pathways related to lipase inhibition, and a plausible mechanism of action for oral tablet formulation.",0.75,2.5
+1,Oral tablet formulation for weight management,none,no_kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,dMMR recurrent/advanced endometrial cancer,none,no_kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,both,consistent,1.0,Uncertain,0.75,2.625
+1,dMMR recurrent/advanced endometrial cancer,none,no_kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,prior,insufficient,4.0,KG evidence is sparse and unclear for this disease; prior knowledge of Drug-1's effectiveness should be relied upon,0.5,2.6666666666666665
+1,Primary humoral immunodeficiency pediatric 2-11yr,none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,prior,insufficient,3.0,"KG evidence suggests DOID 0111941 has a mechanistic link with PD2K4, but prior knowledge on the target disease indicates a different primary humoral immunodeficiency pediatric 2-11yr.",0.7142857142857143,3.142857142857143
+1,Primary humoral immunodeficiency pediatric 2-11yr,none,no_kg,llama3.2:1b,1,8,B,4,0.25,0,0,1,1,,both,consistent,3.0,Drug-1 has a mechanistic link to DOID:0111941 and its involvement in immunoglobulin synthesis support its potential repurposing for primary humoral immunodeficiency pediatric 2-11yr.,0.875,2.75
+1,Neoadj+adj HNSCC,none,no_kg,llama3.2:1b,0,8,E,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Neoadj+adj HNSCC,none,no_kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Juvenile idiopathic arthritis (EMA Feb 2026),none,no_kg,llama3.2:1b,0,8,B,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Juvenile idiopathic arthritis (EMA Feb 2026),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.5
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",none,no_kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,conflicting,3.0,"The provided knowledge graph evidence for Drug-8 suggests a potential link between ALK+ solid tumors and its inhibitor, but my own pharmacological knowledge does not support it. The conflicting evidence from the DOID report may be due to a lack of specificity in the target pathway.",1.0,3.0
+1,Ulcerative colitis,none,no_kg,llama3.2:1b,0,8,G,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"Drug-8 has some mechanistic links to the pathway of inflammation, but there is limited evidence in the DOID graph. Further research is needed.",0.8571428571428571,3.5714285714285716
+1,Ulcerative colitis,none,no_kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"Both provided evidence from biomedical knowledge graph and prior pharmacological knowledge agrees that Drug-8 has potential in treating ulcerative colitis, but the pathway between drug and target (IL23R) is not well-studied.",0.75,1.75
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,none,no_kg,llama3.2:1b,0,8,G,5,0.2,0,0,1,1,,,,,,,
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,none,no_kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,2.1666666666666665
+1,Ulcerative colitis,none,no_kg,llama3.2:1b,0,8,F,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,The weak association with IBDRA:0000014 and the inconsistent evidence from DOID:8577 make F uncertain.,0.875,1.75
+1,Ulcerative colitis,none,no_kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,both,,3.0,,1.0,3.375
+1,BRAF V600E metastatic NSCLC,none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,BRAF V600E metastatic NSCLC,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,3.5
+1,Crohn's disease,none,no_kg,llama3.2:1b,0,8,C,8,0.125,0,0,0,1,,both,consistent,4.0,"The evidence for Drug-8 provides some mechanistic insights into its potential role in Crohn's disease, with associations to inflammatory pathways and immune modulation.",0.875,4.125
+1,Crohn's disease,none,no_kg,llama3.2:1b,1,8,E,2,0.5,0,1,1,1,,both,consistent,4.0,"The mechanistic link from Drug-5 to Crohn's disease is supported by evidence from known inflammatory pathways. The provided knowledge graph evidence supports this association, but may not be comprehensive.",0.875,3.75
+1,dMMR/MSI-H primary advanced endometrial cancer,none,no_kg,llama3.2:1b,0,8,H,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"The biomedical knowledge graph reports an association between drug H and target Z, but the evidence is sparse. Additionally, there are no prior reports of this specific mechanism for drug H.",0.7142857142857143,2.857142857142857
+1,dMMR/MSI-H primary advanced endometrial cancer,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,IgG4-related disease,none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,IgG4-related disease,none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Ph+ CML-CP frontline (EMA Feb 2026),none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Ph+ CML-CP frontline (EMA Feb 2026),none,no_kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,both,consistent,4.0,"Mechanistic links show consistent association between Drug-8 and Ph+ CML-CP frontline, with some supporting evidence",0.8571428571428571,3.5714285714285716
+1,EGPA,none,no_kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,prior,insufficient,1.0,We do not have enough evidence to support Drug-5 as a potential candidate for EGPA.,0.7142857142857143,2.7142857142857144
+1,EGPA,none,no_kg,llama3.2:1b,1,8,A,8,0.125,0,0,0,1,,both,insufficient,2.0,"The knowledge graph reports a mechanistic link from Drug-3 to EGPA, but its evidence is sparse and conflicts with what I know about the disease.",0.875,2.75
+1,Biliary tract cancer,none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,2.8333333333333335
+1,Biliary tract cancer,none,no_kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,,,,,,
+1,COPD,none,no_kg,llama3.2:1b,0,8,D,8,0.125,0,0,0,1,,prior,consistent,5.0,KG evidence is dense and consistent with prior knowledge of COPD as a disease primarily affecting the lungs. Prior knowledge outweighs KG evidence in this case.,0.625,3.375
+1,COPD,none,no_kg,llama3.2:1b,1,8,B,4,0.25,0,0,1,1,,both,insufficient,2.0,"Drug-8 has some evidence linking to COPD pathway in the DOID graph, but it is largely speculative and not directly related to the target disease.",0.625,2.25
+1,Primary mediastinal large B-cell lymphoma,none,no_kg,llama3.2:1b,0,8,D,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Primary mediastinal large B-cell lymphoma,none,no_kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,,,,,,
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),none,no_kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,both,consistent,2.0,"Drug-8 has some mechanistic links to eosinophilic inflammation and is a known treatment for CRSwNP, making it a plausible candidate",0.8333333333333334,2.3333333333333335
+1,RAS wild-type HER2+ metastatic colorectal cancer,none,no_kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,,,,,,
+1,RAS wild-type HER2+ metastatic colorectal cancer,none,no_kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,5.0,"The evidence from Drug-7 suggests a link between RAS mutations and colorectal cancer, but the knowledge graph provides some mechanistic links (RAS -> MAPK signaling pathway) that are not directly relevant to this disease.",0.875,3.5
+1,Schnitzler syndrome (Japan),none,no_kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"The mechanistic links in the knowledge graph and prior knowledge both suggest potential involvement of TNF-α in Schnitzler syndrome, making Drug-8 a plausible candidate.",0.875,3.75
+1,Schnitzler syndrome (Japan),none,no_kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,both,insufficient,2.0,"Evidence from the knowledge graph is sparse, and while it suggests immune system dysregulation, no direct mechanistic links are provided; prior knowledge suggests that Schinzier syndrome might be more closely related to other conditions.",0.875,3.25
+1,HR+/HER2- breast cancer,none,no_kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,both,consistent,4.0,"Drug-8 has evidence from DOID that supports its potential effects on breast cancer, and it shares a pathway with the target. However, its lack of prior knowledge makes it uncertain.",0.875,3.375
+1,HR+/HER2- breast cancer,none,no_kg,llama3.2:1b,1,8,F,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,"While Drug-8 showed some promise in inhibiting HER2, its effects on HR+/HER2- breast cancer were unclear and inconsistent with the provided evidence from the DOID:1612 node.",0.7142857142857143,2.7142857142857144
+1,Psoriasis in children 6-11 (cream),none,no_kg,llama3.2:1b,0,8,G,1,1.0,1,1,1,1,,kg,insufficient,3.0,"KG provides some mechanistic links, but the evidence is sparse and conflicts with my prior knowledge of psoriasis in children.",0.875,3.375
+1,Psoriasis in children 6-11 (cream),none,no_kg,llama3.2:1b,1,8,G,5,0.2,0,0,1,1,,prior,insufficient,2.0,"There is limited evidence for Drug-6's association with psoriasis, and its potential mechanistic plausibility is less clear than that of the other candidates.",0.75,2.875
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),none,no_kg,llama3.2:1b,0,8,E,2,0.5,0,1,1,1,,prior,insufficient,3.0,"Insufficient evidence agreement with DOID:3717, but some prior knowledge and both KG-vs-knowledge conflicts.",0.75,2.0
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),none,no_kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,"Drug-6 has some evidence linking it to gastric/GEJ adenocarcinoma, but the knowledge graph report on Drug-4 shows conflicting mechanistic links. Additionally, Drug-5 is not listed.",0.875,2.75
+1,COPD (EMA 2025),none,no_kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,kg,insufficient,1.0,The evidence from the biomedical knowledge graph does not provide sufficient mechanistic links to support Drug-7 as a potential treatment for COPD.,0.875,3.125
+1,COPD (EMA 2025),none,no_kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,,,,,,
+1,Ph+ CML-CP after 2+ TKIs,none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Ph+ CML-CP after 2+ TKIs,none,no_kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,IgE-mediated food allergy,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,consistent,4.0,"Both the knowledge graph and prior pharmacological knowledge suggest Drug-1's association with IgE-mediated food allergy, making it a plausible candidate.",0.75,3.625
+1,IgE-mediated food allergy,none,no_kg,llama3.2:1b,1,8,A,4,0.25,0,0,1,1,,prior,conflicting,1.0,Drug-2 does not have a mechanistic link to IgE-mediated food allergy from either the graph or prior pharmacological knowledge.,0.8,3.0
+1,BRAF+ thyroid cancer,none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,BRAF+ thyroid cancer,none,no_kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Primary immunodeficiency pediatric (EMA),none,no_kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,,,,,,
+1,Primary immunodeficiency pediatric (EMA),none,no_kg,llama3.2:1b,1,8,G,1,1.0,1,1,1,1,,kg,conflicting,2.0,KG evidence suggests a potential role in EMA but lacks specificity and conflicts with prior knowledge,1.0,3.0
+1,Biliary tract cancer 1L,none,no_kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,both,conflicting,3.0,"KG evidence suggests a role in cell proliferation, but prior knowledge indicates a different mechanism; prior knowledge is more established for Drug-1 and Drug-5",0.6666666666666666,2.6666666666666665
+1,Biliary tract cancer 1L,none,no_kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Polymyalgia rheumatica,none,no_kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,,,,,,
+1,Polymyalgia rheumatica,none,no_kg,llama3.2:1b,1,8,A,5,0.2,0,0,1,1,,prior,consistent,5.0,There is a plausible mechanistic link between Drug-8 and Polymyalgia rheumatica.,0.75,3.5
+1,Chronic lymphocytic leukemia,none,no_kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,both,insufficient,1.0,Insufficient evidence in the biomedical graph for Drug-8. Both sources lack sufficient mechanistic data to rank it.,0.875,3.0
+1,Chronic lymphocytic leukemia,none,no_kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,consistent,5.0,"The evidence from the biomedical knowledge graph (KG) for Drug-4, particularly its association with BCL-2 and its role in apoptosis regulation, supports its mechanistic plausibility as a treatment for Chronic Lymphocytic Leukemia.",0.0,5.0
+1,"Crohn's disease (moderate-severe, refractory)",none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"Evidence from the biomedical knowledge graph indicates that Drug-7 is involved in signaling pathways related to inflammation and immune response, which are key mechanisms in Crohn's disease.",1.0,5.0
+1,"Crohn's disease (moderate-severe, refractory)",none,no_kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,,,,,,
+1,HER2-mutant NSCLC (EMA),none,no_kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,both,inconsistent,2.0,KG evidence of direct interaction with HER2 but no clear mechanistic link to NSCLC or pathway to disease.,1.0,2.125
+1,HER2-mutant NSCLC (EMA),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Giant cell arteritis,none,no_kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,insufficient,4.0,Uncertain due to sparse DOID evidence and conflicting annotations,0.625,3.875
+1,Giant cell arteritis,none,no_kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.5
+1,First-line anemia in lower-risk MDS,none,no_kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.0
+1,First-line anemia in lower-risk MDS,none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,GVHD + pediatric,none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.5
+1,GVHD + pediatric,none,no_kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,MSI-H/dMMR solid tumors (full approval conversion),none,no_kg,llama3.2:1b,0,8,B,5,0.2,0,0,1,1,,both,insufficient,4.0,"KG evidence is sparse or conflicting with established pathways, making Drug-8 uncertain.",0.875,3.875
+1,MSI-H/dMMR solid tumors (full approval conversion),none,no_kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Antibody-mediated rejection in organ transplantation,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Antibody-mediated rejection in organ transplantation,none,no_kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Pancreatic NET,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,insufficient,4.0,"Limited evidence suggests Drug-3 may work, but its mechanistic plausibility is unclear due to the sparse nature of knowledge graph associations.",0.75,3.25
+1,Pancreatic NET,none,no_kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Follicular lymphoma (+obinutuzumab),none,no_kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,The knowledge graph evidence supports a plausible mechanism for Follicular lymphoma treatment with Drug-4 and Drug-8.,0.8571428571428571,3.7142857142857144
+1,Follicular lymphoma (+obinutuzumab),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,2.5714285714285716
+1,HR+/HER2- node-positive high-risk early breast cancer,none,no_kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,prior,insufficient,5.0,Prior pharmacological knowledge regarding the role of Drug-8 in breast cancer treatment suggests it is a potential candidate.,0.5,4.5
+1,HR+/HER2- node-positive high-risk early breast cancer,none,no_kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"Drug-8 lacks any evidence to support its mechanistic link, making it an uncertain candidate. In contrast, Drug-7 has some evidence from the biomedical knowledge graph but is outweighed by other candidates with stronger links.",0.875,2.5
+1,BRAF+ thyroid cancer,none,no_kg,llama3.2:1b,0,8,B,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,BRAF+ thyroid cancer,none,no_kg,llama3.2:1b,1,8,C,5,0.2,0,0,1,1,,,,,,,
+1,HER2+ solid tumors (tumor-agnostic),none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,conflicting,2.0,The provided evidence from the biomedical knowledge graph on Drug-8 is more consistent with DOID:7360 than the other candidates.,1.0,2.7142857142857144
+1,HER2+ solid tumors (tumor-agnostic),none,no_kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,3.0,"The provided evidence from the knowledge graph suggests a plausible mechanistic link between Drug-7 and HER2+ solid tumors, but it is sparse and conflicting with my prior knowledge.",0.875,3.5
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,4.0,"B and C have both mechanistic links to the disease pathway and prior FDA approval. However, the evidence from the biomedical knowledge graph is more comprehensive and consistent with known mechanisms.",0.7142857142857143,3.0
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",none,no_kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,Both prior and knowledge provide some mechanistic plausibility for mCRC BRAF V600E but the prior knowledge is more consistent with treatment of different cancers,0.7142857142857143,2.4285714285714284
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",none,no_kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",none,no_kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,HR+/HER2- metastatic breast cancer,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.8,4.0
+1,HR+/HER2- metastatic breast cancer,none,no_kg,llama3.2:1b,1,8,D,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,1L biliary tract cancer (+gemcitabine+cisplatin),none,no_kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,,,,,,
+1,1L biliary tract cancer (+gemcitabine+cisplatin),none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,RET-fusion NSCLC (expanded),none,no_kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,RET-fusion NSCLC (expanded),none,no_kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.6
+1,HR+/HER2- metastatic breast cancer,none,no_kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,prior,insufficient,1.0,No mechanistic evidence or prior knowledge supports the association between Drug-7 and HR+/HER2- metastatic breast cancer. Uncertain.,0.7142857142857143,1.8571428571428572
+1,HR+/HER2- metastatic breast cancer,none,no_kg,llama3.2:1b,1,8,C,5,0.2,0,0,1,1,,both,insufficient,1.0,"There are no direct mechanistic links from Drug-4 to HR+/HER2- metastatic breast cancer via the DOID:1612 knowledge graph, and our own knowledge is unclear on this topic.",0.7142857142857143,2.142857142857143
+1,Pheochromocytoma/paraganglioma,none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,sufficient,4.0,Both mechanistic links and related annotations are present in the knowledge graph for Drug-4.,1.0,4.0
+1,Pheochromocytoma/paraganglioma,none,no_kg,llama3.2:1b,1,8,G,3,0.3333333333333333,0,1,1,1,,prior,consistent,5.0,Evidence from the knowledge graph confirms a mechanistic link between drug G and Pheochromocytoma/paraganglioma.,0.875,3.75
+1,Gastric/GEJ adenocarcinoma (1L +chemo),none,no_kg,llama3.2:1b,0,8,A,4,0.25,0,0,1,1,,,,,,,
+1,Gastric/GEJ adenocarcinoma (1L +chemo),none,no_kg,llama3.2:1b,1,8,G,5,0.2,0,0,1,1,,both,consistent,4.0,"KG evidence and prior knowledge suggest that drug-7 may be a potential therapeutic target for gastric/GEJ adenocarcinoma, with some evidence supporting its role in inhibiting EGFR signaling",0.6666666666666666,3.0
+1,Metastatic colorectal cancer,none,no_kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,insufficient,3.0,Lack of explicit DOID association for Drug-4 compared to other drugs that have more direct evidence linking it to colorectal cancer via TNF-alpha pathway,0.6666666666666666,4.0
+1,Metastatic colorectal cancer,none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Gastric/GEJ adenocarcinoma,none,no_kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"KG evidence is sparse and conflicting with prior knowledge, while the provided evidence only shows a pathway but no direct association with the disease.",1.0,2.875
+1,Gastric/GEJ adenocarcinoma,none,no_kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,prior,insufficient,2.0,"The prior association of Drug-7 suggests its potential role in gastric adenocarcinoma, but there is limited evidence from the knowledge graph to support this claim.",0.7142857142857143,2.7142857142857144
+1,Urothelial carcinoma (expanded population),none,no_kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.25
+1,Urothelial carcinoma (expanded population),none,no_kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,prior,insufficient,3.0,"The knowledge graph does not provide sufficient evidence to assess the mechanistic plausibility of Drug-8, and prior pharmacological understanding suggests that its direct association with DOID:4006 may be less clear or supported.",0.625,2.375
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),none,no_kg,llama3.2:1b,0,8,B,5,0.2,0,0,1,1,,both,insufficient,1.0,"Unclear evidence links in the DOID knowledge graph, making it uncertain for mechanistic plausibility.",0.8571428571428571,2.0
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),none,no_kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.7142857142857143,3.4285714285714284
+1,Pediatric BRAF V600E low-grade glioma,none,no_kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,Pediatric BRAF V600E low-grade glioma,none,no_kg,llama3.2:1b,1,8,E,3,0.3333333333333333,0,1,1,1,,uncertain,insufficient,1.0,"The evidence from the knowledge graph is too sparse to be considered reliable, and there are no annotations or mechanistic links that support Drug-5's potential for this disease.",0.6666666666666666,2.3333333333333335
+1,HR+/HER2- early breast cancer (adjuvant),none,no_kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,HR+/HER2- early breast cancer (adjuvant),none,no_kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HR+/HER2-low breast cancer,none,no_kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,HR+/HER2-low breast cancer,none,no_kg,llama3.2:1b,1,8,G,5,0.2,0,0,1,1,,both,insufficient,3.0,"The knowledge graph does not support a mechanistic link between Drug-6 and HR+/HER2-low breast cancer, despite its association with HER2-positive breast cancer.",1.0,3.4
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),none,no_kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,insufficient,2.0,"The evidence for Drug-6 from the knowledge graph is weak and sparse, with only a few mechanistic links to platinum resistance. However, prior knowledge suggests that platinum resistance is more closely linked to pathways like DNA repair.",0.75,2.625
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),none,no_kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,kg,insufficient,1.0,Insufficient evidence from the biomedical knowledge graph to assess the mechanistic plausibility of drug B for platinum-resistant ovarian carcinoma.,1.0,2.857142857142857
+1,TRD monotherapy,primekg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,TRD monotherapy,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,ILD-associated pulmonary hypertension,primekg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.7142857142857143,3.2857142857142856
+1,ILD-associated pulmonary hypertension,primekg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,,,,,,
+1,Indolent systemic mastocytosis (EMA),primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Indolent systemic mastocytosis (EMA),primekg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.4285714285714286
+1,Hidradenitis suppurativa,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.5
+1,Hidradenitis suppurativa,primekg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Chronic hepatitis B (pediatric),primekg,kg,llama3.2:1b,0,8,B,5,0.2,0,0,1,1,,prior,insufficient,2.0,"The provided mechanistic links for Drug-6 are consistent with prior pharmacological knowledge, but the evidence is not strong enough to support its association with hepatitis B.",0.75,2.875
+1,Chronic hepatitis B (pediatric),primekg,kg,llama3.2:1b,1,8,A,8,0.125,0,0,0,1,,both,consistent,4.0,"Drug-6 targets CES1, SLCO1B3, and AK1, which may play a role in the pathogenesis of chronic hepatitis B (pediatric)",0.75,3.625
+1,HoFH pediatric (EMA),primekg,kg,llama3.2:1b,0,8,H,7,0.14285714285714285,0,0,0,1,,both,conflicting,3.0,The evidence for SLCO1B1 and ABCC4 in the target pathway is sparse compared to other targets.,0.875,3.0
+1,HoFH pediatric (EMA),primekg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.5
+1,Nephrotic syndrome,primekg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,,,,,,
+1,Nephrotic syndrome,primekg,kg,llama3.2:1b,1,8,A,8,0.125,0,0,0,1,,both,insufficient,2.0,"The knowledge graph evidence (MS4A1, RDH8) is not consistent with the pharmacological profile of Drug-2.",0.875,2.5
+1,Follicular lymphoma,primekg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,prior,insufficient,3.0,"While Drug-1's profile mentions ATP6AP1 and IFNA2 which are associated with follicular lymphoma, the evidence for Drug-8 is stronger.",0.5,3.25
+1,Follicular lymphoma,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Retinal vein occlusion,primekg,kg,llama3.2:1b,0,8,B,4,0.25,0,0,1,1,,both,insufficient,2.0,"KG vs knowledge evidence is sparse for Drug-8, particularly with respect to VEGFA targets.",0.875,2.875
+1,Retinal vein occlusion,primekg,kg,llama3.2:1b,1,8,E,2,0.5,0,1,1,1,,both,conflicting,3.0,"The provided knowledge graph evidence for Drug-8 is ambiguous, as it reports associations with ANGPT2 and VEGFA but does not specify a mechanistic pathway. However, based on the association with VEGFA, which is associated with vascular occlusion disorder, I have weighted this evidence higher than its lack of specificity.",0.8571428571428571,2.0
+1,Agitation associated with Alzheimer's dementia,primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The mechanistic links provided by the knowledge graph show consistent associations between Drug-2 and UGT2B17, UGT2B4, and UGT2B15. These enzymes are indeed involved in various diseases, including Alzheimer's disease.",0.625,3.375
+1,Agitation associated with Alzheimer's dementia,primekg,kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,High LDL-C with increased CV risk (expanded),primekg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,4.0,"The evidence for Drug-8's mechanism is consistent with the provided knowledge graph, but its sparse evidence makes it uncertain. Its mechanism also aligns with other mechanisms reported in the literature.",0.875,3.625
+1,High LDL-C with increased CV risk (expanded),primekg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,conflicting,3.0,"The associations between PCSK9 and ABCB11 with the target disease are supported by both knowledge graph evidence and pharmacological knowledge, but their mechanisms differ.",1.0,3.5
+1,Indolent systemic mastocytosis,primekg,kg,llama3.2:1b,0,8,F,2,0.5,0,1,1,1,,both,conflicting,4.0,"Although Drug-8 targets KIT and ABCB1, which are associated with DOID:349, there is no clear mechanistic link between these drugs and the disease.",1.0,2.0
+1,Indolent systemic mastocytosis,primekg,kg,llama3.2:1b,1,8,A,5,0.2,0,0,1,1,,both,insufficient,2.0,The weak associations in Drug-8 make its mechanistic plausibility uncertain and Drug-7's association with ABCB5 is not directly relevant.,0.5,3.125
+1,EGPA (expanded),primekg,kg,llama3.2:1b,0,8,A,6,0.16666666666666666,0,0,0,1,,both,consistent,5.0,"Both knowledge graph evidence and own pharmacological knowledge agree that EGPA (expanded) is associated with IL5RA, FCGR3A. This association is mechanistically plausible for the disease.",1.0,3.75
+1,EGPA (expanded),primekg,kg,llama3.2:1b,1,8,G,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"Drug-7 targets IL5RA and FCGR3A, which have disease associations with EGPA. However, the evidence is less consistent for Drug-7.",1.0,3.5
+1,COVID-19 (expanded population),primekg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,COVID-19 (expanded population),primekg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"Drug-8 targets CES1, which is a known target for multiple diseases including COVID-19. Additionally, Drug-6 and Drug-7 also target CES1.",1.0,3.857142857142857
+1,Obstructive sleep apnea with obesity,primekg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.5,4.0
+1,Obstructive sleep apnea with obesity,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.6,3.0
+1,KRAS G12C+ mCRC,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,KRAS G12C+ mCRC,primekg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),primekg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),primekg,kg,llama3.2:1b,1,8,B,8,0.125,0,0,0,1,,both,consistent,2.0,The association between Drug-4's targets CYP2C18 and GABRQ is consistent with the mechanism of action of certain drugs used in Diabetic retinopathy/DME.,0.875,1.625
+1,Chorea associated with Huntington's disease,primekg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,4.0,"The knowledge graph suggests a mechanistic link between Drug-8 and CYP3A5, which is involved in the metabolism of many drugs. However, there is limited evidence from the biomedical knowledge graph that links Drug-8 to these genes.",1.0,2.375
+1,Chorea associated with Huntington's disease,primekg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,both,consistent,3.0,"Drug-5 targets a pathway that is not directly related to this disease, and Drug-8 targets CYP3A4, which may not be relevant.",0.75,3.0
+1,Heart failure (broadened),primekg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Heart failure (broadened),primekg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,kg,insufficient,3.0,"Insufficient evidence from the knowledge graph for Drug-8's targets and mechanism, with conflicts noted for some links.",1.0,3.0
+1,Acquired hypofibrinogenemia in cardiovascular surgery,primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,uncertain,2.0,"The provided evidence from the knowledge graph is sparse, and its consistency with other mechanistic links makes it uncertain.",0.75,2.75
+1,Acquired hypofibrinogenemia in cardiovascular surgery,primekg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.0
+1,Pediatric atopic dermatitis,primekg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.6666666666666665
+1,Pediatric atopic dermatitis,primekg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,,,,,,
+1,COVID-19 updated strain,primekg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,Drug-4 is a clear target based on its association with MGAM and potential role in drug metabolism. The evidence provided is consistent with known roles of this target in COVID-19.,1.0,3.125
+1,COVID-19 updated strain,primekg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,,,,,,
+1,Delay T1D onset in children ≥1yr,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.0
+1,Delay T1D onset in children ≥1yr,primekg,kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,"Insufficient evidence to judge H due to sparse association with IL20 and its role in Delay T1D onset. However, both evidence sources indicate Drug-7's involvement in the insulin-dependent glucose metabolism pathways, making it a plausible candidate.",0.875,2.875
+1,Unresectable thymic carcinoma (PMDA),primekg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Unresectable thymic carcinoma (PMDA),primekg,kg,llama3.2:1b,1,8,A,5,0.2,0,0,1,1,,both,conflicting,3.0,Evidence from the knowledge graph is sparse or conflicting with prior knowledge about AOX1.,0.75,3.375
+1,Retinal vein occlusion,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Retinal vein occlusion,primekg,kg,llama3.2:1b,1,8,F,3,0.3333333333333333,0,1,1,1,,prior,insufficient,2.0,Limited mechanistic evidence from the knowledge graph compared to more established connections.,0.6666666666666666,3.0
+1,Spinal muscular atrophy (pediatric expansion),primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The evidence for Drug-8 is consistent across different sources, including the knowledge graph and its annotations. However, some of the mechanistic links are not supported by other sources.",1.0,3.25
+1,Spinal muscular atrophy (pediatric expansion),primekg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,conflicting,3.0,The provided evidence is mostly consistent with HSPB3 association but has conflicting information on PIGQ and IGHMBP2 associations.,1.0,4.25
+1,Chronic thromboembolic pulmonary hypertension,primekg,kg,llama3.2:1b,0,8,B,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Chronic thromboembolic pulmonary hypertension,primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Polycythaemia vera and essential thrombocytopenia,primekg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Polycythaemia vera and essential thrombocytopenia,primekg,kg,llama3.2:1b,1,8,H,1,1.0,1,1,1,1,,prior,insufficient,3.0,"While Drug-3 targets ABCB1 and CYP2C8, the evidence for ABCB1 in Polycythaemia vera and essential thrombocytopenia is sparse. The provided knowledge graph evidence is conflicting with my own knowledge about MPL and SLC30A10 being associated with this disease.",0.875,1.375
+1,Generalized myasthenia gravis,primekg,kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,,,,,,
+1,Generalized myasthenia gravis,primekg,kg,llama3.2:1b,1,8,F,1,1.0,1,1,1,1,,both,consistent,4.0,"The evidence from the knowledge graph that Drug-8 targets CD19 is consistent with Drug-2's profile. Additionally, Drug-8's pharmacological mechanism of action does not conflict with any other provided evidence.",1.0,2.3333333333333335
+1,Invasive fungal infections pediatric ≥2yr,primekg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,2.5
+1,Invasive fungal infections pediatric ≥2yr,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,PKU expanded to ≥12yr,primekg,kg,llama3.2:1b,0,8,E,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,The provided evidence for Drug-4 targets KCNJ14 (Drug-4) is not present in the knowledge graph.,1.0,3.25
+1,PKU expanded to ≥12yr,primekg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,1.7142857142857142
+1,IDH1-mutated relapsed/refractory MDS,primekg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,both,consistent,5.0,"The kg evidence lists Drug-8 as a target for IDH1, CYP2C9, and ABCB1, while the drug profile indicates roles in CLCN2, CBR1, ADRB3, SLCO1A2, ORM1, BCHE, CYP2D6, ALB, ABCB1, and CYP3A4.",1.0,4.833333333333333
+1,IDH1-mutated relapsed/refractory MDS,primekg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,insufficient,2.0,"No evidence from DOID matches the targets of Drug-5, which are CYP2C19, CYP2C9, and ALB.",1.0,3.0
+1,Retinopathy of prematurity,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Retinopathy of prematurity,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Agitation associated with Alzheimer's dementia,primekg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.75,2.5
+1,Agitation associated with Alzheimer's dementia,primekg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,,,,,,
+1,LDL-C elevation in statin-intolerant dyslipidemia,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,LDL-C elevation in statin-intolerant dyslipidemia,primekg,kg,llama3.2:1b,1,8,E,2,0.5,0,1,1,1,,both-prior,consistent,5.0,"The provided evidence shows a clear mechanistic link between drug-8 and LDL-C elevation in statin-intolerant dyslipidemia. It targets EDNRA and AGT, which are both involved in lipid metabolism.",0.0,4.428571428571429
+1,First-line anemia in lower-risk MDS,primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,prior,both,3.0,"The knowledge graph reports associations between Drug-5 targets MAOB, CYP1A2, and BCL2 but not the others. In contrast, the provided evidence only lists association for UGT1A8.",0.0,3.625
+1,First-line anemia in lower-risk MDS,primekg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Atopic dermatitis,primekg,kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,prior,conflicting,4.0,"While Drug-3 targets RXRG, which is involved in skin barrier function, and SLCO1B1, which affects drug absorption, there's no clear mechanistic link to atopic dermatitis.",0.75,2.25
+1,Atopic dermatitis,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Acute HCV pediatric,primekg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Acute HCV pediatric,primekg,kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,prior,consistent,1.0,"Prior knowledge about the disease and related pathways suggests Drug-8 may play a role, but evidence from the knowledge graph is sparse.",0.5,1.5
+1,HoFH in children,primekg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,both,consistent,4.0,Both evidence from the knowledge graph and prior mechanistic knowledge support Drug-1 as a potential treatment for HoFH in children.,1.0,4.0
+1,HoFH in children,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),primekg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.8571428571428572
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),primekg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,prior,consistent,5.0,"Drug-8 targets PDCD1, which is associated with cancer. Its mechanistic plausibility for dMMR/MSI-H primary advanced endometrial cancer (+chemo) is established.",0.75,3.875
+1,Cerebral folate transport deficiency,primekg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Cerebral folate transport deficiency,primekg,kg,llama3.2:1b,1,8,B,3,0.3333333333333333,0,1,1,1,,prior,insufficient,2.0,The provided knowledge graph evidence for Drug-1 is weak and does not provide a clear mechanistic link to cerebral folate transport deficiency.,0.8571428571428571,3.4285714285714284
+1,Reduce MACE in CVD + obesity/overweight,primekg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.5,2.5
+1,Reduce MACE in CVD + obesity/overweight,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.6666666666666665
+1,Palmoplantar pustulosis (PMDA),primekg,kg,llama3.2:1b,0,8,A,6,0.16666666666666666,0,0,0,1,,kg,consistent,5.0,"Drug-1 targets a gene associated with epidermal disease (SERPINA7), which could plausibly affect PMDA.",1.0,2.75
+1,Palmoplantar pustulosis (PMDA),primekg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Measles prophylaxis post-exposure,primekg,kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,prior,insufficient,4.0,The provided evidence on CD46's role in measles prophylaxis post-exposure is limited and does not appear to be directly supported by mechanistic links between CD46 and the disease.,0.75,3.0
+1,Measles prophylaxis post-exposure,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,CKD in T2D,primekg,kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,both,insufficient,4.0,"KG evidence is sparse and conflicting, while prior knowledge indicates potential relevance to CKD in T2D. Uncertainty due to insufficient evidence agreement.",1.0,3.5714285714285716
+1,CKD in T2D,primekg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,,,,,,
+1,HER2-mutant NSCLC (PMDA),primekg,kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,prior,insufficient,3.0,Insufficient evidence and conflicting information make it uncertain.,0.5,2.75
+1,HER2-mutant NSCLC (PMDA),primekg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Heterozygous familial hypercholesterolemia,primekg,kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,both,insufficient,1.0,The evidence for Drug-7's association with PCSK9 is not strong enough to justify the inclusion of this pathway.,1.0,2.3333333333333335
+1,Heterozygous familial hypercholesterolemia,primekg,kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,,,,,,
+1,Crohn's disease,primekg,kg,llama3.2:1b,0,8,E,4,0.25,0,0,1,1,,both,insufficient,2.0,some conflicting evidence despite both KG and prior knowledge being reported for this drug as well,0.6,3.0
+1,Crohn's disease,primekg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,,,,,,
+1,COVID-19 in severe renal impairment/dialysis,primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,prior,insufficient,1.0,The knowledge graph evidence is not sufficient to support Drug-8 as a potential candidate.,0.625,2.625
+1,COVID-19 in severe renal impairment/dialysis,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.0,4.0
+1,MASH with fibrosis,primekg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,prior,insufficient,3.0,"The mechanistic links provided by the knowledge graph are limited and unclear, especially regarding the targets of Drug-8.",0.75,2.875
+1,MASH with fibrosis,primekg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"The knowledge graph reports associations between Drug-8 and several genes, including AMY1C, GLP1R, DPP4, MME, LPL, and ALB. While these targets may not be directly related to fibrosis, they are all involved in metabolic pathways that could potentially impact the disease.",1.0,4.333333333333333
+1,mHSPC + ADT,primekg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,mHSPC + ADT,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Chronic kidney disease,primekg,kg,llama3.2:1b,0,8,B,4,0.25,0,0,1,1,,both,consistent,2.0,"The provided knowledge graph evidence supports Drug-7's potential interaction with the target disease, and its profile does not provide sufficient evidence to assess.",1.0,2.125
+1,Chronic kidney disease,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,primekg,kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,prior,conflicting,5.0,Prior knowledge of AVPR1A and AVPR2 being involved in allergic responses makes Drug-C uncertain.,0.8571428571428571,3.4285714285714284
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Acquired hypothalamic obesity,primekg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,,,,,,
+1,Acquired hypothalamic obesity,primekg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Pediatric glioma (EMA),primekg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"Both knowledge graph and prior knowledge provide consistent evidence for Drug-6, with sufficient evidence from the graph confirming its association with CYP11B2",1.0,5.0
+1,Pediatric glioma (EMA),primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),primekg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Oral tablet formulation for weight management,primekg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,,,,,,
+1,Oral tablet formulation for weight management,primekg,kg,llama3.2:1b,1,8,B,1,1.0,1,1,1,1,,prior,insufficient,2.0,KG vs knowledge evidence,0.5,2.625
+1,dMMR recurrent/advanced endometrial cancer,primekg,kg,llama3.2:1b,0,8,E,2,0.5,0,1,1,1,,both,consistent,4.0,"The knowledge graph provides mechanistic links between drug-8 and gene PDCD1, which is overexpressed in endometrial cancer. Prior knowledge also supports the involvement of PDCD1 in cell cycle regulation and apoptosis, making it a plausible target for therapy.",1.0,3.5
+1,dMMR recurrent/advanced endometrial cancer,primekg,kg,llama3.2:1b,1,8,G,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,KG evidence for G is too sparse and its target PDCD1 is not directly related to the disease.,1.0,2.0
+1,Primary humoral immunodeficiency pediatric 2-11yr,primekg,kg,llama3.2:1b,0,8,F,5,0.2,0,0,1,1,,prior,consistent,4.0,"Based on my knowledge, Drug-1 has a plausible target for the disease, but its evidence agreement is inconsistent with KG.",0.7142857142857143,3.0
+1,Primary humoral immunodeficiency pediatric 2-11yr,primekg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Neoadj+adj HNSCC,primekg,kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Neoadj+adj HNSCC,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Juvenile idiopathic arthritis (EMA Feb 2026),primekg,kg,llama3.2:1b,0,8,B,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,"Drug-7 targets SLC47A2, SLCO1B3, and SLC22A8, which are also associated with juvenile idiopathic arthritis in the knowledge graph. While these genes do not have direct links to disease mechanisms, their association with other genes that may influence disease development provides a plausible mechanistic basis for its potential therapeutic effects.",0.8571428571428571,3.4285714285714284
+1,Juvenile idiopathic arthritis (EMA Feb 2026),primekg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,both,consistent,4.0,Drug-4's evidence is stronger when combined with Drug-2 for CACNA1H,1.0,4.0
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",primekg,kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,both,consistent,2.0,Drug-5's mechanism of action aligns well with both the provided knowledge graph and its own mechanistic links. This is more plausible than Drug-4.,0.75,2.75
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",primekg,kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,prior,insufficient,3.0,"The mechanistic links provided by the knowledge graph (Drug-8 targets ALK; Drug-8 targets ABCG2) are not present in my knowledge base, making this evidence less reliable. Additionally, while Drug-1 targets HTR1D and HTR1B, there is no clear pathway or disease association reported.",0.75,3.75
+1,Ulcerative colitis,primekg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"Both knowledge graph evidence and prior pharmacological knowledge agree that Drug-8 targets IL23A and IL12B, which are known to be involved in ulcerative colitis. The mechanism of action for these drugs (e.g., anti-inflammatory effects) is consistent with the disease profile.",1.0,4.125
+1,Ulcerative colitis,primekg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,kg,uncertain,1.0,"The evidence for Drug-8's association with IL23A and IL12B is sparse, and the knowledge graph does not provide sufficient information to assess their mechanistic plausibility in this context.",1.0,3.25
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,primekg,kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,prior,both,4.0,"Drug-8 targets EPAS1, which is a crucial regulator of angiogenesis and has been implicated in various cancers. While Drug-5 targets CA6, which is associated with kidney cancer, there is limited mechanistic evidence linking it to the target disease.",0.8571428571428571,3.0
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,primekg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Ulcerative colitis,primekg,kg,llama3.2:1b,0,8,H,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,The Ulcerative colitis -IL17REL association and IL23R evidence are present.,0.875,3.625
+1,Ulcerative colitis,primekg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,"Drug-8 targets HCRTR1 and CYP3A43, which are also targeted by Drug-7.",1.0,3.125
+1,BRAF V600E metastatic NSCLC,primekg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,kg,consistent,2.0,Some evidence from the DOID supports Drug-8's association with BRAF V600E and CCND1.,1.0,2.3333333333333335
+1,BRAF V600E metastatic NSCLC,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,3.2857142857142856
+1,Crohn's disease,primekg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,both,inconsistent,1.0,"The evidence from the knowledge graph is mostly consistent, but Drug-4's CYP3A5 target matches a gene in the knowledge graph. However, this could be due to weak evidence or conflicts with what I know.",1.0,2.4285714285714284
+1,Crohn's disease,primekg,kg,llama3.2:1b,1,8,E,8,0.125,0,0,0,1,,,,,,,
+1,dMMR/MSI-H primary advanced endometrial cancer,primekg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,insufficient,3.0,"While Drug-8 targets PDCD1, the provided evidence is limited and does not directly link it to dMMR/MSI-H primary advanced endometrial cancer.",0.875,2.875
+1,dMMR/MSI-H primary advanced endometrial cancer,primekg,kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,3.0,"The provided mechanisms for C target PDCD1, which is related to the disease. However, no clear evidence from the KG supports this mechanism.",1.0,3.0
+1,IgG4-related disease,primekg,kg,llama3.2:1b,0,8,F,8,0.125,0,0,0,1,,prior,insufficient,1.0,Prior knowledge alone does not provide sufficient mechanistic insight into IgG4-related disease.,0.75,3.625
+1,IgG4-related disease,primekg,kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,,,,,,
+1,Ph+ CML-CP frontline (EMA Feb 2026),primekg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.0
+1,Ph+ CML-CP frontline (EMA Feb 2026),primekg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,EGPA,primekg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,both,consistent,5.0,"The provided knowledge graph evidence for Drug-1 is consistent with the mechanistic links between FCER1A and EGPA, as well as ALB. Additionally, Drug-8 targets PON1, which is also associated with EGPA. This consistent evidence supports a plausible mechanism of action for Drug-1 in EGPA.",0.8571428571428571,3.857142857142857
+1,EGPA,primekg,kg,llama3.2:1b,1,8,B,4,0.25,0,0,1,1,,both,consistent,4.0,"Drug-1 targets MS4A2 which is involved in immune system function and Drug-6 has a similar pathway with CHRM1, offering some mechanistic plausibility",0.75,3.75
+1,Biliary tract cancer,primekg,kg,llama3.2:1b,0,8,E,7,0.14285714285714285,0,0,0,1,,both,conflicting,1.0,The association between drug-8 and PDCD1 is not supported by any further evidence in the literature.,1.0,3.25
+1,Biliary tract cancer,primekg,kg,llama3.2:1b,1,8,A,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,COPD,primekg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,inconsistent,3.0,KG evidence for IL4R is weak and lacks relevance to the disease profile in this context.,0.75,3.0
+1,COPD,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,Primary mediastinal large B-cell lymphoma,primekg,kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,,,,,,
+1,Primary mediastinal large B-cell lymphoma,primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),primekg,kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,both,insufficient,2.0,Both evidence and prior knowledge suggest a potential mechanism for CRSwNP but Drug-9's lack of relevance makes it uncertain,0.75,2.5
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),primekg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,both,consistent,5.0,KG evidence is strong for target CYP1A2 and SLCO1C1; prior knowledge indicates a stronger association with other pathways.,1.0,5.0
+1,RAS wild-type HER2+ metastatic colorectal cancer,primekg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,3.8333333333333335
+1,RAS wild-type HER2+ metastatic colorectal cancer,primekg,kg,llama3.2:1b,1,8,C,6,0.16666666666666666,0,0,0,1,,both,uncertain,2.0,The evidence for Drug-7 targeting SLC47A1 is less direct compared to the associations reported in the KG for Drug-4 targets PPARD/PPARA/PPARG.,0.7142857142857143,3.2857142857142856
+1,Schnitzler syndrome (Japan),primekg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,both,consistent,4.0,"Drug-8 targets IL1B, which is involved in inflammatory and autoimmune diseases. Its association with other pathways (IL1RN) suggests a potential mechanistic link to Schnitzler syndrome.",1.0,3.8333333333333335
+1,Schnitzler syndrome (Japan),primekg,kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,consistent,4.0,"The provided KMG evidence is consistent with Drug-5 targets several genes related to Schnitzler syndrome (Japan), supporting its potential.",0.75,3.0
+1,HR+/HER2- breast cancer,primekg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,both,consistent,3.0,"Both knowledge graph evidence (SLC6A2 targets) and pharmacological knowledge suggest a plausible mechanistic link between SLC6A2 and HR+/HER2- breast cancer, but the direct association is not established.",0.8333333333333334,2.5
+1,HR+/HER2- breast cancer,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Psoriasis in children 6-11 (cream),primekg,kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,both,consistent,4.0,Both evidence and prior knowledge support the effectiveness of Drug-5 for PDE4C and PDE4D in treating Psoriasis.,1.0,3.25
+1,Psoriasis in children 6-11 (cream),primekg,kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,"The evidence for Drug-8 targeting HTR1A, HRH1, and other genes is insufficient to confirm a mechanistic role in psoriasis.",0.8571428571428571,3.4285714285714284
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),primekg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,prior,inconsistent,2.0,"Prior evidence is inconsistent with the KG, but targets genes involved in cell signaling.",0.5,2.5
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),primekg,kg,llama3.2:1b,1,8,E,8,0.125,0,0,0,1,,both,consistent,3.0,Prior knowledge confirms CD274's role in gastric adenocarcinoma treatment but there is no direct evidence linking it to neoadjuvant treatment of resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),0.75,3.625
+1,COPD (EMA 2025),primekg,kg,llama3.2:1b,0,8,G,8,0.125,0,0,0,1,,both,consistent,2.0,Both KG and prior knowledge report targets for IL4R. The evidence is consistent.,0.875,2.5
+1,COPD (EMA 2025),primekg,kg,llama3.2:1b,1,8,G,5,0.2,0,0,1,1,,,,,,,
+1,Ph+ CML-CP after 2+ TKIs,primekg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,both,consistent,2.0,"Drug-1's target UGT2B7 is a plausible mechanistic link for CML-CP after TKIs, but the evidence for Drug-4 and Drug-5 is too weak.",1.0,2.2857142857142856
+1,Ph+ CML-CP after 2+ TKIs,primekg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,insufficient,3.0,"The evidence from the knowledge graph is not particularly strong for Drug-2, but its targets UGT1A9 and ADRA1B have been associated with myeloid leukemia-like symptoms. While it's possible that these pathways could be involved in CML-CP after TKIs, the lack of evidence makes this ranking uncertain.",1.0,2.625
+1,IgE-mediated food allergy,primekg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,IgE-mediated food allergy,primekg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,both,consistent,4.0,"While Drug-1 targets MS4A2 and FCER1A, its involvement in IgE-mediated food allergy is less clear compared to Drug-8. However, the evidence supporting Drug-1's target of ADA supports a plausible interaction.",0.8333333333333334,3.3333333333333335
+1,BRAF+ thyroid cancer,primekg,kg,llama3.2:1b,0,8,H,4,0.25,0,0,1,1,,prior,uncertain,1.0,Uncertainty regarding Drug-8's pharmacological mechanisms makes it less plausible than other candidates.,0.75,1.875
+1,BRAF+ thyroid cancer,primekg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Primary immunodeficiency pediatric (EMA),primekg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,consistent,5.0,"The knowledge graph provides evidence of a relationship between Drug-4 and EMA, as well as mechanistic links with ABCA5. My own knowledge supports this association.",1.0,3.75
+1,Primary immunodeficiency pediatric (EMA),primekg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,both,conflicting,2.0,The provided knowledge graph evidence conflicts with the known associations of Drug-1 (FCGR3A targets FCGR1B and C4A) and FCGR2C.,1.0,3.8333333333333335
+1,Biliary tract cancer 1L,primekg,kg,llama3.2:1b,0,8,A,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,"The KMDB data shows associations between CD274 and SLC15A1 with Biliary tract cancer 1L, while the knowledge graph reports associations. The consistency of evidence from both sources supports this mechanistic plausibility.",1.0,4.0
+1,Biliary tract cancer 1L,primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Polymyalgia rheumatica,primekg,kg,llama3.2:1b,0,8,E,2,0.5,0,1,1,1,,prior,consistent,5.0,"I have no prior knowledge on Drug-8 and its target FCGR1A, but the association is supported by the knowledge graph. High confidence",0.8333333333333334,3.0
+1,Polymyalgia rheumatica,primekg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.0
+1,Chronic lymphocytic leukemia,primekg,kg,llama3.2:1b,0,8,B,1,1.0,1,1,1,1,,both,consistent,5.0,"TRG is a known target of Drug-8, which has been shown to inhibit leukemogenesis in various leukemia models. This suggests that Drug-8 may be a viable treatment option for DOID:1040.",0.875,3.5
+1,Chronic lymphocytic leukemia,primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,"Crohn's disease (moderate-severe, refractory)",primekg,kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,both,consistent,3.0,"Both the knowledge graph and prior pharmacological evidence indicate associations with FAM92B, NKX2-3, IRGM, PHOX2B, IL23R, MUC2, GPBAR1, TAGAP, CYP2E1, and ALB; however, specific mechanistic details are not provided.",0.875,3.375
+1,"Crohn's disease (moderate-severe, refractory)",primekg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,prior,conflicting,2.0,"Drug-6 targets IL23A, a known gene in Crohn's disease; however, my prior knowledge is more inconsistent with this target.",0.5,3.0
+1,HER2-mutant NSCLC (EMA),primekg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,,,,,,
+1,HER2-mutant NSCLC (EMA),primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.6,3.2
+1,Giant cell arteritis,primekg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Giant cell arteritis,primekg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.75,3.5
+1,First-line anemia in lower-risk MDS,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,First-line anemia in lower-risk MDS,primekg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,prior,insufficient,1.0,No direct evidence of mechanistic plausibility for Drug-8 against the disease profile,0.75,2.375
+1,GVHD + pediatric,primekg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,both,consistent,5.0,Both the knowledge graph evidence and prior pharmacological knowledge support Drug-2 as a promising candidate.,0.625,3.375
+1,GVHD + pediatric,primekg,kg,llama3.2:1b,1,8,H,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,"Drug-8 has no direct evidence linking to GVHD + pediatric; Drug-3 targets ATP6V0A4, which has been linked to acute graft vs. host disease and immune system disease.",0.8333333333333334,2.5
+1,MSI-H/dMMR solid tumors (full approval conversion),primekg,kg,llama3.2:1b,0,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,3.0,The evidence from DOID:7360 and Drug-8 is insufficient to judge the mechanistic plausibility of Drug-4.,0.8571428571428571,2.4285714285714284
+1,MSI-H/dMMR solid tumors (full approval conversion),primekg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,conflicting,2.0,"Prior knowledge is more supportive of MSI-H/dMMR solid tumors than testicular yolk sac tumor, but KG evidence for PDCD1 is consistent with both diseases",0.75,3.125
+1,Antibody-mediated rejection in organ transplantation,primekg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,3.4285714285714284
+1,Antibody-mediated rejection in organ transplantation,primekg,kg,llama3.2:1b,1,8,B,1,1.0,1,1,1,1,,prior,conflicting,2.0,"The evidence for Drug-1 targeting MS4A1 is insufficient to confidently rank it over the other candidates, while the provided knowledge graph suggests a relationship between the disease and several target genes. The mechanistic plausibility of Drug-5 targeting HTR2C and HTR2A with the provided evidence is uncertain due to lack of consistency across different sources.",0.875,3.25
+1,Pancreatic NET,primekg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,consistent,3.0,"The evidence for Drug-7 targeting RET; CYP2C9 and MET suggests mechanistic plausibility, but the lack of clear associations with CA2 and other targets weakens its rationale.",0.5,2.875
+1,Pancreatic NET,primekg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,kg,insufficient,2.0,"KG evidence for RET and CYP2C9 is not directly relevant to pancreatic NET, but Drug-7 targets a broader range of genes involved in cancer",0.8571428571428571,2.857142857142857
+1,Follicular lymphoma (+obinutuzumab),primekg,kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,,,,,,
+1,Follicular lymphoma (+obinutuzumab),primekg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,,,,,1.0,3.0
+1,HR+/HER2- node-positive high-risk early breast cancer,primekg,kg,llama3.2:1b,0,8,B,5,0.2,0,0,1,1,,both,consistent,3.0,Drug-8 targets SLC47A2 which is associated with breast and salivary gland cancers.,1.0,3.0
+1,HR+/HER2- node-positive high-risk early breast cancer,primekg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,both,consistent,3.0,"The mechanistic links from DOID are consistent with the targets, and the associations reported by the knowledge graph seem plausible.",0.875,2.75
+1,BRAF+ thyroid cancer,primekg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,prior,insufficient,5.0,The provided knowledge graph evidence for Drug-1 is unclear and not relevant to this disease.,0.625,3.0
+1,BRAF+ thyroid cancer,primekg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,4.0,"The knowledge graph reports associations between Drug-6 and BRAF, SLC22A5, and CYP1A2, which are plausible given the known functions of these genes in thyroid cancer. However, without explicit evidence linking Drug-6 to BRAF+ thyroid cancer, its mechanistic plausibility remains uncertain.",1.0,4.0
+1,HER2+ solid tumors (tumor-agnostic),primekg,kg,llama3.2:1b,0,8,F,2,0.5,0,1,1,1,,kg,insufficient,1.0,Lack of information about Drug-5's specific mechanism compared to ENOPH1 makes it uncertain.,1.0,2.0
+1,HER2+ solid tumors (tumor-agnostic),primekg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,both,conflicting,2.0,"Drug-7 has evidence from SLC47A1 and is consistent with the target pathway for solid tumors but lacks direct evidence linking to HER2+ testicular yolk sac tumor, making its plausibility uncertain without more context.",1.0,3.6
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",primekg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,kg,insufficient,2.0,KG evidence is sparse and no prior knowledge suggests a clear mechanistic role in mCRC.,0.875,3.125
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",primekg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",primekg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,4.0,Both evidence from the knowledge graph and my own pharmacological knowledge support the notion that Drug-7 is a plausible target for this disease.,0.42857142857142855,1.8571428571428572
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,HR+/HER2- metastatic breast cancer,primekg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"Drug-8 targets TACSTD2, UGT1A1, and FUBP1. The KG does not provide as clear a picture of Drug-8's mechanism.",1.0,3.5
+1,HR+/HER2- metastatic breast cancer,primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,1L biliary tract cancer (+gemcitabine+cisplatin),primekg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,3.6666666666666665
+1,1L biliary tract cancer (+gemcitabine+cisplatin),primekg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,both,consistent,4.0,"Drug-5 targets PDCD1, which is a known tumor suppressor. The association with biliary tract cancer (+gemcitabine+cisplatin) via PDCD1 mechanistic links appears to be consistent with the provided knowledge graph evidence.",1.0,3.5
+1,RET-fusion NSCLC (expanded),primekg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,RET-fusion NSCLC (expanded),primekg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,HR+/HER2- metastatic breast cancer,primekg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,The provided knowledge graph does not mention a direct mechanistic link between drug-7 and HR+/HER2- metastatic breast cancer.,1.0,3.25
+1,HR+/HER2- metastatic breast cancer,primekg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Pheochromocytoma/paraganglioma,primekg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,Pheochromocytoma/paraganglioma,primekg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,both,insufficient,3.0,The provided knowledge graph evidence for DDC association is sparse and conflicting with the other associations.,1.0,2.857142857142857
+1,Gastric/GEJ adenocarcinoma (1L +chemo),primekg,kg,llama3.2:1b,0,8,D,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,Both Drug-2 and Drug-6 target SLC22A2 (CALCRL). This is consistent with the general knowledge of these drugs' mechanisms.,1.0,4.0
+1,Gastric/GEJ adenocarcinoma (1L +chemo),primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Metastatic colorectal cancer,primekg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Metastatic colorectal cancer,primekg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,"KG evidence for ADRB3-DER, but no clear mechanistic link to colorectal cancer. Also lacks sufficient prior knowledge and evidence agreement.",1.0,2.4285714285714284
+1,Gastric/GEJ adenocarcinoma,primekg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Gastric/GEJ adenocarcinoma,primekg,kg,llama3.2:1b,1,8,A,3,0.3333333333333333,0,1,1,1,,kg,conflicting,4.0,"Drug-7 targets CD274, a known checkpoint molecule in various cancers, including gastric cancer. While Drug-3's target FABP2 is related to gastric cardia adenocarcinoma and drug-drug interactions with ABCC6 might be relevant, the specific mechanistic link between CD274 (BRDT) and gastric/GEJ adenocarcinoma is unclear.",0.875,4.0
+1,Urothelial carcinoma (expanded population),primekg,kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,both,consistent,2.0,"The consistent association with ABCB1 in the knowledge graph makes Drug-8 a more plausible candidate than Drug-3, despite prior knowledge on other drugs like HCAR3.",1.0,2.25
+1,Urothelial carcinoma (expanded population),primekg,kg,llama3.2:1b,1,8,H,8,0.125,0,0,0,1,,both,insufficient,3.0,"Drug-8 has insufficient evidence from the knowledge graph on MTNR1B and MTNR1A, which are not mentioned as mechanistic links for urothelial carcinoma.",0.875,2.875
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),primekg,kg,llama3.2:1b,0,8,E,2,0.5,0,1,1,1,,both,consistent,4.0,"The evidence provided supports the association between Drug-8 and HER2+ early-stage BC (neoadjuvant + adjuvant), as it targets SLC47A2, which is involved in breast cancer efflux and may be affected by chemotherapeutic agents. Additionally, Drug-6 targets CHRM5 and CHRM4, both of which could potentially interact with breast cancer treatment pathways.",1.0,3.5
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),primekg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Pediatric BRAF V600E low-grade glioma,primekg,kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,both,insufficient,1.0,There is insufficient evidence to justify a confident ranking of Drug-8 based on the provided knowledge graph.,1.0,1.25
+1,Pediatric BRAF V600E low-grade glioma,primekg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,HR+/HER2- early breast cancer (adjuvant),primekg,kg,llama3.2:1b,0,8,E,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,HR+/HER2- early breast cancer (adjuvant),primekg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,HR+/HER2-low breast cancer,primekg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HR+/HER2-low breast cancer,primekg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),primekg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),primekg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,TRD monotherapy,drkg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,conflicting,3.0,"The knowledge graph reports evidence for H's targets GRIN1, NTRK2. However, the provided evidence conflicts with some of these associations and does not support an association with TRD monotherapy.",1.0,2.75
+1,TRD monotherapy,drkg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,ILD-associated pulmonary hypertension,drkg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,,,,,,
+1,ILD-associated pulmonary hypertension,drkg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.5
+1,Indolent systemic mastocytosis (EMA),drkg,kg,llama3.2:1b,0,8,H,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"There is no clear mechanistic link between Drug-8 and EMA based on the provided evidence. While it may bind to certain nuclear receptors or ion channels, its effects are not directly related to mast cell proliferation or dysfunction.",1.0,3.0
+1,Indolent systemic mastocytosis (EMA),drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"Drug-3 downregulates TIMELESS, a protein that regulates mast cell survival. This mechanism may contribute to disease suppression and potentially lead to therapeutic efficacy.",1.0,3.625
+1,Hidradenitis suppurativa,drkg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,both,insufficient,4.0,"Drug-7 inhibits IL17A and HTR2A, but there is no evidence in the knowledge graph linking these targets to Hidradenitis suppurativa.",0.875,3.25
+1,Hidradenitis suppurativa,drkg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.5714285714285714
+1,Chronic hepatitis B (pediatric),drkg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Chronic hepatitis B (pediatric),drkg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"Drug-6's targets are not well-established, and its mechanism may be complex. Drug-1's known downregulation of ITFG1 and CNDP2 suggests some mechanistic plausibility, but the evidence is insufficient to judge this candidate.",0.75,2.375
+1,HoFH pediatric (EMA),drkg,kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,both,insufficient,2.0,"The knowledge graph reports mechanistic links between Drug-8 and several genes, but prior pharmacological knowledge is unclear or uncertain regarding the relationship with LDLRAP1.",1.0,3.0
+1,HoFH pediatric (EMA),drkg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,prior,insufficient,2.0,The evidence for Drug-4 inhibiting HRH1 is unclear and not well established in the literature.,0.5714285714285714,2.4285714285714284
+1,Nephrotic syndrome,drkg,kg,llama3.2:1b,0,8,C,7,0.14285714285714285,0,0,0,1,,both,conflicting,2.0,The conflicting evidence between the knowledge graph and your own pharmacological knowledge makes it difficult to confidently rank Drug-1.,1.0,2.75
+1,Nephrotic syndrome,drkg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,prior,insufficient,3.0,"While some evidence is present, it conflicts with known targets of the target diseases.",0.75,2.625
+1,Follicular lymphoma,drkg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Follicular lymphoma,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.0
+1,Retinal vein occlusion,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Retinal vein occlusion,drkg,kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"The mechanistic links for Retinal vein occlusion provided by the biomedical knowledge graph are inconsistent across all sources. While Drug-7 inhibits HCN1, it targets HCN4; however, there is no evidence that Drug-7 inhibits HCN2 or CYP3A4.",1.0,3.125
+1,Agitation associated with Alzheimer's dementia,drkg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,both,consistent,4.0,"The knowledge graph reports consistent evidence for Drug-2 (activates SIGMAR1; binds CYP3A7-CYP3A51P; etc.) to be involved in Alzheimer's disease, although some links are indirect or unclear.",1.0,3.0
+1,Agitation associated with Alzheimer's dementia,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,High LDL-C with increased CV risk (expanded),drkg,kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,consistent,4.0,"The mechanistic links for Drug-7 are largely consistent with the evidence retrieved from the biomedical knowledge graph, suggesting a plausible biological mechanism. Additionally, some links suggest downregulation of CCDC86 and VCAM1, which may be relevant to high LDL-C with increased CV risk.",1.0,3.625
+1,High LDL-C with increased CV risk (expanded),drkg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,insufficient,3.0,"Limited mechanistic evidence to support Drug-7's involvement in CV risk pathways, particularly with respect to gene-target associations. The knowledge graph suggests some potential associations, but without more context or prior literature, it is difficult to assess.",1.0,2.375
+1,Indolent systemic mastocytosis,drkg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,consistent,3.0,"Evidence retrieved from the knowledge graph, including mechanistic links, and related annotations. However, some evidence is sparse or conflicts with prior knowledge.",1.0,3.0
+1,Indolent systemic mastocytosis,drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,3.0,"The knowledge graph reports associations that are consistent with my own pharmacological knowledge, and Drug-4 targets several key proteins in DOID:349. However, its role as a target is unclear without more context.",0.875,3.5
+1,EGPA (expanded),drkg,kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,both,consistent,3.0,"DRG-7 is a target of both IL5RA and FAS, suggesting potential mechanistic plausibility for EGPA (expanded).",0.875,3.5
+1,EGPA (expanded),drkg,kg,llama3.2:1b,1,8,D,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,"The evidence for Drug-3's mechanism is well-documented, whereas the knowledge graph reports a clear association between Drug-1 and CYP2D6 inhibition.",0.875,2.75
+1,COVID-19 (expanded population),drkg,kg,llama3.2:1b,0,8,B,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,"There is insufficient evidence from the knowledge graph to confirm that Drug-4 targets ABCG2, CYP3A51P, or NH16. However, it does bind other genes and pathways.",0.875,2.75
+1,COVID-19 (expanded population),drkg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.857142857142857
+1,Obstructive sleep apnea with obesity,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Obstructive sleep apnea with obesity,drkg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,KRAS G12C+ mCRC,drkg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,The evidence for Drug-8's target of KRAS is weak in comparison to the mechanistic links provided for Drug-1.,1.0,2.857142857142857
+1,KRAS G12C+ mCRC,drkg,kg,llama3.2:1b,1,8,D,5,0.2,0,0,1,1,,both,consistent,5.0,"The provided evidence from the knowledge graph is consistent with known targets and pathways for KRAS G12C+ mCRC, making it a more plausible candidate.",0.875,4.0
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Chorea associated with Huntington's disease,drkg,kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,both,conflicting,2.0,"The knowledge graph evidence suggests a mechanistic link between Drug-8 and the target gene TNFRSF8, but its own pharmacological knowledge indicates that it is primarily an inhibitor of various cytochrome P450 enzymes. The conflicting nature of the evidence makes its ranking uncertain.",1.0,2.142857142857143
+1,Chorea associated with Huntington's disease,drkg,kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,both,consistent,5.0,"Both evidence from the knowledge graph and prior knowledge suggest Drug-8 is a plausible candidate. Its inhibition of SLC18A2 targets NH17, which could impact DOID:12858. However, there's insufficient evidence linking it to this disease.",0.875,4.25
+1,Heart failure (broadened),drkg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,consistent,4.0,"Drug-8's binding to SLC5A11 and UGT2B4 suggest potential direct interaction, while its targets are consistent with known pathways in heart failure.",1.0,3.625
+1,Heart failure (broadened),drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,"The provided knowledge graph evidence is sparse and conflicts with my own pharmacological knowledge on the relationship between Drug-8 and targets involved in heart failure. While there are some mechanistic links, they do not provide clear mechanistic plausibility for this disease.",1.0,2.375
+1,Acquired hypofibrinogenemia in cardiovascular surgery,drkg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.0
+1,Acquired hypofibrinogenemia in cardiovascular surgery,drkg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,insufficient,4.0,"While Drug-6 targets AR, there is no clear mechanism by which this would lead to hypofibrinogenemia.",0.8,4.2
+1,Pediatric atopic dermatitis,drkg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,1.5714285714285714
+1,Pediatric atopic dermatitis,drkg,kg,llama3.2:1b,1,8,B,4,0.25,0,0,1,1,,both,consistent,4.0,"The evidence shows significant associations between Drug-8 and multiple targets (TYK2, JAK3, JAK2), but no clear mechanistic link to atopic dermatitis. The provided knowledge graph evidence is more consistent with a role in immune regulation than atopic dermatitis.",0.7142857142857143,3.5714285714285716
+1,COVID-19 updated strain,drkg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,,,,,,
+1,COVID-19 updated strain,drkg,kg,llama3.2:1b,1,8,H,6,0.16666666666666666,0,0,0,1,,both,insufficient,1.0,The provided knowledge graph evidence on DOID:0080599 is sparse and contradicts the known mechanism of Drug-7.,1.0,3.3333333333333335
+1,Delay T1D onset in children ≥1yr,drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,conflicting,3.0,"The provided evidence includes binding interactions with KCNH7 and KCNH6, but there is no direct link to CYP11A1 or other target genes in the knowledge graph.",1.0,3.5
+1,Delay T1D onset in children ≥1yr,drkg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,conflicting,3.0,"The knowledge graph reports Drug-4 binds CYP11A1 and SLCO1A2, but the mechanisms are unclear (unclear).",0.875,3.25
+1,Unresectable thymic carcinoma (PMDA),drkg,kg,llama3.2:1b,0,8,F,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,The knowledge graph provides some evidence of Drug-7's target genes but is insufficient to assess its mechanistic plausibility. Its mechanism may not be directly relevant to this disease.,0.8333333333333334,2.0
+1,Unresectable thymic carcinoma (PMDA),drkg,kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,,,,,,
+1,Retinal vein occlusion,drkg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Retinal vein occlusion,drkg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,consistent,4.0,"Drug-8's targets (SLC47A1, CYP3A5) are consistent with the disease profile. However, its exact role in retinal vein occlusion is unclear without further evidence.",1.0,3.25
+1,Spinal muscular atrophy (pediatric expansion),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.0
+1,Spinal muscular atrophy (pediatric expansion),drkg,kg,llama3.2:1b,1,8,E,2,0.5,0,1,1,1,,prior,insufficient,3.0,"KG evidence is sparse or conflicting with prior knowledge about the target disease, but prior knowledge is consistent with potential targets in this context.",0.625,3.375
+1,Chronic thromboembolic pulmonary hypertension,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.5714285714285714,2.7142857142857144
+1,Chronic thromboembolic pulmonary hypertension,drkg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Polycythaemia vera and essential thrombocytopenia,drkg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,4.0,"The evidence provided by the knowledge graph for Drug-1 (activates IFNAR2) is consistent with what we know about the function of IFNAR in immune cells and its association with polycythemia vera. Additionally, Drug-1's known targets support a plausible mechanistic role.",0.8571428571428571,3.142857142857143
+1,Polycythaemia vera and essential thrombocytopenia,drkg,kg,llama3.2:1b,1,8,H,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Generalized myasthenia gravis,drkg,kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,both,consistent,4.0,KG evidence for POF1B association is strong and consistent with known targets of other drugs.,0.8571428571428571,3.857142857142857
+1,Generalized myasthenia gravis,drkg,kg,llama3.2:1b,1,8,G,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Invasive fungal infections pediatric ≥2yr,drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Invasive fungal infections pediatric ≥2yr,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,PKU expanded to ≥12yr,drkg,kg,llama3.2:1b,0,8,C,4,0.25,0,0,1,1,,both,consistent,5.0,"Both the provided DOID:9281 information and the mechanistic links suggest a plausible target, but the downregulation of genes related to this pathway is not strongly supported.",1.0,4.375
+1,PKU expanded to ≥12yr,drkg,kg,llama3.2:1b,1,8,A,8,0.125,0,0,0,1,,both,consistent,4.0,"Drug-8 targets several genes involved in PKU, including AGER and PRL, but the evidence is insufficient to judge its mechanistic plausibility.",1.0,3.875
+1,IDH1-mutated relapsed/refractory MDS,drkg,kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,both,uncertain,3.0,"Drug-8 targets IDH1, but the evidence for targeting CLCN2 is unclear and inconsistent with prior knowledge.",1.0,3.75
+1,IDH1-mutated relapsed/refractory MDS,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Retinopathy of prematurity,drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Retinopathy of prematurity,drkg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Agitation associated with Alzheimer's dementia,drkg,kg,llama3.2:1b,0,8,E,6,0.16666666666666666,0,0,0,1,,kg,sufficient,5.0,All of the provided evidence links the candidate drug to targets downregulating genes involved in amyloid-β aggregation and tau phosphorylation.,1.0,3.625
+1,Agitation associated with Alzheimer's dementia,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,LDL-C elevation in statin-intolerant dyslipidemia,drkg,kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,,,,,,
+1,LDL-C elevation in statin-intolerant dyslipidemia,drkg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,4.285714285714286
+1,First-line anemia in lower-risk MDS,drkg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,prior,consistent,4.0,"The provided evidence for Drug-8 aligns well with known associations, especially the activation of AR and inhibition of PDE7B.",0.8,3.6
+1,First-line anemia in lower-risk MDS,drkg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Atopic dermatitis,drkg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,both,insufficient,1.0,"The provided evidence from the DOID knowledge graph does not support a mechanistic relationship between Drug-2 and atopic dermatitis, making it uncertain.",1.0,2.5
+1,Atopic dermatitis,drkg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,conflicting,4.0,"The provided knowledge graph evidence is sparse on mechanistic links for Atopic Dermatitis, and some of the links (e.g., Drug-4 binds TRPA1) conflict with what we know. Furthermore, there is limited information on how Drug-3 activates PPARA or affects ALPP.",1.0,4.0
+1,Acute HCV pediatric,drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Acute HCV pediatric,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,HoFH in children,drkg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,,,,,,
+1,HoFH in children,drkg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,,,,,,
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),drkg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),drkg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,conflicting,3.0,"Evidence from the knowledge graph suggests binding interactions with multiple targets and pathways, but the mechanistic links are not consistent across studies.",0.7142857142857143,3.5714285714285716
+1,Cerebral folate transport deficiency,drkg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Cerebral folate transport deficiency,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.0
+1,Reduce MACE in CVD + obesity/overweight,drkg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,Reduce MACE in CVD + obesity/overweight,drkg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,both,consistent,3.0,"The evidence for Drug-8 suggests a mechanistic link to Reduce MACE in CVD + obesity/overweight, but the specific pathways and targets involved are not clearly defined. In contrast, the evidence for Drug-4 is more consistent.",1.0,2.875
+1,Palmoplantar pustulosis (PMDA),drkg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Palmoplantar pustulosis (PMDA),drkg,kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,both,insufficient,2.0,The provided evidence for Drug-7 targets IL23A in PMDA does not show any consistent links to other pathways or mechanisms that could explain its effect on the disease.,0.875,3.125
+1,Measles prophylaxis post-exposure,drkg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,,,,,,
+1,Measles prophylaxis post-exposure,drkg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,,,,,,
+1,CKD in T2D,drkg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The provided evidence is sufficient to judge Drug-8 as consistent with known mechanisms, and the prior knowledge suggests it might be more plausible.",1.0,3.625
+1,CKD in T2D,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.0
+1,HER2-mutant NSCLC (PMDA),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,3.857142857142857
+1,HER2-mutant NSCLC (PMDA),drkg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"The provided knowledge graph evidence for Drug-3 is consistent and strong, while the mechanistic links to HER2-mutant NSCLC (PMDA) are well-established. Additionally, Drug-3's known targets and mechanisms support its potential role in this disease.",0.875,2.5
+1,Heterozygous familial hypercholesterolemia,drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Heterozygous familial hypercholesterolemia,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Crohn's disease,drkg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"The evidence for Drug-7 (targeting IL23A) is weak compared to other targets that have direct evidence in the literature. Additionally, there is no clear mechanistic link between IL23A and Crohn's disease.",0.625,3.75
+1,Crohn's disease,drkg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,Drug-7 targets a cytokine involved in immune response (IL23A) that is also implicated in autoimmune diseases like Crohn's disease.,1.0,3.125
+1,COVID-19 in severe renal impairment/dialysis,drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,COVID-19 in severe renal impairment/dialysis,drkg,kg,llama3.2:1b,1,8,H,6,0.16666666666666666,0,0,0,1,,both,insufficient,1.0,There are insufficient or conflicting evidence from both knowledge graph and prior knowledge regarding H's mechanistic links to COVID-19 in severe renal impairment/dialysis.,0.875,2.625
+1,MASH with fibrosis,drkg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,prior,conflicting,2.0,"Prior knowledge suggests Drug-1 targets ALAS1, but this is not directly related to MASH with fibrosis.",0.875,3.0
+1,MASH with fibrosis,drkg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,mHSPC + ADT,drkg,kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,both,consistent,2.0,"The mechanistic links for Drug-8 provide plausible biological mechanisms, although the evidence from the knowledge graph is more extensive.",1.0,1.8571428571428572
+1,mHSPC + ADT,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Chronic kidney disease,drkg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"The provided knowledge graph evidence is insufficient to determine the mechanistic links between Drug-1 and its associated targets, making it uncertain.",0.375,3.75
+1,Chronic kidney disease,drkg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,,,,,,
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,drkg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,3.0,"The provided information on Drug-1's mechanisms suggests a broad range of targets and is consistent with prior knowledge, but the specific pathways are not well-established in the KG.",1.0,2.25
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.0,4.0
+1,Acquired hypothalamic obesity,drkg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,prior,consistent,5.0,Drug-8 has a consistent mechanistic relationship with MC3R and MC4R in the knowledge graph and is directly mentioned as activating these genes.,0.75,3.625
+1,Acquired hypothalamic obesity,drkg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.75,2.75
+1,Pediatric glioma (EMA),drkg,kg,llama3.2:1b,0,8,F,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Pediatric glioma (EMA),drkg,kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,IV formulation for rheumatic diseases (EMA),drkg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,,,,,,
+1,Oral tablet formulation for weight management,drkg,kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The knowledge graph evidence for Drug-8 is strong, as it is listed multiple times and has clear mechanistic links to various pathways involved in weight management. However, the provided mechanism does not appear to be directly related to this disease, so its effectiveness would need to be further investigated.",0.875,4.0
+1,Oral tablet formulation for weight management,drkg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,conflicting,2.0,"The knowledge graph reports associations between Drug-8 and GCG, GLP1R, but the evidence for activating GCG and targeting GLP1R is not consistent with other mechanisms reported by Drug-4. However, Drug-8 does downregulate COTL1, which is consistent with its potential mechanism of action.",1.0,3.5
+1,dMMR recurrent/advanced endometrial cancer,drkg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,conflicting,4.0,"The provided evidence for DRUG-1 is sparse, and it does not consistently match the DOID profile. Prior knowledge suggests that Drug-7 has a more direct target to CACNA1I.",0.8333333333333334,4.166666666666667
+1,dMMR recurrent/advanced endometrial cancer,drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,3.0,,0.875,3.0
+1,Primary humoral immunodeficiency pediatric 2-11yr,drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,conflicting,2.0,"While the knowledge graph suggests that Drug-1 targets FCGR2C and FCGR3B, its evidence for FCGR1A is unclear, whereas Drug-4's mechanistic links with ANO1 and CYP2C8 are more consistent.",1.0,2.75
+1,Primary humoral immunodeficiency pediatric 2-11yr,drkg,kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,,,,,,
+1,Neoadj+adj HNSCC,drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,kg,inconsistent,1.0,The knowledge graph evidence conflicts with our prior knowledge of Drug-3's mechanism.,1.0,2.25
+1,Neoadj+adj HNSCC,drkg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,prior,insufficient,2.0,"While Drug-5 binds multiple cancer-promoting genes (CYP3A7-CYP3A51P; CYP3A7; PGR), the provided knowledge graph evidence does not strongly support its relevance to Neoadjuvant HNSCC.",0.875,2.25
+1,Juvenile idiopathic arthritis (EMA Feb 2026),drkg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,,,,,,
+1,Juvenile idiopathic arthritis (EMA Feb 2026),drkg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,,,,,,
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,prior,insufficient,1.0,No clear mechanistic links from the knowledge graph evidence to this candidate.,0.6666666666666666,3.3333333333333335
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",drkg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,,,,,,
+1,Ulcerative colitis,drkg,kg,llama3.2:1b,0,8,C,5,0.2,0,0,1,1,,both,conflicting,1.0,"The provided evidence for Drug-8's mechanistic plausibility is conflicting, with some lines of evidence supporting a role in Ulcerative Colitis and others suggesting no direct involvement.",0.75,1.875
+1,Ulcerative colitis,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,drkg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,,,,,,
+1,Ulcerative colitis,drkg,kg,llama3.2:1b,0,8,F,5,0.2,0,0,1,1,,both,insufficient,1.0,Insufficient evidence from knowledge graph to confirm the role of Drug-7 in targeting IL23A,0.6,3.4
+1,Ulcerative colitis,drkg,kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,kg,conflicting,3.0,"Insufficient evidence in the knowledge graph for IL23A target, and no mechanistic links provided. Also, Drug-7's mechanism is not clear from its profile.",0.875,3.5
+1,BRAF V600E metastatic NSCLC,drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.666666666666667
+1,BRAF V600E metastatic NSCLC,drkg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,,,,,,
+1,Crohn's disease,drkg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,both,consistent,4.0,"The knowledge graph reports associations between CDAN1 and IL37, but the provided evidence shows no direct link. While Drug-6 targets MAOB and MAOA, its impact on Crohn's disease may be indirect or not supported by sufficient evidence.",1.0,3.7142857142857144
+1,Crohn's disease,drkg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,kg,consistent,5.0,Both knowledge graph and prior knowledge support the candidacy. Mechanistic plausibility is high based on target engagement and known mechanisms.,0.625,3.125
+1,dMMR/MSI-H primary advanced endometrial cancer,drkg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,dMMR/MSI-H primary advanced endometrial cancer,drkg,kg,llama3.2:1b,1,8,C,4,0.25,0,0,1,1,,both,insufficient,2.0,The evidence from the biomedical knowledge graph does not provide sufficient information to confirm or rule out Drug-8's mechanistic plausibility for dMMR/MSI-H primary advanced endometrial cancer.,1.0,4.0
+1,IgG4-related disease,drkg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,insufficient,3.0,"The known target for Drug-8 (BE0009558) is a different protein from what's reported in the knowledge graph. While Drug-8 inhibits TACR1, there's no evidence linking it to IgG4-related disease.",1.0,3.0
+1,IgG4-related disease,drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Ph+ CML-CP frontline (EMA Feb 2026),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Ph+ CML-CP frontline (EMA Feb 2026),drkg,kg,llama3.2:1b,1,8,B,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,EGPA,drkg,kg,llama3.2:1b,0,8,D,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,EGPA,drkg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,,,,,,
+1,Biliary tract cancer,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.5714285714285714,3.4285714285714284
+1,Biliary tract cancer,drkg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,COPD,drkg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,COPD,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.5
+1,Primary mediastinal large B-cell lymphoma,drkg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,both,consistent,3.0,"The provided evidence from the knowledge graph reports mechanistic links between Drug-8 and its targets, which are consistent with prior knowledge of its potential mechanisms in lymphoma. The evidence also suggests a plausible biological mechanism for its inhibition of HRH2.",0.875,3.375
+1,Primary mediastinal large B-cell lymphoma,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),drkg,kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,conflicting,3.0,"KG evidence is sparse on the pathway and target for CRSwNP, while prior knowledge suggests a stronger mechanistic role for drug-5.",1.0,2.875
+1,RAS wild-type HER2+ metastatic colorectal cancer,drkg,kg,llama3.2:1b,0,8,H,2,0.5,0,1,1,1,,,,,,,
+1,RAS wild-type HER2+ metastatic colorectal cancer,drkg,kg,llama3.2:1b,1,8,E,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"While the evidence from the knowledge graph and prior knowledge suggest that Drug-7 targets ERBB2, which is a downstream target of RAS in colorectal cancer, it is plausible to hypothesize a mechanistic link through a pathway involving ERBB2. However, without explicit evidence linking ERBB2 activation directly to RAS wild-type HER2+ metastatic colorectal cancer, this reasoning requires cautious consideration.",0.75,4.0
+1,Schnitzler syndrome (Japan),drkg,kg,llama3.2:1b,0,8,A,2,0.5,0,1,1,1,,both,consistent,4.0,"The knowledge graph reports associations between drug-8 and IL1B; Drug-8 inhibits IL1B, which is a crucial gene in Schnitzler syndrome. Additionally, the evidence for Drug-5's association with ATP4A is strong.",0.75,3.75
+1,Schnitzler syndrome (Japan),drkg,kg,llama3.2:1b,1,8,B,6,0.16666666666666666,0,0,0,1,,both,insufficient,1.0,"Knowledge graph evidence on IL1B targets Drug-8, but prior pharmacological knowledge does not provide any mechanistic plausibility.",1.0,1.75
+1,HR+/HER2- breast cancer,drkg,kg,llama3.2:1b,0,8,D,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The knowledge graph reports Drug-1 upregulates E2F2, PLSCR1, TRAPPC6A, GHR, AGR2, UBQLN2, SERPINA3, PTGS2. However, my pharmacological knowledge notes that these targets are not directly upregulated by Drug-1.",1.0,4.25
+1,HR+/HER2- breast cancer,drkg,kg,llama3.2:1b,1,8,C,5,0.2,0,0,1,1,,prior,conflicting,3.0,Drug-8 is a potential candidate but its mechanism is not directly supported by the knowledge graph.,0.8333333333333334,3.1666666666666665
+1,Psoriasis in children 6-11 (cream),drkg,kg,llama3.2:1b,0,8,D,6,0.16666666666666666,0,0,0,1,,both,consistent,5.0,Drug-5 inhibits PDE4C and targets FTMT. Its involvement in Psoriasis is consistent with its effects on gene expression.,0.875,3.75
+1,Psoriasis in children 6-11 (cream),drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),drkg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,insufficient,2.0,Uncertain evidence from the knowledge graph does not support Drug-7's mechanistic plausibility.,0.75,2.875
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),drkg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.0,3.0
+1,COPD (EMA 2025),drkg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,kg,conflicting,3.0,"KG reports an association with IGKV5-2, but Drug-4's profile does not mention this target. Additionally, while Drug-4 is downregulated in COPD (EMA 2025), the evidence for its inhibitory action on BACE1 or ADRA2B is unclear.",1.0,3.0
+1,COPD (EMA 2025),drkg,kg,llama3.2:1b,1,8,E,2,0.5,0,1,1,1,,both,insufficient,4.0,"Uncertain evidence for both target gene associations and mechanistic links, with conflicts between knowledge graph and own pharmacological knowledge.",1.0,4.375
+1,Ph+ CML-CP after 2+ TKIs,drkg,kg,llama3.2:1b,0,8,A,7,0.14285714285714285,0,0,0,1,,both,"consistent with targets abl1, drd3, cdk6; prior evidence suggests inhibiting acy1 and downregulating pnma2 as mechanisms",,,0.875,
+1,Ph+ CML-CP after 2+ TKIs,drkg,kg,llama3.2:1b,1,8,A,2,0.5,0,1,1,1,,both,consistent,3.0,"The knowledge graph reports that Drug-8 targets ABL1, which is a well-known target in CML treatment. The provided mechanistic links for Drug-8 are consistent with this target, and its inhibition of ABL1 has been shown to be effective in preclinical studies.",1.0,3.125
+1,IgE-mediated food allergy,drkg,kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,both,consistent,1.0,"KG reports inhibiting IGHE, but prior knowledge shows IGHE is involved in IgE signaling. This consistent evidence makes it more plausible.",1.0,1.625
+1,IgE-mediated food allergy,drkg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,"The knowledge graph mentions Drug-1 inhibiting IGHE and targets MS4A2, but there is no direct link between these two. Furthermore, the evidence from the knowledge graph is sparse. Uncertain.",0.875,2.75
+1,BRAF+ thyroid cancer,drkg,kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,BRAF+ thyroid cancer,drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Primary immunodeficiency pediatric (EMA),drkg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,consistent,5.0,The provided knowledge graph evidence for B includes mechanisms that are consistent with the target disease and has sufficient support from both the knowledge graph and our pharmacological knowledge.,1.0,3.875
+1,Primary immunodeficiency pediatric (EMA),drkg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Biliary tract cancer 1L,drkg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,5.0,"Drug-8 has a known target (CD274), which is associated with Biliary tract cancer 1L. Additionally, it targets CD80, another molecule involved in the immune response, which could potentially play a role in the disease. This combination of evidence suggests Drug-8 might be a plausible candidate.",1.0,3.25
+1,Biliary tract cancer 1L,drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Polymyalgia rheumatica,drkg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Polymyalgia rheumatica,drkg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Chronic lymphocytic leukemia,drkg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Chronic lymphocytic leukemia,drkg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,"Crohn's disease (moderate-severe, refractory)",drkg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,3.7142857142857144
+1,"Crohn's disease (moderate-severe, refractory)",drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The provided evidence shows a link between Drug-8 and CHRM3, which is involved in muscle contraction. Additionally, Drug-8 modulates several genes that are associated with immune response. Overall, the mechanistic plausibility of Drug-8 for this disease is moderate to high.",1.0,3.5
+1,HER2-mutant NSCLC (EMA),drkg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HER2-mutant NSCLC (EMA),drkg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,both,consistent,1.0,"The knowledge graph reports associations between Drug-2 and GPR55 and DRD1. Our pharmacological knowledge also shows a mechanism of action for these targets in the disease. Therefore, we can confidently rank this candidate as high.",1.0,1.375
+1,Giant cell arteritis,drkg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.3333333333333335
+1,Giant cell arteritis,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.7142857142857143,3.5714285714285716
+1,First-line anemia in lower-risk MDS,drkg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,insufficient,4.0,The provided evidence is limited to inhibiting certain genes and does not demonstrate a clear mechanistic plausibility for the disease.,0.875,3.75
+1,First-line anemia in lower-risk MDS,drkg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,Drug-6's targets (SLC19A1 and SLC46A1) are not directly related to first-line anemia mechanisms.,1.0,1.75
+1,GVHD + pediatric,drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,GVHD + pediatric,drkg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,both,consistent,4.0,"Evidence from the knowledge graph is consistent with mechanistic links (e.g., Drug-6 downregulates SLC38A6; Drug-1 targets drugbank:BE0004800) and Drug-2 binds CYP3A7, suggesting a plausible mechanism for GVHD + pediatric.",0.75,3.75
+1,MSI-H/dMMR solid tumors (full approval conversion),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,MSI-H/dMMR solid tumors (full approval conversion),drkg,kg,llama3.2:1b,1,8,E,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The evidence from the biomedical knowledge graph supports activation of genes associated with MSI-H/dMMR solid tumors, including MSH6 and MLH1 targets. The pharmacological profile also indicates inhibition of several target genes involved in cancer.",0.875,3.5
+1,Antibody-mediated rejection in organ transplantation,drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Antibody-mediated rejection in organ transplantation,drkg,kg,llama3.2:1b,1,8,G,6,0.16666666666666666,0,0,0,1,,both,consistent,3.0,"The knowledge graph evidence provides consistent links between Drug-1 (MS4A1, ABCB1) and its targets. In contrast, the mechanistic link between CYP5 and CALM2 is unclear.",1.0,3.375
+1,Pancreatic NET,drkg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Pancreatic NET,drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Follicular lymphoma (+obinutuzumab),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Follicular lymphoma (+obinutuzumab),drkg,kg,llama3.2:1b,1,8,E,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,"The knowledge graph reports evidence for Drug-8's targeting of various genes and its inhibition of certain enzymes. However, the effects on follicular lymphoma are unclear without more context.",1.0,1.75
+1,HR+/HER2- node-positive high-risk early breast cancer,drkg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,HR+/HER2- node-positive high-risk early breast cancer,drkg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,1.0,1.0
+1,BRAF+ thyroid cancer,drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,3.0,"Drug-6 inhibits RAF1, but also targets CCND1 and PTEN. While there is some evidence for activation of GPR119 against BRAF+ thyroid cancer compared to its role as a regulator of HSD11B2 and HSD3B1, the consistent evidence makes this ranking more plausible than Drug-8's other mechanisms.",0.875,4.125
+1,BRAF+ thyroid cancer,drkg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,Limited mechanistic links and sparse knowledge graph evidence make it uncertain.,0.8571428571428571,3.0
+1,HER2+ solid tumors (tumor-agnostic),drkg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HER2+ solid tumors (tumor-agnostic),drkg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,2.857142857142857
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",drkg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,,,,,,
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",drkg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,prior,insufficient,3.0,The mechanism of Drug-7 inhibiting ARAF in mCRC is not directly supported by the provided knowledge graph evidence and requires more research to confirm,0.6666666666666666,3.1666666666666665
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",drkg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",drkg,kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,3.0,"The knowledge graph evidence for C is strong and matches the known targets of (+dabrafenib, BRAF V600E) glioma. I have some information on its potential effects on other pathways, but it downregulates ALOX5 and MYC in a manner consistent with cancer treatment.",0.875,3.75
+1,HR+/HER2- metastatic breast cancer,drkg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,insufficient,1.0,No mechanistic evidence from either knowledge graph is provided for Drug-2's targets. The relationship between Drug-2 and Drug-3 is also unclear.,0.875,2.125
+1,HR+/HER2- metastatic breast cancer,drkg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,insufficient,2.0,"kg evidence sparse, prior knowledge inconsistent; no direct evidence for HR+/HER2- metastatic breast cancer",1.0,2.25
+1,1L biliary tract cancer (+gemcitabine+cisplatin),drkg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,1L biliary tract cancer (+gemcitabine+cisplatin),drkg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,RET-fusion NSCLC (expanded),drkg,kg,llama3.2:1b,0,8,H,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,RET-fusion NSCLC (expanded),drkg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.0,5.0
+1,HR+/HER2- metastatic breast cancer,drkg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,inconsistent,3.0,The link between Drug-7 and BRCA1 is uncertain due to lack of evidence in DOID:1612.,0.6666666666666666,3.0
+1,HR+/HER2- metastatic breast cancer,drkg,kg,llama3.2:1b,1,8,C,7,0.14285714285714285,0,0,0,1,,,,,,,
+1,Pheochromocytoma/paraganglioma,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Pheochromocytoma/paraganglioma,drkg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"While some evidence is provided, it is sufficient to judge this candidate. The mechanistic links are well-supported by the knowledge graph.",0.75,4.0
+1,Gastric/GEJ adenocarcinoma (1L +chemo),drkg,kg,llama3.2:1b,0,8,G,6,0.16666666666666666,0,0,0,1,,both,insufficient,3.0,"The knowledge graph's evidence for targeting CD274 and CD80 is unclear or conflicting, making it uncertain whether Drug-4 is the actual drug.",0.75,3.375
+1,Gastric/GEJ adenocarcinoma (1L +chemo),drkg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,5.0,"The evidence for H is insufficient to judge its mechanistic plausibility in gastric cancer, and its targets CD274 and CD80 are not well-established.",0.75,3.75
+1,Metastatic colorectal cancer,drkg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.8333333333333335
+1,Metastatic colorectal cancer,drkg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,,,,,,
+1,Gastric/GEJ adenocarcinoma,drkg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,prior,inconsistent,2.0,"While Drug-5 downregulates NR3C2 and upregulates SOCS2, these targets are not directly related to gastric GEJ adenocarcinoma. However, my prior knowledge on this topic is uncertain.",0.875,3.75
+1,Gastric/GEJ adenocarcinoma,drkg,kg,llama3.2:1b,1,8,F,2,0.5,0,1,1,1,,prior,consistent,1.0,"While the KG shows that FABP2 binds to RXRA and inhibits CYP2C18, its evidence agreement with other targets is sufficient for Drug-4 to be considered mechanistically plausible.",0.625,1.625
+1,Urothelial carcinoma (expanded population),drkg,kg,llama3.2:1b,0,8,F,2,0.5,0,1,1,1,,,,,,,
+1,Urothelial carcinoma (expanded population),drkg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.5714285714285714,3.4285714285714284
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),drkg,kg,llama3.2:1b,0,8,F,8,0.125,0,0,0,1,,,,,,,
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),drkg,kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,both,uncertain,4.0,"The sparse evidence from the knowledge graph is not sufficient to judge Drug-8's mechanistic plausibility. Prior knowledge suggests Drug-8's potential role as a therapeutic target, but there are conflicts with existing literature.",0.875,3.375
+1,Pediatric BRAF V600E low-grade glioma,drkg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Pediatric BRAF V600E low-grade glioma,drkg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HR+/HER2- early breast cancer (adjuvant),drkg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The provided mechanistic links from the biomedical knowledge graph are consistent with known mechanisms of HR+/HER2- early breast cancer, such as inhibition of CDK6. However, there is also evidence suggesting targets for this drug, such as CCND2 and PGR.",1.0,3.7142857142857144
+1,HR+/HER2- early breast cancer (adjuvant),drkg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,HR+/HER2-low breast cancer,drkg,kg,llama3.2:1b,0,8,C,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"Drug-8 targets a different set of genes, including FCGR1A and TOP1, which are not directly associated with HR+/HER2-low breast cancer. However, Drug-8's role in inhibiting CYP1A2 suggests potential anti-cancer effects.",1.0,2.5
+1,HR+/HER2-low breast cancer,drkg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,consistent,4.0,"The mechanistic links provided by the knowledge graph are consistent with my prior knowledge of breast cancer, including evidence that Drug-3 downregulates CSRP1 and targets drugbank:BE0000548.",1.0,3.5
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),drkg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),drkg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,TRD monotherapy,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,conflicting,2.0,"Drug-7 targets multiple pathways (NMD3B and NMDE3), which may have anti-inflammatory effects in certain contexts. However, the evidence is conflicting with what we know about its target.",0.875,2.875
+1,TRD monotherapy,biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,ILD-associated pulmonary hypertension,biokg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,ILD-associated pulmonary hypertension,biokg,kg,llama3.2:1b,1,8,B,5,0.2,0,0,1,1,,both,conflicting,2.0,"[A] has a stronger evidence agreement than [C]. While both have associations with CBLN2 and RETNA in the knowledge graph, [E]'s evidence agreement is more consistent with ILD-associated pulmonary hypertension.",0.7142857142857143,2.857142857142857
+1,Indolent systemic mastocytosis (EMA),biokg,kg,llama3.2:1b,0,8,B,7,0.14285714285714285,0,0,0,1,,both,insufficient,4.0,The provided evidence from the knowledge graph is insufficient to judge the mechanistic plausibility of Drug-8.,0.625,3.25
+1,Indolent systemic mastocytosis (EMA),biokg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,both,insufficient,2.0,"While Drug-6 targets S20A1 and S20A2 in mastocytosis, my prior knowledge does not confirm these associations.",1.0,2.142857142857143
+1,Hidradenitis suppurativa,biokg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,,,,,,
+1,Hidradenitis suppurativa,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,conflicting,3.0,"While Drug-7 is associated with IL17, the evidence is not entirely consistent across all knowledge graphs and mechanistic links.",0.75,2.25
+1,Chronic hepatitis B (pediatric),biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Chronic hepatitis B (pediatric),biokg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,0.0,1.0
+1,HoFH pediatric (EMA),biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,HoFH pediatric (EMA),biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,conflicting,3.0,KG provides some pathway associations but mechanistic links are sparse.,0.5,2.5
+1,Nephrotic syndrome,biokg,kg,llama3.2:1b,0,8,D,4,0.25,0,0,1,1,,both,conflicting,3.0,"KG evidence suggests Drug-5 targets COQ8B, CD20 (which is also associated with Nephrotic syndrome), whereas prior pharmacological knowledge associates COQ8B with nephrology, making this conflict.",0.75,3.875
+1,Nephrotic syndrome,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,The association between Anticonvulsants and the pathway involved in Nephrotic syndrome is well-supported by both knowledge graph evidence and pharmacological principles.,1.0,5.0
+1,Follicular lymphoma,biokg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,Insufficient evidence from the knowledge graph to agree with prior understanding of follicular lymphoma's association with COE1 and KDSR.,1.0,3.0
+1,Follicular lymphoma,biokg,kg,llama3.2:1b,1,8,H,8,0.125,0,0,0,1,,both,insufficient,3.0,Drug-8 has some mechanistic plausibility for follicular lymphoma but the evidence is sparse and inconsistent with prior knowledge.,0.75,3.25
+1,Retinal vein occlusion,biokg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,insufficient,1.0,"The knowledge graph evidence for Drug-8 is mostly focused on targets and pathways (e.g., ESR1 -> NR1I3), but there is no direct evidence linking it to DOID:1727. The provided evidence seems to focus more on modulating other pathways that may not be directly relevant to retinal vein occlusion.",0.8333333333333334,2.0
+1,Retinal vein occlusion,biokg,kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,both,insufficient,1.0,"The mechanism of Drug-7 targets HCN3 and HCN2, but there is no direct evidence linking it to the DOID:1727 target disease.",0.875,3.25
+1,Agitation associated with Alzheimer's dementia,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,"No evidence from the knowledge graph is provided, making it impossible to assess mechanistic plausibility.",0.875,2.125
+1,Agitation associated with Alzheimer's dementia,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"Both the knowledge graph evidence (AGAL, UD11) and my own pharmacological knowledge confirm Drug-4's target involvement in Alzheimer's disease. The mechanism is also plausible given its targets AGAL and UD11.",1.0,5.0
+1,High LDL-C with increased CV risk (expanded),biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,High LDL-C with increased CV risk (expanded),biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Indolent systemic mastocytosis,biokg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,4.0,"Mechanistic plausibility is supported by diverse targets and pathways, although some evidence may be inferred from the provided profile.",1.0,2.625
+1,Indolent systemic mastocytosis,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,insufficient,4.0,KG vs. prior evidence for ADA1A pathway,0.7142857142857143,3.7142857142857144
+1,EGPA (expanded),biokg,kg,llama3.2:1b,0,8,G,4,0.25,0,0,1,1,,,,,,,
+1,EGPA (expanded),biokg,kg,llama3.2:1b,1,8,A,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,COVID-19 (expanded population),biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,insufficient,2.0,The evidence does not provide a clear mechanistic link between Drug-8 and COVID-19.,1.0,2.5
+1,COVID-19 (expanded population),biokg,kg,llama3.2:1b,1,8,B,8,0.125,0,0,0,1,,prior,conflicting,1.0,"The provided knowledge graph reports associations between Drug-4 and Hypnotics; Drug-4 targets GBRR3; Drug-4 targets GBRR2; Drug-4 targets GBRR1; Drug-4 targets TSPO; Drug-4 targets GBRP; Drug-4 targets GBRE; Drug-4 targets GBRG1; Drug-4 targets GBRD. However, it does not mention any associations with MRP4 and NTCP, which are critical pathways in COVID-19. Given this lack of evidence, the mechanistic plausibility of Drug-4 for treating COVID-19 is uncertain.",0.125,2.75
+1,Obstructive sleep apnea with obesity,biokg,kg,llama3.2:1b,0,8,H,4,0.25,0,0,1,1,,both,consistent,2.0,The evidence is consistent with what I know about the disease and supports its mechanistic plausibility as a potential target.,1.0,2.4285714285714284
+1,Obstructive sleep apnea with obesity,biokg,kg,llama3.2:1b,1,8,F,3,0.3333333333333333,0,1,1,1,,both,consistent,5.0,The knowledge graph reports associations for EDNRA with DOID:0050848 and DOID:0050854 but the evidence for F is stronger and more consistent.,1.0,4.5
+1,KRAS G12C+ mCRC,biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,KRAS G12C+ mCRC,biokg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,consistent,3.0,"While the knowledge graph reports that Drug-8 targets RASK, which is involved in various diseases beyond cancer treatment, this evidence is consistent with what I know about the role of RASK in cell survival. Additionally, the target of this pathway (RASK) has been shown to be involved in various diseases beyond cancer.",0.875,2.25
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.0
+1,Diabetic retinopathy/DME (EMA Mar+May 2026),biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Chorea associated with Huntington's disease,biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,,,,,,
+1,Chorea associated with Huntington's disease,biokg,kg,llama3.2:1b,1,8,H,8,0.125,0,0,0,1,,,,,,,
+1,Heart failure (broadened),biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Heart failure (broadened),biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Acquired hypofibrinogenemia in cardiovascular surgery,biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Acquired hypofibrinogenemia in cardiovascular surgery,biokg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.5,4.5
+1,Pediatric atopic dermatitis,biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.3333333333333335
+1,Pediatric atopic dermatitis,biokg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,prior,sufficient,5.0,"KG evidence supports the association between Drug-8 and SO1B1, which is a target of Drug-3",0.5,4.5
+1,COVID-19 updated strain,biokg,kg,llama3.2:1b,0,8,F,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"Drug-7 targets multiple proteins related to the SARS-CoV-2 replication complex, including those involved in PORED and CP11A function, supporting its potential role in COVID-19 treatment.",0.875,2.5
+1,COVID-19 updated strain,biokg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Delay T1D onset in children ≥1yr,biokg,kg,llama3.2:1b,0,8,G,2,0.5,0,1,1,1,,both,consistent,4.0,"The knowledge graph reports multiple associations between GLIS3 and T1D onset, which aligns with our own understanding of the pathway's role in diabetes.",1.0,3.75
+1,Delay T1D onset in children ≥1yr,biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Unresectable thymic carcinoma (PMDA),biokg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,prior,conflicting,4.0,"Evidence from the knowledge graph conflicts with my own pharmacological knowledge. While Drug-8 targets CP343 and NR1H2, there is no direct association between these genes and PMDA, making its evidence against ranking.",0.0,4.0
+1,Unresectable thymic carcinoma (PMDA),biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,,,,,,
+1,Retinal vein occlusion,biokg,kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,both,conflicting,3.0,"KG evidence supports modulation of serotonin receptor agonists/antagonists, but prior knowledge indicates targets in the serotonergic system. Conflicts with prior knowledge on serotonin receptor modulators.",1.0,3.25
+1,Retinal vein occlusion,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,consistent,5.0,"Our prior knowledge of endocrine resistance is well-established, making Drug-8 a strong candidate",0.0,5.0
+1,Spinal muscular atrophy (pediatric expansion),biokg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Spinal muscular atrophy (pediatric expansion),biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Chronic thromboembolic pulmonary hypertension,biokg,kg,llama3.2:1b,0,8,G,5,0.2,0,0,1,1,,both,consistent,4.0,"Both the knowledge graph reports associations between CBLN2 and Drug-7, but also mentions Gene CBLN2 as a target for Gene RETNA in DOID:6432, suggesting some mechanistic link.",0.8333333333333334,3.6666666666666665
+1,Chronic thromboembolic pulmonary hypertension,biokg,kg,llama3.2:1b,1,8,D,7,0.14285714285714285,0,0,0,1,,both,insufficient,3.0,Drug-5 targets HDA11 but lacks explicit mechanisms and potential off-target effects make it uncertain for DOID:6432 disease.,0.875,3.0
+1,Polycythaemia vera and essential thrombocytopenia,biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Polycythaemia vera and essential thrombocytopenia,biokg,kg,llama3.2:1b,1,8,F,1,1.0,1,1,1,1,,both,consistent,4.0,"Its associations with INAR2 and CP1A2 are well-established in the literature, but its association with HBA is unclear.",0.625,4.0
+1,Generalized myasthenia gravis,biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,,,,,,
+1,Generalized myasthenia gravis,biokg,kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,both,insufficient,1.0,The knowledge graph reports mechanistic links between Drug-F and Generalized myasthenia gravis but lacks sufficient evidence to confidently rank it.,0.7142857142857143,1.8571428571428572
+1,Invasive fungal infections pediatric ≥2yr,biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,conflicting,1.0,The mechanistic link in Drug-5 targets pathway Antifungal agents and does not align with any known disease target or pathways of the other candidates.,1.0,2.5714285714285716
+1,Invasive fungal infections pediatric ≥2yr,biokg,kg,llama3.2:1b,1,8,C,1,1.0,1,1,1,1,,both,consistent,4.0,"The mechanism of Drug-3 is supported by multiple evidence links (Androgen and estrogen receptor agonists/antagonists, KLK3, PRGR, NR1I2, MRP1) and is consistent with the target disease, indicating high confidence.",1.0,3.75
+1,PKU expanded to ≥12yr,biokg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,both,consistent,4.0,"KG evidence for DHPR association is strong, and the pathways PH4H and Phenylalanine are well-supported in the knowledge graph. Additionally, prior knowledge about drug-2 modulating pathway Antineoplastics suggests a plausible mechanistic link.",1.0,3.2857142857142856
+1,PKU expanded to ≥12yr,biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,IDH1-mutated relapsed/refractory MDS,biokg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,insufficient,1.0,"No evidence is provided for Drug-8, making it uncertain.",1.0,2.75
+1,IDH1-mutated relapsed/refractory MDS,biokg,kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,1.0,"The evidence in the knowledge graph is consistent, and Drug-8 targets IDHC which could be a plausible pathway for IDH1-mutated relapsed/refractory MDS.",0.875,2.375
+1,Retinopathy of prematurity,biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,consistent,2.0,"The provided knowledge graph evidence for Drug-6 shows associations between it and pathways related to VEGFA, which is relevant in the context of Retinopathy of Prematurity. Additionally, Drug-4 targets GRIK5, a gene associated with various diseases including cancer.",1.0,1.625
+1,Retinopathy of prematurity,biokg,kg,llama3.2:1b,1,8,E,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,"The provided evidence from the knowledge graph is insufficient to judge Drug-6, as there are no clear associations between Drug-6's targets and retinopathy of prematurity. Further research would be needed to assess this candidate.",1.0,2.75
+1,Agitation associated with Alzheimer's dementia,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,"The provided evidence includes targets for Drug-5, but lacks direct evidence linking these to Alzheimer's disease. The mechanistic links between ADA2C, ADA1B, and others are also unclear in this context.",0.875,1.875
+1,Agitation associated with Alzheimer's dementia,biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,LDL-C elevation in statin-intolerant dyslipidemia,biokg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.0,2.0
+1,LDL-C elevation in statin-intolerant dyslipidemia,biokg,kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,1.0,"Both evidence graph and prior knowledge suggest that Drug-5 (targets SCN7A) modulates the Sodium channel blocking drugs pathway. However, their roles in Fatty acid degradation are unclear.",0.625,3.0
+1,First-line anemia in lower-risk MDS,biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,First-line anemia in lower-risk MDS,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,,,,,,
+1,Atopic dermatitis,biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Atopic dermatitis,biokg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Acute HCV pediatric,biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Acute HCV pediatric,biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,HoFH in children,biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,HoFH in children,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,consistent,4.0,"Mechanistic links reported by the knowledge graph for Drug-8 and Drug-7 are consistent with HoFH in children. However, no evidence supports a mechanistic link between Drug-6 and HoFH.",0.75,3.125
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),biokg,kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"Drug-8's association with HNMT and ALBU is consistent with its mechanistic links to other targets. However, the knowledge graph evidence for Drug-6 targeting TRPM6 is not sufficient.",1.0,3.75
+1,dMMR/MSI-H primary advanced endometrial cancer (+chemo),biokg,kg,llama3.2:1b,1,8,C,8,0.125,0,0,0,1,,both,consistent,3.0,"Drug-3 targets HNMT and ALBU; while there are multiple pathways mentioned in the evidence, it is unclear how this directly relates to dMMR/MSI-H without more context.",1.0,3.125
+1,Cerebral folate transport deficiency,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,"The knowledge graph reports associations with Cerebral folate transport deficiency, and Drug-1 targets pathways (Lincomycin Action Pathway, Paromomycin Action Pathway) that are related to this disease. However, the evidence provided is not strong enough to support Drug-1.",0.875,3.75
+1,Cerebral folate transport deficiency,biokg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,0.0,4.0
+1,Reduce MACE in CVD + obesity/overweight,biokg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,0,,,,,,0.0,2.0
+1,Reduce MACE in CVD + obesity/overweight,biokg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Palmoplantar pustulosis (PMDA),biokg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Palmoplantar pustulosis (PMDA),biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Measles prophylaxis post-exposure,biokg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,both,conflicting,4.0,"The knowledge graph reports associations between drug targets and disease pathways, but the evidence for a direct link between MCP and measles prophylaxis post-exposure is sparse. Furthermore, Drug-1 targets multiple genes involved in immune response and viral entry, which may not be directly relevant to measles prophylaxis.",1.0,2.75
+1,Measles prophylaxis post-exposure,biokg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8571428571428571,1.4285714285714286
+1,CKD in T2D,biokg,kg,llama3.2:1b,0,8,E,1,1.0,1,1,1,1,,both,insufficient,3.0,"While Drug-8 targets AMY1, GLP1R, NEP, LIPL, DPP4, ALBU, and GCYA1/2, which are all related to CKD in T2D (DOID:784), the evidence is very sparse and conflicts with what we know about its association with GUC2B. Therefore, I flag this as insufficient.",1.0,3.7142857142857144
+1,CKD in T2D,biokg,kg,llama3.2:1b,1,8,D,8,0.125,0,0,0,1,,both,insufficient,1.0,"The evidence for Drug-8 targets various genes, but there is no clear link to CKD in T2D. The pathways it modulates are also not directly relevant.",1.0,1.875
+1,HER2-mutant NSCLC (PMDA),biokg,kg,llama3.2:1b,0,8,B,3,0.3333333333333333,0,1,1,1,,both,insufficient,2.0,"While Drug-8 targets LYAG and CATL1, there's no direct evidence linking these to HER2-mutant NSCLC (PMDA).",1.0,3.2857142857142856
+1,HER2-mutant NSCLC (PMDA),biokg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,both,consistent,5.0,"The evidence for Drug-8 targets LYAG, CATL1, TOP1, CATB, S47A2, FCGR1, MRP1, SO1B3 is strong and consistent across multiple sources. Additionally, its association with pathway Neurotransmitter transporter inhibitors modulates Drug-7, which has a known mechanism for treating NSCLC.",0.875,2.625
+1,Heterozygous familial hypercholesterolemia,biokg,kg,llama3.2:1b,0,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,2.0,"While Drug-7 targets PCSK9, its evidence is insufficient to judge its relevance to Heterozygous Familial Hypercholesterolemia.",0.875,3.125
+1,Heterozygous familial hypercholesterolemia,biokg,kg,llama3.2:1b,1,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Crohn's disease,biokg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Crohn's disease,biokg,kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,The evidence from the biomedical graph for IL23A does not align with prior knowledge of its role in Crohn's disease.,1.0,2.0
+1,COVID-19 in severe renal impairment/dialysis,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,conflicting,2.0,"The knowledge graph provides associations between Drug-8 modulating pathways and DOID, including MRP4; NTCP; ABCBB; SO1B3; and CP2C8. However, the evidence for Drug-7 is uncertain.",0.75,2.75
+1,COVID-19 in severe renal impairment/dialysis,biokg,kg,llama3.2:1b,1,8,E,1,1.0,1,1,1,1,,both,consistent,5.0,The evidence from the knowledge graph and mechanistic links confirms Drug-8 as a potential candidate for DOID:0080599.,1.0,3.625
+1,MASH with fibrosis,biokg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,MASH with fibrosis,biokg,kg,llama3.2:1b,1,8,C,7,0.14285714285714285,0,0,0,1,,prior,insufficient,2.0,KG evidence is sparse for this pathway and the effects on fibrosis are not well understood.,0.875,3.0
+1,mHSPC + ADT,biokg,kg,llama3.2:1b,0,8,C,2,0.5,0,1,1,1,,,,,,,
+1,mHSPC + ADT,biokg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,both,inconsistent,1.0,The provided knowledge graph evidence conflicts with the pharmacological profile of Drug-8 and its evidence agreement is inconsistent.,0.625,2.0
+1,Chronic kidney disease,biokg,kg,llama3.2:1b,0,8,G,7,0.14285714285714285,0,0,0,1,,both,insufficient,1.0,Drug-8 targets SC5A2 and has a clear mechanistic link to Chronic Kidney Disease through its association with UD18.,1.0,2.25
+1,Chronic kidney disease,biokg,kg,llama3.2:1b,1,8,F,5,0.2,0,0,1,1,,both,insufficient,2.0,"While Drug-4 targets GABA-A receptor agonists/antagonists, the provided KG evidence does not provide clear mechanistic links to CKD. Furthermore, prior knowledge suggests that GABA-A receptors are less directly implicated in this disease.",0.875,2.375
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,biokg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Allergic fungal rhinosinusitis (AFRS) ≥6yr,biokg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,insufficient,2.0,The targets of Drug-8 (IL4RA) are not directly related to AFRS.,0.8571428571428571,2.4285714285714284
+1,Acquired hypothalamic obesity,biokg,kg,llama3.2:1b,0,8,F,4,0.25,0,0,1,1,,,,,,,
+1,Acquired hypothalamic obesity,biokg,kg,llama3.2:1b,1,8,D,4,0.25,0,0,1,1,,both,insufficient,2.0,Insufficient evidence from knowledge graph to justify targeting CP3A5 and MDR1 in DOID 6676,0.8,3.0
+1,Pediatric glioma (EMA),biokg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Pediatric glioma (EMA),biokg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,insufficient,3.0,The knowledge graph suggests targets for Pediatric glioma but lacks sufficient evidence to rank Drug-6 or confirm its relevance.,0.6666666666666666,3.1666666666666665
+1,IV formulation for rheumatic diseases (EMA),biokg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,consistent,2.0,"Both prior knowledge and the evidence from the biomedical graph confirm targets for Drug-6, with some discrepancies but a clear understanding of the pathway",0.8571428571428571,2.857142857142857
+1,IV formulation for rheumatic diseases (EMA),biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Oral tablet formulation for weight management,biokg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,5.0,"The evidence from the knowledge graph is consistent with my prior knowledge, and there are no conflicting mechanistic plausibility explanations provided by other candidates.",1.0,4.625
+1,Oral tablet formulation for weight management,biokg,kg,llama3.2:1b,1,8,C,4,0.25,0,0,1,1,,both,insufficient,2.0,The provided evidence is insufficient to judge this candidate and its targets are not relevant to the disease.,0.75,2.125
+1,dMMR recurrent/advanced endometrial cancer,biokg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,dMMR recurrent/advanced endometrial cancer,biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Primary humoral immunodeficiency pediatric 2-11yr,biokg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,kg,insufficient,4.0,Evidence from knowledge graph is sparse and conflicting with prior knowledge regarding FCGRB targets.,0.5714285714285714,2.2857142857142856
+1,Primary humoral immunodeficiency pediatric 2-11yr,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,conflicting,2.0,The mechanistic links for Drug-4 are based on target annotations that do not match the provided evidence from the knowledge graph.,0.0,2.4285714285714284
+1,Neoadj+adj HNSCC,biokg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"While Drug-1 targets ACM1 and HRH1, which are involved in various cellular processes, its direct association with HNSCC is unclear without more specific evidence.",1.0,1.625
+1,Neoadj+adj HNSCC,biokg,kg,llama3.2:1b,1,8,H,4,0.25,0,0,1,1,,both,insufficient,2.0,KG vs. knowledge conflicts over HXA5 and ING1 associations with AGAT Deficiency target MT1A,0.8571428571428571,2.7142857142857144
+1,Juvenile idiopathic arthritis (EMA Feb 2026),biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Juvenile idiopathic arthritis (EMA Feb 2026),biokg,kg,llama3.2:1b,1,8,D,2,0.5,0,1,1,1,,prior,conflicting,2.0,"While Drug-7 has a broad profile and targets multiple pathways involved in Juvenile Idiopathic Arthritis, the conflicting evidence linking it to SC6A3/SC6A4/SC6A2 suggests that its mechanistic plausibility is uncertain.",0.875,3.375
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",biokg,kg,llama3.2:1b,0,8,B,8,0.125,0,0,0,1,,both,insufficient,2.0,Drug-8's primary association is with ABCG2 and MDR1. Its targets do not directly relate to ALK+ solid tumors.,0.875,2.875
+1,"ALK+ solid tumors (tissue-agnostic, world-first)",biokg,kg,llama3.2:1b,1,8,C,2,0.5,0,1,1,1,,both,insufficient,3.0,KG provides pathway information but lack of direct target and mechanism for ALK+ solid tumors makes prior knowledge uncertain.,0.875,2.25
+1,Ulcerative colitis,biokg,kg,llama3.2:1b,0,8,H,5,0.2,0,0,1,1,,both,insufficient,1.0,"Insufficient evidence from the biomedical knowledge graph to assess mechanistic plausibility. The associations between Drug-8 targets IL23A and IL12B with pathways Inflammatory bowel disease (IBD) and JAK-STAT signaling pathway suggest plausible mechanisms, but these links are not supported by any specific mechanistic studies.",1.0,2.2
+1,Ulcerative colitis,biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,0.6666666666666666,3.3333333333333335
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,uncertain,3.0,The evidence from the knowledge graph is sparse on EPAS1 and unclear on its association with PD-1/PD-L1 + VEGF-TKI,0.75,3.125
+1,Ulcerative colitis,biokg,kg,llama3.2:1b,0,8,H,3,0.3333333333333333,0,1,1,1,,kg,insufficient,3.0,"The evidence linking Drug-1 to AK1C2 and PGH1 is weak, and there are no consistent associations with key pathways like Inflammatory bowel disease or JAK-STAT signaling.",1.0,3.3333333333333335
+1,Ulcerative colitis,biokg,kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,consistent,3.0,"The evidence from the knowledge graph and DAP1/PSMG1 association is consistent. The provided link mentions DAP1 targets for cyclooxygenase inhibitors, which aligns with this mechanistic relationship.",0.75,2.625
+1,BRAF V600E metastatic NSCLC,biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,BRAF V600E metastatic NSCLC,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,consistent,4.0,"The evidence from the knowledge graph on BRAF V600E metastatic NSCLC is consistent with Drug-8, and both target CCND1. However, I recognize that my prior knowledge may not be up-to-date.",1.0,2.375
+1,Crohn's disease,biokg,kg,llama3.2:1b,0,8,B,2,0.5,0,1,1,1,,both,consistent,3.0,"Drug-8 targets several genes associated with Crohn's disease, including SO1B1 and ERAP2. The knowledge graph reports associations between Drug-8 and the same pathways as Drug-7, suggesting a mechanistic plausibility for its ranking. However, the evidence is not entirely consistent across different pathways, which raises some uncertainty.",1.0,3.375
+1,Crohn's disease,biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,dMMR/MSI-H primary advanced endometrial cancer,biokg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,dMMR/MSI-H primary advanced endometrial cancer,biokg,kg,llama3.2:1b,1,8,G,8,0.125,0,0,0,1,,,,,,,
+1,IgG4-related disease,biokg,kg,llama3.2:1b,0,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,5.0,KG vs. knowledge: limited mechanistic information; prior evidence suggests other roles for Drug-1 and Drug-3.,1.0,3.875
+1,IgG4-related disease,biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Ph+ CML-CP frontline (EMA Feb 2026),biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Ph+ CML-CP frontline (EMA Feb 2026),biokg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,both,consistent,1.0,The knowledge graph reports Drug-3 modulates Antineoplastics - alkylating agents; it targets 6PGD. This is a plausible target for CML frontline treatment.,1.0,2.125
+1,EGPA,biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,EGPA,biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Biliary tract cancer,biokg,kg,llama3.2:1b,0,8,D,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Biliary tract cancer,biokg,kg,llama3.2:1b,1,8,C,3,0.3333333333333333,0,1,1,1,,prior,insufficient,2.0,Insufficient evidence from the knowledge graph on ELF3 associations.,0.75,3.625
+1,COPD,biokg,kg,llama3.2:1b,0,8,H,4,0.25,0,0,1,1,,both,consistent,3.0,"While Drug-8 targets IL4RA, which is implicated in COPD through association with IL-13 and IL-5, the evidence provided suggests a potential pathway for disease intervention. However, the specific mechanisms are not fully understood.",0.625,3.625
+1,COPD,biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Primary mediastinal large B-cell lymphoma,biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Primary mediastinal large B-cell lymphoma,biokg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),biokg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,0.0,4.0
+1,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),biokg,kg,llama3.2:1b,1,8,H,4,0.25,0,0,1,1,,,,,,,
+1,RAS wild-type HER2+ metastatic colorectal cancer,biokg,kg,llama3.2:1b,0,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,RAS wild-type HER2+ metastatic colorectal cancer,biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Schnitzler syndrome (Japan),biokg,kg,llama3.2:1b,0,8,C,1,1.0,1,1,1,1,,both,insufficient,2.0,"The evidence from the knowledge graph is sparse for Drug-8, and there are conflicts with my own pharmacological knowledge (no association found in both the knowledge graph and my prior knowledge).",1.0,3.125
+1,Schnitzler syndrome (Japan),biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,HR+/HER2- breast cancer,biokg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,both,conflicting,2.0,"Drug-1 targets IDE; Drug-1 targets A2MG. While these drugs are involved in pathways related to cell adhesion and immune function respectively, there's limited direct mechanistic evidence linking them to HR+/HER2- breast cancer.",0.8571428571428571,2.0
+1,HR+/HER2- breast cancer,biokg,kg,llama3.2:1b,1,8,A,7,0.14285714285714285,0,0,0,1,,both,consistent,5.0,Both modulate pathway Drug-8 targets TACD2; Drug-8 targets FUBP1; Drug-8 targets TOP1; Drug-8 targets UD11 for HR+/HER2- breast cancer.,0.625,4.5
+1,Psoriasis in children 6-11 (cream),biokg,kg,llama3.2:1b,0,8,A,3,0.3333333333333333,0,1,1,1,,kg,insufficient,4.0,The provided knowledge graph evidence is limited and conflicting with our prior knowledge on the topic.,1.0,3.142857142857143
+1,Psoriasis in children 6-11 (cream),biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),biokg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),biokg,kg,llama3.2:1b,1,8,B,4,0.25,0,0,1,1,,both,consistent,5.0,The provided evidence matches prior knowledge of Drug-3 targeting 5NTD; DCK; MRP7; S29A1; DPOLB; S22A4.,0.8571428571428571,3.142857142857143
+1,COPD (EMA 2025),biokg,kg,llama3.2:1b,0,8,E,3,0.3333333333333333,0,1,1,1,,both,insufficient,3.0,"While Drug-7 targets IL4RA, which is involved in inflammation, it's unclear how this relates to COPD. More research is needed to confirm or refute this association.",1.0,3.375
+1,COPD (EMA 2025),biokg,kg,llama3.2:1b,1,8,F,6,0.16666666666666666,0,0,0,1,,both,conflicting,2.0,Evidence agreement with knowledge graph is uncertain for Drug-3 and Drug-1.,0.875,1.75
+1,Ph+ CML-CP after 2+ TKIs,biokg,kg,llama3.2:1b,0,8,C,6,0.16666666666666666,0,0,0,1,,,,,,,
+1,Ph+ CML-CP after 2+ TKIs,biokg,kg,llama3.2:1b,1,8,B,2,0.5,0,1,1,1,,both,conflicting,3.0,"While Drug-8 modulates Gastric Acid Production and Betazole Action Pathway, there is no clear link to CML-CP; however, Drug-5 targets ACHA7 and ACM4, which are involved in the NMDA receptor pathway. This makes it uncertain whether Drug-8 has a direct mechanistic role in this disease.",0.8571428571428571,2.857142857142857
+1,IgE-mediated food allergy,biokg,kg,llama3.2:1b,0,8,G,3,0.3333333333333333,0,1,1,1,,both,consistent,4.0,"The provided evidence for Drug-6 is consistent with its association with NCF4 and SGMR1, whereas the knowledge graph evidence does not provide a clear mechanistic link.",0.75,3.0
+1,IgE-mediated food allergy,biokg,kg,llama3.2:1b,1,8,G,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,"The knowledge graph evidence links Drug-1 to multiple pathways involved in IgE-mediated food allergy, including Catecholamine Biosynthesis and Tyrosinemia Type 2 (TYRO3). In contrast, the provided biomedical knowledge graph reports a single association with IFNL3.",1.0,2.375
+1,BRAF+ thyroid cancer,biokg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,BRAF+ thyroid cancer,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,sufficient,4.0,"The provided knowledge graph evidence is strong, as it directly links Drug-8 to multiple targets and pathways involved in antithrombotic agents. However, the mechanistic link between CP2D6 and CP3A4 is not supported by any additional information from the knowledge graph, which only provides associations with other drugs.",0.0,4.0
+1,Primary immunodeficiency pediatric (EMA),biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Primary immunodeficiency pediatric (EMA),biokg,kg,llama3.2:1b,1,8,A,4,0.25,0,0,1,1,,both,conflicting,5.0,KG evidence is sparse and conflicting; prior knowledge suggests potential but lacks specificity.,0.5,3.25
+1,Biliary tract cancer 1L,biokg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Biliary tract cancer 1L,biokg,kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,both,consistent,5.0,"Drug-7 targets genes involved in HIV protease inhibitors and Anti-HIV agents pathways (CP3A4), which are relevant to Biliary tract cancer 1L, making its mechanistic plausibility consistent with the disease",0.75,3.875
+1,Polymyalgia rheumatica,biokg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,,,,,,
+1,Polymyalgia rheumatica,biokg,kg,llama3.2:1b,1,8,D,3,0.3333333333333333,0,1,1,1,,both,conflicting,2.0,"The mechanism of Drug-7 is unclear due to sparse evidence in both the knowledge graph and prior knowledge, but targets CP343 and CP3A7 suggest a potential role in inflammatory processes. However, against the background of other uncertain candidates, this is considered less plausible.",1.0,2.8
+1,Chronic lymphocytic leukemia,biokg,kg,llama3.2:1b,0,8,D,2,0.5,0,1,1,1,,prior,inconsistent,1.0,KG evidence is sparse for CK021; no clear pathway or disease association reported.,0.625,2.5
+1,Chronic lymphocytic leukemia,biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,"Crohn's disease (moderate-severe, refractory)",biokg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,"Crohn's disease (moderate-severe, refractory)",biokg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,both,consistent,3.0,"The knowledge graph reports associations between Drug-6 and IL23A, which is known to be involved in inflammatory processes. Furthermore, our own knowledge of the disease suggests that CBAR2 plays a role in inflammatory pathways. The evidence for ERAP2's involvement in Crohn's disease is not well-supported by prior evidence.",1.0,3.0
+1,HER2-mutant NSCLC (EMA),biokg,kg,llama3.2:1b,0,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,HER2-mutant NSCLC (EMA),biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Giant cell arteritis,biokg,kg,llama3.2:1b,0,8,B,8,0.125,0,0,0,1,,both,insufficient,2.0,Insufficient evidence from the knowledge graph to confirm Drug-8's associations with PTN22 and DRB.,1.0,2.625
+1,Giant cell arteritis,biokg,kg,llama3.2:1b,1,8,B,7,0.14285714285714285,0,0,0,1,,prior,conflicting,3.0,The mechanism of Drug-8 modulating pathway SO1B1 is consistent with its targets JAK1 and ABCG2 as well as CP2D6. This is a stronger evidence-based rationale.,0.75,2.5
+1,First-line anemia in lower-risk MDS,biokg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,prior,conflicting,3.0,The provided evidence for Drug-1 is sparse and conflicting with what we know about DLK1 in MDS.,0.0,3.0
+1,First-line anemia in lower-risk MDS,biokg,kg,llama3.2:1b,1,8,B,5,0.2,0,0,1,1,,both,insufficient,2.0,"The knowledge graph associates Drug-B with multiple pathways (Antipsychotics - phenothiazines and pathway hsa04550), but the provided evidence does not support its association with DLK1 or GATA1.",0.875,2.625
+1,GVHD + pediatric,biokg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,consistent,4.0,Its targets CP3A4 are also associated with GVHD in both graphs,1.0,3.5
+1,GVHD + pediatric,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,consistent,5.0,"The provided knowledge graph evidence on Drug-4 targets AGAL and UD11 is both consistent with and contradicts the target profiles for GVHD + pediatric (which involves AGAL and UD11), indicating a plausible mechanistic link.",1.0,5.0
+1,MSI-H/dMMR solid tumors (full approval conversion),biokg,kg,llama3.2:1b,0,8,D,1,1.0,1,1,1,1,,both,insufficient,2.0,The provided knowledge graph evidence for Drug-8 is sparse and conflicts with my prior knowledge that it targets multiple pathways.,1.0,2.0
+1,MSI-H/dMMR solid tumors (full approval conversion),biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,2.0
+1,Antibody-mediated rejection in organ transplantation,biokg,kg,llama3.2:1b,0,8,C,7,0.14285714285714285,0,0,0,1,,kg,conflicting,2.0,"While CD20 has a target profile, the provided evidence links it to antibody-mediated rejection is inconsistent with our prior knowledge of this disease.",0.625,2.25
+1,Antibody-mediated rejection in organ transplantation,biokg,kg,llama3.2:1b,1,8,G,4,0.25,0,0,1,1,,both,consistent,3.0,"Drug-1 targets CD20, which is relevant to the target disease. The provided evidence on Drug-8 (NNTM and IDH3A) supports its relevance to antibody-mediated rejection.",0.8571428571428571,3.2857142857142856
+1,Pancreatic NET,biokg,kg,llama3.2:1b,0,8,E,3,0.3333333333333333,0,1,1,1,,both,consistent,1.0,"The knowledge graph suggests that Drug-7 targets several proteins involved in various biological pathways, including MET. However, there is no evidence from our own pharmacological knowledge to support this mechanism.",0.875,3.125
+1,Pancreatic NET,biokg,kg,llama3.2:1b,1,8,H,3,0.3333333333333333,0,1,1,1,,,,,,,
+1,Follicular lymphoma (+obinutuzumab),biokg,kg,llama3.2:1b,0,8,E,5,0.2,0,0,1,1,,both,,3.0,I have no relevant information on this drug's mechanism for this disease and do not agree with my prior knowledge of BLK. Uncertain.,0.875,2.5
+1,Follicular lymphoma (+obinutuzumab),biokg,kg,llama3.2:1b,1,8,D,5,0.2,0,0,1,1,,both,insufficient,2.0,KG reports association with KDSR but prior knowledge does not support it and Drug-4's target PBPA is associated with COE1.,1.0,2.142857142857143
+1,HR+/HER2- node-positive high-risk early breast cancer,biokg,kg,llama3.2:1b,0,8,F,1,1.0,1,1,1,1,,both,consistent,5.0,"Drug-8 modulates multiple pathways (A1AG2, S47A2, CDK6, and S47A1), which aligns with our prior mechanistic understanding of CP3A4's role in HR+/HER2- node-positive high-risk early breast cancer.",1.0,4.142857142857143
+1,HR+/HER2- node-positive high-risk early breast cancer,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,both,conflicting,3.0,"Prior knowledge suggests Drug-8 targets A1AG2 and S47A2, while the knowledge graph evidence indicates it modulates pathway CDK6. However, the pathways are not strongly connected in prior knowledge, and the target associations from both sources conflict.",0.8571428571428571,2.2857142857142856
+1,BRAF+ thyroid cancer,biokg,kg,llama3.2:1b,0,8,F,6,0.16666666666666666,0,0,0,1,,both,consistent,2.0,"Both knowledge graph evidence and prior knowledge confirm Drug-6 targets BRAF, while D6 targets CCND1.",1.0,3.0
+1,BRAF+ thyroid cancer,biokg,kg,llama3.2:1b,1,8,D,1,1.0,1,1,1,1,,prior,conflicting,2.0,"KG evidence for HRH2 and ACM5 targets is not consistent with BRAF+ thyroid cancer disease mechanism. Prior knowledge suggests that BRAF+ thyroid cancer is associated with BRAF mutations in the KRAS or NRAS genes, whereas D's mechanisms target HRH2/Acm1/Cac1B are not directly relevant to this context.",0.625,2.625
+1,HER2+ solid tumors (tumor-agnostic),biokg,kg,llama3.2:1b,0,8,B,1,1.0,1,1,1,1,,both,conflicting,4.0,Drug-8's evidence is more consistent with a known mechanism for HER2+ tumors.,0.875,3.625
+1,HER2+ solid tumors (tumor-agnostic),biokg,kg,llama3.2:1b,1,8,G,2,0.5,0,1,1,1,,both,insufficient,1.0,"The knowledge graph provides evidence for Drug-8 targeting LYAG and CATL1, but this is not sufficient to justify its inclusion in the ranking.",1.0,1.6666666666666667
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,"mCRC BRAF V600E (traditional approval, was accelerated)",biokg,kg,llama3.2:1b,1,8,E,5,0.2,0,0,1,1,,,,,,,
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",biokg,kg,llama3.2:1b,0,8,D,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",biokg,kg,llama3.2:1b,1,8,E,4,0.25,0,0,1,1,,both,consistent,3.0,"While evidence from the knowledge graph is consistent with my prior knowledge, it's not as strong as for Drug-2.",0.875,3.625
+1,HR+/HER2- metastatic breast cancer,biokg,kg,llama3.2:1b,0,8,A,4,0.25,0,0,1,1,,kg,inconsistent,3.0,"The evidence for Drug-8 targets TACD2, FUBP1, and TOP1 is sparse; however, it suggests a potential pathway to HR+/HER2- metastatic breast cancer. While the mechanism is plausible, further investigation is required.",1.0,3.875
+1,HR+/HER2- metastatic breast cancer,biokg,kg,llama3.2:1b,1,8,F,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,1L biliary tract cancer (+gemcitabine+cisplatin),biokg,kg,llama3.2:1b,0,8,H,6,0.16666666666666666,0,0,0,1,,both,insufficient,1.0,The association between Drug-5 and PDCD1 has insufficient evidence to judge its mechanistic plausibility.,0.8571428571428571,2.2857142857142856
+1,1L biliary tract cancer (+gemcitabine+cisplatin),biokg,kg,llama3.2:1b,1,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.8333333333333334,3.1666666666666665
+1,RET-fusion NSCLC (expanded),biokg,kg,llama3.2:1b,0,8,F,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,RET-fusion NSCLC (expanded),biokg,kg,llama3.2:1b,1,8,F,3,0.3333333333333333,0,1,1,1,,both,insufficient,1.0,The information about Drug-8's targets is incomplete and does not align with the provided evidence from the knowledge graph.,0.75,2.625
+1,HR+/HER2- metastatic breast cancer,biokg,kg,llama3.2:1b,0,8,F,4,0.25,0,0,1,1,,both,consistent,2.0,,0.8333333333333334,2.6666666666666665
+1,HR+/HER2- metastatic breast cancer,biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,0.6,3.0
+1,Pheochromocytoma/paraganglioma,biokg,kg,llama3.2:1b,0,8,E,6,0.16666666666666666,0,0,0,1,,both,consistent,4.0,"The provided KG evidence is consistent with prior knowledge, and the target EPAS1 is associated with Pheochromocytoma/paraganglioma. However, the significance of this association is unclear.",1.0,2.875
+1,Pheochromocytoma/paraganglioma,biokg,kg,llama3.2:1b,1,8,F,4,0.25,0,0,1,1,,,,,,,
+1,Gastric/GEJ adenocarcinoma (1L +chemo),biokg,kg,llama3.2:1b,0,8,E,9,0.1111111111111111,0,0,0,1,,,,,,,
+1,Gastric/GEJ adenocarcinoma (1L +chemo),biokg,kg,llama3.2:1b,1,8,H,7,0.14285714285714285,0,0,0,1,,both,consistent,3.0,"Drug-7's targets align with pathways involved in cancer development (PD1L1 and CD80), but its mechanism of action is less plausible compared to the other candidates.",0.875,3.375
+1,Metastatic colorectal cancer,biokg,kg,llama3.2:1b,0,8,G,9,0.1111111111111111,0,0,0,0,,,,,,,
+1,Metastatic colorectal cancer,biokg,kg,llama3.2:1b,1,8,F,7,0.14285714285714285,0,0,0,1,,both,insufficient,4.0,"While Drug-1 targets Antiviral agents, there is insufficient evidence from the knowledge graph to confidently rank it above candidates like H. Drug-2.",1.0,4.125
+1,Gastric/GEJ adenocarcinoma,biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.0
+1,Gastric/GEJ adenocarcinoma,biokg,kg,llama3.2:1b,1,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,3.2857142857142856
+1,Urothelial carcinoma (expanded population),biokg,kg,llama3.2:1b,0,8,A,1,1.0,1,1,1,1,,,,,,,
+1,Urothelial carcinoma (expanded population),biokg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,kg,insufficient,3.0,Uncertain - sparse evidence for mechanistic relevance to DOID:4006.,1.0,3.5714285714285716
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),biokg,kg,llama3.2:1b,0,8,H,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,HER2+ early-stage BC (neoadjuvant + adjuvant),biokg,kg,llama3.2:1b,1,8,C,9,0.1111111111111111,0,0,0,1,,,,,,1.0,5.0
+1,Pediatric BRAF V600E low-grade glioma,biokg,kg,llama3.2:1b,0,8,A,9,0.1111111111111111,0,0,0,1,,,,,,0.5,3.5
+1,Pediatric BRAF V600E low-grade glioma,biokg,kg,llama3.2:1b,1,8,G,9,0.1111111111111111,0,0,0,1,,,,,,1.0,4.0
+1,HR+/HER2- early breast cancer (adjuvant),biokg,kg,llama3.2:1b,0,8,B,7,0.14285714285714285,0,0,0,1,,both,conflicting,5.0,"While Drug-3 has multiple links to pathways relevant for HR+/HER2- early breast cancer, Drug-6's profile is more directly linked, suggesting that it may be a more likely candidate.",0.8571428571428571,3.5714285714285716
+1,HR+/HER2- early breast cancer (adjuvant),biokg,kg,llama3.2:1b,1,8,A,1,1.0,1,1,1,1,,,,,,,
+1,HR+/HER2-low breast cancer,biokg,kg,llama3.2:1b,0,8,H,8,0.125,0,0,0,1,,both,consistent,3.0,"The provided evidence supports Drug-8's targets (LYAG, CATL1) and mechanisms of action. The knowledge graph evidence is more comprehensive and established.",1.0,3.875
+1,HR+/HER2-low breast cancer,biokg,kg,llama3.2:1b,1,8,E,9,0.1111111111111111,0,0,0,1,,,,,,1.0,2.0
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),biokg,kg,llama3.2:1b,0,8,C,7,0.14285714285714285,0,0,0,1,,both,consistent,4.0,"Drug-6 targets PDCD1, which has some potential therapeutic relevance in cancer treatment. It interacts with the target disease (Platinum-resistant ovarian carcinoma).",0.875,3.875
+1,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),biokg,kg,llama3.2:1b,1,8,B,9,0.1111111111111111,0,0,0,0,,,,,,,

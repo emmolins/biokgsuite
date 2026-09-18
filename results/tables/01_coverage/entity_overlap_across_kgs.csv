@@ -1,0 +1,12 @@
+Entity Type,Covered by,Count,% of Reference
+Drug,0/2 KGs,2894,52.8
+Drug,1/2 KGs,1246,22.7
+Drug,2/2 KGs,1345,24.5
+Disease,0/2 KGs,24488,78.6
+Disease,1/2 KGs,6569,21.1
+Disease,2/2 KGs,90,0.3
+Gene/Protein,0/2 KGs,0,0.0
+Gene/Protein,1/2 KGs,3,0.3
+Gene/Protein,2/2 KGs,1073,99.7
+Pathway,0/1 KGs,252,18.2
+Pathway,1/1 KGs,1134,81.8

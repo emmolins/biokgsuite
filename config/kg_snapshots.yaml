@@ -1,0 +1,83 @@
+# Knowledge-graph content dates for the prospective check (notebook 07, check 1).
+#
+# `content_date` is the date after which an approval can count as prospective
+# for that graph: the date the graph's data was assembled or released, not the
+# date we downloaded it. A pair approved before this date could already be in
+# the graph for reasons other than inference, so it is excluded from that
+# graph's prospective evaluation by tools/build_post_cutoff_approvals.py.
+#
+# Direction of error matters. Setting a date too EARLY wrongly credits a graph
+# for an approval it already knew; too LATE only discards pairs that were
+# genuinely prospective. Where a range is defensible, the latest date in it is
+# therefore the one used.
+#
+# `verified` means the date was read from the publisher's own metadata or from
+# the downloaded artefact itself, with the evidence named in `source`. The
+# builder prints every unverified date it relied on.
+#
+# A graph with no content_date is not date-filtered; its rows are marked
+# date_ok = unknown in post_cutoff_pair_status.csv and it should not be scored
+# on the prospective axis until the date is known.
+#
+# Scope note, checked 2026-09-18: the post-cutoff approval set spans
+# 2023-01-19 to 2026-08-28. All 128 pairs postdate every content date below
+# except MATRIX's, so for the five older graphs the precise day does not change
+# a single pair; it only has to be established as earlier than 2023-01-19, and
+# each now is.
+
+snapshots:
+  hetionet:
+    content_date: 2017-06-08          # Hetionet v1.0 hetnet JSON release
+    source: data/hetionet/HETIONET_RELEASE.txt (release_tag=v1.0); Himmelstein et al. eLife 2017;6:e26726
+    verified: true
+  biokg:
+    content_date: 2020-06-09          # v1.0.0, the only release
+    source: data/biokg/BIOKG_RELEASE.txt (released_utc=2020-06-09)
+    verified: true
+  openbilink:
+    content_date: 2020-04-27          # OpenBioLink2020 dataset publication date
+    source: >-
+      Zenodo record 5361324 (doi:10.5281/zenodo.5361324), metadata
+      publication_date = 2020-04-27, version 1.0.1. The 2021-09-01 record
+      creation date is a redeposit that added the KGID variants; ALL_DIR.zip is
+      byte-identical between records 3834052 and 5361324 (md5
+      9c150bdd971c786e7d25c8db12dcc21f), so the data is the 2020 build.
+    verified: true
+  drkg:
+    content_date: 2020-05-04          # mtime of drkg.tsv inside the published tarball
+    source: >-
+      data/raw/drkg/2026-09-18/drkg.tar.gz, internal file timestamps. drkg.tsv,
+      entity2src.tsv and relation_glossary.tsv are all stamped 2020-05-04; only
+      the pretrained molecule embeddings under embed/ are later (2020-06-14) and
+      they are not part of the graph. This is evidence from the artefact itself
+      rather than from a paper, and the repository publishes no release or
+      checksum to check it against.
+    verified: true
+  primekg:
+    content_date: 2022-05-02          # Dataverse V2.1 release
+    source: >-
+      Harvard Dataverse doi:10.7910/DVN/IXA7BM, latestVersion 2.1,
+      releaseTime 2022-05-02T18:39:28Z; kg.csv creationDate 2022-04-24,
+      dataset publicationDate 2022-04-25. The downloaded file matches the
+      published md5 aac8191d4fbc5bf09cdf8c3c78b4e75f, so the date belongs to
+      the bytes in data/primekg/.
+    verified: true
+  matrix:
+    content_date: 2026-05-28          # Hugging Face dataset commit date
+    source: >-
+      huggingface.co/datasets/everycure/kg-nodes @ c9c60b2c and
+      everycure/kg-edges @ fcd05859, both lastModified 2026-05-28. The dataset
+      card describes the graph as current "as of February 2026"; the commit
+      date is the later of the two and is used because erring late only
+      discards pairs, while erring early credits a graph for approvals it
+      already held.
+    verified: true
+    # WARNING, and it is not a small one. The post-cutoff approval set runs to
+    # 2026-08-28, so only 5 of its 128 pairs postdate this date. MATRIX is newer
+    # than almost every approval it would be tested on, and its high raw
+    # coverage of the set reflects that it already contains these pairs rather
+    # than that it can predict them. It will fall far below min_new_pairs and
+    # score N/A on the prospective axis, which is the correct outcome: a graph
+    # cannot be evaluated prospectively against approvals that predate it.
+    # Evaluating MATRIX on this axis needs a gold standard of approvals after
+    # 2026-05-28, not a change to this date.

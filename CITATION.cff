@@ -1,0 +1,86 @@
+cff-version: 1.2.0
+message: >
+  If you use BioKGSuite in your research, please cite it using the metadata below.
+title: >
+  BioKGSuite: A Systematic Evaluation Framework for Biomedical
+  Knowledge Graphs for Drug-Repurposing Applications
+type: software
+authors:
+  - family-names: Molins
+    given-names: Emily
+    email: emilymolins@gmail.com
+version: "1.0.0"
+date-released: "2026-05-19"
+license: MIT
+repository-code: "https://github.com/emmolins/biokgsuite-bib"
+url: "https://github.com/emmolins/biokgsuite-bib"
+abstract: >
+  BioKGSuite is a reproducible evaluation framework for assessing biomedical
+  knowledge graphs (KGs) across seven complementary quality dimensions and 18
+  individual metrics: coverage, annotation accuracy, trustworthiness, topology,
+  stability, task performance (link prediction), and generalisation across
+  domains and sparse-entity settings. Six widely-used KGs are evaluated
+  (PrimeKG, Hetionet, DRKG, OpenBioLink, BioKG, and MATRIX from Every Cure)
+  against curated gold standards from DrugBank, UniProt, Disease Ontology,
+  Reactome, Open Targets, and CTD, in the context of drug-repurposing
+  applications. Two supplementary notebooks extend the analysis: one validates
+  the embedding-model choice (TransE vs. RotatE vs. an EmbeddingGemma name
+  prior) with multi-rerun resampling, and one probes whether knowledge-graph
+  context improves a local LLM's drug-disease plausibility judgments.
+keywords:
+  - biomedical knowledge graph
+  - drug repurposing
+  - evaluation framework
+  - PrimeKG
+  - Hetionet
+  - DRKG
+  - OpenBioLink
+  - BioKG
+  - MATRIX
+  - link prediction
+  - computational biomedicine
+references:
+  - type: article
+    authors:
+      - family-names: Chandak
+        given-names: Payal
+      - family-names: Huang
+        given-names: Kexin
+      - family-names: Zitnik
+        given-names: Marinka
+    title: >
+      Building a knowledge graph to enable precision medicine
+    journal: Scientific Data
+    volume: 10
+    year: 2023
+    doi: "10.1038/s41597-023-01960-3"
+  - type: article
+    authors:
+      - family-names: Himmelstein
+        given-names: Daniel S.
+      - family-names: Lizee
+        given-names: Antoine
+      - family-names: Hessler
+        given-names: Christine
+      - family-names: Branan
+        given-names: Leo
+      - family-names: Murray
+        given-names: Benjamin M.
+      - family-names: Ling
+        given-names: Chrissy
+      - family-names: Ranola
+        given-names: John Michael O.
+    title: >
+      Systematic integration of biomedical knowledge prioritizes drugs for
+      repurposing
+    journal: eLife
+    volume: 6
+    year: 2017
+    doi: "10.7554/eLife.26726"
+  - type: article
+    authors:
+      - family-names: Ioannidis
+        given-names: Vassilis N.
+    title: "DRKG, Drug Repurposing Knowledge Graph"
+    year: 2020
+    url: "https://github.com/gnn4dr/DRKG"

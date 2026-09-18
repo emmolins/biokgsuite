@@ -1,0 +1,49 @@
+seed,disease,kg,condition,model,shuffle,pool_size,positive_letter,rank,reciprocal_rank,hit@1,hit@3,hit@5,parsed,error,pos_basis,pos_agreement,pos_confidence,pos_rationale,frac_basis_kg,mean_confidence
+0,Chorea associated with Huntington's disease,none,no_kg,gemini:gemini-3.5-flash-lite,0,8,F,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+0,Chorea associated with Huntington's disease,primekg,kg,gemini:gemini-3.5-flash-lite,0,8,C,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+0,Chorea associated with Huntington's disease,drkg,kg,gemini:gemini-3.5-flash-lite,0,8,H,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+0,Chorea associated with Huntington's disease,biokg,kg,gemini:gemini-3.5-flash-lite,0,8,H,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+1,Chorea associated with Huntington's disease,none,no_kg,gemini:gemini-3.5-flash-lite,0,8,H,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+1,Chorea associated with Huntington's disease,primekg,kg,gemini:gemini-3.5-flash-lite,0,8,H,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+1,Chorea associated with Huntington's disease,drkg,kg,gemini:gemini-3.5-flash-lite,0,8,E,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+1,Chorea associated with Huntington's disease,biokg,kg,gemini:gemini-3.5-flash-lite,0,8,G,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+2,Chorea associated with Huntington's disease,none,no_kg,gemini:gemini-3.5-flash-lite,0,8,F,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+2,Chorea associated with Huntington's disease,primekg,kg,gemini:gemini-3.5-flash-lite,0,8,D,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+2,Chorea associated with Huntington's disease,drkg,kg,gemini:gemini-3.5-flash-lite,0,8,C,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,
+2,Chorea associated with Huntington's disease,biokg,kg,gemini:gemini-3.5-flash-lite,0,8,B,9,0.1111111111111111,0,0,0,0,"404 [{
+  ""error"": {
+    ""code"": 404,
+    ""message"": ""models/gemini-3.5-flash-lite is not found for API version v1main, o",,,,,,

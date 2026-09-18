@@ -1,0 +1,13 @@
+# Provenance for post_cutoff_approvals.csv, post_cutoff_pair_status.csv, post_cutoff_funnel.csv
+# built:          2026-09-18T18:12:12+00:00
+# built_by:       tools/build_post_cutoff_approvals.py
+# source:         data/gold_standards/source/repurposing-dataset-v0.6.0/candidates_reviewed.csv
+# source_version: 0.6.0+20260918
+# source_sha256:  bbb9fb8748247517db73b9557235e97efc6572661321855c109267a1605755e2
+# bridges:        do_diseases.csv, mesh_to_doid.csv, mondo_hierarchy.csv, mondo.sssom.tsv (used)
+# min_degree:     5
+# max_hops:       2
+# kgs_checked:    biokg,drkg,hetionet,matrix,openbilink,primekg
+# n_pairs:        128
+# approval_date is the earliest regulator decision in the source; for EMA-first pairs it is the CHMP positive-opinion date (date_type column).
+# Cite the source dataset version and the graph release dates in config/kg_snapshots.yaml, not the build date.

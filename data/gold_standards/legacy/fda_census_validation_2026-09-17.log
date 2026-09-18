@@ -1,0 +1,82 @@
+frame  5,372 approved NDA/BLA supplements
+census 341 indication-expansion events
+scrape 567 rows (vetted, high precision, ~68% recall)
+
+scrape columns used: application=application_number supplement=submission date=approval_date
+
+[A] containment: 514/515 scraped rows found in the census frame
+    1 scraped rows NOT in the frame (investigate each):
+       208065|SUPPL|35
+
+[B] date agreement on 514 shared rows: 512 agree, 2 disagree
+      213586|SUPPL|8  census=2025-10-10  scrape=2025-10-24
+      214697|SUPPL|2  census=2026-03-26  scrape=2026-03-12
+
+[C] 2025-03 gap: 10/10 of the identifiers the scrape missed are present in the census frame
+
+[D] biologics recovered (2024-09 BLA supplements the scrape could not see):
+    DUPIXENT   SUPPL-66   found 2024-09-12 BLA761055
+    TREMFYA    SUPPL-21   found 2024-09-11 BLA761061
+    ELREXFIO   SUPPL-2    found 2024-09-10 BLA761345
+    CIMZIA     SUPPL-275  found 2024-09-13 BLA125160
+    SOLIRIS    SUPPL-447  found 2024-09-19 BLA125166
+    BLA rows: census frame 1,212 vs scrape 2
+
+[E] per-month recall of the scrape against the like-for-like census subset (approved EFFICACY-class supplements). Correlation between month size and recall is the truncation signature.
+               efficacy_suppl  scrape  scrape_recall_pct
+approval_date                                           
+2023-01                    13       6               46.2
+2023-02                    23      10               43.5
+2023-03                    19      11               57.9
+2023-04                    14       8               57.1
+2023-05                    19      19              100.0
+2023-06                    24      18               75.0
+2023-07                    20      18               90.0
+2023-08                    20       8               40.0
+2023-09                    15      13               86.7
+2023-10                    25      13               52.0
+2023-11                     9       7               77.8
+2023-12                    16       8               50.0
+2024-01                    13       8               61.5
+2024-02                     9       6               66.7
+2024-03                    27      21               77.8
+2024-04                    22      15               68.2
+2024-05                     7       4               57.1
+2024-06                    29      12               41.4
+2024-07                     8       4               50.0
+2024-08                    20      11               55.0
+2024-09                    33      20               60.6
+2024-10                    17      16               94.1
+2024-11                    12       9               75.0
+2024-12                    25      25              100.0
+2025-01                    16       7               43.8
+2025-02                    14       9               64.3
+2025-03                    24      25              104.2
+2025-04                    33      16               48.5
+2025-05                    22      13               59.1
+2025-06                    25      18               72.0
+2025-07                    17      13               76.5
+2025-08                    11       9               81.8
+2025-09                    13       7               53.8
+2025-10                    30      21               70.0
+2025-11                    23      13               56.5
+2025-12                    25      20               80.0
+2026-01                    12      10               83.3
+2026-02                    22      15               68.2
+2026-03                    20      17               85.0
+2026-04                    22      12               54.5
+2026-05                    21       8               38.1
+2026-06                    22      12               54.5
+2026-07                    19      14               73.7
+2026-08                    14      14              100.0
+2026-09                     3       4              133.3
+
+    Spearman(month size, scrape recall) = -0.122  (negative = the scrape lost more in busy months)
+    overall scrape recall = 66.9%
+
+[F] everolimus 2024 submissions in the census frame (2 rows):
+approval_date application supplement SubmissionClassCode SupplCategoryL2
+   2024-02-28   NDA021560   SUPPL-32            LABELING              PI
+   2024-03-11   NDA203985   SUPPL-27         MANUF (CMC)       PACKAGING
+
+VERDICT: 2 CHECK(S) FAILED

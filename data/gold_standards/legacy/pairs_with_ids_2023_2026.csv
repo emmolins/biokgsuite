@@ -1,0 +1,171 @@
+Pair_ID,Drug,Active,DrugBank_ID,PubChem_CID,DOID,MONDO_ID,MeSH_ID,NewIndication,TA,YearSet
+orig-barici,baricitinib,baricitinib,DB11817,44205240,DOID:986,MONDO:0005340,MESH:D000506,alopecia areata,Immunology,2023
+orig-trastu,trastuzumab deruxtecan,trastuzumab deruxtecan,DB14962,,DOID:1612,MONDO:0007254,,breast cancer,Oncology,2023
+orig-dapagl,dapagliflozin,dapagliflozin,DB06292,9887712,DOID:6000,MONDO:0005009,MESH:D006333,congestive heart failure,Cardiovascular,2023
+orig-tucati,tucatinib,tucatinib,DB11652,51039094,DOID:9256,MONDO:0005575,MESH:D015179,colorectal cancer,Oncology,2023
+orig-empagl,empagliflozin,empagliflozin,DB09038,11949646,DOID:6000,MONDO:0005009,MESH:D006333,congestive heart failure,Cardiovascular,2023
+orig-tocili,tocilizumab,tocilizumab,DB06273,,DOID:853,MONDO:0019735,MESH:D011111,polymyalgia rheumatica,Immunology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:3908,MONDO:0005233,MESH:D002289,non-small cell lung carcinoma,Oncology,2023
+orig-olapar,olaparib,olaparib,DB09074,,DOID:10283,MONDO:0008315,MESH:D011471,prostate cancer,Oncology,2023
+orig-durval,durvalumab,durvalumab,DB11714,,DOID:4607,MONDO:0003060,MESH:D001661,biliary tract cancer,Oncology,2023
+orig-ruxoli,ruxolitinib,ruxolitinib,DB08877,25126798,DOID:12306,MONDO:0008661,MESH:D014820,vitiligo,Dermatology,2023
+orig-upadac,upadacitinib,upadacitinib,DB15091,,DOID:8577,MONDO:0005101,MESH:D003093,ulcerative colitis,Immunology,2023
+orig-glofit,glofitamab,glofitamab,DB16371,,DOID:0050745,MONDO:0018905,MESH:D016403,diffuse large B-cell lymphoma,Oncology,2023
+orig-dapagl,dapagliflozin,dapagliflozin,DB06292,9887712,DOID:784,MONDO:0005300,MESH:D007676,chronic kidney disease,Metabolic,2023
+orig-risank,risankizumab,risankizumab,DB14762,,DOID:8778,MONDO:0005011,MESH:D003424,Crohn disease,Immunology,2023
+orig-ruxoli,ruxolitinib,ruxolitinib,DB08877,25126798,DOID:986,MONDO:0005340,MESH:D000506,alopecia areata,Dermatology,2023
+orig-teclis,teclistamab,teclistamab,DB16655,,DOID:9538,MONDO:0009693,MESH:D009101,multiple myeloma,Oncology,2023
+orig-talque,talquetamab,talquetamab,DB16678,,DOID:9538,MONDO:0009693,MESH:D009101,multiple myeloma,Oncology,2023
+orig-epcori,epcoritamab,epcoritamab,DB16672,,DOID:0050745,MONDO:0018905,MESH:D016403,diffuse large B-cell lymphoma,Oncology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:4607,MONDO:0003060,MESH:D001661,biliary tract cancer,Oncology,2023
+orig-veneto,venetoclax,venetoclax,DB11581,49846579,DOID:9119,MONDO:0018874,MESH:D015470,acute myeloid leukemia,Oncology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:4362,MONDO:0002974,MESH:D002583,cervical cancer,Oncology,2023
+orig-upadac,upadacitinib,upadacitinib,DB15091,,DOID:3310,MONDO:0004980,MESH:D003876,atopic eczema,Immunology,2023
+orig-upadac,upadacitinib,upadacitinib,DB15091,,DOID:7147,MONDO:0005306,MESH:D013167,ankylosing spondylitis,Immunology,2023
+orig-nivolu,nivolumab,nivolumab,DB09035,,DOID:9256,MONDO:0005575,MESH:D015179,colorectal cancer,Oncology,2023
+orig-sacitu,sacituzumab govitecan,sacituzumab govitecan,DB12893,,DOID:1612,MONDO:0007254,,breast cancer,Oncology,2023
+orig-caboza,cabozantinib,cabozantinib,DB08875,25102847,DOID:684,MONDO:0007256,MESH:D006528,hepatocellular carcinoma,Oncology,2023
+orig-semagl,semaglutide,semaglutide,DB13928,,DOID:1287,MONDO:0004995,MESH:D002318,cardiovascular disease,Cardiovascular,2023
+orig-olapar,olaparib,olaparib,DB09074,,DOID:1612,MONDO:0007254,,breast cancer,Oncology,2023
+orig-nivolu,nivolumab,nivolumab,DB09035,,DOID:5041,MONDO:0007576,MESH:D004938,esophageal cancer,Oncology,2023
+orig-daratu,daratumumab,daratumumab,DB09331,,DOID:9538,MONDO:0009693,MESH:D009101,multiple myeloma,Oncology,2023
+orig-capiva,capivasertib,capivasertib,DB12218,25227436,DOID:1612,MONDO:0007254,,breast cancer,Oncology,2023
+orig-adalim,adalimumab,adalimumab,DB00051,,DOID:0060480,MONDO:0018901,,hidradenitis suppurativa,Immunology,2023
+orig-everol,everolimus,everolimus,DB01590,6442177,DOID:0080909,MONDO:0850353,MESH:D064129,gastrointestinal neuroendocrine tumor,Oncology,2023
+orig-upadac,upadacitinib,upadacitinib,DB15091,,DOID:8778,MONDO:0005011,MESH:D003424,Crohn disease,Immunology,2023
+orig-acalab,acalabrutinib,acalabrutinib,DB11703,71226662,DOID:1040,MONDO:0004948,MESH:D015451,chronic lymphocytic leukemia,Oncology,2023
+orig-belimu,belimumab,belimumab,DB08879,,DOID:0080162,MONDO:0005556,MESH:D008181,lupus nephritis,Immunology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:2870,MONDO:0005461,,endometrial carcinoma,Oncology,2023
+orig-lenvat,lenvatinib,lenvatinib,DB09078,9823820,DOID:1380,MONDO:0011962,,endometrial cancer,Oncology,2023
+orig-zanubr,zanubrutinib,zanubrutinib,DB15035,,DOID:1040,MONDO:0004948,MESH:D015451,chronic lymphocytic leukemia,Oncology,2023
+orig-zanubr,zanubrutinib,zanubrutinib,DB15035,,DOID:0050748,MONDO:0017604,MESH:D018442,marginal zone lymphoma,Oncology,2023
+orig-nivolu,nivolumab,nivolumab,DB09035,,DOID:684,MONDO:0007256,MESH:D006528,hepatocellular carcinoma,Oncology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:684,MONDO:0007256,MESH:D006528,hepatocellular carcinoma,Oncology,2023
+orig-risank,risankizumab,risankizumab,DB14762,,DOID:8577,MONDO:0005101,MESH:D003093,ulcerative colitis,Immunology,2023
+orig-dupilu,dupilumab,dupilumab,DB12159,,DOID:3083,MONDO:0005002,MESH:D029424,chronic obstructive pulmonary disease,Respiratory,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:4944,MONDO:0003219,,gastroesophageal junction adenocarcinoma,Oncology,2023
+orig-pembro,pembrolizumab,pembrolizumab,DB09037,,DOID:10534,MONDO:0001056,MESH:D013274,gastric cancer,Oncology,2023
+orig-dupilu,dupilumab,dupilumab,DB12159,,DOID:0060845,,,prurigo nodularis,Immunology,2023
+orig-semagl,semaglutide,semaglutide,DB13928,,DOID:0050848,MONDO:0007147,MESH:D020181,obstructive sleep apnea,Respiratory,2023
+orig-durval,durvalumab,durvalumab,DB11714,,DOID:0050685,MONDO:0000402,"MESH:D018288 {source=""MONDO:equivalentTo""}",small cell lung carcinoma,Oncology,2023
+1,Alecensa,alectinib,DB11363,49806720,DOID:3908,MONDO:0005233,MESH:D002289,Adjuvant ALK+ NSCLC,Oncology,2024-2026
+2,Enhertu,trastuzumab deruxtecan,DB14962,,DOID:0050686,MONDO:0004992,MESH:D009371,HER2+ solid tumors (tumor-agnostic),Oncology,2024-2026
+3,Enhertu,trastuzumab deruxtecan,DB14962,,DOID:1612,MONDO:0007254,,HR+/HER2-low breast cancer,Oncology,2024-2026
+4,Imfinzi,durvalumab,DB11714,,DOID:3908,MONDO:0005233,MESH:D002289,Resectable NSCLC,Oncology,2024-2026
+5,Imfinzi,durvalumab,DB11714,,DOID:11054,MONDO:0001187,MESH:D001749,Muscle-invasive bladder cancer,Oncology,2024-2026
+6,Imfinzi,durvalumab,DB11714,,DOID:10534,MONDO:0001056,MESH:D013274,Gastric/GEJ adenocarcinoma,Oncology,2024-2026
+7,Imfinzi,durvalumab,DB11714,,DOID:4607,MONDO:0003060,MESH:D001661,Biliary tract cancer 1L,Oncology,2024-2026
+8,Rybrevant,amivantamab,DB16695,,DOID:3908,MONDO:0005233,MESH:D002289,1L EGFR-mutant NSCLC (+lazertinib),Oncology,2024-2026
+9,Keytruda,pembrolizumab,DB09037,,DOID:5520,MONDO:0010150,MESH:D000077195,Neoadj+adj HNSCC,Oncology,2024-2026
+10,Keytruda,pembrolizumab,DB09037,,DOID:1380,MONDO:0011962,,1L endometrial cancer (dMMR/MSI-H),Oncology,2024-2026
+11,Keytruda,pembrolizumab,DB09037,,DOID:4362,MONDO:0002974,MESH:D002583,Cervical cancer,Oncology,2024-2026
+12,Keytruda,pembrolizumab,DB09037,,DOID:10534,MONDO:0001056,MESH:D013274,Gastric/GEJ cancer,Oncology,2024-2026
+13,Keytruda,pembrolizumab,DB09037,,DOID:4607,MONDO:0003060,MESH:D001661,Biliary tract cancer,Oncology,2024-2026
+14,Opdivo,nivolumab,DB09035,,DOID:4011,MONDO:0002834,,1L metastatic urothelial carcinoma,Oncology,2024-2026
+15,Opdivo+Yervoy,nivolumab+ipilimumab,DB09035,,DOID:5672,MONDO:0005575,,MSI-H/dMMR colorectal cancer 1L,Oncology,2024-2026
+16,Darzalex,daratumumab,DB09331,,DOID:9538,MONDO:0009693,MESH:D009101,Newly diagnosed MM ineligible for ASCT,Oncology,2024-2026
+17,Padcev+Keytruda,enfortumab vedotin+pembrolizumab,DB13007,,DOID:11054,MONDO:0001187,MESH:D001749,Muscle-invasive bladder cancer (non-cisplatin),Oncology,2024-2026
+18,Padcev,enfortumab vedotin,DB13007,,DOID:2671,MONDO:0006474,MESH:D002295,Urothelial cancer extension,Oncology,2024-2026
+19,Pluvicto,lutetium-177 vipivotide,,,DOID:10283,MONDO:0008315,MESH:D011471,Post-ARPI mCRPC,Oncology,2024-2026
+20,Cabometyx,cabozantinib,DB08875,25102847,DOID:0050626,MONDO:0000386,,Pancreatic NET,Oncology,2024-2026
+21,Calquence,acalabrutinib,DB11703,71226662,DOID:0050746,MONDO:0018876,MESH:D020522,Untreated MCL,Oncology,2024-2026
+22,Lumakras,sotorasib+panitumumab,DB15569,,DOID:5672,MONDO:0005575,,KRAS G12C+ mCRC,Oncology,2024-2026
+23,Welireg,belzutifan,DB15463,,DOID:0050771,MONDO:0008233,MESH:D010673,Pheochromocytoma/paraganglioma,Oncology,2024-2026
+24,Monjuvi,tafasitamab,DB15044,,DOID:0050873,MONDO:0018906,MESH:D008224,Follicular lymphoma,Oncology,2024-2026
+25,Libtayo,cemiplimab,DB14707,,DOID:1749,MONDO:0005096,MESH:D002294,Adjuvant cutaneous SCC,Oncology,2024-2026
+26,Tagrisso,osimertinib,DB09330,71496458,DOID:3908,MONDO:0005233,MESH:D002289,Adjuvant EGFR+ NSCLC,Oncology,2024-2026
+27,Tagrisso,osimertinib,DB09330,71496458,DOID:3908,MONDO:0005233,MESH:D002289,Stage III EGFR+ NSCLC post-chemoradiation,Oncology,2024-2026
+30,Kisqali,ribociclib,DB11730,44631912,DOID:1612,MONDO:0007254,,HR+/HER2- BC extension,Oncology,2024-2026
+31,Xtandi,enzalutamide,DB08899,15951529,DOID:10283,MONDO:0008315,MESH:D011471,Metastatic hormone-sensitive prostate cancer,Oncology,2024-2026
+32,Nubeqa,darolutamide,DB12941,67171867,DOID:10283,MONDO:0008315,MESH:D011471,mHSPC + ADT,Oncology,2024-2026
+33,Retsevmo,selpercatinib,DB15685,,DOID:0050686,MONDO:0004992,MESH:D009371,RET-fusion solid tumor extension,Oncology,2024-2026
+34,Rozlytrek,entrectinib,DB11986,25141092,DOID:0050686,MONDO:0004992,MESH:D009371,NTRK fusion solid tumor extension,Oncology,2024-2026
+35,Braftovi,encorafenib,DB11718,50922675,DOID:3963,MONDO:0015075,MESH:D013964,BRAF+ thyroid cancer,Oncology,2024-2026
+36,Mektovi,binimetinib,DB11967,10288191,DOID:3963,MONDO:0015075,MESH:D013964,BRAF+ thyroid cancer,Oncology,2024-2026
+37,Onivyde,irinotecan (liposomal),,,DOID:1793,MONDO:0009831,MESH:D010190,Pancreatic cancer extension,Oncology,2024-2026
+40,Sarclisa,isatuximab,DB14811,,DOID:9538,MONDO:0009693,MESH:D009101,Newly diagnosed MM ineligible for ASCT,Oncology,2024-2026
+45,Blincyto,blinatumomab,DB09052,,DOID:9952,MONDO:0004967,,CD19+ B-precursor ALL consolidation,Oncology,2024-2026
+46,Breyanzi,lisocabtagene maraleucel,DB16582,,DOID:0050873,MONDO:0018906,MESH:D008224,Follicular lymphoma 3L+,Oncology,2024-2026
+48,Scemblix,asciminib,DB12597,72165228,DOID:0060597,MONDO:0004653,MESH:D054438,Ph+ CML-CP after 2+ TKIs,Oncology,2024-2026
+49,Rinvoq,upadacitinib,DB15091,,DOID:13375,MONDO:0008538,MESH:D013700,Giant cell arteritis,Immunology,2024-2026
+50,Tremfya,guselkumab,DB11834,,DOID:8778,MONDO:0005011,MESH:D003424,Crohn's disease,Immunology,2024-2026
+51,Tremfya,guselkumab,DB11834,,DOID:8577,MONDO:0005101,MESH:D003093,Ulcerative colitis,Immunology,2024-2026
+52,Skyrizi,risankizumab,DB14762,,DOID:8577,MONDO:0005101,MESH:D003093,Ulcerative colitis,Immunology,2024-2026
+53,Uplizna,inebilizumab,DB12530,,,,,IgG4-related disease,Immunology,2024-2026
+54,Uplizna,inebilizumab,DB12530,,DOID:437,MONDO:0009688,MESH:D009157,Generalized myasthenia gravis,Immunology,2024-2026
+55,Xolair,omalizumab,DB00043,,DOID:3044,MONDO:0700226,MESH:D005512,IgE-mediated food allergy,Immunology,2024-2026
+56,Benlysta,belimumab,DB08879,,DOID:9074,MONDO:0007915,MESH:D008180,Pediatric SLE,Immunology,2024-2026
+57,Gamifant,emapalumab,DB14724,,DOID:0110921,MONDO:0009974,,HLH/MAS in Still's disease,Immunology,2024-2026
+58,Dupixent,dupilumab,DB12159,,DOID:3083,MONDO:0005002,MESH:D029424,COPD,Immunology,2024-2026
+60,Fasenra,benralizumab,DB12023,,DOID:3049,MONDO:0015943,MESH:D015267,EGPA extension,Immunology,2024-2026
+61,Nucala,mepolizumab,DB06612,,DOID:3049,MONDO:0015943,MESH:D015267,EGPA extension,Immunology,2024-2026
+62,Omalizumab,omalizumab,DB00043,,DOID:3049,MONDO:0015943,MESH:D015267,EGPA,Immunology,2024-2026
+63,Canakinumab,canakinumab,DB06168,,DOID:0090018,MONDO:0007727,"MESH:C536657 {source=""MONDO:equivalentTo""}",TRAPS,Immunology,2024-2026
+65,Otezla,apremilast,DB05676,11561674,DOID:8893,MONDO:0005083,MESH:D011565,Plaque psoriasis,Immunology,2024-2026
+66,Jakavi,ruxolitinib,DB08877,25126798,DOID:0081267,MONDO:0013730,MESH:D006086,GVHD + pediatric,Immunology,2024-2026
+67,Upadacitinib,upadacitinib,DB15091,,DOID:0111958,MONDO:0054697,,Pediatric atopic dermatitis,Immunology,2024-2026
+68,Wegovy,semaglutide,DB13928,,,,,Reduce MACE in CVD + obesity/overweight,Cardiovascular,2024-2026
+69,Amvuttra,vutrisiran,DB16699,,DOID:0050700,MONDO:0004994,MESH:D009202,ATTR cardiomyopathy,Cardiovascular,2024-2026
+70,Kerendia,finerenone,DB16165,,DOID:14172,MONDO:0001899,,HFpEF,Cardiovascular,2024-2026
+71,TNKase,tenecteplase,DB00031,,DOID:3526,MONDO:0002679,MESH:D002544,Acute ischemic stroke,Cardiovascular,2024-2026
+72,Edoxaban,edoxaban tosilate,DB09075,10280735,DOID:6432,MONDO:0005149,MESH:D006976,Chronic thromboembolic pulmonary hypertension,Cardiovascular,2024-2026
+73,Treprostinil,treprostinil,DB00374,6918140,DOID:6432,MONDO:0005149,MESH:D006976,ILD-associated pulmonary hypertension,Cardiovascular,2024-2026
+75,Wegovy,semaglutide,DB13928,,DOID:0080547,MONDO:0007027,,MASH with fibrosis,Metabolic,2024-2026
+76,Ozempic,semaglutide,DB13928,,DOID:784,MONDO:0005300,MESH:D007676,CKD in T2D,Metabolic,2024-2026
+77,Ctexli,chenodiol,,,DOID:4810,MONDO:0008948,MESH:D019294,Cerebrotendinous xanthomatosis,Metabolic,2024-2026
+78,Nityr/Harliku,nitisinone,DB00348,115355,DOID:9270,MONDO:0008753,MESH:D000474,Alkaptonuria,Metabolic,2024-2026
+79,Empaveli,pegcetacoplan,DB16694,,DOID:2920,MONDO:0002461,MESH:D015432,C3G/IC-MPGN,Nephrology,2024-2026
+80,Rituxan,rituximab,DB00073,,DOID:1184,MONDO:0005377,MESH:D009404,Nephrotic syndrome,Nephrology,2024-2026
+81,Yeztugo,lenacapavir,DB15673,,DOID:526,MONDO:0005109,MESH:D015658,HIV PrEP,Infectious,2024-2026
+82,Mavyret,glecaprevir/pibrentasvir,DB13879,66828839,DOID:1883,MONDO:0005231,MESH:D006526,Acute HCV pediatric,Infectious,2024-2026
+83,Prevymis,letermovir,DB12070,,DOID:0080827,MONDO:0850289,MESH:D003586,CMV prophylaxis in organ transplant,Infectious,2024-2026
+85,Ofev,nintedanib,DB09079,9809715,DOID:3770,MONDO:0002771,MESH:D011658,Progressive fibrosing ILDs in children/adolescents,Respiratory,2024-2026
+86,Kaftrio+Kalydeco,ivacaftor/tezacaftor/elexacaftor+ivacaftor,DB08820,16220172,DOID:1485,MONDO:0009061,MESH:D003550,Additional CF mutations (non-class I),Respiratory,2024-2026
+87,Aqvesme,mitapivat,DB16236,,DOID:10241,MONDO:0000984,MESH:D013789,Thalassemia anemia,Hematology,2024-2026
+88,Pegasys,peginterferon alfa-2a,DB00008,,DOID:8997,MONDO:0009891,MESH:D011087,Polycythaemia vera and essential thrombocytopenia,Hematology,2024-2026
+89,Xromi,hydroxycarbamide,,,DOID:10923,MONDO:0011382,MESH:D000755,Vaso-occlusive complications of sickle-cell disease in children,Hematology,2024-2026
+90,Pyrukynd,mitapivat,DB16236,,DOID:10241,MONDO:0000984,MESH:D013789,Thalassemia anemia (EU),Hematology,2024-2026
+91,Susvimo,ranibizumab,DB01270,,DOID:8947,MONDO:0005266,MESH:D003930,DME/diabetic retinopathy,Ophthalmology,2024-2026
+92,Vabysmo,faricimab,DB15303,,DOID:1727,MONDO:0006951,,Retinal vein occlusion,Ophthalmology,2024-2026
+93,Livmarli,maralixibat,DB16226,,DOID:9245,MONDO:0007318,MESH:D016738,PFIC/Alagille syndrome cholestatic pruritus,GI/Metabolic,2024-2026
+94,Spravato,esketamine,DB11823,182137,DOID:1470,MONDO:0002009,,TRD monotherapy,CNS,2024-2026
+95,Dupixent,dupilumab,DB12159,,DOID:0050127,MONDO:0005961,,Allergic fungal rhinosinusitis (AFRS) ≥6yr,Immunology/Respiratory,2024-2026
+96,Keytruda,pembrolizumab,DB09037,,DOID:4001,MONDO:0005140,,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),Oncology,2024-2026
+97,Wellcovorin,leucovorin calcium,DB00650,6006,DOID:0050719,MONDO:0013110,"MESH:C567791 {source=""MONDO:equivalentTo""}",Cerebral folate transport deficiency,CNS/Metabolic,2024-2026
+98,Opdivo,nivolumab,DB09035,,DOID:0050743,MONDO:0000430,,Previously untreated Stage III/IV cHL +AVD,Oncology,2024-2026
+99,Imcivree,setmelanotide,DB11700,11993702,DOID:0060611,MONDO:0000816,MESH:C535554,Acquired hypothalamic obesity,Metabolic,2024-2026
+100,Auvelity,dextromethorphan+bupropion,DB00514,5360696,DOID:10652,MONDO:0004975,MESH:D000544,Agitation associated with Alzheimer's dementia,CNS,2024-2026
+101,Enhertu,trastuzumab deruxtecan,DB14962,,DOID:1612,MONDO:0007254,,HER2+ early-stage BC (neoadjuvant + adjuvant),Oncology,2024-2026
+102,Tecentriq,atezolizumab,DB11595,,DOID:11054,MONDO:0001187,MESH:D001749,Adjuvant MIBC with ctDNA MRD post-cystectomy,Oncology,2024-2026
+103,Calquence,acalabrutinib,DB11703,71226662,DOID:1040,MONDO:0004948,MESH:D015451,CLL/SLL 1L +venetoclax (fixed-duration),Oncology,2024-2026
+104,Tecvayli,teclistamab-cqyv,DB16655,,DOID:9538,MONDO:0009693,MESH:D009101,R/R MM +daratumumab hyaluronidase (≥1 prior line),Oncology,2024-2026
+105,Breztri,budesonide/glycopyrrolate/formoterol,DB01222,5281004,DOID:3083,MONDO:0005002,MESH:D029424,Asthma (was COPD only),Respiratory,2024-2026
+108,Ocrevus,ocrelizumab,DB11988,,DOID:2377,MONDO:0005301,MESH:D009103,Pediatric relapsing-remitting MS ≥10yr,Immunology/Neurology,2024-2026
+109,Vyvgart,efgartigimod alfa-fcab,,,DOID:9952,MONDO:0004967,,All adult gMG (expanded from AChR+ only),Immunology/Neurology,2024-2026
+110,Tzield,teplizumab-mzwv,DB06606,,DOID:9744,MONDO:0005147,MESH:D003922,Delay T1D onset in children ≥1yr,Metabolic/Immunology,2024-2026
+111,Asceniv,immune globulin IV (human-slra),,,,,,Primary humoral immunodeficiency pediatric 2-11yr,Immunology,2024-2026
+113,Cablivi,caplacizumab-yhdp,DB06081,,DOID:10772,MONDO:0018896,MESH:D011697,Acquired TTP pediatric ≥12yr,Hematology,2024-2026
+114,Sotyktu,deucravacitinib,DB16650,,DOID:9008,MONDO:0011849,MESH:D015535,Psoriatic arthritis,Immunology,2024-2026
+115,Palynziq,pegvaliase-pqpz,DB12839,86278362,DOID:9281,MONDO:0009861,MESH:D010661,PKU expanded to ≥12yr,Metabolic (rare),2024-2026
+116,Juxtapid,lomitapide,DB08827,9853053,DOID:13810,MONDO:0005439,MESH:D006938,HoFH pediatric ≥2yr,Metabolic (rare),2024-2026
+118,Braftovi,encorafenib,DB11718,50922675,DOID:5672,MONDO:0005575,,"mCRC BRAF V600E (traditional approval, was accelerated)",Oncology,2024-2026
+119,Trodelvy,sacituzumab govitecan,DB12893,,DOID:1612,MONDO:0007254,,HR+/HER2- breast cancer,Oncology,2024-2026
+120,Aquipta,atogepant,DB16098,,DOID:0060178,MONDO:0000700,,Acute treatment of migraine (was prophylaxis only),CNS,2024-2026
+121,Iclusig,ponatinib,DB08901,24826799,DOID:9952,MONDO:0004967,,Newly diagnosed Ph+ ALL +chemotherapy,Oncology,2024-2026
+122,Imfinzi,durvalumab,DB11714,,DOID:10534,MONDO:0001056,MESH:D013274,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),Oncology,2024-2026
+123,Kerendia,finerenone,DB16165,,DOID:14172,MONDO:0001899,,Symptomatic chronic HFpEF (LVEF≥40%),Cardiovascular,2024-2026
+124,Noxafil,posaconazole,DB01263,468595,DOID:13564,MONDO:0005657,MESH:D001228,Invasive fungal infections pediatric ≥2yr,Infectious,2024-2026
+125,Efmody,hydrocortisone (modified-release),,,DOID:0111967,MONDO:0012383,MESH:C566492,Adrenal insufficiency adolescents ≥12yr,Endocrine,2024-2026
+126,Dupixent,dupilumab,DB12159,,DOID:1555,MONDO:0005492,,Chronic spontaneous urticaria pediatric 2-11yr,Immunology/Dermatology,2024-2026
+127,Jorveza,budesonide (orodispersible),,,DOID:13922,MONDO:0005361,MESH:D057765,Eosinophilic esophagitis pediatric 2-17yr,GI/Immunology,2024-2026
+138,Venclyxto,venetoclax,DB11581,49846579,DOID:9119,MONDO:0018874,MESH:D015470,"New indication extension (EMA Apr 2026, likely AML +Inaqovi)",Oncology,2024-2026
+139,Inaqovi,cedazuridine+decitabine,DB15694,,DOID:9119,MONDO:0018874,MESH:D015470,"AML +venetoclax (newly diagnosed, ineligible for standard chemo)",Oncology,2024-2026
+140,Crysvita,burosumab,DB14012,,,,,XLH infants <1yr,Metabolic (rare),2024-2026
+142,Privigen,immune globulin IV,,,DOID:8622,MONDO:0004619,MESH:D008457,Measles prophylaxis post-exposure,Infectious/Immunology,2024-2026
+148,Tremfya,guselkumab,DB11834,,DOID:8778,MONDO:0005011,MESH:D003424,"Crohn's disease (moderate-severe, refractory)",Immunology/GI,2024-2026
+149,Alecensa,alectinib,DB11363,49806720,DOID:0050686,MONDO:0004992,MESH:D009371,"ALK+ solid tumors (tissue-agnostic, world-first)",Oncology,2024-2026
+151,Effexor SR,venlafaxine,DB00285,5656,DOID:14320,MONDO:0001942,,Generalized anxiety disorder (first GAD drug in Japan),CNS/Psychiatry,2024-2026
+153,Tezspire,tezepelumab,DB15090,,DOID:0111579,MONDO:0008834,MESH:C565935,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),Immunology/Respiratory,2024-2026
+154,Pemafibrate ER,pemafibrate,DB15212,,DOID:13810,MONDO:0005439,MESH:D006938,LDL-C elevation in statin-intolerant dyslipidemia,Cardiovascular/Metabolic,2024-2026
+155,Ilaris,canakinumab,DB06168,,DOID:4371,MONDO:0018304,MESH:D019873,Schnitzler syndrome (Japan),Immunology/Rare,2024-2026
+156,Fibrinogen HT,fibrinogen,,,,,,Acquired hypofibrinogenemia in cardiovascular surgery,Hematology,2024-2026

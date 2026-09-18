@@ -1,0 +1,2 @@
+# Only for the embedding arms. The seven dimension notebooks never import torch.
+torch>=2.2

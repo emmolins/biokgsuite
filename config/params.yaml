@@ -1,0 +1,134 @@
+# Analysis parameters: seeds and per-dimension settings.
+
+analysis_params:
+  random_seed: 42        # used by all notebooks; controls all explicit RandomState objects
+  neg_ratio: 5           # negative-to-positive ratio for link prediction sampling (nb06, nb07)
+
+  # nb01 — an entity type resolving below this fraction is a missing crosswalk,
+  # not a finding about the graph, and is raised rather than reported as coverage.
+  # Nodes sampled per graph when estimating the clustering coefficient (nb04).
+  # Applied uniformly to every graph: sampling k nodes costs k/n of the full
+  # computation, so it grows cheaper as graphs grow, while full computation does
+  # not scale. Clustering lies in [0, 1] so its sd cannot exceed 0.5, which
+  # bounds the standard error on the sub-metric below 0.03 at this size.
+  cluster_sample_n: 10000
+  resolvability_floor: 0.05
+  n_bootstrap: 1000      # bootstrap resamples for 95% CI (nb06 and nb07)
+
+  robustness:            # nb05 — network robustness
+    sample_size: 500     # entity pairs sampled per KG
+    dropout_rates:
+      - 0.05
+      - 0.10
+      - 0.15
+      - 0.20
+      - 0.25
+      - 0.30
+    top_k: 100           # nb05 top-K overlap window (was a hardcoded fallback)
+    n_trials: 3          # independent stochastic dropout trials (seeds: random_seed + trial index)
+    # The one rate the dimension score is computed at. Pre-specified as a
+    # moderate incompleteness regime (Paulheim, 2017). It was hardcoded in the
+    # notebook, so the single number the whole dimension rests on did not appear
+    # in the parameter set at all. Must be one of dropout_rates; the notebook
+    # raises if it is not, rather than scoring every graph 0.0.
+    primary_dropout: 0.10
+
+  validation:            # nb02 — semantic validity (live API calls)
+    n_samples: 250       # nodes sampled per entity type for identifier validation
+    api_timeout: 15      # per-request HTTP timeout in seconds
+    api_sleep: 0.15      # inter-request delay (seconds) to respect API rate limits
+
+  # --- Promoted from hardcoded notebook fallbacks (2026-09-13 review). ---
+  # These four were never in config, so every run silently used the value
+  # below. Recorded here so the parameter set is complete and auditable.
+  train_ratio: 0.9              # nb06 train/test split
+  neg_strategies:               # nb06 negative-sampling strategies
+    - random
+    - type-constrained
+    - shared-target
+  min_pairs_per_area: 25        # nb07 minimum pairs to score a therapeutic area
+  # --- nb07 prospective axis (2026-09-17, regulator-derived post-cutoff approval set). ---
+  min_new_pairs: 10             # minimum evaluable prospective pairs before a graph is scored
+  # A graph is eligible for the prospective axis only if its content date is on
+  # or before this date. The gold standard runs 2023-01-19 to 2026-08-28, so a
+  # graph built after this cutoff already contains most of the approvals it
+  # would be tested on, and its apparent coverage of the set measures its age
+  # rather than its ability to predict. Ineligible graphs score NaN, not 0:
+  # untestable and bad are different claims. Set before any score was seen.
+  prospective_max_content_date: 2022-12-31
+
+  prospective_hits_k: 10        # K for Hits@K. Small relative to the candidate pool:
+                                # with neg_ratio negatives per positive the pool is
+                                # (1+neg_ratio)*n_pairs, so a larger K saturates by
+                                # construction on the smaller graphs. Also the K used
+                                # for the full-denominator Hits@K, where a pair the
+                                # graph cannot express counts as a miss.
+                                # on that axis (was hardcoded in the notebook)
+  prospective_strict: false     # true: drop pairs whose new disease is within
+                                # prospective_max_hops is_a steps of a disease the graph already
+                                # links the drug to (check 3); false: keep them, report the count
+  prospective_common_support: false   # true: score every graph on the pairs evaluable in ALL
+                                # loaded graphs, so coverage and quality are not confounded
+  prospective_max_hops: 2       # is_a distance for check 3, used by tools/build_post_cutoff_approvals.py
+  n_eval_queries: 300           # nb06 disease queries evaluated for neighbourhood
+                                # retrieval. Was hardcoded in the notebook, so the
+                                # size of the retrieval evaluation did not appear
+                                # in the parameter set at all.
+
+  # --- nb06 cross-graph comparability (2026-09-16 review). ---
+  # Recall@K and Hits@K at a fixed K are not comparable across graphs with very
+  # different candidate pools: top-100 of Hetionet's 20,945 genes is the top
+  # 0.48%, top-100 of BioKG's 59,204 is the top 0.17%, so the larger graph is
+  # asked a harder question for the same headline number. The dimension score
+  # uses a pool-normalised cut, K = ceil(k_fraction * pool_size); the fixed-K
+  # values stay in the tables because they are what the literature reports.
+  k_fraction: 0.005             # 0.5% of the candidate pool
+
+  # The three sub-metrics are averaged, so they must share a range. AUROC has a
+  # chance floor of 0.5 while Recall and Hits have a floor near 0, so an
+  # unweighted mean of the raw values handed every graph ~0.167 for free and let
+  # link prediction supply ~79% of the composite. AUROC is rescaled to
+  # (AUROC - 0.5) / 0.5, clipped at 0, so all three run 0 to 1 from chance.
+  # Raw AUROC is still reported everywhere; only the composite uses the rescale.
+  rescale_auroc: true
+
+  # ── Grounding experiment (grounding_experiment/, stages 01-05) ─────────────
+  # An LLM ranks a pool of candidate drugs for a disease; the only difference
+  # between arms is the knowledge-graph evidence attached to each candidate.
+  grounding:
+    kgs: [primekg, drkg, biokg]   # KG arms; the three graphs with enough evaluable
+                                  # post-cutoff pairs for a paired comparison
+    # Hosted models for the headline comparison. Keys are read from the
+    # environment (OPENAI_API_KEY, GEMINI_API_KEY, GROQ_API_KEY) or from .env.
+    models: [gpt-4.1-mini, 'gemini:gemini-3.5-flash-lite', 'groq:llama-3.3-70b-versatile']
+    model_labels:
+      gpt-4.1-mini: GPT-4.1-mini
+      'gemini:gemini-3.5-flash-lite': Gemini-3.5-Flash-Lite
+      'groq:llama-3.3-70b-versatile': Llama-3.3-70B
+      'llama3.2:1b': Llama-3.2-1B
+      'llama3.2:3b': Llama-3.2-3B
+      'llama3.1:8b': Llama-3.1-8B
+      'llama3.3:70b': Llama-3.3-70B
+      'llama3.1:405b': Llama-3.1-405B
+    # Same-family capacity ladder (Ollama tags -> parameters in billions). The
+    # rungs span Llama generations because no single generation offers five sizes.
+    capacity_models:
+      'llama3.2:1b': 1
+      'llama3.2:3b': 3
+      'llama3.1:8b': 8
+      'llama3.3:70b': 70
+      'llama3.1:405b': 405
+    families: [main, common]      # main = all pairs; common = evaluable in every KG arm
+    strict: false                 # true: 'evaluable' also excludes pairs within
+                                  # prospective_max_hops of a prior indication
+    pool_size: 8                  # 1 positive + 7 distractors; chance MRR = 0.340
+    shuffles: 3                   # candidate orders per query (position-bias control)
+    seeds: [0, 1, 2]              # distractor draws; 3 seeds x 3 shuffles = 9 calls per query and arm
+    cap: 8                        # neighbours rendered per relation phrase in a dossier
+    anonymize: true               # candidates shown as Drug-1.. so the name cannot be recalled
+    anonymize_genes: false
+    bridge_mode: full             # 'mechanism_only' drops the disease profile from the header
+    temperature: 0.7
+    api_delay: 1.0                # seconds between hosted-API calls
+    n_bootstrap: 10000            # paired bootstrap over queries for every interval
+    hits_k: [1, 3, 5]

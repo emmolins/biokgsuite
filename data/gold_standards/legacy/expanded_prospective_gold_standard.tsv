@@ -1,0 +1,50 @@
+drug_id	drug_name	disease_name	disease_id	source_agencies	approval_date	therapeutic_area
+DB11817	baricitinib	alopecia areata	DOID:986	EMA,PMDA,TGA	2023-01-23	Immunology
+DB14962	trastuzumab deruxtecan	breast cancer	DOID:1612	EMA,PMDA,TGA	2023-01-25	Oncology
+DB06292	dapagliflozin	congestive heart failure	DOID:6000	EMA,FDA,TGA	2023-02-09	Cardiovascular
+DB11652	tucatinib	colorectal cancer	DOID:9256	EMA	2023-02-17	Oncology
+DB09038	empagliflozin	congestive heart failure	DOID:6000	EMA,FDA	2023-03-09	Cardiovascular
+DB06273	tocilizumab	polymyalgia rheumatica	DOID:853	EMA,FDA	2023-03-23	Immunology
+DB09037	pembrolizumab	non-small cell lung carcinoma	DOID:3908	EMA	2023-03-23	Oncology
+DB09074	olaparib	prostate cancer	DOID:10283	EMA,FDA,PMDA	2023-03-27	Oncology
+DB11714	durvalumab	biliary tract cancer	DOID:4607	EMA,FDA,PMDA	2023-03-27	Oncology
+DB08877	ruxolitinib	vitiligo	DOID:12306	EMA,FDA	2023-04-20	Dermatology
+DB15091	upadacitinib	ulcerative colitis	DOID:8577	EMA,FDA	2023-05-25	Immunology
+DB16371	glofitamab	diffuse large B-cell lymphoma	DOID:0050745	EMA	2023-06-15	Oncology
+DB06292	dapagliflozin	chronic kidney disease	DOID:784	PMDA	2023-06-26	Metabolic
+DB14762	risankizumab	Crohn disease	DOID:8778	EMA,FDA,TGA	2023-06-29	Immunology
+DB08877	ruxolitinib	alopecia areata	DOID:986	EMA,FDA	2023-08-14	Dermatology
+DB16655	teclistamab	multiple myeloma	DOID:9538	EMA	2023-08-24	Oncology
+DB16678	talquetamab	multiple myeloma	DOID:9538	EMA	2023-08-24	Oncology
+DB16672	epcoritamab	diffuse large B-cell lymphoma	DOID:0050745	EMA	2023-09-21	Oncology
+DB09037	pembrolizumab	biliary tract cancer	DOID:4607	EMA,PMDA	2023-12-25	Oncology
+DB11581	venetoclax	acute myeloid leukemia	DOID:9119	EMA,FDA	2024-01-12	Oncology
+DB09037	pembrolizumab	cervical cancer	DOID:4362	EMA,FDA,TGA	2024-01-15	Oncology
+DB15091	upadacitinib	atopic eczema	DOID:3310	FDA	2024-01-25	Immunology
+DB15091	upadacitinib	ankylosing spondylitis	DOID:7147	EMA,FDA	2024-02-13	Immunology
+DB09035	nivolumab	colorectal cancer	DOID:9256	EMA,FDA,PMDA	2024-02-22	Oncology
+DB12893	sacituzumab govitecan	breast cancer	DOID:1612	EMA	2024-02-22	Oncology
+DB08875	cabozantinib	hepatocellular carcinoma	DOID:684	EMA,FDA	2024-02-28	Oncology
+DB13928	semaglutide	cardiovascular disease	DOID:1287	EMA,FDA,PMDA,TGA	2024-03-08	Cardiovascular
+DB09074	olaparib	breast cancer	DOID:1612	EMA,FDA,TGA	2024-03-11	Oncology
+DB09035	nivolumab	esophageal cancer	DOID:5041	EMA,FDA,TGA	2024-03-22	Oncology
+DB09331	daratumumab	multiple myeloma	DOID:9538	EMA,FDA	2024-03-25	Oncology
+DB12218	capivasertib	breast cancer	DOID:1612	EMA	2024-04-25	Oncology
+DB00051	adalimumab	hidradenitis suppurativa	DOID:0060480	EMA,FDA	2024-04-30	Immunology
+DB01590	everolimus	gastrointestinal neuroendocrine tumor	DOID:0080909	EMA,FDA	2024-05-09	Oncology
+DB15091	upadacitinib	Crohn disease	DOID:8778	EMA,FDA,TGA	2024-05-17	Immunology
+DB11703	acalabrutinib	chronic lymphocytic leukemia	DOID:1040	EMA,FDA	2024-05-20	Oncology
+DB08879	belimumab	lupus nephritis	DOID:0080162	EMA,FDA	2024-06-01	Immunology
+DB09037	pembrolizumab	endometrial carcinoma	DOID:2870	EMA,FDA,TGA	2024-06-07	Oncology
+DB09078	lenvatinib	endometrial cancer	DOID:1380	EMA,FDA	2024-06-07	Oncology
+DB15035	zanubrutinib	chronic lymphocytic leukemia	DOID:1040	EMA,PMDA	2024-06-24	Oncology
+DB15035	zanubrutinib	marginal zone lymphoma	DOID:0050748	EMA	2024-06-27	Oncology
+DB09035	nivolumab	hepatocellular carcinoma	DOID:684	EMA,FDA	2024-08-15	Oncology
+DB09037	pembrolizumab	hepatocellular carcinoma	DOID:684	FDA	2024-09-03	Oncology
+DB14762	risankizumab	ulcerative colitis	DOID:8577	EMA,FDA,PMDA	2024-09-19	Immunology
+DB12159	dupilumab	chronic obstructive pulmonary disease	DOID:3083	EMA,FDA,PMDA,TGA	2024-09-24	Respiratory
+DB09037	pembrolizumab	gastroesophageal junction adenocarcinoma	DOID:4944	FDA	2024-10-25	Oncology
+DB09037	pembrolizumab	gastric cancer	DOID:10534	EMA,FDA	2024-10-25	Oncology
+DB12159	dupilumab	prurigo nodularis	DOID:0060845	EMA,FDA	2024-10-25	Immunology
+DB13928	semaglutide	obstructive sleep apnea	DOID:0050848	FDA	2024-12-13	Respiratory
+DB11714	durvalumab	small cell lung carcinoma	DOID:0050685	EMA,FDA	2024-12-19	Oncology

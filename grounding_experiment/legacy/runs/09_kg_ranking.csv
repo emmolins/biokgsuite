@@ -1,0 +1,7 @@
+kg,coverage_L2,mean_L1_edges,auroc_C0,auroc_C3,delta_auroc,delta_mu_pos
+biokg,0.06,30.1,0.825,,,
+drkg,0.2,38.5,0.825,,,
+hetionet,0.045,24.2,0.825,,,
+matrix,0.61,54.3,0.825,,,
+openbilink,0.105,29.2,0.825,,,
+primekg,0.11,47.1,0.825,,,

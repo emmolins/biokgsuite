@@ -1,0 +1,77 @@
+drug_id	drug_name	disease_name	disease_id	source_agencies	approval_date	therapeutic_area	year_set
+DB11652	tucatinib	RAS wild-type HER2+ metastatic colorectal cancer	DOID:0080199	FDA	2020	Oncology	2023
+DB15035	zanubrutinib	Chronic lymphocytic leukemia	DOID:1040	FDA	2019	Oncology	2023
+DB08885	aflibercept	Retinopathy of prematurity	DOID:13025	FDA	2011	Ophthalmology	2023
+DB11767	sarilumab	Polymyalgia rheumatica	DOID:853	FDA	2017	Immunology	2023
+DB06292	dapagliflozin	Heart failure (broadened)	SYMP:0000292	FDA	2014	Cardiovascular	2023
+DB09128	brexpiprazole	Agitation associated with Alzheimer's dementia	DOID:10652	FDA	2015	CNS	2023
+DB15091	upadacitinib	Crohn's disease	DOID:8778	FDA	2019	Immunology	2023
+DB00432	trifluridine/tipiracil+bevacizumab	Metastatic colorectal cancer	DOID:0080199	FDA	2015	Oncology	2023
+DB11915	valbenazine	Chorea associated with Huntington's disease	DOID:12858	FDA	2017	CNS	2023
+DB12281	luspatercept	First-line anemia in lower-risk MDS	DOID:0050908	FDA	2019	Hematology	2023
+DB09029	secukinumab	Hidradenitis suppurativa	DOID:2280	FDA	2015	Immunology	2023
+DB11718	encorafenib+binimetinib	BRAF V600E metastatic NSCLC	DOID:3908	FDA	2018	Oncology	2023
+DB14568	ivosidenib	IDH1-mutated relapsed/refractory MDS	DOID:0050908	FDA	2018	Oncology	2023
+DB09037	pembrolizumab	1L biliary tract cancer (+gemcitabine+cisplatin)	DOID:4607	FDA	2014	Oncology	2023
+DB15463	belzutifan	Advanced RCC after PD-1/PD-L1 + VEGF-TKI	DOID:4450	FDA	2021	Oncology	2023
+DB01656	roflumilast	Psoriasis in children 6-11 (cream)	DOID:8893	FDA	2011	Immunology	2023
+DB09038	empagliflozin	Chronic kidney disease	DOID:784	FDA	2014	Cardiovascular	2023
+DB15035	zanubrutinib	Follicular lymphoma (+obinutuzumab)	DOID:0050873	EMA	2019	Oncology	2023
+DB11714	durvalumab	Gastric/GEJ adenocarcinoma (1L +chemo)	DOID:3717	EMA	2017	Oncology	2023
+DB15171	tirzepatide	Obstructive sleep apnea with obesity	DOID:0050848	EMA	2022	Metabolic	2023
+DB09029	secukinumab	IV formulation for rheumatic diseases (EMA)	DOID:1575	EMA	2015	Immunology	2023
+DB09299	tenofovir alafenamide	Chronic hepatitis B (pediatric)	DOID:2043	EMA	2016	Infectious	2023
+DB00028	immune globulin subcutaneous	Primary immunodeficiency pediatric (EMA)	DOID:0111941	EMA	2014	Immunology	2023
+DB08912	dabrafenib	Pediatric glioma (EMA)	DOID:3774	EMA	2014	Oncology	2023
+DB14962	trastuzumab deruxtecan	HER2-mutant NSCLC (EMA)	DOID:3908	EMA	2019	Oncology	2023
+DB09037	pembrolizumab	Primary mediastinal large B-cell lymphoma	DOID:0080210	PMDA	2016	Oncology	2023
+DB14962	trastuzumab deruxtecan	HER2-mutant NSCLC (PMDA)	DOID:3908	PMDA	2020	Oncology	2023
+DB09078	lenvatinib	Unresectable thymic carcinoma (PMDA)	DOID:3284	PMDA	2015	Oncology	2023
+DB11714	durvalumab	Gastric/GEJ adenocarcinoma	DOID:3717	FDA, EMA	2017	Oncology	2024-2026
+DB11714	durvalumab	Biliary tract cancer 1L	DOID:4607	EMA	2017	Oncology	2024-2026
+DB09037	pembrolizumab	Biliary tract cancer	DOID:4607	PMDA	2014	Oncology	2024-2026
+DB13007	enfortumab vedotin	Urothelial carcinoma (expanded population)	DOID:4006	EMA	2020	Oncology	2024-2026
+DB08875	cabozantinib	Pancreatic NET	DOID:0112306	FDA, EMA	2016	Oncology	2024-2026
+DB15569	sotorasib+panitumumab	KRAS G12C+ mCRC	DOID:0080199	FDA	2021	Oncology	2024-2026
+DB15463	belzutifan	Pheochromocytoma/paraganglioma	DOID:0050771	FDA, PMDA	2021	Oncology	2024-2026
+DB15044	tafasitamab	Follicular lymphoma	DOID:0050873	FDA	2020	Oncology	2024-2026
+DB12941	darolutamide	mHSPC + ADT	DOID:10283	EMA, MHRA/Orbis	2019	Oncology	2024-2026
+DB11718	encorafenib	BRAF+ thyroid cancer	DOID:1781	EMA, PMDA	2018	Oncology	2024-2026
+DB11967	binimetinib	BRAF+ thyroid cancer	DOID:1781	EMA, PMDA	2018	Oncology	2024-2026
+DB12281	luspatercept	First-line anemia in lower-risk MDS	DOID:0050908	EMA	2020	Oncology	2024-2026
+DB15091	upadacitinib	Giant cell arteritis	DOID:13375	FDA, EMA	2019	Immunology	2024-2026
+DB11834	guselkumab	Crohn's disease	DOID:8778	FDA, EMA, PMDA	2017	Immunology	2024-2026
+DB11834	guselkumab	Ulcerative colitis	DOID:8577	FDA, EMA, PMDA	2017	Immunology	2024-2026
+DB14762	risankizumab	Ulcerative colitis	DOID:8577	EMA, PMDA	2019	Immunology	2024-2026
+DB12530	inebilizumab	Generalized myasthenia gravis	DOID:437	FDA	2020	Immunology	2024-2026
+DB12159	dupilumab	COPD	DOID:3083	EMA	2017	Immunology	2024-2026
+DB12159	dupilumab	COPD (EMA 2025)	DOID:3083	EMA	2017	Immunology	2024-2026
+DB12023	benralizumab	EGPA (expanded)	DOID:3049	EMA	2017	Immunology	2024-2026
+DB00043	omalizumab	EGPA	DOID:3049	PMDA	2009	Immunology	2024-2026
+DB08877	ruxolitinib	GVHD + pediatric	DOID:0081267	PMDA	2012	Immunology	2024-2026
+DB13928	semaglutide	Reduce MACE in CVD + obesity/overweight	DOID:1287	FDA	2021	Cardiovascular	2024-2026
+DB09075	edoxaban tosilate	Chronic thromboembolic pulmonary hypertension	DOID:6432	PMDA	2014	Cardiovascular	2024-2026
+DB00374	treprostinil	ILD-associated pulmonary hypertension	DOID:6432	PMDA	2002	Cardiovascular	2024-2026
+DB13928	semaglutide	CKD in T2D	DOID:784	FDA	2017	Metabolic	2024-2026
+DB00073	rituximab	Nephrotic syndrome	DOID:1184	PMDA	2001	Nephrology	2024-2026
+DB13879	glecaprevir/pibrentasvir	Acute HCV pediatric	DOID:684	FDA	2017	Infectious	2024-2026
+DB00008	peginterferon alfa-2a	Polycythaemia vera and essential thrombocytopenia	DOID:8997	EMA	2002	Hematology	2024-2026
+DB12159	dupilumab	Allergic fungal rhinosinusitis (AFRS) ≥6yr	DOID:13565	FDA	2017	Immunology	2024-2026
+DB09037	pembrolizumab	Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1)	DOID:4001	FDA	2014	Oncology	2024-2026
+DB00514	dextromethorphan+bupropion	Agitation associated with Alzheimer's dementia	DOID:10652	FDA	2022	CNS	2024-2026
+DB06606	teplizumab-mzwv	Delay T1D onset in children ≥1yr	DOID:9744	FDA	2022	Metabolic	2024-2026
+DB00028	immune globulin IV (human-slra)	Primary humoral immunodeficiency pediatric 2-11yr	DOID:0111941	FDA	2019	Immunology	2024-2026
+DB12839	pegvaliase-pqpz	PKU expanded to ≥12yr	DOID:9281	FDA+EMA	2018	Metabolic	2024-2026
+DB13928	semaglutide	Oral tablet formulation for weight management	DOID:9970	FDA+EMA	2021	Metabolic	2024-2026
+DB11718	encorafenib	mCRC BRAF V600E (traditional approval, was accelerated)	DOID:0080199	FDA+EMA	2018	Oncology	2024-2026
+DB11714	durvalumab	Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT)	DOID:3717	EMA	2018	Oncology	2024-2026
+DB01263	posaconazole	Invasive fungal infections pediatric ≥2yr	DOID:0050073	EMA	2005	Infectious	2024-2026
+DB11817	baricitinib	Juvenile idiopathic arthritis (EMA Feb 2026)	DOID:676	EMA	2017	Immunology	2024-2026
+DB05889	inotuzumab ozogamicin	Ph+ ALL frontline (EMA Mar 2026, TBD)	DOID:9952	EMA	2017	Oncology	2024-2026
+DB00028	immune globulin IV	Measles prophylaxis post-exposure	DOID:8622	EMA	2008	Infectious	2024-2026
+DB13007	enfortumab vedotin	Muscle-invasive bladder cancer (EMA May 2026, TBD)	DOID:4007	EMA	2020	Oncology	2024-2026
+DB12023	benralizumab	Eosinophilic esophagitis (EMA May 2026, TBD)	DOID:13922	EMA	2017	Immunology	2024-2026
+DB13879	glecaprevir/pibrentasvir	HCV pediatric extension (EMA May 2026, TBD)	DOID:684	EMA	2017	Infectious	2024-2026
+DB11834	guselkumab	Crohn's disease (moderate-severe, refractory)	DOID:8778	PMDA	2019	Immunology	2024-2026
+DB15090	tezepelumab	CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps)	DOID:0110597	PMDA	2021	Immunology	2024-2026
+DB06168	canakinumab	Schnitzler syndrome (Japan)	DOID:4371	PMDA	2009	Immunology	2024-2026

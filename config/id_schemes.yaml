@@ -1,0 +1,116 @@
+# Permissible identifier schemes per entity type  (check 1 of notebook 02).
+#
+# A node labelled Drug whose id is DB12494 is recognised by shape: DB + five
+# digits is a DrugBank accession, therefore a valid drug identifier. This
+# rejects a DrugBank accession filed under Anatomy. It cannot confirm a type,
+# because some shapes are shared: a bare integer is a valid Entrez gene AND a
+# valid MONDO or OMIM number. Confirming is check 2's job. Check 2 is REPORTED
+# for Drug, Disease and Gene/Protein and is never scored: its complement is the
+# share our reference registries do not carry, which is not an error rate.
+#
+# A CURIE prefix, when present, is stronger evidence than the shape and is
+# matched first: MONDO:0007254 is a disease on the strength of its prefix,
+# whereas the bare 0007254 is only shape evidence.
+#
+# DISCIPLINE. Each entry states what a real identifier of that scheme looks
+# like. Add a scheme because the scheme exists, never because a graph was
+# failing. The predecessor of this file (VALID_PATTERNS) was grown by appending
+# whatever each KG tripped on until a bare integer was valid as seven entity
+# types and the check meant nothing. tools/check_id_schemes.py reports every
+# shape that is ambiguous across types, so that failure mode stays measurable.
+#
+# CHANGES.
+# 2026-09-14  MeSH corrected. The file declared `^D\d{6}$` as MeSH's only shape.
+#             MeSH in fact uses four: descriptor UIs D+6 and D+9, and
+#             Supplementary Concept Record UIs C+6 and C+9. Each was checked
+#             individually against NLM's MeSH RDF service
+#             (https://id.nlm.nih.gov/mesh/<UI>.json) on that date:
+#               D004194    TopicalDescriptor   "Diabetes Mellitus, Experimental"
+#               D000070625 TopicalDescriptor   "Brain Injuries, Diffuse"
+#               C531609    SCR_Disease         "Diffuse alopecia"
+#               C000600608 SCR_Disease         "Ehlers-Danlos ... type 1"
+#               C000006    SCR_Chemical        "insulin, neutral"
+#             The last of these is why the C shapes are declared under BOTH
+#             Drug and Disease and marked ambiguous: NLM issues chemical and
+#             disease SCRs from one C space, so the shape cannot separate them.
+#             This corrects the arbiter, not any graph's score: identifiers that
+#             match no shape were already outside the scored denominator, so the
+#             change moves `nodes_judged_pct`, not `entity_validity`.
+
+id_schemes:
+
+  Drug:
+    - {scheme: DrugBank, pattern: '^DB\d{5}$',            example: DB12494}
+    - {scheme: ChEMBL,   pattern: '^CHEMBL\d+$',          example: CHEMBL941}
+    - {scheme: PubChem,  pattern: '^CID\d+$',             example: CID100002244}
+    - {scheme: ChEBI,    pattern: '^CHEBI:\d+$',          example: 'CHEBI:15365'}
+    - {scheme: PubChem,  pattern: '^\d+$',   ambiguous: true, example: '2244',
+       note: 'bare CID; indistinguishable from an Entrez gene id'}
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+       example: C000006,
+       note: 'most Supplementary Concept Records are substances; declared here
+              as well as under Disease because the shape truly is shared'}
+
+  Disease:
+    - {scheme: MONDO,    pattern: '^MONDO:\d{7}$',        example: 'MONDO:0007254'}
+    - {scheme: DOID,     pattern: '^DOID:\d+$',           example: 'DOID:0050156'}
+    - {scheme: OMIM,     pattern: '^(?i:omim|mim):\d+$',   example: 'OMIM:607948',
+       note: 'MIM: and OMIM: name one registry; BioKG and others write the
+              short prefix, so the spelling must not decide validity'}
+    - {scheme: Orphanet, pattern: '^(?i:orphanet):\d+$',  example: 'ORPHANET:377788'}
+    - {scheme: EFO,      pattern: '^EFO:\d{7}$',          example: 'EFO:0009491'}
+    - {scheme: UMLS,     pattern: '^C\d{7}$',   ambiguous: true, example: C0012634,
+       note: 'also the shape of a side-effect CUI; UMLS spans both'}
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+       example: D004194,
+       note: 'D+6 legacy and D+9 modern UIs; descriptors also cover symptoms'}
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+       example: C531609,
+       note: 'Supplementary Concept Record; the C space also holds SCR_Chemical
+              (C000006 is "insulin, neutral"), so the shape alone does not
+              separate a disease SCR from a substance SCR'}
+    - {scheme: MONDO,    pattern: '^\d{7}$',    ambiguous: true, example: '0007254',
+       note: 'bare MONDO number; indistinguishable from an Entrez gene id'}
+
+  Gene/Protein:
+    - {scheme: Ensembl,  pattern: '^ENSG\d{11}$',         example: ENSG00000146648}
+    - {scheme: HGNC,     pattern: '^HGNC:\d+$',           example: 'HGNC:5'}
+    - {scheme: UniProt,  pattern: '^[OPQ][0-9][A-Z0-9]{3}[0-9]$', example: P04217}
+    - {scheme: UniProt,  pattern: '^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$',
+       example: A0A075B6P5}
+    - {scheme: Entrez,   pattern: '^\d+$',     ambiguous: true, example: '1956',
+       note: 'bare Entrez; indistinguishable from a bare MONDO or PubChem id'}
+
+  Pathway:
+    - {scheme: Reactome, pattern: '^R-[A-Z]{3}-\d+$', ambiguous: true,
+       example: R-HSA-109582,
+       note: 'a Reactome stable id names ANY object class - pathway, reaction,
+              complex or physical entity - so the shape cannot establish that
+              an id is a pathway; only the Reactome pathway list can, and
+              IdResolver.is_valid_pathway consults it'}
+    - {scheme: WikiPathways, pattern: '^WP\d+(_r\d+)?$',  example: WP100_r74146}
+    - {scheme: PathwayCommons, pattern: '^PC\d+_\d+$',    example: PC7_10399}
+    - {scheme: KEGG,     pattern: '^[a-z]{3}\d{5}$',      example: hsa04010}
+    - {scheme: SMPDB,    pattern: '^SMP\d+$',             example: SMP0000001}
+
+  Biological Process:
+    - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0008150',
+       note: 'all three GO aspects share this shape; only check 2 separates them'}
+  Molecular Function:
+    - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0003674'}
+  Cellular Component:
+    - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0005575'}
+
+  Anatomy:
+    - {scheme: UBERON, pattern: '^UBERON:\d{7}$',         example: 'UBERON:0000002'}
+
+  Side Effect:
+    - {scheme: UMLS,   pattern: '^C\d{7}$',   ambiguous: true, example: C0000727}
+    - {scheme: MedDRA, pattern: '^\d{8}$',    ambiguous: true, example: '10000647'}
+
+  Symptom:
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+       example: D000006}
+
+  Pharmacologic Class:
+    - {scheme: NDF-RT, pattern: '^N\d{10}$',              example: N0000000069}

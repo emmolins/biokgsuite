@@ -1,0 +1,5 @@
+seed,disease,kg,condition,model,shuffle,pool_size,positive_letter,rank,reciprocal_rank,hit@1,hit@3,hit@5,parsed,error,pos_basis,pos_agreement,pos_confidence,pos_rationale,frac_basis_kg,mean_confidence
+0,Chorea associated with Huntington's disease,none,no_kg,gpt-4.1-mini,0,8,E,6,0.16666666666666666,0,0,0,1,,kg,insufficient,2,Drug-6 has weak KG links to targets with unclear roles in Huntington's disease mechanisms.,0.625,2.625
+0,Chorea associated with Huntington's disease,primekg,kg,gpt-4.1-mini,0,8,C,4,0.25,0,0,1,1,,prior,insufficient,2,Targets multiple CYP enzymes involved in drug metabolism; no known direct neuroprotective or disease-modifying roles.,0.25,2.125
+0,Chorea associated with Huntington's disease,drkg,kg,gpt-4.1-mini,0,8,H,7,0.14285714285714285,0,0,0,1,,both,insufficient,2,Drug-6 targets multiple CYP enzymes and transporters with no direct disease gene links.,1.0,2.0
+0,Chorea associated with Huntington's disease,biokg,kg,gpt-4.1-mini,0,8,G,8,0.125,0,0,0,1,,kg,insufficient,1,"Targets cytochrome P450 enzymes involved in drug metabolism, with no mechanistic link to disease.",1.0,1.75

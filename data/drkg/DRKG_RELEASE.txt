@@ -1,0 +1,10 @@
+dataset=drkg
+release=DRKG, no versioned release; repository gnn4dr/DRKG at commit d4bb1974312013c4bd79a13e42c1d9492033f8c7 (2022-04-19)
+licence=Apache-2.0 (per-source licences apply; see the DRKG licences table)
+retrieved_utc=2026-09-18T15:57:02+00:00
+fetched_by=tools/fetch_kgs.py
+citation=Ioannidis VN, et al. DRKG - Drug Repurposing Knowledge Graph for Covid-19. 2020. https://github.com/gnn4dr/DRKG/
+raw_files:
+  drkg.tar.gz                                     216,650,245 bytes  sha256 00a8154a35bda496  (no published checksum)
+derived_files:
+  data/drkg/drkg.tsv                              383,932,925 bytes  sha256 036344723ba56686

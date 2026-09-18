@@ -1,0 +1,56 @@
+{
+  "built_utc": "2026-09-17T12:50:19+00:00",
+  "source": "Drugs@FDA Data Files (drugsatfda.zip, unzipped)",
+  "source_url": "https://www.fda.gov/drugs/drug-approvals-and-databases/drugsfda-data-files",
+  "source_sha256": "e1739f79478a01bb925e83e5f5657b3f08f700d75310b5ddbac69a85c81c9eef",
+  "source_bytes": 43275019,
+  "window_start": "2023-01-01",
+  "window_end": "2026-09-17",
+  "rule": {
+    "A_new_indication": "SUPPL with action type 'Efficacy-New Indication'",
+    "B_accelerated_approval": "SUPPL with action type 'Efficacy-Accelerated Approval', excluding confirmatory studies",
+    "C_new_indication_distinct_application": "ORIG with SubmissionClassCode in TYPE 9 / TYPE 9- BLA / TYPE 10",
+    "excluded": [
+      "Efficacy-New Patient Population",
+      "Efficacy-New Dosing Regimen",
+      "Efficacy-New Route Of Administration",
+      "Efficacy-Rx To OTC Switch",
+      "Efficacy-Labeling Change With Clinical Data",
+      "Efficacy-Accelerated Approval Confirmatory Study",
+      "all LABELING / MANUF (CMC) / REMS / BIOEQUIV"
+    ]
+  },
+  "scope_note": "CDER-regulated drugs and therapeutic biologics only; CBER biologics (vaccines, blood products, most cell and gene therapies) are not in Drugs@FDA and are out of frame.",
+  "known_join_gap": "Submissions whose ApplNo is absent from Applications.txt carry a null ApplType; all observed cases are pre-1982 antibiotic or legacy ANDA numbers, excluded by the NDA/BLA filter regardless.",
+  "funnel": [
+    {
+      "step": "all submissions in source",
+      "rows": 193752
+    },
+    {
+      "step": "status date in [2023-01-01, today]",
+      "rows": 20514
+    },
+    {
+      "step": "SubmissionStatus == AP (approved)",
+      "rows": 20003
+    },
+    {
+      "step": "ApplType in (NDA, BLA)",
+      "rows": 5372
+    },
+    {
+      "step": "matches the tiered indication rule",
+      "rows": 341
+    }
+  ],
+  "n_events": 341,
+  "n_by_tier": {
+    "A_new_indication": 303,
+    "B_accelerated_approval": 25,
+    "C_new_indication_distinct_application": 13
+  },
+  "n_applications": 229,
+  "n_ingredients": 205,
+  "n_adjudication_required": 38
+}

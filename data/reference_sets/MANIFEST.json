@@ -1,0 +1,44 @@
+{
+  "entity_disease": {
+    "rule": "MONDO non-obsolete, non-grouping",
+    "source": "mondo.obo",
+    "n": 31147,
+    "n_rare": 15656
+  },
+  "entity_drug": {
+    "rule": "maximumClinicalStage == 'APPROVAL' (there is no isApproved column in 26.06)",
+    "source": "ot_drug_molecule",
+    "n": 5485
+  },
+  "entity_gene": {
+    "rule": "targets of the approved drug set",
+    "source": "ot_drug_mechanism_of_action",
+    "n": 1076
+  },
+  "entity_pathway_names": {
+    "rule": "Reactome id -> name, all pathways mentioned by ot_target",
+    "source": "ot_target.pathways",
+    "n": 2298,
+    "scored": false
+  },
+  "entity_pathway": {
+    "rule": "Reactome pathways of the target gene set",
+    "source": "ot_target.pathways",
+    "n": 1386
+  },
+  "disease_strata": {
+    "rule": "drugged = has >=1 APPROVAL-stage indication",
+    "source": "ot_clinical_indication",
+    "n_drugged": 946,
+    "n_undrugged": 30201,
+    "n_rare_undrugged": 15234
+  },
+  "relations": {
+    "drug_gene": 7922,
+    "drug_pathway": 22019,
+    "disease_gene": 18841,
+    "disease_pathway": 72701,
+    "disease_disease": 37667,
+    "drug_disease": 8343
+  }
+}

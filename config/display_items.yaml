@@ -1,0 +1,64 @@
+# Which pipeline output becomes which manuscript display item.
+#
+# Each dimension README declares its display items in prose ("Fig 1 panel;
+# Table S6"), but nothing connected that to a file. Assembling the manuscript
+# then means mapping figures to panels by hand, and again after every revision.
+#
+# This file makes the mapping explicit so tools/results_manifest.py can print
+# it, and so a display item whose source output is MISSING is reported rather
+# than discovered at submission. Paths are relative to results/ and given
+# without extension; figures are written as both .pdf and .png.
+#
+# Keep in step with the "Display item" line in each dimension's README.
+
+display_items:
+
+  # ---- main figures
+  Fig1:
+    caption: BioKGSuite dimension scores across the knowledge-graph panel
+    source: figures/00_summary/dimension_scores
+    notebook: 00_summary
+    panels:
+      A: figures/01_coverage/entity_coverage
+      B: figures/02_annotation_accuracy/entity_validity
+      C: figures/03_trustworthiness/source_diversity
+      D: figures/04_topology/graph_cohesion
+
+  Fig2:
+    caption: Disease coverage by stratum, including rare and undrugged diseases
+    source: figures/01_coverage/relation_coverage
+    notebook: 01_coverage
+
+  # ---- supplementary tables
+  TableS1:
+    caption: Reference set sizes and provenance
+    source: tables/01_coverage/reference_sets
+    notebook: 01_coverage
+  TableS2:
+    caption: Entity validity per declared type, with registry confirmation
+    source: tables/02_annotation_accuracy/entity_validity
+    notebook: 02_annotation_accuracy
+  TableS3:
+    caption: Declared identifier schemes and shapes shared across entity types
+    source: tables/02_annotation_accuracy/declared_id_schemes
+    notebook: 02_annotation_accuracy
+  TableS4:
+    caption: Source counts per knowledge graph, with citations
+    source: tables/03_trustworthiness/source_counts
+    notebook: 03_trustworthiness
+  TableS5:
+    caption: Edge traceability, provenance level and share of edges attributed
+    source: tables/03_trustworthiness/edge_traceability
+    notebook: 03_trustworthiness
+  TableS6:
+    caption: Entity and relation coverage against task-derived reference sets
+    source: tables/01_coverage/entity_coverage
+    notebook: 01_coverage
+  TableS7:
+    caption: Schema coverage, and node types not mapped to a canonical type
+    source: tables/01_coverage/schema_coverage
+    notebook: 01_coverage
+  TableS8:
+    caption: Topology raw statistics, including clustering sampling error
+    source: tables/04_topology/raw_statistics
+    notebook: 04_topology

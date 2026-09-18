@@ -1,0 +1,21 @@
+{
+  "kg": "primekg",
+  "release": "PrimeKG V2.1 (Harvard Dataverse, published 2022-05-02)",
+  "doi": "doi:10.7910/DVN/IXA7BM",
+  "licence": "CC0 1.0",
+  "citation": "Chandak P, Huang K, Zitnik M. Building a knowledge graph to enable precision medicine. Sci Data 2023;10:67. doi:10.1038/s41597-023-01960-3",
+  "retrieved_utc": "2026-09-18T16:24:24+00:00",
+  "fetched_by": "tools/fetch_kgs.py --adopt (file already on disk, not downloaded here)",
+  "raw_files": [],
+  "derived_files": [
+    {
+      "path": "data/primekg/primekg.csv",
+      "bytes": 981751236,
+      "sha256": "0a5a010fcd88dcec572a573d98c26c1c244a11567092b6161d3ded611cfb5c69",
+      "md5": "aac8191d4fbc5bf09cdf8c3c78b4e75f",
+      "publisher_artifact": "kg.csv",
+      "md5_published": "aac8191d4fbc5bf09cdf8c3c78b4e75f",
+      "verification": "verified against the publisher"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+Pair_ID,Drug,Active,Agencies,YearSet,NewIndication,ema_status,token_coverage,matched_on,ema_evidence,in_116,placeholder_text
+3,Keytruda,pembrolizumab,"FDA, EMA",2023,Adjuvant NSCLC (stage IB-IIIA),indication_match,1.0,MeSH area via ontology label,"Keytruda [Authorised] Melanoma;Hodgkin Disease;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Carcinoma, Transitional Cell;Squ",False,False
+56,Keytruda,pembrolizumab,EMA,2023,1L HER2+ gastric/GEJ adenocarcinoma (+trastuzumab+chemo),indication_match,1.0,indication text,"Keytruda [Authorised] Melanoma;Hodgkin Disease;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Carcinoma, Transitional Cell;Squ",False,False
+57,Opdivo,nivolumab,EMA,2023,Adjuvant melanoma (stage IIB/IIC),indication_match,1.0,MeSH area,"Nivolumab BMS [Withdrawn] Carcinoma, Non-Small-Cell Lung",False,False
+58,Opdivo,nivolumab,EMA,2023,Urothelial carcinoma (1L metastatic),indication_match,1.0,indication text,"Nivolumab BMS [Withdrawn] Carcinoma, Non-Small-Cell Lung",False,False
+59,Olumiant,baricitinib,EMA,2023,Atopic dermatitis,indication_match,1.0,indication text,"Olumiant [Authorised] Arthritis, Rheumatoid",True,False
+60,Brukinsa,zanubrutinib,EMA,2023,Follicular lymphoma (+obinutuzumab),indication_match,1.0,indication text,Brukinsa [Authorised] Waldenstrom Macroglobulinemia,True,False
+61,Imfinzi,durvalumab,EMA,2023,Gastric/GEJ adenocarcinoma (1L +chemo),indication_match,1.0,indication text,"Imfinzi [Authorised] Carcinoma, Non-Small-Cell Lung",True,False
+62,Jemperli,dostarlimab,EMA,2023,dMMR/MSI-H primary advanced endometrial cancer,indication_match,1.0,indication text,Jemperli [Authorised] Endometrial Neoplasms,True,False
+63,Praluent,alirocumab,EMA,2023,Heterozygous familial hypercholesterolemia,indication_match,0.667,indication text,Praluent [Authorised] Dyslipidemias,True,False
+64,Prevymis,letermovir,EMA,2023,CMV prophylaxis in kidney transplant,indication_match,1.0,indication text,Prevymis [Authorised] Cytomegalovirus Infections,False,False
+65,Rubraca,rucaparib,EMA,2023,"Ovarian cancer (maintenance, 2L+)",indication_match,1.0,indication text,Rubraca [Authorised] Ovarian Neoplasms,False,False
+66,Soliris,eculizumab,EMA,2023,Pediatric generalized myasthenia gravis,indication_match,1.0,indication text,"Soliris [Authorised] Hemoglobinuria, Paroxysmal",False,False
+67,Takhzyro,lanadelumab,EMA,2023,HAE prevention in children 2+,indication_match,1.0,MeSH area via ontology label,"Takhzyro [Authorised] Angioedemas, Hereditary",False,False
+68,Jardiance,empagliflozin,EMA,2023,T2D in children 10+ (EMA),indication_match,1.0,MeSH area via ontology label,"Jardiance [Authorised] Diabetes Mellitus, Type 2;Heart Failure;Renal Insufficiency, Chronic",False,False
+69,Mounjaro,tirzepatide,EMA,2023,Obstructive sleep apnea with obesity,indication_match,0.75,indication text,"Mounjaro [Authorised] Diabetes Mellitus, Type 2;Obesity;Overweight",True,False
+70,Talzenna,talazoparib,EMA,2023,HR+/HER2- metastatic breast cancer,indication_match,1.0,indication text via ontology label,Talzenna [Authorised] Breast Neoplasms,True,False
+71,Evrysdi,risdiplam,EMA,2023,Spinal muscular atrophy (pediatric expansion),indication_match,1.0,MeSH area,"Evrysdi [Authorised] Muscular Atrophy, Spinal",True,False
+72,Bylvay,odevixibat,EMA,2023,PFIC cholestatic pruritus,indication_match,1.0,indication text via ontology label,Kayfanda [Authorised] Pruritus;Alagille Syndrome,False,False
+73,Ervebo,Ebola Zaire vaccine,EMA,2023,Ebola Zaire (pediatric 1+),indication_match,1.0,MeSH area via ontology label,"Ervebo [Authorised] Hemorrhagic Fever, Ebola",False,False
+74,Adempas,riociguat,EMA,2023,Chronic thromboembolic pulmonary hypertension,indication_match,1.0,MeSH area via ontology label,"Adempas [Authorised] Hypertension, Pulmonary",False,False
+75,Cosentyx,secukinumab,EMA,2023,IV formulation for rheumatic diseases (EMA),partial_match,0.5,indication text via ontology label,"Cosentyx [Authorised] Arthritis, Psoriatic;Psoriasis;Spondylitis, Ankylosing",True,False
+76,Orkambi,lumacaftor/ivacaftor,EMA,2023,Cystic fibrosis (pediatric expansion),indication_match,1.0,MeSH area,Kalydeco [Authorised] Cystic Fibrosis,False,False
+77,Revestive,teduglutide,EMA,2023,Short bowel syndrome (pediatric),indication_match,1.0,MeSH area,Revestive [Authorised] Malabsorption Syndromes,False,False
+78,Spikevax,mRNA-1273,EMA,2023,COVID-19 updated strain,partial_match,0.333,MeSH area,Spikevax (previously COVID-19 Vaccine Moderna) [Authorised] COVID-19 virus infection,True,False
+79,Vemlidy,tenofovir alafenamide,EMA,2023,Chronic hepatitis B (pediatric),indication_match,1.0,MeSH area,Odefsey [Authorised] HIV Infections,True,False
+80,Yervoy,ipilimumab,EMA,2023,Adjuvant melanoma (+nivolumab),indication_match,1.0,MeSH area,"Yervoy [Authorised] Melanoma;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Mesothelioma, Malignant;Colorectal Neoplasms",False,False
+81,HyQvia,immune globulin subcutaneous,EMA,2023,Primary immunodeficiency pediatric (EMA),indication_match,1.0,indication text,"HyQvia [Authorised] Immunologic Deficiency Syndromes;Polyradiculoneuropathy;Polyradiculoneuropathy, Chronic Inflammatory Demyelina",True,False
+82,Metalyse,tenecteplase,EMA,2023,Acute ischemic stroke,partial_match,0.5,indication text,Tenecteplase Boehringer Ingelheim Pharma GmbH  Co. KG [Withdrawn] Myocardial Infarction,False,False
+83,Zinplava,bezlotoxumab,EMA,2023,Pediatric C. difficile infection (EMA),indication_match,1.0,indication text,"Zinplava [Authorised] Enterocolitis, Pseudomembranous",False,False
+84,Spexotras,selumetinib,EMA,2023,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",indication_match,1.0,indication text,Spexotras [Authorised] Glioma,True,False
+85,Finlee,dabrafenib,EMA,2023,Pediatric glioma (EMA),indication_match,1.0,MeSH area,Finlee [Authorised] Glioma,True,False
+86,Adcetris,brentuximab vedotin,EMA,2023,Stage III Hodgkin lymphoma (EMA),indication_match,1.0,indication text,"Adcetris [Authorised] Lymphoma, Non-Hodgkin;Hodgkin Disease",False,False
+87,Enhertu,trastuzumab deruxtecan,EMA,2023,HER2-mutant NSCLC (EMA),indication_match,1.0,indication text via ontology label,Enhertu [Authorised] Breast Neoplasms,True,False
+88,Vanflyta,quizartinib,EMA,2023,FLT3-ITD AML (EMA),indication_match,1.0,MeSH area via ontology label,"Vanflyta [Refused] Leukemia, Myeloid, Acute",False,False
+89,Nordimet,methotrexate,EMA,2023,Moderate psoriasis (EMA),indication_match,1.0,MeSH area,"Jylamvo [Authorised] Arthritis, Psoriatic;Precursor Cell Lymphoblastic Leukemia-Lymphoma;Psoriasis;Arthritis, Rheumatoid;Arthritis",False,False
+90,Ayvakyt,avapritinib,EMA,2023,Indolent systemic mastocytosis (EMA),indication_match,1.0,indication text,Ayvakyt [Authorised] Gastrointestinal Stromal Tumors,True,False
+91,Evkeeza,evinacumab,EMA,2023,HoFH pediatric (EMA),indication_match,1.0,indication text,Evkeeza [Authorised] Hypercholesterolemia,True,False
+97,Alecensa,alectinib,"FDA, EMA, MHRA/Orbis",2024-2026,Adjuvant ALK+ NSCLC,indication_match,1.0,MeSH area via ontology label,"Alecensa [Authorised] Carcinoma, Non-Small-Cell Lung",False,False
+99,Enhertu,trastuzumab deruxtecan,"FDA, EMA",2024-2026,HR+/HER2-low breast cancer,indication_match,1.0,indication text,Enhertu [Authorised] Breast Neoplasms,True,False
+102,Imfinzi,durvalumab,"FDA, EMA",2024-2026,Gastric/GEJ adenocarcinoma,indication_match,1.0,indication text,"Imfinzi [Authorised] Carcinoma, Non-Small-Cell Lung",True,False
+103,Imfinzi,durvalumab,EMA,2024-2026,Biliary tract cancer 1L,indication_match,1.0,indication text,"Imfinzi [Authorised] Carcinoma, Non-Small-Cell Lung",True,False
+104,Rybrevant,amivantamab,"FDA, EMA",2024-2026,1L EGFR-mutant NSCLC (+lazertinib),indication_match,1.0,MeSH area via ontology label,"Rybrevant [Authorised] Carcinoma, Non-Small-Cell Lung",False,False
+106,Keytruda,pembrolizumab,"EMA, MHRA/Orbis",2024-2026,1L endometrial cancer (dMMR/MSI-H),indication_match,1.0,indication text,"Keytruda [Authorised] Melanoma;Hodgkin Disease;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Carcinoma, Transitional Cell;Squ",False,False
+107,Keytruda,pembrolizumab,"EMA, PMDA",2024-2026,Cervical cancer,indication_match,1.0,indication text,"Keytruda [Authorised] Melanoma;Hodgkin Disease;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Carcinoma, Transitional Cell;Squ",False,False
+110,Opdivo,nivolumab,"EMA, MHRA/Orbis",2024-2026,1L metastatic urothelial carcinoma,indication_match,1.0,indication text,"Nivolumab BMS [Withdrawn] Carcinoma, Non-Small-Cell Lung",False,False
+111,Opdivo+Yervoy,nivolumab+ipilimumab,"FDA, EMA",2024-2026,MSI-H/dMMR colorectal cancer 1L,indication_match,1.0,MeSH area via ontology label,"Nivolumab BMS [Withdrawn] Carcinoma, Non-Small-Cell Lung",False,False
+112,Darzalex,daratumumab,"FDA, EMA",2024-2026,Newly diagnosed MM ineligible for ASCT,indication_match,0.75,indication text,Darzalex [Authorised] Multiple Myeloma,False,False
+114,Padcev,enfortumab vedotin,EMA,2024-2026,Urothelial carcinoma (expanded population),indication_match,0.75,MeSH area via ontology label,"Padcev [Authorised] Carcinoma, Transitional Cell;Urologic Neoplasms",True,False
+116,Cabometyx,cabozantinib,"FDA, EMA",2024-2026,Pancreatic NET,indication_match,1.0,indication text,"Cabometyx [Authorised] Carcinoma, Renal Cell;Carcinomas, Hepatocellular",True,False
+117,Calquence,acalabrutinib,"FDA, EMA",2024-2026,Untreated MCL,indication_match,1.0,indication text,"Calquence [Authorised] Leukemia, Lymphocytic, Chronic, B-Cell",False,False
+121,Libtayo,cemiplimab,"FDA, EMA",2024-2026,Adjuvant cutaneous SCC,indication_match,1.0,MeSH area via ontology label,"Libtayo [Authorised] Carcinoma, Squamous Cell",False,False
+122,Tagrisso,osimertinib,"EMA, MHRA/Orbis",2024-2026,Adjuvant EGFR+ NSCLC,indication_match,1.0,MeSH area via ontology label,"Tagrisso [Authorised] Carcinoma, Non-Small-Cell Lung",False,False
+123,Tagrisso,osimertinib,"EMA, PMDA, MHRA/Orbis",2024-2026,Stage III EGFR+ NSCLC post-chemoradiation,indication_match,1.0,MeSH area via ontology label,"Tagrisso [Authorised] Carcinoma, Non-Small-Cell Lung",False,False
+124,Xalkori,crizotinib,"EMA, PMDA",2024-2026,ALK+ or ROS1+ NSCLC (pediatric/new formulation),indication_match,1.0,MeSH area via ontology label,"Xalkori [Authorised] Carcinoma, Non-Small-Cell Lung",False,False
+125,Lynparza,olaparib,EMA,2024-2026,BRCA-mutated mCRPC (+abiraterone),indication_match,1.0,indication text,"Lynparza [Authorised] Ovarian Neoplasms;Breast Neoplasms;Pancreatic Neoplasms;Prostatic Neoplasms, Castration-Resistant",False,False
+126,Kisqali,ribociclib,EMA,2024-2026,HR+/HER2- early breast cancer (adjuvant),indication_match,1.0,indication text,Kisqali [Authorised] Breast Neoplasms,True,False
+127,Xtandi,enzalutamide,EMA,2024-2026,Metastatic hormone-sensitive prostate cancer,indication_match,1.0,indication text,Enzalutamide Accordpharma [Authorised] Prostatic Neoplasms,False,False
+128,Nubeqa,darolutamide,"EMA, MHRA/Orbis",2024-2026,mHSPC + ADT,indication_match,1.0,indication text,"Nubeqa [Authorised] Prostatic Neoplasms, Castration-Resistant",True,False
+129,Retsevmo,selpercatinib,EMA,2024-2026,RET-fusion NSCLC (expanded),indication_match,1.0,MeSH area via ontology label,"Retsevmo [Authorised] Carcinoma, Non-Small-Cell Lung;Thyroid Neoplasms;Cancer",True,False
+130,Rozlytrek,entrectinib,EMA,2024-2026,NTRK fusion solid tumors (pediatric),indication_match,0.75,indication text,"Rozlytrek [Authorised] Cancer;Carcinoma, Non-Small-Cell Lung",False,False
+131,Braftovi,encorafenib,"EMA, PMDA",2024-2026,BRAF+ thyroid cancer,indication_match,1.0,indication text,Braftovi [Authorised] Melanoma;Colorectal Neoplasms,True,False
+132,Mektovi,binimetinib,"EMA, PMDA",2024-2026,BRAF+ thyroid cancer,indication_match,1.0,indication text,Balimek [Application withdrawn] Melanoma,True,False
+133,Onivyde,irinotecan (liposomal),EMA,2024-2026,Pancreatic cancer (2L+),partial_match,0.5,MeSH area,Onivyde pegylated liposomal (previously Onivyde) [Authorised] Pancreatic Neoplasms,False,False
+134,Adcetris,brentuximab vedotin,EMA,2024-2026,Stage III Hodgkin lymphoma,indication_match,1.0,indication text,"Adcetris [Authorised] Lymphoma, Non-Hodgkin;Hodgkin Disease",False,False
+135,Bosulif,bosutinib,EMA,2024-2026,Pediatric Ph+ CML-CP,indication_match,1.0,MeSH area,"Bosulif [Authorised] Leukemia, Myeloid",False,False
+136,Sarclisa,isatuximab,EMA,2024-2026,Newly diagnosed MM ineligible for ASCT,indication_match,0.75,indication text,Sarclisa [Authorised] Multiple Myeloma,False,False
+137,Imbruvica,ibrutinib,EMA,2024-2026,Chronic GVHD,drug_found_no_match,0.0,,"Imbruvica [Authorised] Lymphoma, Mantle-Cell;Leukemia, Lymphocytic, Chronic, B-Cell",False,False
+138,Carvykti,ciltacabtagene autoleucel,EMA,2024-2026,R/R MM (earlier line),partial_match,0.333,MeSH area,Carvykti [Authorised] Multiple Myeloma,False,False
+139,Cibinqo,abrocitinib,EMA,2024-2026,Atopic dermatitis (adolescents),indication_match,1.0,MeSH area,"Cibinqo [Authorised] Dermatitis, Atopic",False,False
+140,Reblozyl,luspatercept,EMA,2024-2026,First-line anemia in lower-risk MDS,indication_match,1.0,MeSH area via ontology label,Reblozyl [Authorised] Anemia;Myelodysplastic Syndromes;beta-Thalassemia,True,False
+142,Breyanzi,lisocabtagene maraleucel,EMA,2024-2026,Follicular lymphoma 3L+,indication_match,1.0,MeSH area,"Breyanzi [Authorised] Lymphoma, Large B-Cell, Diffuse;Lymphoma, Follicular;Mediastinal Neoplasms",False,False
+143,Gazyvaro,obinutuzumab,EMA,2024-2026,Follicular lymphoma (+chemo),indication_match,1.0,indication text,"Gazyvaro [Authorised] Leukemia, Lymphocytic, Chronic, B-Cell",False,False
+144,Scemblix,asciminib,EMA,2024-2026,Ph+ CML-CP after 2+ TKIs,partial_match,0.5,MeSH area via ontology label,"Scemblix [Authorised] Leukemia, Myelogenous, Chronic, BCR-ABL Positive",True,False
+145,Rinvoq,upadacitinib,"FDA, EMA",2024-2026,Giant cell arteritis,indication_match,1.0,MeSH area,"Rinvoq [Authorised] Arthritis, Rheumatoid;Arthritis, Psoriatic;Axial Spondyloarthritis;Spondylitis, Ankylosing;Giant Cell Arteriti",True,False
+146,Tremfya,guselkumab,"FDA, EMA, PMDA",2024-2026,Crohn's disease,indication_match,1.0,MeSH area,"Tremfya [Authorised] Psoriasis;Crohn Disease;Colitis, Ulcerative",True,False
+147,Tremfya,guselkumab,"FDA, EMA, PMDA",2024-2026,Ulcerative colitis,indication_match,1.0,MeSH area,"Tremfya [Authorised] Psoriasis;Crohn Disease;Colitis, Ulcerative",True,False
+148,Skyrizi,risankizumab,"EMA, PMDA",2024-2026,Ulcerative colitis,indication_match,1.0,MeSH area,"Skyrizi [Authorised] Psoriasis;Arthritis, Psoriatic;Colitis, Ulcerative;Crohn Disease",True,False
+149,Uplizna,inebilizumab,"FDA, EMA",2024-2026,IgG4-related disease,drug_found_no_match,0.25,indication text via ontology label,Uplizna [Authorised] Neuromyelitis Optica,True,False
+152,Benlysta,belimumab,"FDA, EMA",2024-2026,Pediatric SLE,indication_match,1.0,MeSH area via ontology label,"Benlysta [Authorised] Lupus Erythematosus, Systemic",False,False
+154,Dupixent,dupilumab,EMA,2024-2026,COPD,indication_match,1.0,indication text,"Dupixent [Authorised] Dermatitis, Atopic;Prurigo;Esophageal Diseases;Asthma;Sinusitis",True,False
+155,Dupixent,dupilumab,EMA,2024-2026,COPD (EMA 2025),indication_match,1.0,indication text,"Dupixent [Authorised] Dermatitis, Atopic;Prurigo;Esophageal Diseases;Asthma;Sinusitis",True,False
+156,Fasenra,benralizumab,EMA,2024-2026,EGPA (expanded),indication_match,1.0,indication text,Fasenra [Authorised] Asthma,True,False
+157,Nucala,mepolizumab,"EMA, PMDA",2024-2026,"EGPA (expanded, PMDA)",indication_match,1.0,indication text,Bosatria [Application withdrawn] Hypereosinophilic Syndrome,False,False
+160,Vyvgart,efgartigimod,EMA,2024-2026,Generalized myasthenia gravis (expanded),indication_match,1.0,MeSH area via ontology label,"Vyvgart [Authorised] Myasthenia Gravis;Polyradiculoneuropathy, Chronic Inflammatory Demyelinating",False,False
+161,Otezla,apremilast,"FDA, EMA, PMDA",2024-2026,Plaque psoriasis,indication_match,1.0,MeSH area via ontology label,"Apremilast Viatris [Application withdrawn] Arthritis, Psoriatic;Psoriasis;Behcet Syndrome",False,False
+165,Amvuttra,vutrisiran,"FDA, EMA",2024-2026,ATTR cardiomyopathy,indication_match,0.667,MeSH area via ontology label,"Amvuttra [Authorised] Amyloid Neuropathies, Familial",False,False
+170,Eliquis,apixaban,EMA,2024-2026,Pediatric VTE prevention/treatment,indication_match,1.0,indication text,Eliquis [Authorised] Arthroplasty;Venous Thromboembolism,False,False
+180,Veklury,remdesivir,EMA,2024-2026,COVID-19 (expanded population),indication_match,1.0,MeSH area,Veklury [Authorised] COVID-19 virus infection,True,False
+181,Ofev,nintedanib,EMA,2024-2026,Progressive fibrosing ILDs in children/adolescents,indication_match,1.0,MeSH area via ontology label,"Ofev [Authorised] Idiopathic Pulmonary Fibrosis;Lung Diseases, Interstitial;Pulmonary Fibrosis;Scleroderma, Systemic",False,False
+182,Kaftrio+Kalydeco,ivacaftor/tezacaftor/elexacaftor+ivacaftor,EMA,2024-2026,Additional CF mutations (non-class I),indication_match,1.0,MeSH area via ontology label,Kalydeco [Authorised] Cystic Fibrosis,False,False
+184,Pegasys,peginterferon alfa-2a,EMA,2024-2026,Polycythaemia vera and essential thrombocytopenia,indication_match,0.75,indication text,"Pegasys [Authorised] Hepatitis C, Chronic;Hepatitis B, Chronic;Polycythemia Vera;Thrombocythemia, Essential",True,False
+185,Xromi,hydroxycarbamide,EMA,2024-2026,Vaso-occlusive complications of sickle-cell disease in children,indication_match,1.0,indication text,"Siklos [Authorised] Anemia, Sickle Cell",False,False
+186,Pyrukynd,mitapivat,EMA,2024-2026,Thalassemia anemia (EU),partial_match,0.5,MeSH area,"Pyrukynd [Authorised] Genetic Diseases, Inborn;Anemia, Hemolytic",False,False
+188,Vabysmo,faricimab,EMA,2024-2026,Retinal vein occlusion,indication_match,1.0,indication text,Vabysmo [Authorised] Wet Macular Degeneration;Macular Edema;Diabetes Complications,True,False
+189,Livmarli,maralixibat,"FDA, EMA",2024-2026,PFIC/Alagille syndrome cholestatic pruritus,indication_match,1.0,indication text,"Livmarli [Application withdrawn] Cholestasis, Intrahepatic",False,False
+194,Opdivo,nivolumab,FDA+EMA,2024-2026,Previously untreated Stage III/IV cHL +AVD,indication_match,1.0,indication text,"Nivolumab BMS [Withdrawn] Carcinoma, Non-Small-Cell Lung",False,False
+195,Imcivree,setmelanotide,FDA+EMA,2024-2026,Acquired hypothalamic obesity,indication_match,1.0,indication text,Imcivree [Authorised] Obesity,True,False
+197,Enhertu,trastuzumab deruxtecan,FDA+EMA,2024-2026,HER2+ early-stage BC (neoadjuvant + adjuvant),indication_match,1.0,indication text,Enhertu [Authorised] Breast Neoplasms,True,False
+208,Stelara,ustekinumab,FDA+EMA,2024-2026,Population expansion (FDA+EMA),drug_found_no_match,0.0,,"Upstelda [Application withdrawn] Psoriasis;Arthritis, Psoriatic;Crohn Disease",False,True
+210,Sotyktu,deucravacitinib,FDA+EMA+PMDA,2024-2026,Psoriatic arthritis,indication_match,1.0,indication text,Sotyktu [Authorised] Psoriasis,False,False
+211,Palynziq,pegvaliase-pqpz,FDA+EMA,2024-2026,PKU expanded to ≥12yr,indication_match,1.0,MeSH area via ontology label,Palynziq [Authorised] Phenylketonurias,True,False
+212,Juxtapid,lomitapide,FDA+EMA,2024-2026,HoFH pediatric ≥2yr,partial_match,0.5,MeSH area via ontology label,Lojuxta [Authorised] Hypercholesterolemia,False,False
+213,Wegovy,semaglutide,FDA+EMA,2024-2026,Oral tablet formulation for weight management,partial_match,0.5,MeSH area via ontology label,"Kyinsu [Authorised] Diabetes Mellitus, Type 2",True,False
+214,Braftovi,encorafenib,FDA+EMA,2024-2026,"mCRC BRAF V600E (traditional approval, was accelerated)",indication_match,0.667,indication text,Braftovi [Authorised] Melanoma;Colorectal Neoplasms,True,False
+215,Trodelvy,sacituzumab govitecan,EMA+PMDA,2024-2026,HR+/HER2- breast cancer,indication_match,1.0,indication text,Trodelvy [Authorised] Breast Neoplasms;Triple Negative Breast Neoplasms,True,False
+216,Aquipta,atogepant,EMA+PMDA,2024-2026,Acute treatment of migraine (was prophylaxis only),indication_match,1.0,MeSH area,Aquipta [Authorised] Migraine Disorders,False,False
+217,Iclusig,ponatinib,EMA,2024-2026,Newly diagnosed Ph+ ALL +chemotherapy,indication_match,1.0,indication text,"Iclusig [Authorised] Leukemia, Myeloid;Leukemia, Lymphoid",False,False
+218,Imfinzi,durvalumab,EMA,2024-2026,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),indication_match,1.0,indication text,"Imfinzi [Authorised] Carcinoma, Non-Small-Cell Lung",True,False
+219,Kerendia,finerenone,EMA,2024-2026,Symptomatic chronic HFpEF (LVEF≥40%),indication_match,0.667,MeSH area via ontology label,"Kerendia [Authorised] Renal Insufficiency, Chronic;Diabetes Mellitus, Type 2;Heart Failure",False,False
+220,Noxafil,posaconazole,EMA,2024-2026,Invasive fungal infections pediatric ≥2yr,indication_match,1.0,indication text via ontology label,Posaconazole SP [Lapsed] Candidiasis;Mycoses;Coccidioidomycosis;Aspergillosis,True,False
+221,Efmody,hydrocortisone (modified-release),EMA,2024-2026,Adrenal insufficiency adolescents ≥12yr,partial_match,0.5,indication text,"Efmody [Authorised] Adrenal Hyperplasia, Congenital",False,False
+222,Dupixent,dupilumab,EMA,2024-2026,Chronic spontaneous urticaria pediatric 2-11yr,indication_match,1.0,indication text via ontology label,"Dupixent [Authorised] Dermatitis, Atopic;Prurigo;Esophageal Diseases;Asthma;Sinusitis",False,False
+223,Jorveza,budesonide (orodispersible),EMA,2024-2026,Eosinophilic esophagitis pediatric 2-17yr,indication_match,1.0,indication text via ontology label,Jorveza [Authorised] Esophageal Diseases,False,False
+224,Keytruda,pembrolizumab,EMA,2024-2026,"New indication (EMA Feb 2026, TBD)",drug_found_no_match,0.0,,,False,True
+225,Olumiant,baricitinib,EMA,2024-2026,Juvenile idiopathic arthritis (EMA Feb 2026),indication_match,1.0,indication text,"Olumiant [Authorised] Arthritis, Rheumatoid",True,False
+226,Scemblix,asciminib,EMA,2024-2026,Ph+ CML-CP frontline (EMA Feb 2026),partial_match,0.5,MeSH area via ontology label,"Scemblix [Authorised] Leukemia, Myelogenous, Chronic, BCR-ABL Positive",True,False
+227,Retsevmo,selpercatinib,EMA,2024-2026,"RET-fusion NSCLC expanded (EMA Mar 2026, TBD)",indication_match,1.0,MeSH area via ontology label,"Retsevmo [Authorised] Carcinoma, Non-Small-Cell Lung;Thyroid Neoplasms;Cancer",True,True
+228,Besponsa,inotuzumab ozogamicin,EMA,2024-2026,"Ph+ ALL frontline (EMA Mar 2026, TBD)",indication_match,1.0,MeSH area via ontology label,Besponsa [Authorised] Precursor Cell Lymphoblastic Leukemia-Lymphoma,False,True
+229,Mekinist,trametinib,EMA,2024-2026,"BRAF V600E solid tumors (EMA Mar 2026, TBD)",partial_match,0.5,indication text,Spexotras [Authorised] Glioma,False,True
+230,Tafinlar,dabrafenib,EMA,2024-2026,"BRAF V600E solid tumors (EMA Mar 2026, TBD)",partial_match,0.5,indication text,Finlee [Authorised] Glioma,False,True
+231,Feraccru,ferric maltol,EMA,2024-2026,"Iron deficiency anemia (EMA Mar 2026, TBD)",indication_match,1.0,MeSH area,"Feraccru [Authorised] Anemia, Iron-Deficiency",False,True
+232,Hetronifly,faricimab,EMA,2024-2026,Diabetic retinopathy/DME (EMA Mar+May 2026),indication_match,0.667,indication text,"Hetronifly [Authorised] Small Cell Lung Carcinoma;Carcinoma, Non-Small-Cell Lung;Esophageal Squamous Cell Carcinoma",True,False
+233,Namuscla,mexiletine,EMA,2024-2026,"Myotonic dystrophy (EMA Mar 2026, TBD)",partial_match,0.5,MeSH area,Namuscla [Authorised] Myotonic Disorders,False,True
+234,Venclyxto,venetoclax,EMA,2024-2026,AML +Inaqovi (EMA Apr 2026),indication_match,1.0,indication text,"Venclyxto [Authorised] Leukemia, Lymphocytic, Chronic, B-Cell",False,False
+235,Inaqovi,cedazuridine+decitabine,EMA,2024-2026,"AML +venetoclax (newly diagnosed, ineligible for standard chemo)",indication_match,1.0,MeSH area via ontology label,"Dacogen [Authorised] Leukemia, Myeloid",False,False
+236,Crysvita,burosumab,EMA,2024-2026,XLH infants <1yr,indication_match,1.0,MeSH area via ontology label,"Crysvita [Authorised] Hypophosphatemia, Familial;Hypophosphatemic Rickets, X-Linked Dominant;Osteomalacia",False,False
+237,Comirnaty,tozinameran,EMA,2024-2026,COVID-19 updated strain (EMA Apr 2026),partial_match,0.333,MeSH area,Comirnaty [Authorised] COVID-19 virus infection,False,False
+238,Privigen,immune globulin IV,EMA,2024-2026,Measles prophylaxis post-exposure,drug_found_no_match,0.0,,"Privigen [Authorised] Purpura, Thrombocytopenic, Idiopathic;Bone Marrow Transplantation;Immunologic Deficiency Syndromes;Guillain-Ba",True,False
+239,Keytruda,pembrolizumab,EMA,2024-2026,"Gastric/GEJ cancer (EMA May 2026, TBD)",indication_match,1.0,indication text,"Keytruda [Authorised] Melanoma;Hodgkin Disease;Carcinoma, Renal Cell;Carcinoma, Non-Small-Cell Lung;Carcinoma, Transitional Cell;Squ",False,True
+240,Padcev,enfortumab vedotin,EMA,2024-2026,"Muscle-invasive bladder cancer (EMA May 2026, TBD)",indication_match,1.0,indication text,"Padcev [Authorised] Carcinoma, Transitional Cell;Urologic Neoplasms",False,True
+241,Fasenra,benralizumab,EMA,2024-2026,"Eosinophilic esophagitis (EMA May 2026, TBD)",partial_match,0.5,indication text,Fasenra [Authorised] Asthma,False,True
+242,Iclusig,ponatinib,EMA,2024-2026,"Ph+ ALL frontline (EMA May 2026, 2nd)",partial_match,0.5,MeSH area via ontology label,"Iclusig [Authorised] Leukemia, Myeloid;Leukemia, Lymphoid",False,False
+243,Maviret,glecaprevir/pibrentasvir,EMA,2024-2026,"HCV pediatric extension (EMA May 2026, TBD)",indication_match,1.0,indication text,"Maviret [Authorised] Hepatitis C, Chronic",False,True

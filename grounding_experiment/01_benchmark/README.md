@@ -1,0 +1,79 @@
+# G01 · Benchmark
+
+**Computes.** The benchmark every later stage reads: the 128 post-cutoff
+approval pairs with their per-graph coverage, leak and evaluability flags, the
+`common` subset evaluable in every KG arm, the candidate pools for the first
+seed, and a selection audit asking whether `common` keeps a different kind of
+pair from the rest.
+
+**Inputs.** `config/params.yaml` (`grounding`),
+`data/gold_standards/post_cutoff_approvals/{post_cutoff_approvals.csv, post_cutoff_pair_status.csv}`,
+`data/gold_standards/bridges/{approved_drug_pool.csv, approved_indications.csv, mondo_hierarchy.csv, do_diseases.csv, mesh_to_doid.csv}`
+**Outputs.** `results/{figures,tables}/G01_benchmark/`, `results/checkpoints/G01_benchmark.pkl`
+**Display item.** Supplementary figure (selection audit)
+
+## What is measured
+
+| | measured | reported, not scored |
+|---|---|---|
+| | per-graph covered / leaked / evaluable counts; size of the `common` subset | benchmark composition, distractor-pool statistics, the selection audit |
+
+Nothing here is a score. `evaluable_<kg>` is the builder's flag: the graph
+holds both nodes, the approval postdates the graph's content date, and the
+graph carries no direct edge. With `grounding.strict` it also excludes pairs
+within `prospective_max_hops` of a prior indication.
+
+## Design notes
+
+### One benchmark for both parts of the paper
+
+The positives are exactly the pairs notebook 07 scores, and the per-graph
+flags are read from the status table `tools/build_post_cutoff_approvals.py`
+writes rather than recomputed, so the coverage-controlled comparison in G03
+uses the same checks the generalisation dimension reports. The source table's
+SHA-256 travels in the checkpoint.
+
+### Two query families from the same pairs
+
+`main` asks every pair in every arm and controls for coverage afterwards by
+restricting to the `common` pairs. `common` asks only those pairs, as its own
+run with its own distractor draw. The first is the within-experiment control;
+the second corroborates it with an independent sample. Both are cheap enough
+to run because `common` is a subset.
+
+### Distractors that are wrong under either record
+
+A distractor is an approved drug (Open Targets, DrugBank id via cross-reference
+or the name bridge, `tools/build_distractor_pool.py`) that is not indicated for
+the target disease or any MONDO descendant of it, and is not another
+post-cutoff positive for that disease. The descendant closure is new: a drug
+approved for a subtype is a defensible answer for the parent term and must not
+be a distractor. Distractors are drawn without regard to graph membership; the
+run records how many candidates carried evidence so G03 can check that a
+positive was not simply the only candidate with a dossier.
+
+### Order is seeded and stratified
+
+Queries are permuted within therapeutic area and taken round-robin across
+areas, so a run cut short by a rate limit is not an oncology run. The area
+comes from the MONDO hierarchy (`OntologyClassifier.classify_mondo`), with the
+MeSH C-category terms on the name as the fallback; 14 pairs remain
+unclassified and form their own bucket.
+
+### The selection audit
+
+`kept` marks the `common` pairs. Fisher odds ratios per categorical level and
+Mann-Whitney tests per continuous covariate say whether evaluability in every
+graph tracks modality, area, year or how many regulators approved the pair.
+A trait that predicts being kept narrows what the coverage-controlled result
+generalises to; the audit is reported so a reader can weigh that.
+
+## Run
+
+    jupyter nbconvert --to notebook --execute grounding_experiment/01_benchmark/notebook.ipynb
+
+Runs in seconds; no graph is loaded.
+
+Benchmark construction lives in `src/biokgsuite/grounding/benchmark.py`, the
+audit statistics in `src/biokgsuite/grounding/bias.py`, the figures in
+`src/biokgsuite/viz/grounding.py`.

@@ -1,0 +1,133 @@
+Pair_ID,Drug,Active,DrugBank_ID,PubChem_CID,OrigYear,NewIndication,MONDO_ID,MeSH_ID,DOID_ID,Agencies,TA,TA_simplified,StrictRepurposing,Drug_Pre2023,YearSet,ID_Flag,in116,has_fda,has_ema,has_pmda,has_mhra
+56,Keytruda,pembrolizumab,DB09037,,2014,1L HER2+ gastric/GEJ adenocarcinoma (+trastuzumab+chemo),MONDO:0005036,D013274,DOID:3717,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,False,False,True,False,False
+57,Opdivo,nivolumab,DB09035,,2015,Adjuvant melanoma (stage IIB/IIC),MONDO:0005105,D008545,DOID:1909,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,False,False,True,False,False
+58,Opdivo,nivolumab,DB09035,,2015,Urothelial carcinoma (1L metastatic),MONDO:0040679,D001749,DOID:4006,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,False,False,True,False,False
+59,Olumiant,baricitinib,DB11817,44205240,2017,Atopic dermatitis,MONDO:0011596,C565293,DOID:0110098,EMA,Immunology/Dermatology,Immunology,True,True,2023,complete,True,False,True,False,False
+60,Brukinsa,zanubrutinib,DB15035,135565884,2019,Follicular lymphoma (+obinutuzumab),MONDO:0018906,D008224,DOID:0050873,EMA,Oncology,Oncology,True,True,2023,complete,True,False,True,False,False
+61,Imfinzi,durvalumab,DB11714,,2017,Gastric/GEJ adenocarcinoma (1L +chemo),MONDO:0005036,D013274,DOID:3717,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,True,False,True,False,False
+62,Jemperli,dostarlimab,DB15627,,2021,dMMR/MSI-H primary advanced endometrial cancer,MONDO:0011962,D016889,DOID:1380,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,True,False,True,False,False
+63,Praluent,alirocumab,DB09302,,2015,Heterozygous familial hypercholesterolemia,MONDO:0005439,D000090542,DOID:13810,EMA,Cardiovascular,Cardiovascular,False,True,2023,missing_PubChem,True,False,True,False,False
+64,Prevymis,letermovir,DB12070,45138674,2017,CMV prophylaxis in kidney transplant,MONDO:0005132,D003586,DOID:0080827,EMA,Infectious,Infectious,True,True,2023,complete,False,False,True,False,False
+65,Rubraca,rucaparib,DB12332,9931954,2018,"Ovarian cancer (maintenance, 2L+)",MONDO:0008170,D010051,DOID:2394,EMA,Oncology,Oncology,True,True,2023,complete,False,False,True,False,False
+66,Soliris,eculizumab,DB01257,,2007,Pediatric generalized myasthenia gravis,MONDO:0018324,D009157,DOID:437,EMA,Immunology/Neurology,Immunology,True,True,2023,missing_PubChem,False,False,True,False,False
+67,Takhzyro,lanadelumab,DB14597,,2018,HAE prevention in children 2+,MONDO:0019623,D054179,DOID:14735,EMA,Immunology,Immunology,False,True,2023,missing_PubChem,False,False,True,False,False
+68,Jardiance,empagliflozin,DB09038,11949646,2014,T2D in children 10+ (EMA),MONDO:0005148,D003924,DOID:9352,EMA,Metabolic,Metabolic,False,True,2023,complete,False,False,True,False,False
+69,Mounjaro,tirzepatide,DB15171,166567236,2022,Obstructive sleep apnea with obesity,MONDO:0007147,D020181,DOID:0050848,EMA,Metabolic/Respiratory,Metabolic,True,True,2023,complete,True,False,True,False,False
+70,Talzenna,talazoparib,DB11760,135565082,2018,HR+/HER2- metastatic breast cancer,MONDO:0007254,D000072656,DOID:1612,EMA,Oncology,Oncology,True,True,2023,complete,True,False,True,False,False
+71,Evrysdi,risdiplam,DB15305,118513932,2020,Spinal muscular atrophy (pediatric expansion),MONDO:0001516,D009134,DOID:12377,EMA,CNS,CNS,False,True,2023,complete,True,False,True,False,False
+72,Bylvay,odevixibat,DB16261,10153627,2021,PFIC cholestatic pruritus,MONDO:0015762,D002780,DOID:0070221,EMA,GI/Metabolic,GI/Metabolic,True,True,2023,complete,False,False,True,False,False
+73,Ervebo,Ebola Zaire vaccine,,,2020,Ebola Zaire (pediatric 1+),MONDO:0005737,D019142,DOID:4325,EMA,Infectious,Infectious,False,True,2023,missing_DrugBank|missing_PubChem,False,False,True,False,False
+74,Adempas,riociguat,DB08931,11304743,2013,Chronic thromboembolic pulmonary hypertension,MONDO:0013024,D065627,DOID:6432,EMA,Cardiovascular,Cardiovascular,True,True,2023,complete,False,False,True,False,False
+75,Cosentyx,secukinumab,DB09029,,2015,IV formulation for rheumatic diseases (EMA),MONDO:0005554,D012216,DOID:1575,EMA,Immunology,Immunology,False,True,2023,missing_PubChem,True,False,True,False,False
+76,Orkambi,lumacaftor/ivacaftor,"DB09280,DB08820","16678941,16220172",2015,Cystic fibrosis (pediatric expansion),MONDO:0009061,D003550,DOID:1485,EMA,Respiratory,Respiratory,False,True,2023,complete,False,False,True,False,False
+77,Revestive,teduglutide,DB08900,16139605,2012,Short bowel syndrome (pediatric),MONDO:0015183,D012778,DOID:10605,EMA,GI,GI,False,True,2023,complete,False,False,True,False,False
+78,Spikevax,mRNA-1273,DB15654,,2022,COVID-19 updated strain,MONDO:0100320,D000086382,DOID:0080599,EMA,Infectious,Infectious,False,True,2023,missing_PubChem,True,False,True,False,False
+79,Vemlidy,tenofovir alafenamide,DB09299,9574768,2016,Chronic hepatitis B (pediatric),MONDO:0005344,D006509,DOID:2043,EMA,Infectious,Infectious,False,True,2023,complete,True,False,True,False,False
+80,Yervoy,ipilimumab,DB06186,,2011,Adjuvant melanoma (+nivolumab),MONDO:0005105,D008545,DOID:1909,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,False,False,True,False,False
+81,HyQvia,immune globulin subcutaneous,DB00028,,2014,Primary immunodeficiency pediatric (EMA),MONDO:0012559,C563663,DOID:0111941,EMA,Immunology,Immunology,False,True,2023,missing_PubChem,True,False,True,False,False
+82,Metalyse,tenecteplase,DB00031,,2001,Acute ischemic stroke,MONDO:1060198,D000083242,DOID:0051062,EMA,Cardiovascular,Cardiovascular,True,True,2023,missing_PubChem,False,False,True,False,False
+83,Zinplava,bezlotoxumab,DB13140,,2016,Pediatric C. difficile infection (EMA),MONDO:1014887,D016360,DOID:0060185,EMA,Infectious,Infectious,True,True,2023,missing_PubChem,False,False,True,False,False
+84,Spexotras,selumetinib,DB11689,10127622,2020,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",MONDO:0021637,,DOID:0060101,EMA,Oncology,Oncology,True,True,2023,missing_MeSH,True,False,True,False,False
+85,Finlee,dabrafenib,DB08912,44462760,2014,Pediatric glioma (EMA),MONDO:0021042,D005910,DOID:3774,EMA,Oncology,Oncology,True,True,2023,complete,True,False,True,False,False
+86,Adcetris,brentuximab vedotin,DB08870,,2012,Stage III Hodgkin lymphoma (EMA),MONDO:0004952,D006689,DOID:8567,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,False,False,True,False,False
+87,Enhertu,trastuzumab deruxtecan,DB14962,,2019,HER2-mutant NSCLC (EMA),MONDO:0005233,D002289,DOID:3908,EMA,Oncology,Oncology,True,True,2023,missing_PubChem,True,False,True,False,False
+88,Vanflyta,quizartinib,DB12874,24889392,2019,FLT3-ITD AML (EMA),MONDO:0018874,D015470,DOID:9119,EMA,Oncology,Oncology,True,True,2023,complete,False,False,True,False,False
+89,Nordimet,methotrexate,DB00563,126941,1988,Moderate psoriasis (EMA),MONDO:0005083,D011565,DOID:8893,EMA,Immunology/Dermatology,Immunology,True,True,2023,complete,False,False,True,False,False
+90,Ayvakyt,avapritinib,DB15233,118023034,2020,Indolent systemic mastocytosis (EMA),MONDO:0016586,D034721,DOID:349,EMA,Hematology,Hematology,True,True,2023,complete,True,False,True,False,False
+91,Evkeeza,evinacumab,DB15354,,2021,HoFH pediatric (EMA),MONDO:0018328,D000090542,DOID:0090105,EMA,Metabolic,Metabolic,True,True,2023,missing_PubChem,True,False,True,False,False
+92,Keytruda,pembrolizumab,DB09037,,2016,Primary mediastinal large B-cell lymphoma,MONDO:0020323,D016403,DOID:0080210,PMDA,Oncology,Oncology,True,True,2023,missing_PubChem,True,False,False,True,False
+93,Enhertu,trastuzumab deruxtecan,DB14962,,2020,HER2-mutant NSCLC (PMDA),MONDO:0005233,D002289,DOID:3908,PMDA,Oncology,Oncology,True,True,2023,missing_PubChem,True,False,False,True,False
+94,Rituxan,rituximab,DB00073,,2001,Antibody-mediated rejection in organ transplantation,MONDO:1010185,D006084,,PMDA,Immunology/Transplant,Immunology,True,True,2023,missing_PubChem|missing_DOID,True,False,False,True,False
+95,Tremfya,guselkumab,DB11834,,2019,Palmoplantar pustulosis (PMDA),MONDO:0015597,,DOID:4398,PMDA,Immunology/Dermatology,Immunology,True,True,2023,missing_PubChem|missing_MeSH,True,False,False,True,False
+96,Lenvatinib,lenvatinib,DB09078,9823820,2015,Unresectable thymic carcinoma (PMDA),MONDO:0006451,D013953,DOID:3284,PMDA,Oncology,Oncology,True,True,2023,complete,True,False,False,True,False
+103,Imfinzi,durvalumab,DB11714,,2017,Biliary tract cancer 1L,MONDO:0003060,D001661,DOID:4607,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+106,Keytruda,pembrolizumab,DB09037,,2014,1L endometrial cancer (dMMR/MSI-H),MONDO:0011962,D016889,DOID:1380,"EMA, MHRA/Orbis",Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,True
+107,Keytruda,pembrolizumab,DB09037,,2014,Cervical cancer,MONDO:0002974,D002583,DOID:4362,"EMA, PMDA",Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,True,False
+108,Keytruda,pembrolizumab,DB09037,,2014,Gastric/GEJ cancer,MONDO:0001056,D013274,DOID:10534,PMDA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,False,True,False
+109,Keytruda,pembrolizumab,DB09037,,2014,Biliary tract cancer,MONDO:0003060,D001661,DOID:4607,PMDA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+110,Opdivo,nivolumab,DB09035,,2015,1L metastatic urothelial carcinoma,MONDO:0040679,D001749,DOID:4006,"EMA, MHRA/Orbis",Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,True
+114,Padcev,enfortumab vedotin,DB13007,,2020,Urothelial carcinoma (expanded population),MONDO:0040679,D001749,DOID:4006,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+122,Tagrisso,osimertinib,DB09330,71496458,2016,Adjuvant EGFR+ NSCLC,MONDO:0005233,D002289,DOID:3908,"EMA, MHRA/Orbis",Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,True
+123,Tagrisso,osimertinib,DB09330,71496458,2016,Stage III EGFR+ NSCLC post-chemoradiation,MONDO:0005233,D002289,DOID:3908,"EMA, PMDA, MHRA/Orbis",Oncology,Oncology,True,True,2024-2026,complete,False,False,True,True,True
+124,Xalkori,crizotinib,DB08865,11626560,2012,ALK+ or ROS1+ NSCLC (pediatric/new formulation),MONDO:0005233,D002289,DOID:3908,"EMA, PMDA",Oncology,Oncology,True,True,2024-2026,complete,False,False,True,True,False
+125,Lynparza,olaparib,DB09074,23725625,2014,BRCA-mutated mCRPC (+abiraterone),MONDO:0008315,D011471,DOID:10283,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+126,Kisqali,ribociclib,DB11730,44631912,2017,HR+/HER2- early breast cancer (adjuvant),MONDO:0007254,D000072656,DOID:1612,EMA,Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,False
+127,Xtandi,enzalutamide,DB08899,15951529,2013,Metastatic hormone-sensitive prostate cancer,MONDO:0004956,D011471,DOID:10283,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+128,Nubeqa,darolutamide,DB12941,67171867,2019,mHSPC + ADT,MONDO:0004956,D011471,DOID:10283,"EMA, MHRA/Orbis",Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,True
+129,Retsevmo,selpercatinib,DB15685,134436906,2021,RET-fusion NSCLC (expanded),MONDO:0005233,D002289,DOID:3908,EMA,Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,False
+130,Rozlytrek,entrectinib,DB11986,25141092,2020,NTRK fusion solid tumors (pediatric),MONDO:0004198,D066066,DOID:7360,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+131,Braftovi,encorafenib,DB11718,50922675,2018,BRAF+ thyroid cancer,MONDO:0002108,D000077273,DOID:1781,"EMA, PMDA",Oncology,Oncology,True,True,2024-2026,complete,True,False,True,True,False
+132,Mektovi,binimetinib,DB11967,10288191,2018,BRAF+ thyroid cancer,MONDO:0002108,D000077273,DOID:1781,"EMA, PMDA",Oncology,Oncology,True,True,2024-2026,complete,True,False,True,True,False
+133,Onivyde,irinotecan (liposomal),DB00762,60838,2016,Pancreatic cancer (2L+),MONDO:0006478,D010190,DOID:4905,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+134,Adcetris,brentuximab vedotin,DB08870,,2012,Stage III Hodgkin lymphoma,MONDO:0004952,D006689,DOID:8567,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+135,Bosulif,bosutinib,DB06616,5328940,2013,Pediatric Ph+ CML-CP,MONDO:0011996,D015464,DOID:0081088,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+136,Sarclisa,isatuximab,DB14811,,2020,Newly diagnosed MM ineligible for ASCT,MONDO:0009693,D009101,DOID:9538,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+137,Imbruvica,ibrutinib,DB09053,24821094,2014,Chronic GVHD,MONDO:0020547,D006086,DOID:0081267,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+138,Carvykti,ciltacabtagene autoleucel,,,2022,R/R MM (earlier line),MONDO:0009693,D009101,DOID:9538,EMA,Oncology,Oncology,True,True,2024-2026,missing_DrugBank|missing_PubChem,False,False,True,False,False
+139,Cibinqo,abrocitinib,DB14973,78323835,2021,Atopic dermatitis (adolescents),MONDO:0011596,C565293,DOID:0110098,EMA,Oncology,Oncology,False,True,2024-2026,complete,False,False,True,False,False
+140,Reblozyl,luspatercept,DB12281,,2020,First-line anemia in lower-risk MDS,MONDO:0018881,D009190,DOID:0050908,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+141,Blincyto,blinatumomab,DB09052,,2015,CD19+ B-precursor ALL consolidation,MONDO:0004967,D054198,DOID:9952,MHRA/Orbis,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,False,False,True
+142,Breyanzi,lisocabtagene maraleucel,,,2021,Follicular lymphoma 3L+,MONDO:0018906,D008224,DOID:0050873,EMA,Oncology,Oncology,True,True,2024-2026,missing_DrugBank|missing_PubChem,False,False,True,False,False
+143,Gazyvaro,obinutuzumab,DB08935,,2014,Follicular lymphoma (+chemo),MONDO:0018906,D008224,DOID:0050873,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+144,Scemblix,asciminib,DB12597,72165228,2021,Ph+ CML-CP after 2+ TKIs,MONDO:0011996,D015464,DOID:0081088,EMA,Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,False
+148,Skyrizi,risankizumab,DB14762,,2019,Ulcerative colitis,MONDO:0005101,D003093,DOID:8577,"EMA, PMDA",Immunology,Immunology,True,True,2024-2026,missing_PubChem,True,False,True,True,False
+154,Dupixent,dupilumab,DB12159,,2017,COPD,MONDO:0005002,D029424,DOID:3083,EMA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+155,Dupixent,dupilumab,DB12159,,2017,COPD (EMA 2025),MONDO:0005002,D029424,DOID:3083,EMA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+156,Fasenra,benralizumab,DB12023,,2017,EGPA (expanded),MONDO:0015943,D015267,DOID:3049,EMA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+157,Nucala,mepolizumab,DB06612,,2015,"EGPA (expanded, PMDA)",MONDO:0015943,D015267,DOID:3049,"EMA, PMDA",Immunology,Immunology,True,True,2024-2026,missing_PubChem,False,False,True,True,False
+158,Omalizumab,omalizumab,DB00043,,2009,EGPA,MONDO:0015943,D015267,DOID:3049,PMDA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+159,Canakinumab,canakinumab,DB06168,,2009,TRAPS,MONDO:0007727,C536657,DOID:0090018,PMDA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,False,False,False,True,False
+160,Vyvgart,efgartigimod,DB15270,,2021,Generalized myasthenia gravis (expanded),MONDO:0018324,D009157,DOID:437,EMA,Immunology,Immunology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+162,Jakavi,ruxolitinib,DB08877,25126798,2012,GVHD + pediatric,MONDO:0013730,D006086,DOID:0081267,PMDA,Immunology,Immunology,True,True,2024-2026,complete,True,False,False,True,False
+163,Upadacitinib,upadacitinib,DB15091,58557659,2019,Pediatric atopic dermatitis,MONDO:0011596,C565293,DOID:0110098,PMDA,Immunology,Immunology,False,True,2024-2026,complete,True,False,False,True,False
+168,Edoxaban,edoxaban tosilate,DB09075,44610678,2014,Chronic thromboembolic pulmonary hypertension,MONDO:0013024,D065627,DOID:6432,PMDA,Cardiovascular,Cardiovascular,True,True,2024-2026,complete,True,False,False,True,False
+169,Treprostinil,treprostinil,DB00374,6918140,2002,ILD-associated pulmonary hypertension,MONDO:0005149,D006976,DOID:6432,PMDA,Cardiovascular,Cardiovascular,True,True,2024-2026,complete,True,False,False,True,False
+170,Eliquis,apixaban,DB06605,10182969,2011,Pediatric VTE prevention/treatment,MONDO:0005399,D054556,DOID:3574,EMA,Cardiovascular,Cardiovascular,False,True,2024-2026,complete,False,False,True,False,False
+176,Rituxan,rituximab,DB00073,,2001,Nephrotic syndrome,MONDO:0005377,D009404,DOID:1184,PMDA,Nephrology,Nephrology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+179,Prevymis,letermovir,DB12070,45138674,2018,CMV prophylaxis in organ transplant,MONDO:0005132,D003586,DOID:0080827,PMDA,Infectious,Infectious,True,True,2024-2026,complete,False,False,False,True,False
+180,Veklury,remdesivir,DB14761,121304016,2020,COVID-19 (expanded population),MONDO:0100320,D000086382,DOID:0080599,EMA,Infectious,Infectious,True,True,2024-2026,complete,True,False,True,False,False
+181,Ofev,nintedanib,DB09079,135423438,2014,Progressive fibrosing ILDs in children/adolescents,MONDO:0800504,D054990,DOID:0050156,EMA,Respiratory,Respiratory,True,True,2024-2026,complete,False,False,True,False,False
+182,Kaftrio+Kalydeco,ivacaftor/tezacaftor/elexacaftor+ivacaftor,"DB08820,DB11712,DB15444,DB08820","16220172,46199646,134587348,16220172",2020,Additional CF mutations (non-class I),MONDO:0009061,D003550,DOID:1485,EMA,Respiratory,Respiratory,False,True,2024-2026,complete,False,False,True,False,False
+184,Pegasys,peginterferon alfa-2a,DB00008,,2002,Polycythaemia vera and essential thrombocytopenia,MONDO:0009891,D011087,DOID:8997,EMA,Hematology,Hematology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+185,Xromi,hydroxycarbamide,DB01005,3657,1998,Vaso-occlusive complications of sickle-cell disease in children,MONDO:0011382,D000755,DOID:0081445,EMA,Hematology,Hematology,True,True,2024-2026,complete,False,False,True,False,False
+186,Pyrukynd,mitapivat,DB16236,59634741,2022,Thalassemia anemia (EU),MONDO:0000984,D013789,DOID:10241,EMA,Hematology,Hematology,True,True,2024-2026,complete,False,False,True,False,False
+188,Vabysmo,faricimab,DB15303,,2022,Retinal vein occlusion,MONDO:0006951,D012170,DOID:1727,EMA,Ophthalmology,Ophthalmology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+215,Trodelvy,sacituzumab govitecan,DB12893,,2020,HR+/HER2- breast cancer,MONDO:0007254,D000072656,DOID:1612,EMA+PMDA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,True,True,False
+216,Aquipta,atogepant,DB16098,72163100,2021,Acute treatment of migraine (was prophylaxis only),MONDO:0043219,D008881,DOID:6364,EMA+PMDA,CNS,CNS,True,True,2024-2026,complete,False,False,True,True,False
+217,Iclusig,ponatinib,DB08901,24826799,2013,Newly diagnosed Ph+ ALL +chemotherapy,MONDO:0004967,D054198,DOID:9952,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+218,Imfinzi,durvalumab,DB11714,,2018,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),MONDO:0005036,D013274,DOID:3717,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+219,Kerendia,finerenone,DB16165,60150535,2021,Symptomatic chronic HFpEF (LVEF≥40%),MONDO:0006727,D054144,DOID:9775,EMA,Cardiovascular,Cardiovascular,True,True,2024-2026,complete,False,False,True,False,False
+220,Noxafil,posaconazole,DB01263,468595,2005,Invasive fungal infections pediatric ≥2yr,MONDO:0044067,D058365,DOID:0050073,EMA,Infectious,Infectious,True,True,2024-2026,complete,True,False,True,False,False
+221,Efmody,hydrocortisone (modified-release),DB00741,5754,2021,Adrenal insufficiency adolescents ≥12yr,MONDO:0000004,D000309,DOID:10493,EMA,Endocrine,Endocrine,False,True,2024-2026,complete,False,False,True,False,False
+222,Dupixent,dupilumab,DB12159,,2017,Chronic spontaneous urticaria pediatric 2-11yr,MONDO:0850230,D000080223,DOID:0080747,EMA,Immunology/Dermatology,Immunology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+223,Jorveza,budesonide (orodispersible),DB01222,5281004,2019,Eosinophilic esophagitis pediatric 2-17yr,MONDO:0005361,D057765,DOID:13922,EMA,GI/Immunology,GI,True,True,2024-2026,complete,False,False,True,False,False
+224,Keytruda,pembrolizumab,DB09037,,2015,"New indication (EMA Feb 2026, TBD)",,,,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem|missing_MONDO|missing_MeSH|missing_DOID|unresolvable_indication,False,False,True,False,False
+225,Olumiant,baricitinib,DB11817,44205240,2017,Juvenile idiopathic arthritis (EMA Feb 2026),MONDO:0011429,D001171,DOID:676,EMA,Immunology,Immunology,True,True,2024-2026,complete,True,False,True,False,False
+226,Scemblix,asciminib,DB12597,72165228,2021,Ph+ CML-CP frontline (EMA Feb 2026),MONDO:0011996,D015464,DOID:0081088,EMA,Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,False
+227,Retsevmo,selpercatinib,DB15685,134436906,2021,"RET-fusion NSCLC expanded (EMA Mar 2026, TBD)",MONDO:0005233,D002289,DOID:3908,EMA,Oncology,Oncology,True,True,2024-2026,complete,True,False,True,False,False
+228,Besponsa,inotuzumab ozogamicin,DB05889,,2017,"Ph+ ALL frontline (EMA Mar 2026, TBD)",MONDO:0004967,D054198,DOID:9952,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+229,Mekinist,trametinib,DB08911,11707110,2014,"BRAF V600E solid tumors (EMA Mar 2026, TBD)",MONDO:0004198,D066066,DOID:7360,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+230,Tafinlar,dabrafenib,DB08912,44462760,2013,"BRAF V600E solid tumors (EMA Mar 2026, TBD)",MONDO:0004198,D066066,DOID:7360,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+231,Feraccru,ferric maltol,DB15598,169535,2016,"Iron deficiency anemia (EMA Mar 2026, TBD)",MONDO:0001356,D018798,DOID:11758,EMA,Hematology,Hematology,True,True,2024-2026,complete,False,False,True,False,False
+232,Hetronifly,faricimab,DB15303,,2022,Diabetic retinopathy/DME (EMA Mar+May 2026),MONDO:0005266,D003930,DOID:8947,EMA,Ophthalmology,Ophthalmology,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+233,Namuscla,mexiletine,DB00379,4178,2022,"Myotonic dystrophy (EMA Mar 2026, TBD)",MONDO:0023595,D009223,DOID:11722,EMA,CNS/Cardiovascular,Cardiovascular,True,True,2024-2026,complete,False,False,True,False,False
+234,Venclyxto,venetoclax,DB11581,49846579,2016,AML +Inaqovi (EMA Apr 2026),MONDO:0018874,D015470,DOID:9119,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+235,Inaqovi,cedazuridine+decitabine,"DB15694,DB01262","25267009,451668",2020,"AML +venetoclax (newly diagnosed, ineligible for standard chemo)",MONDO:0018874,D015470,DOID:9119,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+236,Crysvita,burosumab,DB14012,,2018,XLH infants <1yr,MONDO:0010619,D007015,DOID:0050445,EMA,Metabolic (rare),Metabolic,False,True,2024-2026,missing_PubChem,False,False,True,False,False
+237,Comirnaty,tozinameran,DB15696,,2020,COVID-19 updated strain (EMA Apr 2026),MONDO:0100320,D000086382,DOID:0080599,EMA,Infectious,Infectious,False,True,2024-2026,missing_PubChem,False,False,True,False,False
+238,Privigen,immune globulin IV,DB00028,,2008,Measles prophylaxis post-exposure,MONDO:0004619,D008457,DOID:8622,EMA,Infectious/Immunology,Infectious,True,True,2024-2026,missing_PubChem,True,False,True,False,False
+239,Keytruda,pembrolizumab,DB09037,,2015,"Gastric/GEJ cancer (EMA May 2026, TBD)",MONDO:0001056,D013274,DOID:10534,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+240,Padcev,enfortumab vedotin,DB13007,,2020,"Muscle-invasive bladder cancer (EMA May 2026, TBD)",MONDO:0004986,D001749,DOID:4007,EMA,Oncology,Oncology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+241,Fasenra,benralizumab,DB12023,,2017,"Eosinophilic esophagitis (EMA May 2026, TBD)",MONDO:0005361,D057765,DOID:13922,EMA,Immunology/Respiratory,Immunology,True,True,2024-2026,missing_PubChem,False,False,True,False,False
+242,Iclusig,ponatinib,DB08901,24826799,2013,"Ph+ ALL frontline (EMA May 2026, 2nd)",MONDO:0004967,D054198,DOID:9952,EMA,Oncology,Oncology,True,True,2024-2026,complete,False,False,True,False,False
+243,Maviret,glecaprevir/pibrentasvir,"DB13879,DB13878","66828839,58031952",2017,"HCV pediatric extension (EMA May 2026, TBD)",MONDO:0007256,D006528,DOID:684,EMA,Infectious,Infectious,True,True,2024-2026,complete,False,False,True,False,False
+244,Tremfya,guselkumab,DB11834,,2019,"Crohn's disease (moderate-severe, refractory)",MONDO:0005011,D003424,DOID:8778,PMDA,Immunology/GI,Immunology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+245,Alecensa,alectinib,DB11363,49806720,2015,"ALK+ solid tumors (tissue-agnostic, world-first)",MONDO:0004198,D066066,DOID:7360,PMDA,Oncology,Oncology,True,True,2024-2026,complete,True,False,False,True,False
+246,Lunsumio,mosunetuzumab,,,2022,R/R LBCL + FL (new dosage),MONDO:0968974,D016403,DOID:0081452,PMDA,Oncology,Oncology,True,True,2024-2026,missing_DrugBank|missing_PubChem,False,False,False,True,False
+247,Effexor SR,venlafaxine,DB00285,5656,1994,Generalized anxiety disorder (first GAD drug in Japan),MONDO:0001942,D000098647,DOID:14320,PMDA,CNS/Psychiatry,CNS,True,True,2024-2026,complete,False,False,False,True,False
+248,Eylea 8mg,aflibercept 8mg,DB08885,,2012,Retinal vein occlusion (new high-dose formulation),MONDO:0006951,D012170,DOID:1727,PMDA,Ophthalmology,Ophthalmology,True,True,2024-2026,missing_PubChem,False,False,False,True,False
+249,Tezspire,tezepelumab,DB15090,,2021,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),MONDO:0006031,D012852,DOID:0110597,PMDA,Immunology/Respiratory,Immunology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+250,Pemafibrate ER,pemafibrate,DB15212,11526038,2017,LDL-C elevation in statin-intolerant dyslipidemia,MONDO:0015905,D050171,DOID:3146,PMDA,Cardiovascular/Metabolic,Cardiovascular,True,True,2024-2026,complete,True,False,False,True,False
+251,Ilaris,canakinumab,DB06168,,2009,Schnitzler syndrome (Japan),MONDO:0018304,D019873,DOID:4371,PMDA,Immunology/Rare,Immunology,True,True,2024-2026,missing_PubChem,True,False,False,True,False
+252,Fibrinogen HT,fibrinogen,DB09222,,1996,Acquired hypofibrinogenemia in cardiovascular surgery,MONDO:0015096,,DOID:2219,PMDA,Hematology,Hematology,True,True,2024-2026,missing_PubChem|missing_MeSH,True,False,False,True,False
+253,Rysefio,ruseogliflozin,,,2014,T2D pediatric dosage addition,MONDO:0005148,D003924,DOID:9352,PMDA,Metabolic,Metabolic,False,True,2024-2026,missing_DrugBank|missing_PubChem,False,False,False,True,False

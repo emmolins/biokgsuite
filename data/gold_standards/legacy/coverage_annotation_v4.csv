@@ -1,0 +1,349 @@
+Pair_ID,drug_id,disease_id,disease_name,kg,drug_in,disease_in,has_mech_edges,covered
+1,DB11652,DOID:0080199,RAS wild-type HER2+ metastatic colorectal cancer,primekg,1,1,1,1
+1,DB11652,DOID:0080199,RAS wild-type HER2+ metastatic colorectal cancer,drkg,1,1,1,1
+1,DB11652,DOID:0080199,RAS wild-type HER2+ metastatic colorectal cancer,biokg,1,1,1,1
+2,DB15035,DOID:1040,Chronic lymphocytic leukemia,primekg,1,1,1,1
+2,DB15035,DOID:1040,Chronic lymphocytic leukemia,drkg,1,1,1,1
+2,DB15035,DOID:1040,Chronic lymphocytic leukemia,biokg,1,1,1,1
+4,DB12893,DOID:1612,HR+/HER2- metastatic breast cancer,primekg,1,1,1,1
+4,DB12893,DOID:1612,HR+/HER2- metastatic breast cancer,drkg,1,1,0,1
+4,DB12893,DOID:1612,HR+/HER2- metastatic breast cancer,biokg,1,0,1,0
+5,DB08885,DOID:13025,Retinopathy of prematurity,primekg,1,1,1,1
+5,DB08885,DOID:13025,Retinopathy of prematurity,drkg,1,1,1,1
+5,DB08885,DOID:13025,Retinopathy of prematurity,biokg,1,1,1,1
+6,DB15627,DOID:1380,dMMR recurrent/advanced endometrial cancer,primekg,1,1,1,1
+6,DB15627,DOID:1380,dMMR recurrent/advanced endometrial cancer,drkg,0,1,0,0
+6,DB15627,DOID:1380,dMMR recurrent/advanced endometrial cancer,biokg,0,1,0,0
+7,DB11767,DOID:853,Polymyalgia rheumatica,primekg,1,1,1,1
+7,DB11767,DOID:853,Polymyalgia rheumatica,drkg,1,1,1,1
+7,DB11767,DOID:853,Polymyalgia rheumatica,biokg,1,1,1,1
+8,DB12001,DOID:1612,HR+/HER2- node-positive high-risk early breast cancer,primekg,1,1,1,1
+8,DB12001,DOID:1612,HR+/HER2- node-positive high-risk early breast cancer,drkg,1,1,1,1
+8,DB12001,DOID:1612,HR+/HER2- node-positive high-risk early breast cancer,biokg,1,0,1,0
+9,DB08912,DOID:0060101,Pediatric BRAF V600E low-grade glioma,primekg,1,1,1,1
+9,DB08912,DOID:0060101,Pediatric BRAF V600E low-grade glioma,drkg,1,0,1,0
+9,DB08912,DOID:0060101,Pediatric BRAF V600E low-grade glioma,biokg,1,0,1,0
+10,DB15354,DOID:0090105,HoFH in children,primekg,1,1,0,1
+10,DB15354,DOID:0090105,HoFH in children,drkg,1,0,0,0
+10,DB15354,DOID:0090105,HoFH in children,biokg,1,0,0,0
+11,DB09037,DOID:7360,MSI-H/dMMR solid tumors (full approval conversion),primekg,1,1,1,1
+11,DB09037,DOID:7360,MSI-H/dMMR solid tumors (full approval conversion),drkg,1,1,1,1
+11,DB09037,DOID:7360,MSI-H/dMMR solid tumors (full approval conversion),biokg,1,0,1,0
+15,DB06292,SYMP:0000292,Heart failure (broadened),primekg,1,1,1,1
+15,DB06292,SYMP:0000292,Heart failure (broadened),drkg,1,1,1,1
+15,DB06292,SYMP:0000292,Heart failure (broadened),biokg,1,1,1,1
+16,DB09128,DOID:10652,Agitation associated with Alzheimer's dementia,primekg,1,1,1,1
+16,DB09128,DOID:10652,Agitation associated with Alzheimer's dementia,drkg,1,1,1,1
+16,DB09128,DOID:10652,Agitation associated with Alzheimer's dementia,biokg,1,1,1,1
+17,DB15091,DOID:8778,Crohn's disease,primekg,1,1,1,1
+17,DB15091,DOID:8778,Crohn's disease,drkg,1,1,1,1
+17,DB15091,DOID:8778,Crohn's disease,biokg,1,1,1,1
+18,DB15233,DOID:349,Indolent systemic mastocytosis,primekg,1,1,1,1
+18,DB15233,DOID:349,Indolent systemic mastocytosis,drkg,0,1,0,0
+18,DB15233,DOID:349,Indolent systemic mastocytosis,biokg,1,1,1,1
+24,DB14761,DOID:0080599,COVID-19 in severe renal impairment/dialysis,primekg,1,1,1,1
+24,DB14761,DOID:0080599,COVID-19 in severe renal impairment/dialysis,drkg,0,0,0,0
+24,DB14761,DOID:0080599,COVID-19 in severe renal impairment/dialysis,biokg,1,0,1,0
+25,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer (+chemo),primekg,1,1,1,1
+25,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer (+chemo),drkg,0,1,0,0
+25,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer (+chemo),biokg,0,1,0,0
+26,DB00432,DOID:0080199,Metastatic colorectal cancer,primekg,1,1,1,1
+26,DB00432,DOID:0080199,Metastatic colorectal cancer,drkg,1,1,1,1
+26,DB00432,DOID:0080199,Metastatic colorectal cancer,biokg,1,1,1,1
+28,DB11915,DOID:12858,Chorea associated with Huntington's disease,primekg,1,1,1,1
+28,DB11915,DOID:12858,Chorea associated with Huntington's disease,drkg,1,1,1,1
+28,DB11915,DOID:12858,Chorea associated with Huntington's disease,biokg,1,1,1,1
+29,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,primekg,1,1,0,1
+29,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,drkg,1,1,0,1
+29,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,biokg,1,1,0,1
+32,DB09029,DOID:2280,Hidradenitis suppurativa,primekg,1,1,1,1
+32,DB09029,DOID:2280,Hidradenitis suppurativa,drkg,1,1,1,1
+32,DB09029,DOID:2280,Hidradenitis suppurativa,biokg,1,1,1,1
+33,DB11718,DOID:3908,BRAF V600E metastatic NSCLC,primekg,1,1,1,1
+33,DB11718,DOID:3908,BRAF V600E metastatic NSCLC,drkg,1,1,1,1
+33,DB11718,DOID:3908,BRAF V600E metastatic NSCLC,biokg,1,1,1,1
+37,DB14568,DOID:0050908,IDH1-mutated relapsed/refractory MDS,primekg,1,1,1,1
+37,DB14568,DOID:0050908,IDH1-mutated relapsed/refractory MDS,drkg,1,1,1,1
+37,DB14568,DOID:0050908,IDH1-mutated relapsed/refractory MDS,biokg,1,1,1,1
+38,DB15303,DOID:1727,Retinal vein occlusion,primekg,1,1,1,1
+38,DB15303,DOID:1727,Retinal vein occlusion,drkg,0,1,0,0
+38,DB15303,DOID:1727,Retinal vein occlusion,biokg,0,1,0,0
+39,DB09037,DOID:4607,1L biliary tract cancer (+gemcitabine+cisplatin),primekg,1,1,1,1
+39,DB09037,DOID:4607,1L biliary tract cancer (+gemcitabine+cisplatin),drkg,1,1,1,1
+39,DB09037,DOID:4607,1L biliary tract cancer (+gemcitabine+cisplatin),biokg,1,1,1,1
+42,DB15463,DOID:4450,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,primekg,1,1,1,1
+42,DB15463,DOID:4450,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,drkg,1,1,1,1
+42,DB15463,DOID:4450,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,biokg,1,1,1,1
+51,DB01656,DOID:8893,Psoriasis in children 6-11 (cream),primekg,1,1,1,1
+51,DB01656,DOID:8893,Psoriasis in children 6-11 (cream),drkg,1,1,1,1
+51,DB01656,DOID:8893,Psoriasis in children 6-11 (cream),biokg,1,1,1,1
+54,DB14901,DOID:13810,High LDL-C with increased CV risk (expanded),primekg,1,1,1,1
+54,DB14901,DOID:13810,High LDL-C with increased CV risk (expanded),drkg,0,1,0,0
+54,DB14901,DOID:13810,High LDL-C with increased CV risk (expanded),biokg,0,1,0,0
+55,DB09038,DOID:784,Chronic kidney disease,primekg,1,1,1,1
+55,DB09038,DOID:784,Chronic kidney disease,drkg,1,1,1,1
+55,DB09038,DOID:784,Chronic kidney disease,biokg,1,1,1,1
+59,DB11817,DOID:0110098,Atopic dermatitis,primekg,1,1,1,1
+59,DB11817,DOID:0110098,Atopic dermatitis,drkg,1,0,1,0
+59,DB11817,DOID:0110098,Atopic dermatitis,biokg,1,1,1,1
+60,DB15035,DOID:0050873,Follicular lymphoma (+obinutuzumab),primekg,1,1,1,1
+60,DB15035,DOID:0050873,Follicular lymphoma (+obinutuzumab),drkg,1,1,1,1
+60,DB15035,DOID:0050873,Follicular lymphoma (+obinutuzumab),biokg,1,1,1,1
+61,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma (1L +chemo),primekg,1,1,1,1
+61,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma (1L +chemo),drkg,1,1,1,1
+61,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma (1L +chemo),biokg,1,1,1,1
+62,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer,primekg,1,1,1,1
+62,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer,drkg,0,1,0,0
+62,DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer,biokg,0,1,0,0
+63,DB09302,DOID:13810,Heterozygous familial hypercholesterolemia,primekg,1,1,1,1
+63,DB09302,DOID:13810,Heterozygous familial hypercholesterolemia,drkg,1,0,1,0
+63,DB09302,DOID:13810,Heterozygous familial hypercholesterolemia,biokg,1,0,1,0
+69,DB15171,DOID:0050848,Obstructive sleep apnea with obesity,primekg,1,1,0,1
+69,DB15171,DOID:0050848,Obstructive sleep apnea with obesity,drkg,1,1,0,1
+69,DB15171,DOID:0050848,Obstructive sleep apnea with obesity,biokg,1,1,0,1
+70,DB11760,DOID:1612,HR+/HER2- metastatic breast cancer,primekg,1,1,1,1
+70,DB11760,DOID:1612,HR+/HER2- metastatic breast cancer,drkg,1,1,1,1
+70,DB11760,DOID:1612,HR+/HER2- metastatic breast cancer,biokg,1,0,1,0
+71,DB15305,DOID:12377,Spinal muscular atrophy (pediatric expansion),primekg,1,1,1,1
+71,DB15305,DOID:12377,Spinal muscular atrophy (pediatric expansion),drkg,0,1,0,0
+71,DB15305,DOID:12377,Spinal muscular atrophy (pediatric expansion),biokg,0,1,0,0
+75,DB09029,DOID:1575,IV formulation for rheumatic diseases (EMA),primekg,1,1,1,1
+75,DB09029,DOID:1575,IV formulation for rheumatic diseases (EMA),drkg,1,1,1,1
+75,DB09029,DOID:1575,IV formulation for rheumatic diseases (EMA),biokg,1,1,1,1
+78,DB15654,DOID:0080599,COVID-19 updated strain,primekg,1,1,0,1
+78,DB15654,DOID:0080599,COVID-19 updated strain,drkg,0,0,0,0
+78,DB15654,DOID:0080599,COVID-19 updated strain,biokg,0,0,0,0
+79,DB09299,DOID:2043,Chronic hepatitis B (pediatric),primekg,1,1,1,1
+79,DB09299,DOID:2043,Chronic hepatitis B (pediatric),drkg,1,1,1,1
+79,DB09299,DOID:2043,Chronic hepatitis B (pediatric),biokg,1,1,1,1
+81,DB00028,DOID:0111941,Primary immunodeficiency pediatric (EMA),primekg,1,1,1,1
+81,DB00028,DOID:0111941,Primary immunodeficiency pediatric (EMA),drkg,1,1,1,1
+81,DB00028,DOID:0111941,Primary immunodeficiency pediatric (EMA),biokg,1,1,1,1
+84,DB11689,DOID:0060101,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",primekg,1,1,1,1
+84,DB11689,DOID:0060101,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",drkg,1,0,1,0
+84,DB11689,DOID:0060101,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",biokg,1,0,1,0
+85,DB08912,DOID:3774,Pediatric glioma (EMA),primekg,1,1,1,1
+85,DB08912,DOID:3774,Pediatric glioma (EMA),drkg,1,1,1,1
+85,DB08912,DOID:3774,Pediatric glioma (EMA),biokg,1,1,1,1
+87,DB14962,DOID:3908,HER2-mutant NSCLC (EMA),primekg,1,1,1,1
+87,DB14962,DOID:3908,HER2-mutant NSCLC (EMA),drkg,1,1,1,1
+87,DB14962,DOID:3908,HER2-mutant NSCLC (EMA),biokg,1,1,1,1
+90,DB15233,DOID:349,Indolent systemic mastocytosis (EMA),primekg,1,1,1,1
+90,DB15233,DOID:349,Indolent systemic mastocytosis (EMA),drkg,0,1,0,0
+90,DB15233,DOID:349,Indolent systemic mastocytosis (EMA),biokg,1,1,1,1
+91,DB15354,DOID:0090105,HoFH pediatric (EMA),primekg,1,1,0,1
+91,DB15354,DOID:0090105,HoFH pediatric (EMA),drkg,1,0,0,0
+91,DB15354,DOID:0090105,HoFH pediatric (EMA),biokg,1,0,0,0
+92,DB09037,DOID:0080210,Primary mediastinal large B-cell lymphoma,primekg,1,1,1,1
+92,DB09037,DOID:0080210,Primary mediastinal large B-cell lymphoma,drkg,1,1,1,1
+92,DB09037,DOID:0080210,Primary mediastinal large B-cell lymphoma,biokg,1,1,1,1
+93,DB14962,DOID:3908,HER2-mutant NSCLC (PMDA),primekg,1,1,1,1
+93,DB14962,DOID:3908,HER2-mutant NSCLC (PMDA),drkg,1,1,1,1
+93,DB14962,DOID:3908,HER2-mutant NSCLC (PMDA),biokg,1,1,1,1
+94,DB00073,MONDO:1010185,Antibody-mediated rejection in organ transplantation,primekg,1,0,1,0
+94,DB00073,MONDO:1010185,Antibody-mediated rejection in organ transplantation,drkg,1,1,1,1
+94,DB00073,MONDO:1010185,Antibody-mediated rejection in organ transplantation,biokg,1,0,1,0
+95,DB11834,DOID:4398,Palmoplantar pustulosis (PMDA),primekg,1,1,1,1
+95,DB11834,DOID:4398,Palmoplantar pustulosis (PMDA),drkg,1,0,1,0
+95,DB11834,DOID:4398,Palmoplantar pustulosis (PMDA),biokg,1,0,1,0
+96,DB09078,DOID:3284,Unresectable thymic carcinoma (PMDA),primekg,1,1,1,1
+96,DB09078,DOID:3284,Unresectable thymic carcinoma (PMDA),drkg,1,1,1,1
+96,DB09078,DOID:3284,Unresectable thymic carcinoma (PMDA),biokg,1,1,1,1
+98,DB14962,DOID:7360,HER2+ solid tumors (tumor-agnostic),primekg,1,1,1,1
+98,DB14962,DOID:7360,HER2+ solid tumors (tumor-agnostic),drkg,1,1,1,1
+98,DB14962,DOID:7360,HER2+ solid tumors (tumor-agnostic),biokg,1,0,1,0
+99,DB14962,DOID:1612,HR+/HER2-low breast cancer,primekg,1,1,1,1
+99,DB14962,DOID:1612,HR+/HER2-low breast cancer,drkg,1,1,1,1
+99,DB14962,DOID:1612,HR+/HER2-low breast cancer,biokg,1,0,1,0
+102,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma,primekg,1,1,1,1
+102,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma,drkg,1,1,1,1
+102,DB11714,DOID:3717,Gastric/GEJ adenocarcinoma,biokg,1,1,1,1
+103,DB11714,DOID:4607,Biliary tract cancer 1L,primekg,1,1,1,1
+103,DB11714,DOID:4607,Biliary tract cancer 1L,drkg,1,1,1,1
+103,DB11714,DOID:4607,Biliary tract cancer 1L,biokg,1,1,1,1
+105,DB09037,DOID:5520,Neoadj+adj HNSCC,primekg,1,1,1,1
+105,DB09037,DOID:5520,Neoadj+adj HNSCC,drkg,1,1,1,1
+105,DB09037,DOID:5520,Neoadj+adj HNSCC,biokg,1,0,1,0
+109,DB09037,DOID:4607,Biliary tract cancer,primekg,1,1,1,1
+109,DB09037,DOID:4607,Biliary tract cancer,drkg,1,1,1,1
+109,DB09037,DOID:4607,Biliary tract cancer,biokg,1,1,1,1
+114,DB13007,DOID:4006,Urothelial carcinoma (expanded population),primekg,1,1,1,1
+114,DB13007,DOID:4006,Urothelial carcinoma (expanded population),drkg,1,1,1,1
+114,DB13007,DOID:4006,Urothelial carcinoma (expanded population),biokg,1,1,1,1
+116,DB08875,DOID:0112306,Pancreatic NET,primekg,1,1,1,1
+116,DB08875,DOID:0112306,Pancreatic NET,drkg,1,1,1,1
+116,DB08875,DOID:0112306,Pancreatic NET,biokg,1,1,1,1
+118,DB15569,DOID:0080199,KRAS G12C+ mCRC,primekg,1,1,1,1
+118,DB15569,DOID:0080199,KRAS G12C+ mCRC,drkg,1,1,1,1
+118,DB15569,DOID:0080199,KRAS G12C+ mCRC,biokg,1,1,1,1
+119,DB15463,DOID:0050771,Pheochromocytoma/paraganglioma,primekg,1,1,1,1
+119,DB15463,DOID:0050771,Pheochromocytoma/paraganglioma,drkg,1,1,1,1
+119,DB15463,DOID:0050771,Pheochromocytoma/paraganglioma,biokg,1,1,1,1
+120,DB15044,DOID:0050873,Follicular lymphoma,primekg,1,1,1,1
+120,DB15044,DOID:0050873,Follicular lymphoma,drkg,1,1,0,1
+120,DB15044,DOID:0050873,Follicular lymphoma,biokg,1,1,0,1
+126,DB11730,DOID:1612,HR+/HER2- early breast cancer (adjuvant),primekg,1,1,1,1
+126,DB11730,DOID:1612,HR+/HER2- early breast cancer (adjuvant),drkg,1,1,1,1
+126,DB11730,DOID:1612,HR+/HER2- early breast cancer (adjuvant),biokg,1,0,1,0
+128,DB12941,DOID:10283,mHSPC + ADT,primekg,1,1,1,1
+128,DB12941,DOID:10283,mHSPC + ADT,drkg,1,1,1,1
+128,DB12941,DOID:10283,mHSPC + ADT,biokg,1,1,1,1
+129,DB15685,DOID:3908,RET-fusion NSCLC (expanded),primekg,1,1,1,1
+129,DB15685,DOID:3908,RET-fusion NSCLC (expanded),drkg,0,1,0,0
+129,DB15685,DOID:3908,RET-fusion NSCLC (expanded),biokg,1,1,1,1
+131,DB11718,DOID:1781,BRAF+ thyroid cancer,primekg,1,1,1,1
+131,DB11718,DOID:1781,BRAF+ thyroid cancer,drkg,1,1,1,1
+131,DB11718,DOID:1781,BRAF+ thyroid cancer,biokg,1,1,1,1
+132,DB11967,DOID:1781,BRAF+ thyroid cancer,primekg,1,1,1,1
+132,DB11967,DOID:1781,BRAF+ thyroid cancer,drkg,1,1,1,1
+132,DB11967,DOID:1781,BRAF+ thyroid cancer,biokg,1,1,1,1
+140,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,primekg,1,1,0,1
+140,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,drkg,1,1,0,1
+140,DB12281,DOID:0050908,First-line anemia in lower-risk MDS,biokg,1,1,0,1
+144,DB12597,DOID:0081088,Ph+ CML-CP after 2+ TKIs,primekg,0,1,0,0
+144,DB12597,DOID:0081088,Ph+ CML-CP after 2+ TKIs,drkg,1,1,1,1
+144,DB12597,DOID:0081088,Ph+ CML-CP after 2+ TKIs,biokg,0,1,0,0
+145,DB15091,DOID:13375,Giant cell arteritis,primekg,1,1,1,1
+145,DB15091,DOID:13375,Giant cell arteritis,drkg,1,1,1,1
+145,DB15091,DOID:13375,Giant cell arteritis,biokg,1,1,1,1
+146,DB11834,DOID:8778,Crohn's disease,primekg,1,1,1,1
+146,DB11834,DOID:8778,Crohn's disease,drkg,1,1,1,1
+146,DB11834,DOID:8778,Crohn's disease,biokg,1,1,1,1
+147,DB11834,DOID:8577,Ulcerative colitis,primekg,1,1,1,1
+147,DB11834,DOID:8577,Ulcerative colitis,drkg,1,1,1,1
+147,DB11834,DOID:8577,Ulcerative colitis,biokg,1,1,1,1
+148,DB14762,DOID:8577,Ulcerative colitis,primekg,1,1,1,1
+148,DB14762,DOID:8577,Ulcerative colitis,drkg,1,1,1,1
+148,DB14762,DOID:8577,Ulcerative colitis,biokg,1,1,1,1
+149,DB12530,DOID:0080356,IgG4-related disease,primekg,1,1,1,1
+149,DB12530,DOID:0080356,IgG4-related disease,drkg,1,0,0,0
+149,DB12530,DOID:0080356,IgG4-related disease,biokg,1,0,1,0
+150,DB12530,DOID:437,Generalized myasthenia gravis,primekg,1,1,1,1
+150,DB12530,DOID:437,Generalized myasthenia gravis,drkg,1,1,0,1
+150,DB12530,DOID:437,Generalized myasthenia gravis,biokg,1,1,1,1
+151,DB00043,DOID:3044,IgE-mediated food allergy,primekg,1,0,1,0
+151,DB00043,DOID:3044,IgE-mediated food allergy,drkg,1,1,1,1
+151,DB00043,DOID:3044,IgE-mediated food allergy,biokg,1,1,1,1
+154,DB12159,DOID:3083,COPD,primekg,1,1,1,1
+154,DB12159,DOID:3083,COPD,drkg,1,1,1,1
+154,DB12159,DOID:3083,COPD,biokg,1,1,1,1
+155,DB12159,DOID:3083,COPD (EMA 2025),primekg,1,1,1,1
+155,DB12159,DOID:3083,COPD (EMA 2025),drkg,1,1,1,1
+155,DB12159,DOID:3083,COPD (EMA 2025),biokg,1,1,1,1
+156,DB12023,DOID:3049,EGPA (expanded),primekg,1,1,1,1
+156,DB12023,DOID:3049,EGPA (expanded),drkg,1,1,1,1
+156,DB12023,DOID:3049,EGPA (expanded),biokg,1,1,1,1
+158,DB00043,DOID:3049,EGPA,primekg,1,1,1,1
+158,DB00043,DOID:3049,EGPA,drkg,1,1,1,1
+158,DB00043,DOID:3049,EGPA,biokg,1,1,1,1
+162,DB08877,DOID:0081267,GVHD + pediatric,primekg,1,1,1,1
+162,DB08877,DOID:0081267,GVHD + pediatric,drkg,1,1,1,1
+162,DB08877,DOID:0081267,GVHD + pediatric,biokg,1,1,1,1
+163,DB15091,DOID:0110098,Pediatric atopic dermatitis,primekg,1,1,1,1
+163,DB15091,DOID:0110098,Pediatric atopic dermatitis,drkg,1,0,1,0
+163,DB15091,DOID:0110098,Pediatric atopic dermatitis,biokg,1,1,1,1
+164,DB13928,DOID:1287,Reduce MACE in CVD + obesity/overweight,primekg,1,1,1,1
+164,DB13928,DOID:1287,Reduce MACE in CVD + obesity/overweight,drkg,1,1,1,1
+164,DB13928,DOID:1287,Reduce MACE in CVD + obesity/overweight,biokg,1,1,1,1
+168,DB09075,DOID:6432,Chronic thromboembolic pulmonary hypertension,primekg,1,1,1,1
+168,DB09075,DOID:6432,Chronic thromboembolic pulmonary hypertension,drkg,1,1,1,1
+168,DB09075,DOID:6432,Chronic thromboembolic pulmonary hypertension,biokg,1,1,1,1
+169,DB00374,DOID:6432,ILD-associated pulmonary hypertension,primekg,1,1,1,1
+169,DB00374,DOID:6432,ILD-associated pulmonary hypertension,drkg,1,1,1,1
+169,DB00374,DOID:6432,ILD-associated pulmonary hypertension,biokg,1,1,1,1
+171,DB13928,DOID:0080547,MASH with fibrosis,primekg,1,1,1,1
+171,DB13928,DOID:0080547,MASH with fibrosis,drkg,1,0,1,0
+171,DB13928,DOID:0080547,MASH with fibrosis,biokg,1,0,1,0
+172,DB13928,DOID:784,CKD in T2D,primekg,1,1,1,1
+172,DB13928,DOID:784,CKD in T2D,drkg,1,1,1,1
+172,DB13928,DOID:784,CKD in T2D,biokg,1,1,1,1
+176,DB00073,DOID:1184,Nephrotic syndrome,primekg,1,1,1,1
+176,DB00073,DOID:1184,Nephrotic syndrome,drkg,1,1,1,1
+176,DB00073,DOID:1184,Nephrotic syndrome,biokg,1,1,1,1
+178,DB13879,DOID:684,Acute HCV pediatric,primekg,1,1,1,1
+178,DB13879,DOID:684,Acute HCV pediatric,drkg,1,1,1,1
+178,DB13879,DOID:684,Acute HCV pediatric,biokg,1,1,1,1
+180,DB14761,DOID:0080599,COVID-19 (expanded population),primekg,1,1,1,1
+180,DB14761,DOID:0080599,COVID-19 (expanded population),drkg,0,0,0,0
+180,DB14761,DOID:0080599,COVID-19 (expanded population),biokg,1,0,1,0
+184,DB00008,DOID:8997,Polycythaemia vera and essential thrombocytopenia,primekg,1,1,1,1
+184,DB00008,DOID:8997,Polycythaemia vera and essential thrombocytopenia,drkg,1,1,1,1
+184,DB00008,DOID:8997,Polycythaemia vera and essential thrombocytopenia,biokg,1,1,1,1
+188,DB15303,DOID:1727,Retinal vein occlusion,primekg,1,1,1,1
+188,DB15303,DOID:1727,Retinal vein occlusion,drkg,0,1,0,0
+188,DB15303,DOID:1727,Retinal vein occlusion,biokg,0,1,0,0
+190,DB11823,DOID:1470,TRD monotherapy,primekg,1,1,1,1
+190,DB11823,DOID:1470,TRD monotherapy,drkg,1,1,1,1
+190,DB11823,DOID:1470,TRD monotherapy,biokg,1,0,1,0
+191,DB12159,DOID:13565,Allergic fungal rhinosinusitis (AFRS) ≥6yr,primekg,1,1,1,1
+191,DB12159,DOID:13565,Allergic fungal rhinosinusitis (AFRS) ≥6yr,drkg,1,1,1,1
+191,DB12159,DOID:13565,Allergic fungal rhinosinusitis (AFRS) ≥6yr,biokg,1,1,1,1
+192,DB09037,DOID:4001,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),primekg,1,1,1,1
+192,DB09037,DOID:4001,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),drkg,1,1,1,1
+192,DB09037,DOID:4001,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),biokg,1,1,1,1
+193,DB00149,DOID:0050719,Cerebral folate transport deficiency,primekg,1,1,1,1
+193,DB00149,DOID:0050719,Cerebral folate transport deficiency,drkg,1,0,1,0
+193,DB00149,DOID:0050719,Cerebral folate transport deficiency,biokg,1,0,1,0
+195,DB11700,DOID:6676,Acquired hypothalamic obesity,primekg,1,1,1,1
+195,DB11700,DOID:6676,Acquired hypothalamic obesity,drkg,1,1,1,1
+195,DB11700,DOID:6676,Acquired hypothalamic obesity,biokg,0,1,0,0
+196,DB00514,DOID:10652,Agitation associated with Alzheimer's dementia,primekg,1,1,1,1
+196,DB00514,DOID:10652,Agitation associated with Alzheimer's dementia,drkg,1,1,1,1
+196,DB00514,DOID:10652,Agitation associated with Alzheimer's dementia,biokg,1,1,1,1
+197,DB14962,DOID:1612,HER2+ early-stage BC (neoadjuvant + adjuvant),primekg,1,1,1,1
+197,DB14962,DOID:1612,HER2+ early-stage BC (neoadjuvant + adjuvant),drkg,1,1,1,1
+197,DB14962,DOID:1612,HER2+ early-stage BC (neoadjuvant + adjuvant),biokg,1,0,1,0
+206,DB06606,DOID:9744,Delay T1D onset in children ≥1yr,primekg,1,1,0,1
+206,DB06606,DOID:9744,Delay T1D onset in children ≥1yr,drkg,1,1,0,1
+206,DB06606,DOID:9744,Delay T1D onset in children ≥1yr,biokg,1,1,0,1
+207,DB00028,DOID:0111941,Primary humoral immunodeficiency pediatric 2-11yr,primekg,1,1,1,1
+207,DB00028,DOID:0111941,Primary humoral immunodeficiency pediatric 2-11yr,drkg,1,1,1,1
+207,DB00028,DOID:0111941,Primary humoral immunodeficiency pediatric 2-11yr,biokg,1,1,1,1
+211,DB12839,DOID:9281,PKU expanded to ≥12yr,primekg,1,1,0,1
+211,DB12839,DOID:9281,PKU expanded to ≥12yr,drkg,1,1,0,1
+211,DB12839,DOID:9281,PKU expanded to ≥12yr,biokg,1,1,0,1
+213,DB13928,DOID:9970,Oral tablet formulation for weight management,primekg,1,1,1,1
+213,DB13928,DOID:9970,Oral tablet formulation for weight management,drkg,1,1,1,1
+213,DB13928,DOID:9970,Oral tablet formulation for weight management,biokg,1,1,1,1
+214,DB11718,DOID:0080199,"mCRC BRAF V600E (traditional approval, was accelerated)",primekg,1,1,1,1
+214,DB11718,DOID:0080199,"mCRC BRAF V600E (traditional approval, was accelerated)",drkg,1,1,1,1
+214,DB11718,DOID:0080199,"mCRC BRAF V600E (traditional approval, was accelerated)",biokg,1,1,1,1
+215,DB12893,DOID:1612,HR+/HER2- breast cancer,primekg,1,1,1,1
+215,DB12893,DOID:1612,HR+/HER2- breast cancer,drkg,1,1,0,1
+215,DB12893,DOID:1612,HR+/HER2- breast cancer,biokg,1,0,1,0
+218,DB11714,DOID:3717,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),primekg,1,1,1,1
+218,DB11714,DOID:3717,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),drkg,1,1,1,1
+218,DB11714,DOID:3717,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),biokg,1,1,1,1
+220,DB01263,DOID:0050073,Invasive fungal infections pediatric ≥2yr,primekg,1,1,1,1
+220,DB01263,DOID:0050073,Invasive fungal infections pediatric ≥2yr,drkg,1,1,1,1
+220,DB01263,DOID:0050073,Invasive fungal infections pediatric ≥2yr,biokg,1,1,1,1
+225,DB11817,DOID:676,Juvenile idiopathic arthritis (EMA Feb 2026),primekg,1,1,1,1
+225,DB11817,DOID:676,Juvenile idiopathic arthritis (EMA Feb 2026),drkg,1,1,1,1
+225,DB11817,DOID:676,Juvenile idiopathic arthritis (EMA Feb 2026),biokg,1,1,1,1
+226,DB12597,DOID:0081088,Ph+ CML-CP frontline (EMA Feb 2026),primekg,0,1,0,0
+226,DB12597,DOID:0081088,Ph+ CML-CP frontline (EMA Feb 2026),drkg,1,1,1,1
+226,DB12597,DOID:0081088,Ph+ CML-CP frontline (EMA Feb 2026),biokg,0,1,0,0
+232,DB15303,DOID:8947,Diabetic retinopathy/DME (EMA Mar+May 2026),primekg,1,1,1,1
+232,DB15303,DOID:8947,Diabetic retinopathy/DME (EMA Mar+May 2026),drkg,0,1,0,0
+232,DB15303,DOID:8947,Diabetic retinopathy/DME (EMA Mar+May 2026),biokg,0,1,0,0
+238,DB00028,DOID:8622,Measles prophylaxis post-exposure,primekg,1,1,1,1
+238,DB00028,DOID:8622,Measles prophylaxis post-exposure,drkg,1,1,1,1
+238,DB00028,DOID:8622,Measles prophylaxis post-exposure,biokg,1,1,1,1
+244,DB11834,DOID:8778,"Crohn's disease (moderate-severe, refractory)",primekg,1,1,1,1
+244,DB11834,DOID:8778,"Crohn's disease (moderate-severe, refractory)",drkg,1,1,1,1
+244,DB11834,DOID:8778,"Crohn's disease (moderate-severe, refractory)",biokg,1,1,1,1
+245,DB11363,DOID:7360,"ALK+ solid tumors (tissue-agnostic, world-first)",primekg,1,1,1,1
+245,DB11363,DOID:7360,"ALK+ solid tumors (tissue-agnostic, world-first)",drkg,1,1,1,1
+245,DB11363,DOID:7360,"ALK+ solid tumors (tissue-agnostic, world-first)",biokg,1,0,1,0
+249,DB15090,DOID:0110597,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),primekg,1,1,0,1
+249,DB15090,DOID:0110597,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),drkg,1,1,0,1
+249,DB15090,DOID:0110597,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),biokg,1,1,0,1
+250,DB15212,DOID:3146,LDL-C elevation in statin-intolerant dyslipidemia,primekg,0,1,0,0
+250,DB15212,DOID:3146,LDL-C elevation in statin-intolerant dyslipidemia,drkg,1,1,1,1
+250,DB15212,DOID:3146,LDL-C elevation in statin-intolerant dyslipidemia,biokg,0,1,0,0
+251,DB06168,DOID:4371,Schnitzler syndrome (Japan),primekg,1,1,1,1
+251,DB06168,DOID:4371,Schnitzler syndrome (Japan),drkg,1,1,1,1
+251,DB06168,DOID:4371,Schnitzler syndrome (Japan),biokg,1,1,1,1
+252,DB09222,DOID:2219,Acquired hypofibrinogenemia in cardiovascular surgery,primekg,1,1,0,1
+252,DB09222,DOID:2219,Acquired hypofibrinogenemia in cardiovascular surgery,drkg,1,0,0,0
+252,DB09222,DOID:2219,Acquired hypofibrinogenemia in cardiovascular surgery,biokg,1,0,0,0

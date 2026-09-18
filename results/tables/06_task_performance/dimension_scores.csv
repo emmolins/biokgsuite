@@ -1,0 +1,3 @@
+KG,task_performance,task_performance_ci_lo,task_performance_ci_hi,n_sub_metrics_scored,link_prediction,nbhd_retrieval,multihop_reasoning,link_prediction_auroc_raw,nbhd_retrieval_recall100,multihop_reasoning_hits100,k_fraction,nbhd_k_norm,multihop_k_norm,link_prediction_ci_lo,link_prediction_ci_hi,nbhd_retrieval_ci_lo,nbhd_retrieval_ci_hi,multihop_reasoning_ci_lo,multihop_reasoning_ci_hi
+hetionet,0.3504,0.316,0.3847,3,0.7968,0.1488,0.1055,0.8984,0.1405,0.1013,0.005,105,105,0.7123999999999999,0.8660000000000001,0.09090909090909091,0.21487603305785125,0.0759493670886076,0.1350210970464135
+biokg,0.3747,0.3572,0.3922,3,0.8178,0.1733,0.1329,0.9089,0.1467,0.0612,0.005,297,297,0.8084,0.8266,0.13333333333333333,0.21666666666666667,0.10337552742616034,0.16455696202531644

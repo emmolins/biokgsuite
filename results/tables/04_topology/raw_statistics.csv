@@ -1,0 +1,3 @@
+KG,lcc_fraction,C_empirical,C_se,C_ER_random,C_over_CER,sw_score_se,nodes_sampled,ri_gold,ri_rand,dr_pairs,community_ami,community_nmi,community_ari,modularity,n_communities,gold_pairs_mapped,recovery_1hop,recovery_2hop,recovery_3hop,recovery_4hop,recovery_5hop
+hetionet,0.9601752035891221,0.1092,0.0018,0.001906,57.3,0.0023,10000,0.8323,0.1793,300,0.2842,0.3073,0.2132,0.347,1882,649,0.6163,0.9137,1.0,1.0,1.0
+biokg,0.9330199764982373,0.1396,0.0025,0.000367,380.3,0.0026,10000,0.8128,0.0706,300,0.1569,0.1689,0.0696,0.4985,1529,3586,0.3614,0.8519,0.988,0.9986,0.9997

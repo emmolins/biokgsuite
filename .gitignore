@@ -1,0 +1,57 @@
+# Secrets. .env holds live API keys (OpenAI, Gemini, Groq) read by
+# grounding/03_run/notebook.ipynb. It must never reach a git history or a
+# supplementary archive.
+.env
+.env.*
+!.env.example
+
+# Environments
+.venv/
+venv/
+
+# Caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Retired work, removed by tools/cleanup.sh
+_to_delete/
+
+# Transfer archives
+_incoming_*.tar.gz
+
+# ── Data: fetched, not committed ─────────────────────────────────────────────
+# The graphs, ontologies and Open Targets datasets are re-fetched at pinned
+# releases by tools/fetch_kgs.py and tools/build_crosswalks.py; their release
+# notes, checksums and snapshot records are the only data files in git.
+data/raw/**
+!data/raw/**/
+!data/raw/**/*.json
+data/biokg/*
+data/drkg/*
+data/hetionet/*
+data/matrix/*
+data/openbilink/*
+data/primekg/*
+!data/*/*_RELEASE.txt
+!data/*/README.md
+!data/*/LICENSE
+data/crosswalks/*
+!data/crosswalks/*.txt
+data/crosswalks/hgnc_complete_set.txt
+# CTD asks that its files not be redistributed; fetch_ctd.sh rebuilds them and
+# CTD_PROVENANCE.txt records the release that was used.
+data/gold_standards/ctd/*.gz
+
+# ── Results that are regenerated, or too large ───────────────────────────────
+# per-graph views (300 MB), rebuilt by build_post_cutoff_approvals.py --extract-views
+results/checkpoints/07_kg_views/
+# loader cache
+data/matrix/_cache_matrix_*
+logs/
+*.tar.gz
+*.tgz

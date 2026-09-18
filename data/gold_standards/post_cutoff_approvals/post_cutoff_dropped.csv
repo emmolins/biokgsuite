@@ -1,0 +1,1033 @@
+candidate_id,stage,reason
+HC:29859,S1,out of scope: class=line_extension
+HC:29861,S1,out of scope: class=ingredient_prior_indication
+TGA:rinvoq-abbvie-pty-ltd-4,S1,out of scope: class=line_extension
+FDA:NDA213217-S7,S1,out of scope: class=ingredient_prior_indication
+TGA:xeljanzxeljanz-xr-pfizer-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:enhertu-astrazeneca-pty-ltd-1,S1,out of scope: class=line_extension
+FDA:BLA761164-S3,S1,out of scope: class=wording_only
+HC:30004,S1,out of scope: class=commitment_fulfilment
+FDA:BLA125514-S128,S1,out of scope: class=line_extension
+EMA:23-26-january-2023:Byfavo,S1,disease pending_source_text
+EMA:23-26-january-2023:Dupixent,S1,class=expanded_population
+EMA:23-26-january-2023:Nubeqa,S1,out of scope: class=line_extension
+EMA:23-26-january-2023:Reblozyl,S1,out of scope: class=line_extension
+EMA:23-26-january-2023:Trecondi,S1,out of scope: no disease target
+EMA:23-26-january-2023:Trulicity,S1,class=expanded_population
+EMA:23-26-january-2023:Wakix,S1,class=expanded_population
+FDA:NDA021845-S25,S1,class=expanded_population
+FDA:BLA761115-S35,S1,out of scope: class=line_extension
+HC:30059,S1,class=expanded_population
+FDA:NDA206111-S33,S1,class=expanded_population
+FDA:NDA208658-S21,S1,class=expanded_population
+FDA:BLA125387-S75,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761174-S3,S1,out of scope: class=commitment_fulfilment; no disease target
+FDA:BLA761174-S4,S1,disease pending_source_text
+HC:30115,S1,disease pending_source_text
+TGA:kalydeco-vertex-pharmaceuticals-australia-pty-ltd-0,S1,class=expanded_population
+TGA:polivy-roche-products-pty-ltd-0,S1,out of scope: class=line_extension
+HC:30145,S1,class=unclear
+HC:30137,S1,class=expanded_population
+TGA:kyprolis-amgen-australia-pty-ltd,S1,out of scope: class=line_extension
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-12,S1,out of scope: class=line_extension
+EMA:20-23-february-2023:Esbriet,S1,out of scope: class=wording_only; no disease target
+EMA:20-23-february-2023:Libtayo,S1,out of scope: class=line_extension
+EMA:20-23-february-2023:TachoSil,S1,out of scope: no disease target
+PMDA:2023-02-24:77,S1,out of scope: no disease target
+PMDA:2023-02-24:110,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-02-24:109,S1,out of scope: class=line_extension
+PMDA:2023-02-24:55,S1,out of scope: no disease target
+PMDA:2023-02-24:76,S1,out of scope: class=line_extension
+FDA:NDA205054-S4,S1,out of scope: class=wording_only; no disease target
+TGA:brukinsa-beigene-aus-pty-ltd-2,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA208716-S10,S1,out of scope: class=line_extension
+FDA:NDA208716-S11,S1,out of scope: class=line_extension
+TGA:nubeqa-bayer-australia-ltd-0,S1,out of scope: class=line_extension
+HC:30342,S1,disease pending_source_text
+FDA:BLA761058-S13,S1,out of scope: class=biosimilar_alignment; no disease target
+HC:30386,S1,out of scope: class=indication_removed; no disease target
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-13,S1,out of scope: class=ingredient_prior_indication
+TGA:vaxneuvance-merck-sharp-dohme-australia-pty-ltd-1,S1,class=expanded_population
+TGA:winglore-bristol-myers-squibb-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+HC:30377,S1,disease pending_source_text
+TGA:imbruvica-janssen-cilag-pty-ltd-1,S1,out of scope: class=line_extension
+PMDA:2023-03-27:117,S1,out of scope: class=line_extension
+PMDA:2023-03-27:15,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-03-27:116,S1,out of scope: class=line_extension
+PMDA:2023-03-27:114,S1,out of scope: class=line_extension
+PMDA:2023-03-27:113,S1,out of scope: class=line_extension
+PMDA:2023-03-27:112,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-03-27:115,S1,out of scope: class=line_extension
+PMDA:2023-03-27:40,S1,out of scope: no disease target
+PMDA:2023-03-27:64,S1,out of scope: class=line_extension
+TGA:imfinzi-astrazeneca-pty-ltd-3,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA125514-S132,S1,out of scope: class=commitment_fulfilment; no disease target
+HC:30526,S1,class=expanded_population
+EMA:27-30-march-2023:Breyanzi,S1,out of scope: class=line_extension
+EMA:27-30-march-2023:Entresto,S1,class=expanded_population
+EMA:27-30-march-2023:Neparvis,S1,class=expanded_population
+EMA:27-30-march-2023:Tenkasi,S1,class=expanded_population
+EMA:27-30-march-2023:Wegovy,S1,class=expanded_population
+FDA:BLA125514-S136,S1,out of scope: class=line_extension
+FDA:BLA761137-S18,S1,out of scope: class=line_extension
+HC:30504,S1,class=unclear
+TGA:gardasil-merck-sharp-dohme-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+HC:30660,S1,class=expanded_population
+FDA:NDA215206-S4,S1,class=unclear
+FDA:BLA761121-S8,S1,out of scope: class=line_extension
+HC:30562,S1,out of scope: class=line_extension
+EMA:24-26-april-2023:Adempas,S1,class=expanded_population
+EMA:24-26-april-2023:Opdivo,S1,class=unclear
+EMA:24-26-april-2023:Orkambi,S1,disease pending_source_text
+EMA:24-26-april-2023:Revestive,S1,class=expanded_population
+EMA:24-26-april-2023:Ronapreve,S1,class=expanded_population
+EMA:24-26-april-2023:Spikevax,S1,disease pending_source_text
+EMA:24-26-april-2023:Vemlidy,S1,class=expanded_population
+EMA:24-26-april-2023:Yervoy,S1,class=expanded_population
+HC:30578,S1,out of scope: class=line_extension
+HC:30889,S1,out of scope: class=ingredient_prior_indication
+HC:30610,S1,disease pending_source_text
+FDA:NDA207925-S16,S1,class=expanded_population
+HC:30651,S1,out of scope: class=wording_only; no disease target
+TGA:gazyva-roche-products-pty-ltd,S1,out of scope: no disease target
+TGA:libtayo-sanofi-aventis-australia-pty-ltd-2,S1,out of scope: class=line_extension
+FDA:NDA202293-S26,S1,out of scope: class=line_extension
+HC:30657,S1,class=expanded_population
+HC:30701,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:30691,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:30731,S1,class=unclear
+HC:30718,S1,disease pending_source_text
+TGA:olumiant-eli-lilly-australia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+HC:30722,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:30723,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:30770,S1,class=expanded_population
+TGA:ultomiris-alexion-pharmaceuticals-australasia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+TGA:evrysdi-roche-products-pty-ltd-0,S1,class=expanded_population
+FDA:NDA212608-S13,S1,out of scope: class=line_extension
+HC:30810,S1,disease pending_source_text
+FDA:NDA021425-S36,S1,out of scope: no disease target
+FDA:NDA020220-S54,S1,out of scope: no disease target
+PMDA:2023-05-25:75,S1,out of scope: class=line_extension
+PMDA:2023-05-25:73,S1,out of scope: class=line_extension
+EMA:22-25-may-2023:Opdivo,S1,class=unclear
+EMA:22-25-may-2023:Sogroya,S1,disease pending_source_text
+HC:30880,S1,disease pending_source_text
+HC:30890,S1,class=expanded_population
+FDA:NDA203565-S20,S1,out of scope: class=line_extension
+FDA:NDA208558-S25,S1,out of scope: class=line_extension
+TGA:entyvio-takeda-pharmaceuticals-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA211580-S6,S1,out of scope: no disease target
+FDA:NDA202811-S21,S1,class=expanded_population
+FDA:BLA761118-S9,S1,out of scope: class=biosimilar_alignment; no disease target
+HC:31004,S1,class=expanded_population
+TGA:imfinzi-astrazeneca-pty-ltd-4,S1,out of scope: class=line_extension
+TGA:dupixent-sanofi-aventis-australia-pty-ltd-4,S1,class=expanded_population
+EMA:19-22-june-2023:Comirnaty,S1,out of scope: class=formulation_or_route; no disease target
+EMA:19-22-june-2023:Imjudo,S1,out of scope: class=line_extension
+EMA:19-22-june-2023:Lonsurf,S1,out of scope: class=line_extension
+EMA:19-22-june-2023:Mircera,S1,class=expanded_population
+EMA:19-22-june-2023:Refixia,S1,class=expanded_population
+EMA:19-22-june-2023:Soliris,S1,class=expanded_population
+EMA:19-22-june-2023:Trodelvy,S1,out of scope: class=line_extension
+FDA:BLA761059-S6,S1,out of scope: class=biosimilar_alignment; no disease target
+PMDA:2023-06-26:18,S1,class=expanded_population
+PMDA:2023-06-26:59,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-06-26:20,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-06-26:78,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-06-26:103,S1,class=expanded_population
+FDA:NDA206229-S13,S1,out of scope: class=ingredient_prior_indication
+HC:31088,S1,class=expanded_population
+FDA:BLA761058-S18,S1,out of scope: class=biosimilar_alignment; no disease target
+HC:31487,S1,class=expanded_population
+HC:31158,S1,class=expanded_population
+TGA:trodelvy-gilead-sciences-pty-ltd-1,S1,out of scope: class=line_extension
+TGA:forxiga-astrazeneca-pty-ltd-3,S1,class=expanded_population
+FDA:BLA761059-S8,S1,out of scope: class=biosimilar_alignment; no disease target
+HC:31175,S1,disease pending_source_text
+HC:31186,S1,disease pending_source_text
+HC:31201,S1,out of scope: class=ingredient_prior_indication
+TGA:cefintra-aspen-pharmacare-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+HC:31246,S1,out of scope: class=line_extension
+FDA:NDA021343-S48,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021379-S50,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021488-S45,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021731-S47,S1,out of scope: class=wording_only; no disease target
+TGA:ferinject-vifor-pharma-pty-ltd-0,S1,class=expanded_population
+EMA:17-20-july-2023:Bylvay,S1,disease pending_source_text
+EMA:17-20-july-2023:Ervebo,S1,class=expanded_population
+EMA:17-20-july-2023:Evrysdi,S1,class=expanded_population
+EMA:17-20-july-2023:Keytruda,S1,out of scope: class=line_extension
+EMA:17-20-july-2023:Olumiant,S1,class=unclear
+EMA:17-20-july-2023:Opdivo,S1,class=expanded_population
+EMA:17-20-july-2023:Spikevax,S1,disease pending_source_text
+HC:31283,S1,class=expanded_population
+HC:31270,S1,out of scope: class=ingredient_prior_indication
+HC:31285,S1,disease pending_source_text
+HC:31303,S1,disease pending_source_text
+HC:31305,S1,disease pending_source_text
+TGA:kerendia-bayer-australia-ltd-0,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761174-S6,S1,out of scope: class=line_extension
+FDA:NDA207981-S12,S1,out of scope: class=line_extension
+TGA:dupixent-sanofi-aventis-australia-pty-ltd-5,S1,disease pending_source_text
+FDA:NDA208647-S7,S1,out of scope: class=wording_only; no disease target
+FDA:NDA208647-S8,S1,out of scope: class=wording_only; no disease target
+FDA:NDA208647-S9,S1,out of scope: class=wording_only; no disease target
+FDA:NDA208647-S10,S1,out of scope: class=wording_only; no disease target
+FDA:NDA208647-S11,S1,out of scope: class=wording_only; no disease target
+HC:31369,S1,disease pending_source_text
+FDA:BLA103000-S5325,S1,class=expanded_population
+PMDA:2023-08-23:79,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-08-23:34,S1,out of scope: no disease target
+PMDA:2023-08-23:3,S1,out of scope: class=ingredient_prior_indication
+HC:31476,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:BLA125319-S107,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761136-S9,S1,out of scope: class=line_extension
+TGA:apotex-zoledronic-apotex-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:otezla-amgen-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA204114-S29,S1,out of scope: no disease target
+FDA:NDA202806-S27,S1,out of scope: no disease target
+HC:31532,S1,class=expanded_population
+HC:31556,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021029-S36,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021029-S37,S1,out of scope: class=wording_only; no disease target
+FDA:NDA021029-S38,S1,out of scope: class=line_extension
+FDA:NDA022277-S17,S1,out of scope: class=line_extension
+FDA:NDA022277-S18,S1,out of scope: class=wording_only; no disease target
+FDA:NDA022277-S19,S1,out of scope: class=wording_only; no disease target
+TGA:sogroya-novo-nordisk-pharmaceuticals-pty-ltd-1,S1,class=expanded_population
+EMA:11-14-september-2023:Adcetris,S1,out of scope: class=line_extension
+EMA:11-14-september-2023:Enhertu,S1,out of scope: class=ingredient_prior_indication
+EMA:11-14-september-2023:Kaftrio,S1,disease pending_source_text
+EMA:11-14-september-2023:Kalydeco,S1,class=unclear
+EMA:11-14-september-2023:Keytruda,S1,out of scope: class=line_extension
+EMA:11-14-september-2023:Nordimet,S1,out of scope: class=ingredient_prior_indication
+EMA:11-14-september-2023:Olumiant,S1,class=expanded_population
+EMA:11-14-september-2023:Pepaxti,S1,out of scope: class=wording_only; no disease target
+EMA:11-14-september-2023:Ryeqo,S1,out of scope: class=ingredient_prior_indication
+EMA:11-14-september-2023:Takhzyro,S1,disease pending_source_text
+EMA:11-14-september-2023:Voxzogo,S1,class=expanded_population
+HC:31740,S1,disease pending_source_text
+HC:31675,S1,out of scope: class=line_extension
+PMDA:2023-09-25:84,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-09-25:38,S1,out of scope: no disease target
+PMDA:2023-09-25:7,S1,out of scope: class=formulation_or_route
+PMDA:2023-09-25:6,S1,out of scope: class=line_extension
+FDA:NDA203341-S25,S1,class=expanded_population
+HC:31728,S1,out of scope: class=out_of_scope_veterinary; no disease target
+TGA:lynparza-astrazeneca-pty-ltd-4,S1,out of scope: class=line_extension
+FDA:BLA761202-S6,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA761118-S7,S1,out of scope: class=formulation_or_route; no disease target
+HC:31828,S1,disease pending_source_text
+FDA:BLA125514-S138,S1,out of scope: class=commitment_fulfilment; no disease target
+EMA:9-12-october-2023:Imfinzi,S1,disease pending_source_text
+EMA:9-12-october-2023:Jemperli,S1,out of scope: class=line_extension
+EMA:9-12-october-2023:Keytruda,S1,out of scope: class=line_extension
+EMA:9-12-october-2023:Praluent,S1,class=expanded_population
+EMA:9-12-october-2023:Prevymis,S1,class=expanded_population
+EMA:9-12-october-2023:Rubraca,S1,out of scope: class=line_extension
+EMA:9-12-october-2023:Veyvondi,S1,out of scope: class=wording_only; no disease target
+FDA:BLA125554-S121,S1,class=expanded_population
+HC:31866,S1,disease pending_source_text
+FDA:BLA103795-S5595,S1,class=expanded_population
+FDA:BLA125118-S250,S1,class=expanded_population
+FDA:BLA125514-S148,S1,class=unclear
+FDA:NDA022496-S44,S1,out of scope: class=wording_only; no disease target
+EMA:6-9-november-2023:Ayvakyt,S1,out of scope: class=line_extension
+EMA:6-9-november-2023:Evkeeza,S1,class=expanded_population
+EMA:6-9-november-2023:Fluad-Tetra,S1,disease pending_source_text
+EMA:6-9-november-2023:Jardiance,S1,class=expanded_population
+EMA:6-9-november-2023:NexoBrid,S1,disease pending_source_text
+EMA:6-9-november-2023:Talzenna,S1,disease pending_source_text
+EMA:6-9-november-2023:Veltassa,S1,disease pending_source_text
+HC:32102,S1,out of scope: class=line_extension
+FDA:BLA125514-S143,S1,out of scope: class=line_extension
+FDA:NDA203415-S22,S1,out of scope: class=line_extension
+FDA:NDA213674-S10,S1,out of scope: class=line_extension
+TGA:tacrolimus-intas-azematop-accord-healthcare-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:xeomin-merz-australia-pty-ltd-0,S1,disease pending_source_text
+PMDA:2023-11-24:85,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-11-24:86,S1,out of scope: class=line_extension
+PMDA:2023-11-24:27,S1,out of scope: class=line_extension
+HC:32204,S1,disease pending_source_text
+HC:32277,S1,disease pending_source_text
+HC:32320,S1,out of scope: class=ingredient_prior_indication
+TGA:voxzogo-biomarin-pharmaceutical-australia-pty-ltd-0,S1,class=expanded_population
+TGA:xobet-cream-dpl-clobetasol-cream-cloxobet-cream-xobet-ointment-dpl-clobetasol-ointment-cloxobet-ointment-douglas-pharmaceuticals-australia-pty-ltd,S1,disease pending_source_text
+FDA:NDA215383-S6,S1,out of scope: class=line_extension
+EMA:11-14-december-2023:HyQvia,S1,out of scope: class=ingredient_prior_indication
+EMA:11-14-december-2023:Metalyse,S1,disease pending_source_text
+EMA:11-14-december-2023:VeraSeal,S1,out of scope: no disease target
+EMA:11-14-december-2023:Zinplava,S1,class=unclear
+TGA:ultravist-bayer-australia-ltd,S1,out of scope: no disease target
+TGA:comirnaty-originalomicron-pfizer-australia-pty-ltd-0,S1,class=expanded_population
+FDA:BLA761039-S15,S1,out of scope: class=formulation_or_route; no disease target
+PMDA:2023-12-22:21,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-12-22:37,S1,out of scope: no disease target
+PMDA:2023-12-22:44,S1,out of scope: class=ingredient_prior_indication
+PMDA:2023-12-22:8,S1,out of scope: class=line_extension
+HC:32435,S1,out of scope: no disease target
+HC:32436,S1,out of scope: class=line_extension
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-14,S1,out of scope: class=line_extension
+TGA:wegovy-novo-nordisk-pharmaceuticals-pty-ltd-0,S1,class=expanded_population
+HC:32462,S1,disease pending_source_text
+HC:32548,S1,disease pending_source_text
+TGA:prevenar-pfizer-australia-pty-ltd,S1,class=expanded_population
+TGA:adcetris-takeda-pharmaceuticals-australia-pty-ltd-1,S1,out of scope: class=line_extension
+FDA:NDA212526-S9,S1,class=expanded_population
+HC:32556,S1,disease pending_source_text
+FDA:NDA212018-S9,S1,class=unclear
+TGA:ultomiris-alexion-pharmaceuticals-australasia-pty-ltd-2,S1,disease pending_source_text
+FDA:NDA211988-S13,S1,out of scope: class=wording_only; no disease target
+HC:32606,S1,class=expanded_population
+TGA:ryeqo-gedeon-richter-australia-pty-ltd-0,S1,disease pending_source_text
+EMA:22-25-january-2024:Abecma,S1,out of scope: class=line_extension
+EMA:22-25-january-2024:Aspaveli,S1,out of scope: class=line_extension
+EMA:22-25-january-2024:Prevenar-20-previously-Apexxnar,S1,class=expanded_population
+EMA:22-25-january-2024:Retsevmo,S1,disease pending_source_text
+HC:32616,S1,out of scope: class=ingredient_prior_indication
+TGA:trikafta-vertex-pharmaceuticals-australia-pty-ltd-1,S1,class=expanded_population
+HC:32634,S1,disease pending_source_text
+HC:32659,S1,class=expanded_population
+PMDA:2024-02-09:29,S1,class=expanded_population
+FDA:NDA207793-S16,S1,out of scope: class=line_extension
+HC:32714,S1,out of scope: class=biosimilar_alignment
+FDA:NDA208065-S30,S1,out of scope: class=line_extension
+HC:32730,S1,out of scope: class=wording_only; no disease target
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-24,S1,out of scope: class=line_extension
+EMA:19-22-february-2024:Carvykti,S1,out of scope: class=line_extension
+EMA:19-22-february-2024:Cibinqo,S1,class=expanded_population
+EMA:19-22-february-2024:Kalydeco,S1,disease pending_source_text
+EMA:19-22-february-2024:Keytruda,S1,out of scope: class=line_extension
+EMA:19-22-february-2024:Reblozyl,S1,out of scope: class=line_extension
+EMA:19-22-february-2024:Xromi,S1,class=expanded_population
+FDA:NDA210251-S18,S1,out of scope: class=wording_only; no disease target
+FDA:BLA761210-S3,S1,out of scope: class=line_extension
+TGA:onivyde-servier-laboratories-aust-pty-ltd,S1,out of scope: class=line_extension
+FDA:BLA761040-S3,S1,class=expanded_population
+HC:32837,S1,disease pending_source_text
+FDA:BLA125559-S39,S1,class=expanded_population
+FDA:NDA215256-S11,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA209022-S19,S1,out of scope: class=line_extension
+FDA:BLA761244-S3,S1,class=expanded_population
+FDA:NDA203469-S37,S1,out of scope: class=line_extension
+HC:32928,S1,class=unclear
+HC:32944,S1,out of scope: class=line_extension
+EMA:18-21-march-2024:Nilemdo,S1,out of scope: class=line_extension
+EMA:18-21-march-2024:Nustendi,S1,out of scope: class=line_extension
+EMA:18-21-march-2024:Onivyde-pegylated-liposomal,S1,out of scope: class=line_extension
+EMA:18-21-march-2024:Xtandi,S1,disease pending_source_text
+FDA:NDA211616-S12,S1,out of scope: class=line_extension
+FDA:NDA211616-S13,S1,out of scope: class=line_extension
+FDA:NDA211617-S16,S1,out of scope: class=line_extension
+FDA:NDA211617-S17,S1,out of scope: class=line_extension
+PMDA:2024-03-26:99,S1,out of scope: class=line_extension
+PMDA:2024-03-26:116,S1,class=expanded_population
+PMDA:2024-03-26:30,S1,class=expanded_population
+PMDA:2024-03-26:47,S1,out of scope: class=ingredient_prior_indication
+PMDA:2024-03-26:57,S1,class=expanded_population
+FDA:NDA022192-S23,S1,class=unclear
+TGA:dymista-dylastine-viatris-pty-ltd,S1,class=expanded_population
+HC:33046,S1,disease pending_source_text
+FDA:NDA208434-S15,S1,out of scope: class=line_extension
+FDA:NDA205437-S13,S1,class=expanded_population
+HC:33117,S1,disease pending_source_text
+EMA:22-25-april-2024:Alecensa,S1,out of scope: class=line_extension
+EMA:22-25-april-2024:Opdivo,S1,out of scope: class=line_extension
+EMA:22-25-april-2024:Rozlytrek,S1,disease pending_source_text
+EMA:22-25-april-2024:Rybrevant,S1,out of scope: class=line_extension
+EMA:22-25-april-2024:Sirturo,S1,out of scope: class=wording_only; no disease target
+EMA:22-25-april-2024:Triumeq,S1,class=expanded_population
+TGA:saizen-merck-healthcare-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+HC:33152,S1,class=expanded_population
+FDA:BLA761066-S1,S1,out of scope: class=biosimilar_alignment; no disease target
+FDA:BLA761066-S3,S1,out of scope: class=formulation_or_route; no disease target
+HC:33178,S1,disease pending_source_text
+TGA:comirnaty-originalomicron-pfizer-australia-pty-ltd-1,S1,class=expanded_population
+PMDA:2024-05-17:74,S1,out of scope: no disease target
+PMDA:2024-05-17:70,S1,out of scope: class=ingredient_prior_indication
+PMDA:2024-05-17:50,S1,out of scope: class=line_extension
+HC:33297,S1,out of scope: class=wording_only; no disease target
+FDA:NDA213246-S12,S1,out of scope: no disease target
+HC:33340,S1,out of scope: class=line_extension; no disease target
+EMA:27-30-may-2024:Eliquis,S1,class=expanded_population
+EMA:27-30-may-2024:Kinpeygo,S1,disease pending_source_text
+EMA:27-30-may-2024:Tagrisso,S1,disease pending_source_text
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-25,S1,out of scope: class=line_extension
+FDA:NDA216185-S1,S1,out of scope: class=ingredient_prior_indication
+HC:33462,S1,class=expanded_population
+FDA:BLA761180-S6,S1,out of scope: class=formulation_or_route; no disease target
+FDA:NDA213246-S9,S1,out of scope: class=commitment_fulfilment; no disease target
+FDA:BLA125557-S28,S1,out of scope: class=line_extension
+FDA:NDA022304-S28,S1,out of scope: no disease target
+TGA:zerbaxa-merck-sharp-dohme-australia-pty-ltd-0,S1,disease pending_source_text
+FDA:BLA125514-S155,S1,out of scope: class=line_extension
+PMDA:2024-06-24:132,S1,out of scope: class=line_extension
+PMDA:2024-06-24:40,S1,class=expanded_population
+PMDA:2024-06-24:80,S1,out of scope: class=line_extension
+PMDA:2024-06-24:79,S1,out of scope: no disease target
+FDA:NDA209481-S24,S1,out of scope: class=formulation_or_route; no disease target
+HC:33511,S1,out of scope: no disease target
+HC:33512,S1,out of scope: no disease target; drug unresolved:disinfectant
+HC:33524,S1,out of scope: class=line_extension; no disease target
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-27,S1,out of scope: class=line_extension
+EMA:24-27-june-2024:Betmiga,S1,disease pending_source_text
+EMA:24-27-june-2024:Beyfortus,S1,class=expanded_population
+EMA:24-27-june-2024:Cresemba,S1,disease pending_source_text
+EMA:24-27-june-2024:Imcivree,S1,disease pending_source_text
+EMA:24-27-june-2024:Imfinzi,S1,disease pending_source_text
+EMA:24-27-june-2024:Infanrix-hexa,S1,class=unclear
+EMA:24-27-june-2024:Lynparza,S1,class=unclear
+EMA:24-27-june-2024:Pegasys,S1,disease pending_source_text
+EMA:24-27-june-2024:Vabysmo,S1,disease pending_source_text
+EMA:24-27-june-2024:Xalkori,S1,out of scope: no disease target
+HC:33536,S1,out of scope: class=line_extension
+HC:33535,S1,out of scope: class=line_extension
+FDA:BLA125360-S99,S1,class=unclear
+HC:33609,S1,out of scope: class=line_extension; no disease target
+HC:33628,S1,class=expanded_population
+HC:33637,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:33638,S1,out of scope: class=out_of_scope_veterinary; no disease target
+HC:33686,S1,out of scope: class=line_extension
+FDA:NDA209092-S19,S1,out of scope: class=line_extension
+TGA:takhzyro-takeda-pharmaceuticals-australia-pty-ltd,S1,class=expanded_population
+HC:33696,S1,class=expanded_population
+EMA:22-25-july-2024:Arexvy,S1,disease pending_source_text
+EMA:22-25-july-2024:Edurant,S1,disease pending_source_text
+EMA:22-25-july-2024:Keytruda,S1,out of scope: class=line_extension
+EMA:22-25-july-2024:Opsumit,S1,disease pending_source_text
+EMA:22-25-july-2024:Padcev,S1,out of scope: class=line_extension
+EMA:22-25-july-2024:Rybrevant,S1,out of scope: class=line_extension
+EMA:22-25-july-2024:Slenyto,S1,out of scope: class=line_extension
+EMA:22-25-july-2024:Spevigo,S1,disease pending_source_text
+EMA:22-25-july-2024:Tecentriq,S1,out of scope: class=line_extension
+FDA:BLA761145-S25,S1,out of scope: class=line_extension
+HC:33789,S1,class=expanded_population
+FDA:BLA761174-S9,S1,class=unclear
+TGA:refixia-novo-nordisk-pharmaceuticals-pty-ltd-0,S1,class=expanded_population
+FDA:NDA209988-S1,S1,out of scope: class=wording_only; no disease target
+FDA:BLA761069-S43,S1,out of scope: class=line_extension
+FDA:BLA761192-S10,S1,out of scope: no disease target
+FDA:BLA761210-S5,S1,out of scope: class=line_extension
+HC:33931,S1,out of scope: class=line_extension
+PMDA:2024-08-28:82,S1,out of scope: class=line_extension
+PMDA:2024-08-28:84,S1,out of scope: class=line_extension
+PMDA:2024-08-28:83,S1,out of scope: class=line_extension
+PMDA:2024-08-28:60,S1,out of scope: class=ingredient_prior_indication
+PMDA:2024-08-28:125,S1,class=expanded_population
+PMDA:2024-08-28:69,S1,out of scope: class=ingredient_prior_indication
+TGA:jardiamet-boehringer-ingelheim-pty-ltd,S1,class=expanded_population
+TGA:jardiance-boehringer-ingelheim-pty-ltd-2,S1,class=expanded_population
+FDA:NDA216403-S3,S1,class=unclear
+HC:33948,S1,class=expanded_population
+HC:33967,S1,class=expanded_population
+TGA:revolade-novartis-pharmaceuticals-australia-pty-ltd-0,S1,out of scope: class=ingredient_prior_indication
+HC:33996,S1,out of scope: class=line_extension
+FDA:NDA209092-S18,S1,out of scope: class=line_extension
+FDA:NDA209935-S27,S1,out of scope: class=line_extension
+FDA:BLA761210-S4,S1,out of scope: class=line_extension
+EMA:16-19-september-2024:Aflunov,S1,class=expanded_population
+EMA:16-19-september-2024:Buccolam,S1,disease pending_source_text
+EMA:16-19-september-2024:Darzalex,S1,out of scope: class=line_extension
+EMA:16-19-september-2024:Dupixent,S1,class=expanded_population
+EMA:16-19-september-2024:Esperoct,S1,class=expanded_population
+EMA:16-19-september-2024:Imvanex,S1,class=expanded_population
+EMA:16-19-september-2024:Keytruda,S1,out of scope: class=line_extension
+EMA:16-19-september-2024:Otezla,S1,class=expanded_population
+EMA:16-19-september-2024:Pravafenix,S1,out of scope: class=wording_only; no disease target
+EMA:16-19-september-2024:Sialanar,S1,out of scope: class=excluded
+EMA:16-19-september-2024:Synjardy,S1,class=expanded_population
+EMA:16-19-september-2024:Tecentriq,S1,out of scope: class=excluded
+EMA:16-19-september-2024:Zavicefta,S1,disease pending_source_text
+FDA:BLA761113-S14,S1,out of scope: class=line_extension
+HC:34069,S1,class=expanded_population
+PMDA:2024-09-24:45,S1,class=expanded_population
+PMDA:2024-09-24:9,S1,out of scope: class=ingredient_prior_indication
+PMDA:2024-09-24:92,S1,out of scope: class=line_extension
+PMDA:2024-09-24:133,S1,out of scope: class=ingredient_prior_indication
+PMDA:2024-09-24:91,S1,out of scope: class=line_extension
+PMDA:2024-09-24:8,S1,out of scope: class=line_extension
+PMDA:2024-09-24:24,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA208065-S33,S1,out of scope: class=line_extension
+HC:34232,S1,out of scope: class=commitment_fulfilment
+HC:34254,S1,out of scope: class=line_extension
+TGA:humira-abbvie-pty-ltd,S1,class=expanded_population
+FDA:BLA125554-S127,S1,out of scope: class=line_extension
+TGA:illuccix-telix-pharmaceuticals-anz-pty-ltd-0,S1,out of scope: no disease target; drug unresolved:radiolabelled diagnostic (gallium Ga-68 gozetotide)
+HC:34169,S1,out of scope: class=ingredient_prior_indication
+HC:34202,S1,class=expanded_population
+EMA:14-17-october-2024:Cerdelga,S1,disease pending_source_text
+EMA:14-17-october-2024:Hepcludex,S1,disease pending_source_text
+EMA:14-17-october-2024:Kisqali,S1,disease pending_source_text
+FDA:BLA103000-S5331,S1,out of scope: no disease target
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-15,S1,out of scope: class=line_extension
+FDA:NDA215358-S8,S1,out of scope: class=line_extension
+FDA:NDA215358-S9,S1,out of scope: class=wording_only; no disease target
+TGA:tagrisso-astrazeneca-pty-ltd-1,S1,out of scope: class=line_extension
+HC:34324,S1,class=expanded_population
+HC:34321,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:NDA208716-S17,S1,out of scope: class=commitment_fulfilment; no disease target
+HC:34401,S1,out of scope: class=biosimilar_alignment
+EMA:11-14-november-2024:CellCept,S1,out of scope: no disease target
+EMA:11-14-november-2024:Evkeeza,S1,disease pending_source_text
+EMA:11-14-november-2024:Jakavi,S1,class=unclear
+EMA:11-14-november-2024:Keytruda,S1,disease pending_source_text
+EMA:11-14-november-2024:Opdivo,S1,out of scope: class=line_extension
+EMA:11-14-november-2024:Palforzia,S1,class=expanded_population
+EMA:11-14-november-2024:Rybrevant,S1,out of scope: class=line_extension
+EMA:11-14-november-2024:Sarclisa,S1,out of scope: class=line_extension
+EMA:11-14-november-2024:Tagrisso,S1,out of scope: class=line_extension
+EMA:11-14-november-2024:Yervoy,S1,out of scope: class=line_extension
+HC:34383,S1,class=expanded_population
+TGA:eikance-aspen-pharmacare-australia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+HC:34402,S1,out of scope: no disease target
+TGA:prevymis-merck-sharp-dohme-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:NDA022137-S15,S1,out of scope: class=line_extension
+TGA:veraseal-grifols-australia-pty-ltd-0,S1,out of scope: no disease target; drug unresolved:two-component fibrin sealant (fibrinogen and thrombin)
+FDA:BLA761115-S58,S1,out of scope: class=indication_removed; no disease target
+PMDA:2024-11-22:95,S1,out of scope: class=line_extension
+TGA:fintepla-ucb-australia-pty-ltd-ta-ucb-pharma-division-ucb-australia,S1,out of scope: class=ingredient_prior_indication
+HC:34449,S1,out of scope: class=ingredient_prior_indication
+HC:34581,S1,out of scope: class=line_extension
+TGA:darzalex-janssen-cilag-pty-ltd-0,S1,out of scope: class=line_extension
+TGA:tagrisso-astrazeneca-pty-ltd-2,S1,out of scope: class=line_extension
+FDA:BLA761069-S49,S1,out of scope: class=line_extension
+FDA:NDA011525-S39,S1,out of scope: no disease target
+HC:34542,S1,out of scope: class=ingredient_prior_indication
+EMA:9-12-december-2024:Blincyto,S1,class=unclear
+EMA:9-12-december-2024:Bridion,S1,out of scope: no disease target
+EMA:9-12-december-2024:Flucelvax-Tetra,S1,class=expanded_population
+EMA:9-12-december-2024:Jemperli,S1,out of scope: class=line_extension
+EMA:9-12-december-2024:Ofev,S1,class=unclear
+EMA:9-12-december-2024:Omvoh,S1,class=unclear
+EMA:9-12-december-2024:Rekambys,S1,class=expanded_population
+EMA:9-12-december-2024:Vocabria,S1,class=expanded_population
+HC:34582,S1,class=expanded_population
+TGA:wegovy-novo-nordisk-pharmaceuticals-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+HC:34573,S1,out of scope: class=line_extension
+FDA:NDA213006-S11,S1,class=expanded_population
+TGA:alecensa-roche-products-pty-ltd,S1,out of scope: class=line_extension
+FDA:NDA210496-S17,S1,out of scope: class=line_extension
+FDA:NDA213793-S7,S1,out of scope: no disease target
+FDA:NDA205649-S23,S1,out of scope: class=line_extension
+HC:34610,S1,out of scope: class=ingredient_prior_indication
+HC:34618,S1,out of scope: class=line_extension
+PMDA:2024-12-27:108,S1,out of scope: class=line_extension
+PMDA:2024-12-27:106,S1,out of scope: class=line_extension
+PMDA:2024-12-27:107,S1,out of scope: class=line_extension
+PMDA:2024-12-27:49,S1,out of scope: class=ingredient_prior_indication
+TGA:arcatus-arctic-vision-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:alhemo-novo-nordisk-pharmaceuticals-pty-ltd-1,S1,out of scope: class=line_extension
+HC:34686,S1,out of scope: class=line_extension
+TGA:imfinzi-astrazeneca-pty-ltd-5,S1,out of scope: class=line_extension
+TGA:ilaris-novartis-pharmaceuticals-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA210259-S11,S1,out of scope: class=line_extension
+FDA:NDA216387-S5,S1,out of scope: class=line_extension
+FDA:BLA125147-S213,S1,out of scope: class=line_extension
+FDA:NDA211243-S16,S1,out of scope: class=wording_only; no disease target
+HC:34697,S1,out of scope: class=formulation_or_route; no disease target
+HC:34717,S1,out of scope: class=line_extension
+TGA:blincyto-amgen-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:BLA761269-S5,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA761139-S32,S1,out of scope: class=line_extension
+TGA:empaveli-swedish-orphan-biovitrum-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:kalydeco-vertex-pharmaceuticals-australia-pty-ltd-1,S1,class=expanded_population
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-28,S1,disease pending_source_text
+EMA:27-30-january-2025:Imfinzi,S1,disease pending_source_text
+EMA:27-30-january-2025:Opdivo,S1,out of scope: class=ingredient_prior_indication
+EMA:27-30-january-2025:Ronapreve,S1,class=expanded_population
+EMA:27-30-january-2025:Rxulti,S1,disease pending_source_text
+EMA:27-30-january-2025:Sivextro,S1,disease pending_source_text
+EMA:27-30-january-2025:Slenyto,S1,out of scope: class=line_extension
+EMA:27-30-january-2025:Yervoy,S1,disease pending_source_text
+FDA:BLA761197-S6,S1,out of scope: class=ingredient_prior_indication
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-16,S1,out of scope: class=line_extension
+HC:34815,S1,out of scope: class=line_extension
+TGA:xtandi-astellas-pharma-australia-pty-ltd-0,S1,out of scope: class=line_extension
+HC:34845,S1,out of scope: class=ingredient_prior_indication
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-29,S1,out of scope: class=line_extension
+TGA:padcev-astellas-pharma-australia-pty-ltd-0,S1,out of scope: class=line_extension
+PMDA:2025-02-20:65,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-02-20:29,S1,disease pending_source_text
+PMDA:2025-02-20:111,S1,out of scope: class=line_extension
+PMDA:2025-02-20:109,S1,out of scope: class=ingredient_prior_indication
+TGA:venclexta-abbvie-pty-ltd-0,S1,out of scope: class=line_extension
+TGA:imfinzi-astrazeneca-pty-ltd-6,S1,out of scope: class=line_extension
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-30,S1,out of scope: class=line_extension
+TGA:boostrix-ipv-glaxosmithkline-australia-pty-ltd,S1,class=expanded_population
+EMA:24-27-february-2025:Abrysvo,S1,class=expanded_population
+EMA:24-27-february-2025:Calquence,S1,out of scope: class=ingredient_prior_indication
+EMA:24-27-february-2025:Columvi,S1,out of scope: class=line_extension
+EMA:24-27-february-2025:Darzalex,S1,disease pending_source_text
+EMA:24-27-february-2025:Enhertu,S1,out of scope: class=line_extension
+EMA:24-27-february-2025:Imfinzi,S1,disease pending_source_text
+EMA:24-27-february-2025:Ixchiq,S1,disease pending_source_text
+EMA:24-27-february-2025:Kaftrio,S1,class=expanded_population
+EMA:24-27-february-2025:Kalydeco,S1,class=expanded_population
+EMA:24-27-february-2025:Prevymis,S1,disease pending_source_text
+EMA:24-27-february-2025:Stelara,S1,class=expanded_population
+EMA:24-27-february-2025:Supemtek-Tetra,S1,class=expanded_population
+EMA:24-27-february-2025:Tremfya,S1,disease pending_source_text
+FDA:BLA103909-S5197,S1,class=unclear
+HC:34931,S1,disease pending_source_text
+TGA:kisqali-novartis-pharmaceuticals-australia-pty-ltd-0,S1,out of scope: class=line_extension
+HC:34956,S1,out of scope: no disease target
+HC:34963,S1,class=expanded_population
+HC:34961,S1,out of scope: class=line_extension
+FDA:NDA209988-S3,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA206111-S45,S1,out of scope: class=line_extension
+FDA:NDA208658-S32,S1,out of scope: class=line_extension
+FDA:NDA212097-S12,S1,out of scope: no disease target
+TGA:enhertu-astrazeneca-pty-ltd-2,S1,out of scope: class=line_extension
+HC:35023,S1,out of scope: class=out_of_scope_veterinary; no disease target
+TGA:phelinun-link-medical-products-pty-ltd-ta-link-pharmaceuticals,S1,out of scope: no disease target
+FDA:NDA215515-S6,S1,class=expanded_population
+TGA:cresemba-pfizer-australia-pty-ltd-0,S1,class=expanded_population
+PMDA:2025-03-27:68,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-03-27:118,S1,out of scope: class=line_extension
+PMDA:2025-03-27:15,S1,out of scope: class=line_extension
+PMDA:2025-03-27:119,S1,out of scope: class=line_extension
+TGA:arexvy-glaxosmithkline-australia-pty-ltd-0,S1,class=expanded_population
+EMA:24-27-march-2025:Bosulif,S1,class=expanded_population
+EMA:24-27-march-2025:Calquence,S1,out of scope: class=line_extension
+EMA:24-27-march-2025:Flucelvax,S1,class=expanded_population
+EMA:24-27-march-2025:Opdivo,S1,out of scope: class=line_extension
+EMA:24-27-march-2025:Pemazyre,S1,out of scope: class=excluded
+EMA:24-27-march-2025:Xydalba,S1,class=expanded_population
+FDA:BLA761069-S50,S1,out of scope: class=line_extension
+FDA:NDA215833-S21,S1,out of scope: class=wording_only; no disease target
+TGA:forxiga-astrazeneca-pty-ltd-4,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761024-S23,S1,out of scope: class=formulation_or_route; no disease target
+HC:35138,S1,out of scope: class=line_extension
+TGA:rybrevant-janssen-cilag-pty-ltd-0,S1,out of scope: class=line_extension
+HC:35152,S1,out of scope: class=line_extension
+TGA:jemperli-glaxosmithkline-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:NDA212801-S3,S1,class=expanded_population
+HC:35199,S1,out of scope: class=line_extension
+HC:35232,S1,out of scope: class=line_extension
+HC:35244,S1,out of scope: class=line_extension; no disease target
+TGA:trikafta-vertex-pharmaceuticals-australia-pty-ltd-2,S1,class=expanded_population
+EMA:22-25-april-2025:Adcetris,S1,out of scope: class=line_extension
+EMA:22-25-april-2025:Adempas,S1,disease pending_source_text
+EMA:22-25-april-2025:Amvuttra,S1,class=expanded_population
+EMA:22-25-april-2025:Calquence,S1,out of scope: class=line_extension
+EMA:22-25-april-2025:Cystadrops,S1,class=expanded_population
+EMA:22-25-april-2025:Jivi,S1,disease pending_source_text
+EMA:22-25-april-2025:Veklury,S1,class=expanded_population
+EMA:22-25-april-2025:Vyvgart,S1,disease pending_source_text
+EMA:22-25-april-2025:Xofluza,S1,disease pending_source_text
+EMA:22-25-april-2025:Zoonotic-Influenza-Vaccine-Seqirus,S1,disease pending_source_text
+HC:35273,S1,out of scope: class=line_extension
+HC:35304,S1,out of scope: class=ingredient_prior_indication
+HC:35335,S1,class=expanded_population
+TGA:xeomin-merz-australia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA020899-S25,S1,out of scope: no disease target
+TGA:venclexta-abbvie-pty-ltd-1,S1,out of scope: class=line_extension
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-17,S1,out of scope: class=ingredient_prior_indication
+TGA:winglore-bristol-myers-squibb-australia-pty-ltd-0,S1,out of scope: class=ingredient_prior_indication
+HC:35357,S1,out of scope: class=out_of_scope_veterinary; no disease target
+PMDA:2025-05-19:9,S1,out of scope: class=line_extension
+PMDA:2025-05-19:1,S1,out of scope: no disease target
+PMDA:2025-05-19:6,S1,out of scope: class=line_extension
+FDA:BLA761024-S21,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA761058-S31,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA761197-S7,S1,out of scope: class=ingredient_prior_indication
+TGA:welireg-merck-sharp-dohme-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:BLA125514-S182,S1,out of scope: class=wording_only; no disease target
+FDA:NDA217242-S5,S1,class=expanded_population
+EMA:19-22-may-2025:Imfinzi,S1,disease pending_source_text
+EMA:19-22-may-2025:Lutathera,S1,out of scope: class=excluded
+EMA:19-22-may-2025:Rezolsta,S1,disease pending_source_text
+EMA:19-22-may-2025:Saxenda,S1,class=expanded_population
+FDA:BLA125554-S133,S1,out of scope: class=wording_only; no disease target
+FDA:BLA125377-S136,S1,class=unclear
+FDA:NDA212099-S8,S1,out of scope: class=line_extension
+HC:35471,S1,class=expanded_population
+FDA:NDA209449-S18,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA209394-S19,S1,out of scope: class=line_extension
+FDA:NDA215110-S5,S1,out of scope: class=line_extension
+HC:35488,S1,class=expanded_population
+HC:35487,S1,class=expanded_population
+FDA:NDA211651-S13,S1,class=unclear
+FDA:NDA217439-S3,S1,class=unclear
+HC:35510,S1,out of scope: class=line_extension; no disease target
+HC:35547,S1,out of scope: class=ingredient_prior_indication
+HC:35571,S1,class=expanded_population
+EMA:16-19-june-2025:Benlysta,S1,class=expanded_population
+EMA:16-19-june-2025:Cabometyx,S1,disease pending_source_text
+EMA:16-19-june-2025:Dapivirine-Vaginal-Ring-25-mg,S1,out of scope: class=excluded
+EMA:16-19-june-2025:Darzalex,S1,disease pending_source_text
+EMA:16-19-june-2025:Imbruvica,S1,out of scope: class=line_extension
+EMA:16-19-june-2025:Nubeqa,S1,disease pending_source_text
+EMA:16-19-june-2025:Sarclisa,S1,out of scope: class=line_extension
+TGA:opdivo-bristol-myers-squibb-australia-pty-ltd-18,S1,out of scope: class=ingredient_prior_indication
+TGA:winglore-bristol-myers-squibb-australia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+HC:35572,S1,out of scope: class=line_extension; no disease target
+PMDA:2025-06-24:1,S1,out of scope: no disease target
+PMDA:2025-06-24:16,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-06-24:9,S1,class=expanded_population
+PMDA:2025-06-24:3,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-06-24:17,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-06-24:18,S1,out of scope: class=ingredient_prior_indication
+TGA:botox-abbvie-pty-ltd,S1,out of scope: no disease target
+FDA:BLA761107-S18,S1,out of scope: class=line_extension
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-31,S1,out of scope: class=ingredient_prior_indication
+TGA:scemblix-novartis-pharmaceuticals-australia-pty-ltd-0,S1,out of scope: class=line_extension
+HC:35647,S1,disease pending_source_text
+TGA:biktarvy-gilead-sciences-pty-ltd-0,S1,class=expanded_population
+HC:35675,S1,out of scope: class=line_extension
+FDA:NDA017558-S68,S1,out of scope: class=wording_only; no disease target
+HC:35691,S1,out of scope: class=ingredient_prior_indication
+TGA:columvi-roche-products-pty-ltd-0,S1,out of scope: class=line_extension
+HC:35692,S1,out of scope: class=line_extension
+FDA:NDA210238-S10,S1,class=expanded_population
+EMA:21-24-july-2025:Alhemo,S1,disease pending_source_text
+EMA:21-24-july-2025:Baqsimi,S1,disease pending_source_text
+EMA:21-24-july-2025:Clopidogrel-Zentiva,S1,out of scope: class=line_extension
+EMA:21-24-july-2025:Invokana,S1,class=expanded_population
+EMA:21-24-july-2025:Sirturo,S1,class=expanded_population
+EMA:21-24-july-2025:Tevimbra,S1,out of scope: class=line_extension
+EMA:21-24-july-2025:mResvia,S1,disease pending_source_text
+HC:35751,S1,out of scope: class=line_extension; no disease target
+HC:35750,S1,out of scope: class=line_extension; no disease target
+FDA:NDA214012-S16,S1,out of scope: class=wording_only; no disease target
+HC:35771,S1,out of scope: no disease target
+TGA:darzalex-sc-janssen-cilag-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:NDA216099-S5,S1,class=expanded_population
+TGA:opsumit-janssen-cilag-pty-ltd,S1,class=expanded_population
+HC:35813,S1,out of scope: class=line_extension
+HC:35837,S1,out of scope: class=line_extension
+HC:35902,S1,class=expanded_population
+HC:35859,S1,out of scope: class=line_extension; no disease target
+PMDA:2025-08-25:13,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-08-25:2,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-08-25:11,S1,out of scope: class=line_extension
+PMDA:2025-08-25:7,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-08-25:12,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-08-25:8,S1,out of scope: class=ingredient_prior_indication
+HC:35915,S1,out of scope: class=out_of_scope_veterinary; no disease target; drug unresolved:veterinary
+HC:35913,S1,out of scope: class=out_of_scope_veterinary; no disease target; drug unresolved:veterinary
+HC:35948,S1,disease pending_source_text
+FDA:NDA213756-S5,S1,class=expanded_population
+HC:35986,S1,out of scope: class=line_extension
+HC:35996,S1,class=expanded_population
+TGA:zicthoru-accelagen-pty-ltd,S1,out of scope: no disease target
+EMA:15-18-september-2025:Bimervax,S1,class=expanded_population
+EMA:15-18-september-2025:Keytruda,S1,disease pending_source_text
+EMA:15-18-september-2025:Koselugo,S1,disease pending_source_text
+EMA:15-18-september-2025:Tezspire,S1,disease pending_source_text
+EMA:15-18-september-2025:Uplizna,S1,disease pending_source_text
+FDA:BLA761061-S26,S1,out of scope: class=formulation_or_route; no disease target
+PMDA:2025-09-19:5,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-09-19:25,S1,out of scope: class=line_extension
+PMDA:2025-09-19:23,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-09-19:30,S1,out of scope: class=line_extension
+TGA:hyqvia-takeda-pharmaceuticals-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761061-S29,S1,class=expanded_population
+TGA:imfinzi-astrazeneca-pty-ltd-8,S1,out of scope: class=line_extension
+HC:36097,S1,out of scope: class=formulation_or_route
+FDA:BLA761034-S58,S1,class=unclear
+FDA:BLA761347-S3,S1,class=unclear
+FDA:NDA213702-S11,S1,out of scope: class=line_extension
+FDA:NDA210661-S4,S1,out of scope: class=line_extension
+FDA:BLA125289-S157,S1,class=expanded_population
+HC:36123,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:BLA761097-S30,S1,out of scope: class=line_extension
+FDA:BLA125559-S47,S1,out of scope: class=wording_only; no disease target
+HC:36139,S1,out of scope: class=ingredient_prior_indication
+TGA:enhertu-astrazeneca-pty-ltd-4,S1,out of scope: class=ingredient_prior_indication
+TGA:vevye-aft-pharmaceuticals-pty-ltd,S1,out of scope: class=formulation_or_route
+FDA:NDA018735-S75,S1,out of scope: no disease target
+FDA:NDA214860-S7,S1,out of scope: no disease target
+FDA:NDA213586-S8,S1,out of scope: class=ingredient_prior_indication
+HC:36169,S1,out of scope: class=wording_only; no disease target
+TGA:retevmo-eli-lilly-australia-pty-ltd-0,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA203214-S39,S1,class=expanded_population
+FDA:NDA213082-S11,S1,class=expanded_population
+EMA:13-16-october-2025:Breyanzi,S1,disease pending_source_text
+EMA:13-16-october-2025:Cejemly,S1,disease pending_source_text
+EMA:13-16-october-2025:Gazyvaro,S1,disease pending_source_text
+EMA:13-16-october-2025:Libtayo,S1,out of scope: class=line_extension
+EMA:13-16-october-2025:Paxlovid,S1,class=unclear
+EMA:13-16-october-2025:Pyrukynd,S1,disease pending_source_text
+EMA:13-16-october-2025:Scemblix,S1,disease pending_source_text
+EMA:13-16-october-2025:Tremfya,S1,class=expanded_population
+FDA:NDA213051-S24,S1,out of scope: class=line_extension
+HC:36224,S1,class=expanded_population
+HC:36206,S1,class=expanded_population
+FDA:NDA218944-S3,S1,out of scope: class=line_extension
+FDA:BLA761381-S1,S1,out of scope: class=line_extension
+FDA:BLA761381-S2,S1,out of scope: class=line_extension
+HC:36272,S1,out of scope: class=line_extension
+FDA:BLA761145-S29,S1,out of scope: class=line_extension
+HC:36339,S1,out of scope: class=out_of_scope_veterinary; no disease target
+TGA:spevigo-boehringer-ingelheim-pty-ltd-0,S1,out of scope: class=line_extension
+HC:36361,S1,class=expanded_population
+EMA:10-13-november-2025:Hetlioz,S1,out of scope: class=excluded
+EMA:10-13-november-2025:Koselugo,S1,disease pending_source_text
+EMA:10-13-november-2025:Minjuvi,S1,disease pending_source_text
+EMA:10-13-november-2025:Veyvondi,S1,disease pending_source_text
+EMA:10-13-november-2025:Xerava,S1,disease pending_source_text
+TGA:enhertu-astrazeneca-pty-ltd-5,S1,out of scope: class=line_extension
+HC:36402,S1,out of scope: class=line_extension
+FDA:BLA761355-S10,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA215390-S2,S1,out of scope: class=commitment_fulfilment; no disease target
+FDA:BLA761344-S1,S1,out of scope: class=commitment_fulfilment; no disease target
+FDA:NDA213756-S6,S1,class=expanded_population
+PMDA:2025-11-20:3,S1,out of scope: no disease target
+PMDA:2025-11-20:4,S1,out of scope: class=formulation_or_route
+PMDA:2025-11-20:2,S1,out of scope: class=ingredient_prior_indication
+PMDA:2025-11-20:6,S1,out of scope: class=line_extension
+PMDA:2025-11-20:5,S1,out of scope: class=ingredient_prior_indication
+TGA:crysvita-kyowa-kirin-australia-pty-ltd-1,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA125514-S188,S1,out of scope: class=line_extension
+FDA:BLA761467-S1,S1,out of scope: class=line_extension
+FDA:NDA211616-S24,S1,out of scope: class=wording_only; no disease target
+FDA:NDA211617-S29,S1,out of scope: class=wording_only; no disease target
+FDA:BLA761137-S32,S1,out of scope: class=line_extension
+FDA:NDA215256-S23,S1,out of scope: class=wording_only; no disease target
+HC:36410,S1,out of scope: class=biosimilar_alignment
+FDA:NDA216059-S5,S1,out of scope: class=commitment_fulfilment; no disease target
+HC:36466,S1,out of scope: class=wording_only
+HC:36479,S1,out of scope: class=line_extension
+EMA:8-11-december-2025:Arexvy,S1,class=expanded_population
+EMA:8-11-december-2025:Dovprela,S1,disease pending_source_text
+EMA:8-11-december-2025:Elucirem,S1,out of scope: no disease target
+EMA:8-11-december-2025:Eylea,S1,disease pending_source_text
+EMA:8-11-december-2025:Hetlioz,S1,out of scope: class=excluded
+EMA:8-11-december-2025:Mounjaro,S1,class=expanded_population
+EMA:8-11-december-2025:Recarbrio,S1,disease pending_source_text
+EMA:8-11-december-2025:Simponi,S1,class=expanded_population
+EMA:8-11-december-2025:Uplizna,S1,class=unclear
+EMA:8-11-december-2025:Vueway,S1,out of scope: no disease target
+EMA:8-11-december-2025:Winrevair,S1,class=expanded_population
+FDA:NDA216793-S1,S1,out of scope: class=line_extension
+HC:36544,S1,class=expanded_population
+TGA:adcetris-takeda-pharmaceuticals-australia-pty-ltd-2,S1,out of scope: class=line_extension
+FDA:NDA022526-S13,S1,out of scope: no disease target
+FDA:BLA761139-S38,S1,class=unclear
+TGA:yeytuo-gilead-sciences-pty-ltd,S1,out of scope: class=line_extension
+HC:36593,S1,class=expanded_population
+FDA:BLA761263-S6,S1,out of scope: class=formulation_or_route; no disease target
+PMDA:2025-12-22:4,S1,out of scope: class=ingredient_prior_indication
+HC:36698,S1,class=expanded_population
+HC:36662,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA020367-S123,S1,out of scope: class=line_extension
+TGA:sublocade-indivior-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+HC:36731,S1,class=expanded_population
+TGA:tremfya-janssen-cilag-pty-ltd-1,S1,class=expanded_population
+TGA:nubeqa-bayer-australia-ltd-1,S1,out of scope: class=line_extension
+TGA:retrieve-inova-pharmaceuticals-australia-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA022472-S27,S1,out of scope: class=formulation_or_route; no disease target
+FDA:NDA022348-S28,S1,out of scope: class=wording_only; no disease target
+FDA:BLA761145-S28,S1,out of scope: class=line_extension
+HC:36794,S1,class=expanded_population
+TGA:keytruda-merck-sharp-dohme-australia-pty-ltd-33,S1,out of scope: class=line_extension
+EMA:26-29-january-2026:Akeega,S1,out of scope: class=line_extension
+EMA:26-29-january-2026:Efmody,S1,disease pending_source_text
+EMA:26-29-january-2026:Eurneffy,S1,disease pending_source_text
+EMA:26-29-january-2026:Iclusig,S1,out of scope: class=line_extension
+EMA:26-29-january-2026:Kerendia,S1,disease pending_source_text
+EMA:26-29-january-2026:Noxafil,S1,disease pending_source_text
+EMA:26-29-january-2026:Opdivo,S1,class=unclear
+EMA:26-29-january-2026:Zynyz,S1,disease pending_source_text
+HC:36822,S1,class=expanded_population
+TGA:koselugo-alexion-pharmaceuticals-australasia-pty-ltd,S1,class=expanded_population
+HC:36854,S1,class=expanded_population
+HC:36884,S1,out of scope: class=line_extension
+FDA:NDA214012-S18,S1,class=expanded_population
+FDA:NDA210259-S12,S1,out of scope: class=line_extension
+FDA:NDA216387-S6,S1,out of scope: class=line_extension
+PMDA:2026-02-19:13,S1,out of scope: class=line_extension
+HC:36949,S1,out of scope: class=line_extension
+FDA:BLA761055-S75,S1,out of scope: class=line_extension
+FDA:NDA210496-S21,S1,out of scope: class=line_extension
+HC:36984,S1,class=expanded_population
+HC:36985,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA219042-S1,S1,class=unclear
+EMA:23-26-february-2026:Dupixent,S1,class=expanded_population
+EMA:23-26-february-2026:Jorveza,S1,disease pending_source_text
+EMA:23-26-february-2026:Keytruda,S1,disease pending_source_text
+EMA:23-26-february-2026:Olumiant,S1,class=expanded_population
+EMA:23-26-february-2026:Scemblix,S1,out of scope: class=line_extension
+EMA:23-26-february-2026:Stelara,S1,class=expanded_population
+FDA:BLA761079-S31,S1,class=expanded_population
+HC:37076,S1,class=expanded_population
+FDA:BLA761291-S18,S1,out of scope: class=commitment_fulfilment; no disease target
+FDA:BLA761105-S42,S1,out of scope: class=wording_only; no disease target
+TGA:calquence-astrazeneca-pty-ltd-1,S1,out of scope: class=line_extension
+FDA:BLA125504-S91,S1,class=expanded_population
+TGA:maviret-abbvie-pty-ltd-3,S1,class=expanded_population
+FDA:BLA125554-S135,S1,out of scope: class=line_extension
+TGA:zolgensma-novartis-pharmaceuticals-australia-pty-ltd-0,S1,out of scope: class=line_extension
+HC:37418,S1,class=expanded_population
+EMA:23-26-march-2026:Besponsa,S1,disease pending_source_text
+EMA:23-26-march-2026:Capvaxive,S1,class=expanded_population
+EMA:23-26-march-2026:Feraccru,S1,disease pending_source_text
+EMA:23-26-march-2026:Hympavzi,S1,disease pending_source_text
+EMA:23-26-march-2026:Lojuxta,S1,disease pending_source_text
+EMA:23-26-march-2026:Mresvia,S1,class=expanded_population
+EMA:23-26-march-2026:Namuscla,S1,disease pending_source_text
+EMA:23-26-march-2026:Retsevmo,S1,disease pending_source_text
+EMA:23-26-march-2026:Tafinlar,S1,disease pending_source_text
+FDA:BLA761324-S10,S1,out of scope: class=wording_only; no disease target
+TGA:menquadfi-sanofi-aventis-australia-pty-ltd-0,S1,class=expanded_population
+FDA:BLA761334-S8,S1,out of scope: class=formulation_or_route; no disease target
+TGA:amvuttra-medison-pharma-australia-pty-ltd-0,S1,class=expanded_population
+TGA:darzalex-sc-janssen-cilag-pty-ltd-1,S1,out of scope: class=line_extension
+FDA:BLA761355-S5,S1,out of scope: class=formulation_or_route; no disease target
+TGA:pedmarqsi-norgine-pty-ltd,S1,out of scope: class=ingredient_prior_indication
+TGA:winrevair-merck-sharp-dohme-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:BLA761235-S8,S1,out of scope: class=formulation_or_route; no disease target
+HC:37280,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:BLA761044-S20,S1,class=expanded_population
+TGA:zepzelca-specialised-therapeutics-pharma-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:BLA125504-S97,S1,class=unclear
+FDA:BLA125504-S98,S1,class=expanded_population
+HC:37342,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:BLA761183-S13,S1,out of scope: no disease target
+HC:37368,S1,out of scope: class=line_extension
+HC:37369,S1,out of scope: class=out_of_scope_veterinary; no disease target
+FDA:BLA761055-S74,S1,class=expanded_population
+FDA:BLA761068-S11,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA125409-S141,S1,out of scope: class=wording_only; no disease target
+FDA:NDA212306-S18,S1,out of scope: class=indication_removed; no disease target
+EMA:20-23-april-2026:Agamree,S1,disease pending_source_text
+EMA:20-23-april-2026:Aquipta,S1,disease pending_source_text
+EMA:20-23-april-2026:Comirnaty,S1,disease pending_source_text
+EMA:20-23-april-2026:Crysvita,S1,disease pending_source_text
+EMA:20-23-april-2026:Inaqovi,S1,disease pending_source_text
+EMA:20-23-april-2026:Opdivo,S1,out of scope: class=line_extension
+EMA:20-23-april-2026:Privigen,S1,disease pending_source_text
+EMA:20-23-april-2026:Skyrizi,S1,disease pending_source_text
+EMA:20-23-april-2026:Venclyxto,S1,out of scope: class=line_extension
+FDA:BLA761467-S3,S1,out of scope: class=wording_only; no disease target
+FDA:NDA212122-S9,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761139-S39,S1,out of scope: class=wording_only; no disease target
+FDA:NDA216579-S1,S1,out of scope: class=ingredient_prior_indication
+HC:37421,S1,out of scope: class=line_extension
+FDA:BLA761053-S38,S1,class=expanded_population
+FDA:BLA761195-S16,S1,class=expanded_population
+FDA:BLA761304-S18,S1,class=expanded_population
+FDA:NDA212576-S8,S1,out of scope: class=ingredient_prior_indication
+FDA:BLA761139-S41,S1,out of scope: class=line_extension
+FDA:BLA761139-S43,S1,out of scope: class=line_extension
+FDA:BLA761034-S61,S1,out of scope: class=line_extension
+FDA:BLA761347-S8,S1,class=unclear
+HC:37540,S1,out of scope: class=out_of_scope_veterinary; no disease target
+TGA:slenyto-rad-data-australia-pty-ltd-0,S1,out of scope: class=line_extension
+FDA:BLA761334-S9,S1,out of scope: class=commitment_fulfilment; no disease target
+TGA:eydenzelt-celltrion-healthcare-australia-pty-ltd-0,S1,disease pending_source_text
+TGA:haruropi-accelagen-pty-ltd,S1,disease pending_source_text
+EMA:18-21-may-2026:Braftovi,S1,disease pending_source_text
+EMA:18-21-may-2026:Erbitux,S1,out of scope: class=line_extension
+EMA:18-21-may-2026:Hetronifly,S1,disease pending_source_text
+EMA:18-21-may-2026:Iclusig,S1,disease pending_source_text
+EMA:18-21-may-2026:Keytruda,S1,out of scope: class=line_extension
+EMA:18-21-may-2026:Maviret,S1,disease pending_source_text
+EMA:18-21-may-2026:Padcev,S1,out of scope: class=line_extension
+EMA:18-21-may-2026:Palynziq,S1,disease pending_source_text
+EMA:18-21-may-2026:Sogroya,S1,disease pending_source_text
+EMA:18-21-may-2026:Tepkinly,S1,disease pending_source_text
+EMA:18-21-may-2026:Trodelvy,S1,out of scope: class=line_extension
+FDA:BLA761394-S3,S1,out of scope: class=line_extension
+FDA:NDA207947-S14,S1,class=unclear
+TGA:coveram-servier-laboratories-aust-pty-ltd,S1,disease pending_source_text
+FDA:BLA761069-S53,S1,out of scope: class=line_extension
+FDA:BLA761061-S34,S1,out of scope: class=wording_only; no disease target
+FDA:BLA022472-S29,S1,class=unclear
+FDA:BLA761369-S3,S1,class=expanded_population
+HC:37664,S1,out of scope: class=line_extension
+TGA:pluvicto-novartis-pharmaceuticals-australia-pty-ltd-0,S1,out of scope: class=line_extension; drug unresolved:radiolabelled therapeutic (lutetium-177 vipivotide tetraxetan) without a DrugBank accession in the cache
+FDA:BLA761306-S6,S1,out of scope: class=formulation_or_route; no disease target
+HC:37684,S1,out of scope: class=line_extension
+FDA:BLA125514-S192,S1,out of scope: class=line_extension
+FDA:BLA761467-S9,S1,out of scope: class=line_extension
+FDA:BLA761105-S44,S1,class=expanded_population
+FDA:BLA761183-S10,S1,class=expanded_population
+FDA:NDA215383-S15,S1,out of scope: class=line_extension
+HC:37731,S1,out of scope: class=line_extension
+HC:37769,S1,out of scope: class=line_extension; no disease target
+HC:37768,S1,out of scope: class=line_extension
+HC:37767,S1,class=expanded_population
+FDA:NDA207103-S24,S1,out of scope: class=line_extension
+FDA:NDA212436-S12,S1,out of scope: class=line_extension
+FDA:BLA125514-S187,S1,out of scope: class=line_extension
+FDA:BLA761467-S4,S1,out of scope: class=line_extension
+FDA:BLA761115-S63,S1,out of scope: class=line_extension
+FDA:BLA761115-S64,S1,out of scope: class=line_extension
+FDA:BLA125360-S108,S1,out of scope: class=wording_only; no disease target
+HC:37770,S1,out of scope: class=first_indication
+EMA:22-25-june-2026:Datroway,S1,disease pending_source_text
+EMA:22-25-june-2026:Imvanex,S1,class=expanded_population
+EMA:22-25-june-2026:Ixchiq,S1,disease pending_source_text
+EMA:22-25-june-2026:Jaypirca,S1,out of scope: class=line_extension
+EMA:22-25-june-2026:Leqvio,S1,disease pending_source_text
+EMA:22-25-june-2026:MenQuadfi,S1,disease pending_source_text
+EMA:22-25-june-2026:Opzelura,S1,disease pending_source_text
+EMA:22-25-june-2026:Rezolsta,S1,disease pending_source_text
+EMA:22-25-june-2026:Stelara,S1,disease pending_source_text
+EMA:22-25-june-2026:Symtuza,S1,disease pending_source_text
+EMA:22-25-june-2026:Tecvayli,S1,disease pending_source_text
+FDA:BLA761105-S45,S1,class=expanded_population
+HC:37779,S1,out of scope: class=line_extension
+HC:37804,S1,out of scope: class=line_extension
+HC:37833,S1,out of scope: class=wording_only; no disease target
+HC:37834,S1,class=expanded_population
+FDA:BLA125514-S194,S1,out of scope: class=line_extension
+FDA:BLA761467-S12,S1,out of scope: class=line_extension
+FDA:BLA761137-S37,S1,out of scope: class=line_extension
+FDA:BLA761375-S1,S1,out of scope: class=formulation_or_route; no disease target
+FDA:BLA761067-S27,S1,out of scope: class=wording_only; no disease target
+EMA:20-23-july-2026:Dupixent,S1,out of scope: class=excluded
+EMA:20-23-july-2026:Enhertu,S1,disease pending_source_text
+EMA:20-23-july-2026:Imfinzi,S1,out of scope: class=excluded
+EMA:20-23-july-2026:Jivi,S1,disease pending_source_text
+EMA:20-23-july-2026:Piqray,S1,disease pending_source_text
+EMA:20-23-july-2026:Repatha,S1,disease pending_source_text
+EMA:20-23-july-2026:Riltrava-Aerosphere,S1,disease pending_source_text
+EMA:20-23-july-2026:Rinvoq,S1,disease pending_source_text
+EMA:20-23-july-2026:Trixeo-Aerosphere,S1,disease pending_source_text
+EMA:20-23-july-2026:Trodelvy,S1,disease pending_source_text
+FDA:NDA215833-S37,S1,class=unclear
+HC:38034,S1,out of scope: class=line_extension
+HC:38031,S1,out of scope: class=line_extension
+HC:38111,S1,class=expanded_population
+HC:38107,S1,out of scope: class=ingredient_prior_indication; drug unresolved:multi-factor plasma product (prothrombin complex concentrate has no single DrugBank accession)
+FDA:BLA761406-S2,S1,out of scope: class=formulation_or_route; no disease target
+HC:38113,S1,class=expanded_population
+HC:38136,S1,out of scope: class=ingredient_prior_indication
+HC:38144,S1,class=expanded_population
+HC:38153,S1,out of scope: class=line_extension
+FDA:BLA761232-S18,S1,out of scope: class=line_extension
+FDA:NDA215866-S44,S1,out of scope: class=line_extension
+HC:38183,S1,out of scope: class=line_extension
+FDA:BLA761044-S21,S1,class=expanded_population
+HC:38242,S1,out of scope: class=biosimilar_alignment
+FDA:NDA208081-S40,S1,out of scope: class=ingredient_prior_indication
+FDA:NDA219972-S1,S1,class=unclear
+PMDA:2023-02-28:129,S2,vaccine (product-level identifier; no graph models it as a compound)
+TGA:flucelvax-seqirus-pty-ltd,S2,vaccine (product-level identifier; no graph models it as a compound)
+PMDA:2023-08-02:107,S2,vaccine (product-level identifier; no graph models it as a compound)
+PMDA:2023-11-28:112,S2,vaccine (product-level identifier; no graph models it as a compound)
+PMDA:2024-09-05:126,S2,vaccine (product-level identifier; no graph models it as a compound)
+PMDA:2024-09-13:127,S2,vaccine (product-level identifier; no graph models it as a compound)
+TGA:fluad-quad-seqirus-pty-ltd-0,S2,vaccine (product-level identifier; no graph models it as a compound)
+TGA:fluad-seqirus-pty-ltd,S2,vaccine (product-level identifier; no graph models it as a compound)
+TGA:flumist-astrazeneca-pty-ltd,S2,vaccine (product-level identifier; no graph models it as a compound)
+FDA:NDA215430-S18,S2,combination product (composite drug identifier matches no graph node)
+FDA:BLA761127-S2,S2,no DrugBank accession (CHEMBL.COMPOUND:CHEMBL2108035)
+FDA:NDA215395-S7,S2,no DrugBank accession (UNII:IEU56G3J9C)
+PMDA:2026-02-19:12,S2,no DrugBank accession (CHEMBL.COMPOUND:CHEMBL1615807)
+EMA:23-26-march-2026:Hetronifly,S2,no DrugBank accession (UNII:S3GQZ2K36V)
+FDA:BLA761352-S10,S2,no DrugBank accession (UNII:AE72RB1W1X)
+FDA:NDA218614-S4,S2,no DrugBank accession (UNII:NSY2BY6PSB)
+FDA:BLA761430-S2,S2,no DrugBank accession (UNII:87M90CV8NC)
+FDA:BLA761416-S2,S2,no DrugBank accession (UNII:Z20OC92TDI)
+PMDA:2023-08-31:36,S2,"diagnostic agent (imaging target, not a treated disease)"
+PMDA:2023-08-31:35,S2,"diagnostic agent (imaging target, not a treated disease)"
+EMA:18-21-march-2024:Retsevmo,S2,generic disease target (cancer; tumour-agnostic)
+FDA:BLA761139-S28,S2,generic disease target (cancer; tumour-agnostic)
+FDA:NDA218213-S1,S2,generic disease target (cancer; tumour-agnostic)
+TGA:enhertu-astrazeneca-pty-ltd-3,S2,generic disease target (cancer; tumour-agnostic)
+HC:35646,S2,generic disease target (cancer; tumour-agnostic)
+EMA:18-21-may-2026:Enhertu,S2,generic disease target (cancer; tumour-agnostic)

@@ -1,0 +1,117 @@
+drug_id,disease_id,disease_name,primekg,drkg,biokg,all3
+DB11652,DOID:0080199,RAS wild-type HER2+ metastatic colorectal cancer,1.0,1.0,1.0,True
+DB15035,DOID:1040,Chronic lymphocytic leukemia,1.0,1.0,1.0,True
+DB12893,DOID:1612,HR+/HER2- metastatic breast cancer,1.0,1.0,0.0,False
+DB08885,DOID:13025,Retinopathy of prematurity,1.0,1.0,1.0,True
+DB15627,DOID:1380,dMMR recurrent/advanced endometrial cancer,1.0,0.0,0.0,False
+DB11767,DOID:853,Polymyalgia rheumatica,1.0,1.0,1.0,True
+DB12001,DOID:1612,HR+/HER2- node-positive high-risk early breast cancer,1.0,1.0,0.0,False
+DB08912,DOID:0060101,Pediatric BRAF V600E low-grade glioma,1.0,0.0,0.0,False
+DB15354,DOID:0090105,HoFH in children,1.0,0.0,0.0,False
+DB09037,DOID:7360,MSI-H/dMMR solid tumors (full approval conversion),1.0,1.0,0.0,False
+DB06292,SYMP:0000292,Heart failure (broadened),1.0,1.0,1.0,True
+DB09128,DOID:10652,Agitation associated with Alzheimer's dementia,1.0,1.0,1.0,True
+DB15091,DOID:8778,Crohn's disease,1.0,1.0,1.0,True
+DB15233,DOID:349,Indolent systemic mastocytosis,1.0,0.0,1.0,False
+DB14761,DOID:0080599,COVID-19 in severe renal impairment/dialysis,1.0,0.0,0.0,False
+DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer (+chemo),1.0,0.0,0.0,False
+DB00432,DOID:0080199,Metastatic colorectal cancer,1.0,1.0,1.0,True
+DB11915,DOID:12858,Chorea associated with Huntington's disease,1.0,1.0,1.0,True
+DB12281,DOID:0050908,First-line anemia in lower-risk MDS,1.0,1.0,1.0,True
+DB09029,DOID:2280,Hidradenitis suppurativa,1.0,1.0,1.0,True
+DB11718,DOID:3908,BRAF V600E metastatic NSCLC,1.0,1.0,1.0,True
+DB14568,DOID:0050908,IDH1-mutated relapsed/refractory MDS,1.0,1.0,1.0,True
+DB15303,DOID:1727,Retinal vein occlusion,1.0,0.0,0.0,False
+DB09037,DOID:4607,1L biliary tract cancer (+gemcitabine+cisplatin),1.0,1.0,1.0,True
+DB15463,DOID:4450,Advanced RCC after PD-1/PD-L1 + VEGF-TKI,1.0,1.0,1.0,True
+DB01656,DOID:8893,Psoriasis in children 6-11 (cream),1.0,1.0,1.0,True
+DB14901,DOID:13810,High LDL-C with increased CV risk (expanded),1.0,0.0,0.0,False
+DB09038,DOID:784,Chronic kidney disease,1.0,1.0,1.0,True
+DB11817,DOID:0110098,Atopic dermatitis,1.0,0.0,1.0,False
+DB15035,DOID:0050873,Follicular lymphoma (+obinutuzumab),1.0,1.0,1.0,True
+DB11714,DOID:3717,Gastric/GEJ adenocarcinoma (1L +chemo),1.0,1.0,1.0,True
+DB15627,DOID:1380,dMMR/MSI-H primary advanced endometrial cancer,1.0,0.0,0.0,False
+DB09302,DOID:13810,Heterozygous familial hypercholesterolemia,1.0,0.0,0.0,False
+DB15171,DOID:0050848,Obstructive sleep apnea with obesity,1.0,1.0,1.0,True
+DB11760,DOID:1612,HR+/HER2- metastatic breast cancer,1.0,1.0,0.0,False
+DB15305,DOID:12377,Spinal muscular atrophy (pediatric expansion),1.0,0.0,0.0,False
+DB09029,DOID:1575,IV formulation for rheumatic diseases (EMA),1.0,1.0,1.0,True
+DB15654,DOID:0080599,COVID-19 updated strain,1.0,0.0,0.0,False
+DB09299,DOID:2043,Chronic hepatitis B (pediatric),1.0,1.0,1.0,True
+DB00028,DOID:0111941,Primary immunodeficiency pediatric (EMA),1.0,1.0,1.0,True
+DB11689,DOID:0060101,"Pediatric low-grade glioma (+dabrafenib, BRAF V600E)",1.0,0.0,0.0,False
+DB08912,DOID:3774,Pediatric glioma (EMA),1.0,1.0,1.0,True
+DB14962,DOID:3908,HER2-mutant NSCLC (EMA),1.0,1.0,1.0,True
+DB15233,DOID:349,Indolent systemic mastocytosis (EMA),1.0,0.0,1.0,False
+DB15354,DOID:0090105,HoFH pediatric (EMA),1.0,0.0,0.0,False
+DB09037,DOID:0080210,Primary mediastinal large B-cell lymphoma,1.0,1.0,1.0,True
+DB14962,DOID:3908,HER2-mutant NSCLC (PMDA),1.0,1.0,1.0,True
+DB00073,MONDO:1010185,Antibody-mediated rejection in organ transplantation,0.0,1.0,0.0,False
+DB11834,DOID:4398,Palmoplantar pustulosis (PMDA),1.0,0.0,0.0,False
+DB09078,DOID:3284,Unresectable thymic carcinoma (PMDA),1.0,1.0,1.0,True
+DB14962,DOID:7360,HER2+ solid tumors (tumor-agnostic),1.0,1.0,0.0,False
+DB14962,DOID:1612,HR+/HER2-low breast cancer,1.0,1.0,0.0,False
+DB11714,DOID:3717,Gastric/GEJ adenocarcinoma,1.0,1.0,1.0,True
+DB11714,DOID:4607,Biliary tract cancer 1L,1.0,1.0,1.0,True
+DB09037,DOID:5520,Neoadj+adj HNSCC,1.0,1.0,0.0,False
+DB09037,DOID:4607,Biliary tract cancer,1.0,1.0,1.0,True
+DB13007,DOID:4006,Urothelial carcinoma (expanded population),1.0,1.0,1.0,True
+DB08875,DOID:0112306,Pancreatic NET,1.0,1.0,1.0,True
+DB15569,DOID:0080199,KRAS G12C+ mCRC,1.0,1.0,1.0,True
+DB15463,DOID:0050771,Pheochromocytoma/paraganglioma,1.0,1.0,1.0,True
+DB15044,DOID:0050873,Follicular lymphoma,1.0,1.0,1.0,True
+DB11730,DOID:1612,HR+/HER2- early breast cancer (adjuvant),1.0,1.0,0.0,False
+DB12941,DOID:10283,mHSPC + ADT,1.0,1.0,1.0,True
+DB15685,DOID:3908,RET-fusion NSCLC (expanded),1.0,0.0,1.0,False
+DB11718,DOID:1781,BRAF+ thyroid cancer,1.0,1.0,1.0,True
+DB11967,DOID:1781,BRAF+ thyroid cancer,1.0,1.0,1.0,True
+DB12281,DOID:0050908,First-line anemia in lower-risk MDS,1.0,1.0,1.0,True
+DB12597,DOID:0081088,Ph+ CML-CP after 2+ TKIs,0.0,1.0,0.0,False
+DB15091,DOID:13375,Giant cell arteritis,1.0,1.0,1.0,True
+DB11834,DOID:8778,Crohn's disease,1.0,1.0,1.0,True
+DB11834,DOID:8577,Ulcerative colitis,1.0,1.0,1.0,True
+DB14762,DOID:8577,Ulcerative colitis,1.0,1.0,1.0,True
+DB12530,DOID:0080356,IgG4-related disease,1.0,0.0,0.0,False
+DB12530,DOID:437,Generalized myasthenia gravis,1.0,1.0,1.0,True
+DB00043,DOID:3044,IgE-mediated food allergy,0.0,1.0,1.0,False
+DB12159,DOID:3083,COPD,1.0,1.0,1.0,True
+DB12159,DOID:3083,COPD (EMA 2025),1.0,1.0,1.0,True
+DB12023,DOID:3049,EGPA (expanded),1.0,1.0,1.0,True
+DB00043,DOID:3049,EGPA,1.0,1.0,1.0,True
+DB08877,DOID:0081267,GVHD + pediatric,1.0,1.0,1.0,True
+DB15091,DOID:0110098,Pediatric atopic dermatitis,1.0,0.0,1.0,False
+DB13928,DOID:1287,Reduce MACE in CVD + obesity/overweight,1.0,1.0,1.0,True
+DB09075,DOID:6432,Chronic thromboembolic pulmonary hypertension,1.0,1.0,1.0,True
+DB00374,DOID:6432,ILD-associated pulmonary hypertension,1.0,1.0,1.0,True
+DB13928,DOID:0080547,MASH with fibrosis,1.0,0.0,0.0,False
+DB13928,DOID:784,CKD in T2D,1.0,1.0,1.0,True
+DB00073,DOID:1184,Nephrotic syndrome,1.0,1.0,1.0,True
+DB13879,DOID:684,Acute HCV pediatric,1.0,1.0,1.0,True
+DB14761,DOID:0080599,COVID-19 (expanded population),1.0,0.0,0.0,False
+DB00008,DOID:8997,Polycythaemia vera and essential thrombocytopenia,1.0,1.0,1.0,True
+DB15303,DOID:1727,Retinal vein occlusion,1.0,0.0,0.0,False
+DB11823,DOID:1470,TRD monotherapy,1.0,1.0,0.0,False
+DB12159,DOID:13565,Allergic fungal rhinosinusitis (AFRS) ≥6yr,1.0,1.0,1.0,True
+DB09037,DOID:4001,Platinum-resistant ovarian carcinoma (PD-L1+ CPS≥1),1.0,1.0,1.0,True
+DB00149,DOID:0050719,Cerebral folate transport deficiency,1.0,0.0,0.0,False
+DB11700,DOID:6676,Acquired hypothalamic obesity,1.0,1.0,0.0,False
+DB00514,DOID:10652,Agitation associated with Alzheimer's dementia,1.0,1.0,1.0,True
+DB14962,DOID:1612,HER2+ early-stage BC (neoadjuvant + adjuvant),1.0,1.0,0.0,False
+DB06606,DOID:9744,Delay T1D onset in children ≥1yr,1.0,1.0,1.0,True
+DB00028,DOID:0111941,Primary humoral immunodeficiency pediatric 2-11yr,1.0,1.0,1.0,True
+DB12839,DOID:9281,PKU expanded to ≥12yr,1.0,1.0,1.0,True
+DB13928,DOID:9970,Oral tablet formulation for weight management,1.0,1.0,1.0,True
+DB11718,DOID:0080199,"mCRC BRAF V600E (traditional approval, was accelerated)",1.0,1.0,1.0,True
+DB12893,DOID:1612,HR+/HER2- breast cancer,1.0,1.0,0.0,False
+DB11714,DOID:3717,Resectable gastric/GEJ adenocarcinoma (neoadj+adj +FLOT),1.0,1.0,1.0,True
+DB01263,DOID:0050073,Invasive fungal infections pediatric ≥2yr,1.0,1.0,1.0,True
+DB11817,DOID:676,Juvenile idiopathic arthritis (EMA Feb 2026),1.0,1.0,1.0,True
+DB12597,DOID:0081088,Ph+ CML-CP frontline (EMA Feb 2026),0.0,1.0,0.0,False
+DB15303,DOID:8947,Diabetic retinopathy/DME (EMA Mar+May 2026),1.0,0.0,0.0,False
+DB00028,DOID:8622,Measles prophylaxis post-exposure,1.0,1.0,1.0,True
+DB11834,DOID:8778,"Crohn's disease (moderate-severe, refractory)",1.0,1.0,1.0,True
+DB11363,DOID:7360,"ALK+ solid tumors (tissue-agnostic, world-first)",1.0,1.0,0.0,False
+DB15090,DOID:0110597,CRSwNP (eosinophilic chronic rhinosinusitis with nasal polyps),1.0,1.0,1.0,True
+DB15212,DOID:3146,LDL-C elevation in statin-intolerant dyslipidemia,0.0,1.0,0.0,False
+DB06168,DOID:4371,Schnitzler syndrome (Japan),1.0,1.0,1.0,True
+DB09222,DOID:2219,Acquired hypofibrinogenemia in cardiovascular surgery,1.0,0.0,0.0,False

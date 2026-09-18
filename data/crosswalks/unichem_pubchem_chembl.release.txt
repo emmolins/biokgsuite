@@ -1,0 +1,4 @@
+retrieved_utc=2026-09-14T09:25:15Z
+source_url=https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/src_id1/src1src22.txt.gz
+rows=2832794
+8a3738247c97916eef1a5c3144c67e0903c8a78ae9578086a2f1a156c987fd17  data/crosswalks/unichem_pubchem_chembl.tsv

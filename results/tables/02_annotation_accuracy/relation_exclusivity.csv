@@ -1,0 +1,9 @@
+KG,Conflict,|A|,|B|,Shared pairs,Conflict rate (%)
+hetionet,Treats (CtD) vs. Palliates (CpD),755,390,0,0.0
+hetionet,Compound: Up- vs. Downregulates Gene,18756,21102,0,0.0
+hetionet,Anatomy:  Up- vs. Downregulates Gene,97848,102240,0,0.0
+hetionet,Disease:  Up- vs. Downregulates Gene,7731,7623,0,0.0
+biokg,Target vs. Carrier,15231,804,4,0.025
+biokg,Target vs. Enzyme,15231,5077,106,0.525
+biokg,Target vs. Transporter,15231,3040,66,0.363
+biokg,Carrier vs. Enzyme,804,5077,0,0.0

@@ -1,0 +1,12 @@
+# Provenance for mondo_hierarchy.csv
+# built:        2026-09-16T19:09:46+00:00
+# built_by:     tools/build_mondo_hierarchy.py
+# source:       data/crosswalks/mondo.obo
+# source_bytes: 53086111
+# source_sha256:fce4bccd97c4eb66161e88272ca0bd6ecd28c003afa878bbec8eae0ceb78fba8
+# mondo_release:releases/2026-08-04
+# relation:     is_a only
+# terms_seen:   63267
+# obsolete_skipped: 4612
+# edges:        81580
+# Cite the MONDO release above, not the build date.

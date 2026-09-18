@@ -1,0 +1,23 @@
+dataset=BioKG
+release_tag=v1.0.0
+released_utc=2020-06-09
+note=v1.0.0 is the only release; the repository has published no newer data.
+source_url=https://github.com/dsi-bdi/biokg/releases/download/v1.0.0/biokg.zip
+retrieved_utc=2026-09-14T18:41:04Z
+zip_sha256=e8277485db404683920ffb64ac22b55b025398af2db521212e76b8a5480c4967
+# file timestamps below are the archive's own (2020), not the retrieval date
+files:
+  BIOKG_RELEASE.txt                                   408 bytes  97e45c86ad9fc9ec
+  LICENSE                                           19346 bytes  3711f963c05d0be8
+  README.md                                          4090 bytes  a3ae066bff9c7d43
+  biokg.links.tsv                                54916519 bytes  481dcbf010fc3316
+  biokg.metadata.disease.tsv                       756314 bytes  655becbe6aecd67b
+  biokg.metadata.drug.tsv                        28683472 bytes  adfec7aba0f4ccae
+  biokg.metadata.pathway.tsv                      5194901 bytes  7280dbfb35f4cb9b
+  biokg.metadata.protein.tsv                    138897025 bytes  2fe0a764ced4dbdb
+  biokg.properties.cell.tsv                          4485 bytes  7071ee6c1eeb10a0
+  biokg.properties.disease.tsv                    1874745 bytes  124cfb76731fbbdb
+  biokg.properties.drug.tsv                       7138486 bytes  6b95834b48f37ea1
+  biokg.properties.genetic_disorder.tsv           1777409 bytes  1f095d95f84e2e96
+  biokg.properties.pathway.tsv                    5415554 bytes  4430f8c71089959c
+  biokg.properties.protein.tsv                   91141635 bytes  e0641a0ed652ebf9

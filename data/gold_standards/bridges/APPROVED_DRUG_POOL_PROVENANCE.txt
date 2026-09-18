@@ -1,0 +1,21 @@
+# Provenance for approved_drug_pool.csv and approved_indications.csv
+# built:        2026-09-18T18:49:25+00:00
+# built_by:     tools/build_distractor_pool.py
+# source:       Open Targets Platform drug_molecule, clinical_indication, disease (data/crosswalks/)
+#   Open Targets Platform release: 26.06
+#   Source:    https://ftp.ebi.ac.uk/pub/databases/opentargets/platform/26.06/output
+#   Retrieved: 2026-09-14T08:25:27Z
+#   Datasets:  drug_molecule clinical_indication drug_mechanism_of_action disease target reactome evidence_clingen evidence_orphanet evidence_gene2phenotype evidence_genomics_england evidence_uniprot_literature evidence_uniprot_variants evidence_gene_burden
+#   Files:     16
+#   Licence:   CC0 1.0
+#   Citation:  Open Targets Platform. Nucleic Acids Research 2025;53(D1):D1467.
+# name_bridge:  drug_name_to_drugbank.csv sha256 05c07d9ac41fc48e
+# sssom:        mondo.sssom.tsv sha256 701a4c0278a79b17
+# approved drugs in Open Targets:      5485
+# with a DrugBank id (pool):           3664 (2993 by cross-reference, 671 by name bridge; 0 conflicts, cross-reference kept)
+# approved indications in Open Targets: 11175
+#   dropped, drug has no DrugBank id:   3130
+#   dropped, disease not in MONDO:      2044
+# indications kept:                     6001 (2765 drugs, 889 diseases)
+# sha256 approved_drug_pool.csv: 8c2fe64e342cc6b1
+# sha256 approved_indications.csv:  ff03e0b9852fd201

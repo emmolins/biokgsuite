@@ -1,0 +1,1085 @@
+{
+  "kg": "matrix",
+  "release": "Every Cure integrated KG, Hugging Face everycure/kg-nodes and everycure/kg-edges, tracked at main (the commit each resolved to is appended by the fetch); commits everycure/kg-nodes@c9c60b2c55e7, everycure/kg-edges@fcd0585957ab",
+  "doi": "",
+  "licence": "Custom (see the LICENSE file in each dataset repository)",
+  "citation": "Every Cure MATRIX. https://huggingface.co/datasets/everycure/",
+  "retrieved_utc": "2026-09-18T16:02:21+00:00",
+  "fetched_by": "tools/fetch_kgs.py",
+  "raw_files": [
+    {
+      "name": "kg-nodes/.cache/huggingface/.gitignore",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "md5": "3389dae361af79b04c9c8e7057f60cc6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/CACHEDIR.TAG",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 191,
+      "sha256": "f6572428f6d5e1575e73a1502895a8731f10757dfbb634909c6e154b849af91d",
+      "md5": "7610c3f0a61e99809814719d9712f278",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00000-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 124,
+      "sha256": "a205513211bac4f1b5bc066c5b43ce6c0fc1c5f7eb90cef8e18f2af4aa3b014e",
+      "md5": "a005a373dd6a658492afe22c87278822",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00001-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 124,
+      "sha256": "eb029b55dab380f76ba42ab1b8005aa36b76ce8442ab3886649f54ced88c1f85",
+      "md5": "0caf00f3e97a45187f8aae9705452ae4",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00002-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 124,
+      "sha256": "690ff172ca6ff6699a104d7c64960cd4f21ab5cfa10478ef94e4f1467a99e0f5",
+      "md5": "e2aa4f2803840e55b56d843461911e60",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00003-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 125,
+      "sha256": "0f1f643805657728f45d0d14779e2b509e6721ebc0f24b4386127543a3233f57",
+      "md5": "76d0a28918f162b74d411ba3a7b8c423",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00004-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 124,
+      "sha256": "11f1c400397a909ab19f5de7c775408297766e48417ce49aa91c89a26b3bd2d7",
+      "md5": "42019d72f0f8dd51875e8fc4096f6edb",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00005-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 123,
+      "sha256": "9e7fbbe897879f23893ad7ac8041ebe7e3810dadea8c5ad0ad0f57c3b517e951",
+      "md5": "9b8a63283fcb598444fd7242492b84b8",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00006-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 125,
+      "sha256": "b088b6def58e1f28baa754efb3c9a5d47473036dc703381527dd0b435976bc0d",
+      "md5": "559de35d8bb2fa8c674447a8cfe5a1a8",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/.cache/huggingface/download/data/nodes/train-00007-of-00008.parquet.metadata",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 124,
+      "sha256": "058eb68157e7ef31e71ee5e2e33fbc826aefb3d803919466ba8f81e7e8fcd4cf",
+      "md5": "0e5940e3a2050d2b5f94d98e3ac00650",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00000-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108942920,
+      "sha256": "b679ad40955215f517cc2fff7c097e08c735b153fab5e4f405581b2be10bf46d",
+      "md5": "aca4919e9fa3e03084baff5349db03fb",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00001-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108638741,
+      "sha256": "ff041801a32e5d6dd3f115099e44bef9b6fb3baac3cd999a4c9df4a0117488d2",
+      "md5": "d3a6b5d2bce4cd0ffd65d2d3e14142b6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00002-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108976084,
+      "sha256": "4290764ec32e518da7aa86b84774b26696c1e31b8f77fadeb07827052ecf1a7a",
+      "md5": "a546856d97cb69a1c4fb849bf8a663cb",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00003-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108655185,
+      "sha256": "720d085acee7b2723ff0e093e8187f4dd8e17eeffce326a50a7cf0c8d60344fe",
+      "md5": "6bcb1f1c971e16477463b1b223e9c584",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00004-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108743321,
+      "sha256": "c3aadfa79cbbe8a5b65579c512bd10daf579b15e2b0c8ad9ce4ea248a3d93fcb",
+      "md5": "998f28af5a6721757fb2d83d29dd245b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00005-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108392488,
+      "sha256": "fccd308e4b23b1d64b2d82ccaeff2817c81da8bedfe93acdfecc886239ee5649",
+      "md5": "e70a4614ec216f568bcf8be36c784d5b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00006-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108838567,
+      "sha256": "c42013761c0671f99eb48e315949536c89559d1dab0c1be6649602179506d462",
+      "md5": "56555d00e58db214c4e117cc80d22568",
+      "md5_published": null
+    },
+    {
+      "name": "kg-nodes/data/nodes/train-00007-of-00008.parquet",
+      "url": "everycure/kg-nodes",
+      "revision": "c9c60b2c55e72cedb757b0422f4ea160a9bffc5c",
+      "bytes": 108926372,
+      "sha256": "a27a3b0ff485c901d4420b5025bb6f97d82f6c8b5b120ed396f2d150456466cd",
+      "md5": "401eef2b02b1e730dc7499609bd4164b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/.gitignore",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "md5": "3389dae361af79b04c9c8e7057f60cc6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/CACHEDIR.TAG",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 191,
+      "sha256": "f6572428f6d5e1575e73a1502895a8731f10757dfbb634909c6e154b849af91d",
+      "md5": "7610c3f0a61e99809814719d9712f278",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00000-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "62543418720cdff42bbab1a29c26f38d89202c07a8bca20b7ed9df9591a3aa89",
+      "md5": "018f29e8330b94525033005b66bdcb93",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00001-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "789fd0d421b3583e716c6efc23e9d61aa8a2ac0d047a3967d814c75ea8ba57a7",
+      "md5": "28e346ecedcced6eb605262d3af68563",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00002-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "6376484f598fba435b27753045e2adabccd961c647bd6f58d2dc90fb21cce4e5",
+      "md5": "9fd5591e776b9e8128c6f18c51f6b4a6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00003-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "2acefa22b67262987dca215d17daa957a0c1c270cffcd824aa7bb6d984dc40ee",
+      "md5": "4ab7cd94c5199e3c509f976e830e6c2c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00004-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "a0d93495137fe102e47fcb882e265a9191528817df2e34a8dff7e8fe12eee734",
+      "md5": "5fb483e9dec49eeeb55c70e662c2595d",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00005-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "6977d129296fdd7c2e45608ee90f978539d3da77a3d8cd3fa4dc81c724ec8154",
+      "md5": "799524f052898970a92743dad2af6095",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00006-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "35b53aa566ea260a5754936890f91cba2b87ab6eb78fc7a1abcda8f12b017d5c",
+      "md5": "aeea7ec7584291af39b083313a8bfdb6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00007-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "c5bf5c74bce85d4f08325dde306cac3268de4abcc250c67d32b9e99ef71a2ac4",
+      "md5": "c3f093bd20f26c705fa9db572730df87",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00008-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "ce3a0873347ff6e36e2d49165831d24584d63105417fb01d706d512d538dafc9",
+      "md5": "0340f832dfe1228835754c1800373052",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00009-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "74b58e1079a4e891b404a70ce27d025b216ee76044d89b08fb1f933c5a7302fb",
+      "md5": "3901729b89683bcf85576c7d8e483bef",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00010-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "afcc958e4d5a072fb716a3915ae227fbb58d693c1c84a159607bb76a99e97a3d",
+      "md5": "9010d1a1af1d103a98457e107eea19ad",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00011-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "6b6cceb6e4c1c8efdf8e29afbb78e719a8a14f32359f88b7a94cdb3791b6d1b8",
+      "md5": "88d401ccabf4787742fc6c5d36334c8e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00012-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "b74d02f0540ebe0d823988135292763a681ed623cb8b759cf37fbc1864a3cd37",
+      "md5": "fe7b73a847420e489fc6825b0d93c566",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00013-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "504a33f8a5fc74d0188b6ffa1297387264a4e3be3f99730390fd1e08cb526967",
+      "md5": "8b79e30fae29d956f7f67cf4ebbc5a4c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00014-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "b99715ab747db1b328cb71a799b8021734973c3ef13035247ff729e9a1b52278",
+      "md5": "449d7f2195989f62c7439d00ba5c2e88",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00015-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "27a69a8607afa8676ea9c8ff757503cdf8d149b380e4f0e02985d9f2e46bb1f4",
+      "md5": "91de8193ee027a3d1992658aa72c3c9b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00016-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "1442702bb9dec38e13eff21d9eeb358ac98de2316687993685b0089070356a8d",
+      "md5": "4adc378c9a059a6af0325b726ace5b9a",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00017-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "a10cfa5bbfa6e14da69346fb620482b237534daa026488d160d9fa53a0947c52",
+      "md5": "7335eff66782cbcde89632e117e3e440",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00018-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "a8b0b80adea20e869d62db093b2c08e409e86fdeed5a20e2161b0aa611d60a87",
+      "md5": "5dc6bbb4ed956777369f34a0d7c16a7c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00019-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "2893ae0e3b3aa2c33b8ac96bbb103ccb470c33cceac2c83a18176b757dd0c968",
+      "md5": "eb517b10ef67423b1c7f01be80a0e790",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00020-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "68d5139af7fa50b3e1166187959f284e342bd260ae710dfbb7bf6cf566bd6b27",
+      "md5": "722299aee9c750a78f2dbb14c7cc9972",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00021-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "b4db61f06365376f8cc1af857e241c4f79fbe9799ca7db9cb10423aae1feb862",
+      "md5": "0f8167728f187ed6bdefd0b31d3ddbdd",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00022-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "cc3fe42b246d915a196d6748291ac210915e80ca1683f4c7462dc1acf2fe0546",
+      "md5": "9fabe1ec138f97221ff30eaeaf4be93b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00023-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "bcb9c4f4f00bf48ad625fee728087bc37cb41b939772c3e421d38cfb8ede82bc",
+      "md5": "2fc668d35fde5fd27cb379ebe1470d75",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00024-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "b5ead00575a375754609fc59bc7ea08c7df7b00c21a81b78a98ff39965a88c0e",
+      "md5": "c20ac4e656adf8c929612c2e48b5b585",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00025-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "6fdcac9122af616a2c664c8ad43cdb2f258e3ed6f032f08c8fcb81ab58bbb932",
+      "md5": "7e2ea5fa05bbb2d71a241706654e7b51",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00026-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "6a1eea9c7ceb3a3d0255033b6c8d37ac1ffb5ad1b0791387a05c2f58b423fd4b",
+      "md5": "e3ed2f7bc366faf1e4f7514a54f852db",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00027-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "48213f48a894a4af84bb3cc7570e25a5cccd6384d800fca0cff23f921d9764ed",
+      "md5": "637df2988e542a63eb78d9a13e417094",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00028-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "df1e58245912c66a3e9e7cd43c184f596d49cbff1c67d4c813c06f265fcc2b56",
+      "md5": "dd0d1282d57f3485c2927463eca1c0e3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00029-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "a028a6022759b5940dbcd3326877c0797e74bfc8357761f92e288b70a6682b0a",
+      "md5": "a0922cea4d5c968a5adbc59c305b73aa",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00030-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "62cb6e6a8813d8a535ee98da0c60c55fabdae52813ac816c068c34b0dd7908a0",
+      "md5": "57bfd2afe5988ba3965e20859e34c7b3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00031-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "a1fa757d8b7f4d1fe2d00586611c4282f6b82a60b19d8fc664fd279fc18a7bd5",
+      "md5": "ee281b32c2e517fdd1bf19cc7cf5063c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00032-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "35347878e2a34511e765177b8661f00f0f4be7067ae299dd63372e469aabb0e3",
+      "md5": "ecbd57785444b1a44b6bdc2014c7c1be",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00033-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "f012d2f0b2b26b3472877f1541901fcd459ff41c069bc36ceb6a02e1e11a5c00",
+      "md5": "003edf39a7222d630a3df04277e98b10",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00034-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "31cffe9b528c57a6ce0b5949445ab40b1bb3c79b28c1953a3fed3d27409466b6",
+      "md5": "683d97aba1fc93bcafc9b34aec45e54e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00035-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "fcc37744fb65d00ea13ba421b5f65bc29d11a0a44b85e0aa049956570564038d",
+      "md5": "abfd19b4928f7a1f173cc9bf1d3e30e6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00036-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "6e872d40469936a8afd67fbafab25beca43d2df27ff48f00525f659dfdf89b69",
+      "md5": "ea15870dcf66d90480737b7de629a317",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00037-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "0fbb334c985a209d30b4e491704e23c2fdb8673cb01a826cf046f3467581238e",
+      "md5": "ce3ab43ea55cfe189ed4b0f6abae189f",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00038-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "2589e7c098af42347bb5bfdbface568fe0552255af029d0ec43e4816dc2b5800",
+      "md5": "747b7555239db08704c1ea114fc1f07c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00039-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "cac5280f64b8ea8c142f9bbaeabf46598af44aaaef714c16ca11787ba733ee6e",
+      "md5": "18fdb6e2457b62e5b57c166544a3de53",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00040-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "e1a58a54156cf9151fd3877fab45e928c617ff741b72054ed633b3515d64b111",
+      "md5": "6a0d0fe78bbd95f0f0c900ff3f71a92e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00041-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "2385aa17ae1e2fd824212e699e56365f86e7fadcd0cc2380211912893fc9bf70",
+      "md5": "c7994d3c80fcc378990327ca1af25628",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00042-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "f6fc0710a213e3e564e9d8208d5f8e00c2b9564bbcc27666bde3f2d73d113a9d",
+      "md5": "a5e3430955289f2e01743695ed2630c5",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00043-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "018cee3cf9034eb9fee13682c1f2c3db4ab7970fdce20f9806c9d1c93522c674",
+      "md5": "26024ac61ccec5be937b302e9c7e778a",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00044-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "86337e15c5096938e1a59e18710798f8aca903b457244fe5953ac870fc44d272",
+      "md5": "b7d608be92c87c8fe495adfb9ab92f04",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00045-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 123,
+      "sha256": "df6893d6cbd4bf75c1a87192d30c2015530f2e971946b1874efdbfc0aaba55d3",
+      "md5": "367e7f1acbd45797cebcb4f136ee159c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00046-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 122,
+      "sha256": "ab4273da5e265c109c840ef5ad73f90af31166e79c22399c5cb9374bb92222d3",
+      "md5": "9327c4ab1eeeceda3508dbfca5288206",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00047-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 125,
+      "sha256": "291c3ae1d28388aec4bf39c11465ed07a154fe5e6c2c7d0e1bab89520ddb5eb9",
+      "md5": "0e31a670697cc154a002e3c2fc237a5e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/.cache/huggingface/download/data/edges/train-00048-of-00049.parquet.metadata",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 124,
+      "sha256": "17dc2423672274560f59ae355206c69c8a47c41fc6b930c48a493209f64bd009",
+      "md5": "7581cafe6c49bfceab8b10ad5bde23b4",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00000-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72601247,
+      "sha256": "39e06676146c10d162cce9d8ce2adeba0532034643b49fc07210e3f903cce87e",
+      "md5": "547389821403c6ec4fa2bcd236720727",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00001-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72506954,
+      "sha256": "75cd806019cadb789379abc66b0d82ec444c088cd017201c32120bb2e5a75d05",
+      "md5": "7669c9e0a3c9834acf600946702a95a7",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00002-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72587047,
+      "sha256": "0b6f1fa501a4158b0355facac17816842a2ac7e83ae8fc1dcace2804ac12e913",
+      "md5": "2f6d4fd59e2b9fe49c366436c3a9a91e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00003-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72536108,
+      "sha256": "9e52c41678d467d40ccad877ffda2b361ab3ceee018c36173e3a35b2aab37558",
+      "md5": "ca0200cdbf06025a00da6780c22c6ea7",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00004-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72585542,
+      "sha256": "73b2009bf3cc8af2d83dd03316f6edd9fc625d283c406153007b6a1e28cf27fa",
+      "md5": "80b6fd7e881d596546fec6e2480e1ef6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00005-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72638578,
+      "sha256": "b111c002b1a6e8fd5dbd2ebd6e41db7258001d980accff7d8806229ffc37b46b",
+      "md5": "c3b906c0d121b21b76242e4c26699ffd",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00006-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72485075,
+      "sha256": "5b734b0b6d74b8aa0d93dec9d79c2278ecc4bc864c53b51a6ebb8817ac985426",
+      "md5": "2be98be8995dcb670ee2f19f22ce63c3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00007-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72637298,
+      "sha256": "b2b47c4a6c016835cd32e6ddae561a9314d80f997e996b92421c565dee0eb65c",
+      "md5": "4092939e1258b64274e3a3c578e384f6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00008-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72560923,
+      "sha256": "5f7f2af8c3cf1675a3599eecc20d2ecdf8945e29635e69f969ea7b5faa138cda",
+      "md5": "a34f19339e8db93460f278140e32f6ea",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00009-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72586596,
+      "sha256": "07f7662ce87419f49f5b15578b0cce5cdcbd3a876aefd378f81a3c87fc369d55",
+      "md5": "a94509a5ee021312768ce279b3cb4fb3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00010-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72591805,
+      "sha256": "6022c7f204238d63fcf3ddc31af6982249913f280c9676305347ca400e93eeb4",
+      "md5": "427f61c8d31fb348acfd47b4ae9be932",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00011-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72608827,
+      "sha256": "dd4eb8118328c01eb3904b4114748f71b406ba71e7d6f714b4460d548b104bb4",
+      "md5": "6f523841098417d7f0fda92c7e716a19",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00012-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72502274,
+      "sha256": "237c4ead701010425594cc86640b222f76ad536d0d909fba822ff374af62b85b",
+      "md5": "57fe58fbedfa9167be7269371de711cd",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00013-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72640437,
+      "sha256": "26c0bc2efc269e759fd9200f36841560c9ac8bca11e463a406b777c6712da862",
+      "md5": "38312bf13aa4016bd00b92879e42b1c0",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00014-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72562281,
+      "sha256": "7a04996dc92f3f7eeaab1645b86febd2eee4465c1b63505a1901cdb4d23245a5",
+      "md5": "214df0c60fd2a15b770a8f1df57c6ea1",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00015-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72591896,
+      "sha256": "fcaba4fe935ce907285c2f2beaf96750506c80facccb6c2ad15c8670076f1aad",
+      "md5": "972f2a354cc542407cc8e9de4948f319",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00016-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72522397,
+      "sha256": "427a0aa9825f172c99f33f498636f7b85bae6dfcc11e6e2b9f69f7997454844f",
+      "md5": "ec3d278424e3d4c5aaccd49e0522a343",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00017-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72555982,
+      "sha256": "1ee484b045677f4b8225928458d80c3f4491b449f40c165948acde7672c12cb6",
+      "md5": "1f2b7352833c1dae96acce014b297134",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00018-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72624318,
+      "sha256": "45df30097c94ef7710327ee26a4079b1933d0cae2eae6041067a372cb7f33764",
+      "md5": "f220226a0b10d5433bf2971de7a6e2a3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00019-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72513830,
+      "sha256": "d6362101ea08fb2566ae130a769074c50066cc928f085059a24484696e7ee2ce",
+      "md5": "87b5c416e9ad9304084bd089f94dbbae",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00020-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72591134,
+      "sha256": "0cc7fd3c41c444d0cf68ea0db26a4167a7674851b4399eb14d2e6347d69f1a1b",
+      "md5": "04d025c9fa3df993f56cd8ea07b41eec",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00021-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72592776,
+      "sha256": "489ee966b1bfb8e1db3bbfd0645684ac8ef7b9bd13ab27f7bfad88db261d2cc3",
+      "md5": "a4c69e1227debc0973b3b979448756c3",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00022-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72501735,
+      "sha256": "9a48360700a96d3c5d82a5b6998f73bec773242bfcc7bd99cf6e662607c30ef9",
+      "md5": "528a0d6b591fa51e22f8ef463ff1789c",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00023-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72494154,
+      "sha256": "6432f2d54cda38747e2c42b397a9d3ef6509489288d84c3fefbef7fae94c4f60",
+      "md5": "e63acbc67e16ad00a6bce34f30e8953d",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00024-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72534953,
+      "sha256": "9fc0b963adf09c4a6554ccf152f99e93fb8f05a9133f1d079462590405a07bca",
+      "md5": "3d7957b58cf9d79e3ae36ad29b4bba89",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00025-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72553621,
+      "sha256": "53397a5744ddf93d7d3ce7dfb5643f3f2ce0ed98b18109be2ce54f1fb686ee3b",
+      "md5": "c1fd6f9e89a4ef930950c50dcfd662d6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00026-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72579634,
+      "sha256": "2893ede03a40bc664bc6df1de76147f12fa42f248a0634c8a2f3667a68376c05",
+      "md5": "6ae76198cbd6567c0ba3f442f81f29be",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00027-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72572965,
+      "sha256": "17a72016a6cb091761fc34db58350d7a404060d53900121b498208fa547a5dc8",
+      "md5": "b21670e9d58cac9deb72db35aae99ff6",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00028-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72550049,
+      "sha256": "01e936adb24c859e79181cc7ce6acbaa3087f49bda45ce90e4c942ea61361679",
+      "md5": "f4725dff92fab42efdd1268d01ecd689",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00029-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72565380,
+      "sha256": "13eca0317803d2eaa050c3969ef099de40295a397cbd04132d6afe0f21ebc6fc",
+      "md5": "efffaf115458cdbb92c1b6f42be80d9e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00030-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72532776,
+      "sha256": "1b4e010c6728c7c022321e0799f56354f2f2d1754dff538201bd0f89bcf6adc2",
+      "md5": "6a99fe605ab5032e05c759ba7eb98218",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00031-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72595022,
+      "sha256": "0eadc4fdd98a696952318359a927316ae62fa234f7d793bc096f1c4ad1429f51",
+      "md5": "d0bfb5394eb76663a4eb74ef685c0960",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00032-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72591941,
+      "sha256": "f13fcc9f4366d6ba39025742a6a76d4f57fbf863bc22fc37428ddb289784281d",
+      "md5": "c9683938857b3a8d6042bde6fc0ceb32",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00033-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72546545,
+      "sha256": "f21f6396e4a2c62aad6f68ae465118443c264e1b7aae9bd60716f6e0a77ae557",
+      "md5": "c0b0d38352f1183840f790e61f043661",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00034-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72586491,
+      "sha256": "cf559a67d97755547ea86a3a08ef001e82e981c01b6760ff627a59887e7905e4",
+      "md5": "dea06ed7df6fa867c509871210f69876",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00035-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72636898,
+      "sha256": "fcd0e8f97a1b9d60a1373a0d686d29d8b73c9c7d9f296f0343c9bf3248df6ef2",
+      "md5": "c634cd1b80ddbe44e10e4da867db2afd",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00036-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72578884,
+      "sha256": "9d77469b2c9822892751237199ed4136b526dd49a27c84ebe42de72ff2451e29",
+      "md5": "3bc53604f86aa49904137ff88e10a96e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00037-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72550531,
+      "sha256": "b024fcf73fdf269081e38a066cf0a64a1ba431c4670382c1a8bdd5f1ab04ce1d",
+      "md5": "1f391f45834e469003659dc0c32fb321",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00038-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72607013,
+      "sha256": "0a9c9ffd54daccd04c5cd035a603e0dde958e0eb8ab6702e1f3e7720c85829f8",
+      "md5": "f5c6f07f7770ab4564665b0b0fca4d19",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00039-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72579889,
+      "sha256": "01cfe188dc89d6ee6fca2a58729e0b87dca93576f423ac64ea0b2b8490b53d66",
+      "md5": "b69127eb4f39891e8fd243814192f896",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00040-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72487604,
+      "sha256": "8f59ceea2475aa224da04c1ec1ef7e450e69accda421ba76557bd5c3fb35ccb5",
+      "md5": "71288798840f83023c3eab51357f803a",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00041-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72589156,
+      "sha256": "d52d5b86e5ba70e7519d0e88f8ae14ce30e640bd9196a7471e54348969256d03",
+      "md5": "71cee0b99d792d815034e36bb9d958c1",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00042-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72635500,
+      "sha256": "7fca05ed4b6cf86485131b0cfde04189c530c7dca9b31213d99ec5569f55c478",
+      "md5": "d63f4a24dcf7659508289d9435fe8e99",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00043-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72618060,
+      "sha256": "67a455e6dc2e836b8316696a83673f64f4bdaaac583cf1397d59ad459e14b7a8",
+      "md5": "cee8cbc8916e1fcc157891d0525ff686",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00044-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72563675,
+      "sha256": "2913e50452b016d2ea89a29b79ea5bb5cd9ded8304bb356510f8506711134aa4",
+      "md5": "484aab5472a390b53b55a0ca6c3a61ca",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00045-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72539746,
+      "sha256": "6bd82646b6edbf187d44891eab0a3c4254b6da1e542fb3db3a6881d45d48b77c",
+      "md5": "b8303217bc27dd596687a80bee55715e",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00046-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72589783,
+      "sha256": "3e800b32e0dd9c57af0e36233640e68e4aef23b087678a6bd61178917a0b61fc",
+      "md5": "a51661b7f2c08570b35c0134561a855b",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00047-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72561998,
+      "sha256": "3d2797b28db13171fd3af9cba5fa0cf7f63f2f6e2b098de5566684000811e3ea",
+      "md5": "5c600140a85aa651bdbedb6b68f78e38",
+      "md5_published": null
+    },
+    {
+      "name": "kg-edges/data/edges/train-00048-of-00049.parquet",
+      "url": "everycure/kg-edges",
+      "revision": "fcd0585957ab5137771b256dad3714dcaf44b7db",
+      "bytes": 72583589,
+      "sha256": "10acaf8bde5844932ec68ffad061137657260cb3aa3fdd72aba573a62ac593d4",
+      "md5": "28db59eae785d357d8aedc3a10a19027",
+      "md5_published": null
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "data/matrix/nodes.tsv",
+      "bytes": 1054044197,
+      "sha256": "a510f54b7b4972e533a9f7b70522c3e461b07d921455324c847809bda6b8bbe6"
+    },
+    {
+      "path": "data/matrix/edges.tsv",
+      "bytes": 10876555709,
+      "sha256": "df7cb042013b8e6ea312b9c83ebf5415b877b25675dc21822fb3e5f571bf3742"
+    }
+  ]
+}

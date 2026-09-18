@@ -1,0 +1,16 @@
+# Provenance for drug_name_to_drugbank.csv
+# built:    2026-09-17T04:16:31+00:00
+# built_by: tools/build_drug_name_xref.py
+# sources:  each configured KG's own node table (drug-typed nodes whose
+#           id carries a DB accession), plus drugbank_drugs.csv with its
+#           CHEMBL-id-as-name rows dropped.
+#   hetionet: 1552
+#   biokg: 8805
+#   drugbank_drugs.csv: 8777
+# unique names:      13969
+# rows:              13996
+# antibody names:    239
+# ambiguous names:   26 (same name, >1 accession; flagged in
+#                    the ambiguous column, NOT silently resolved)
+# Coverage is bounded by the graph snapshots; drugs approved after a
+# graph was built are absent from it by construction.

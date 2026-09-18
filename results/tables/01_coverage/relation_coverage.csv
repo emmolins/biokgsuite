@@ -1,0 +1,13 @@
+KG,Relation,KG pairs,Overlap,Gold,Coverage (%),Note
+hetionet,drug_gene,49999,2289.0,7922,28.89,
+biokg,drug_gene,22242,3011.0,7922,38.01,
+hetionet,drug_pathway,0,,22019,,not evaluable (endpoint type not scored for this KG)
+biokg,drug_pathway,0,0.0,22019,0.0,
+hetionet,disease_gene,27635,420.0,18841,2.23,
+biokg,disease_gene,29343,5284.0,18841,28.05,
+hetionet,disease_pathway,0,,72701,,not evaluable (endpoint type not scored for this KG)
+biokg,disease_pathway,0,0.0,72701,0.0,
+hetionet,disease_disease,543,6.0,37667,0.02,
+biokg,disease_disease,4264,497.0,37667,1.32,
+hetionet,drug_disease,1099,400.0,8343,4.79,
+biokg,drug_disease,37462,1297.0,8343,15.55,

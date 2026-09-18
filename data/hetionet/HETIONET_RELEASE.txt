@@ -1,0 +1,18 @@
+dataset=Hetionet
+release_tag=v1.0
+format=hetnet JSON, converted to TSV by tools/convert_hetionet_json.py
+source_url=https://media.githubusercontent.com/media/hetio/hetionet/main/hetnet/json/hetionet-v1.0.json.bz2
+retrieved_utc=2026-09-15T10:03:59Z
+sha256=a342ab57e9073e6c02bb5e109d1f16917e6f933be4e5c77ebbaebfa26b984c19
+bytes=16112094
+nodes=47031
+edges=2250197
+edges_with_edge_source=1552432 (69.0%)
+edges_flagged_unbiased=1059426
+distinct_edge_sources=13
+note=The previously used TSV export carries only (source, metaedge, target). The
+  JSON additionally carries per-edge properties, which is why Hetionet's README
+  names JSON and Neo4j the recommended formats. describe/definitions.json defines
+  properties.edges as {"source": "The database from which the edge and its
+  properties were gathered"}. That field is the per-edge provenance scored by
+  the trustworthiness dimension; reading the TSV made Hetionet score zero for it.

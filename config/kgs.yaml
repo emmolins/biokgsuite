@@ -1,0 +1,156 @@
+# Knowledge graph definitions: paths, entity-type maps, ID schemes, relation predicates.
+# Snapshot dates and checksums live in data/MANIFEST.md.
+
+knowledge_graphs:
+  primekg:
+    path: data/primekg/primekg.csv
+    entity_types:                        # canonical label -> KG-internal type string
+      Biological Process: biological_process
+      Molecular Function: molecular_function
+      Cellular Component: cellular_component
+      Anatomy: anatomy
+      Drug: drug
+      Disease: disease
+      Gene/Protein: gene/protein
+      Pathway: pathway
+    disease_id_scheme: mondo             # raw IDs are bare MONDO numerics
+    disease_id_separator: "_"           # compound MONDO IDs joined by underscore (e.g. "1234_5678")
+    pathway_ontology: reactome           # Reactome R-HSA-* IDs; eligible for Reactome gold standard
+    relations:
+      drug_target:  {relation: drug_protein, display_relation: target}
+      drug_disease: {relation: indication}
+      drug_drug:    {relation: drug_drug}
+
+  hetionet:
+    nodes_path: data/hetionet/nodes.tsv
+    edges_path: data/hetionet/edges.tsv
+    entity_types:
+      Symptom: Symptom
+      Pharmacologic Class: Pharmacologic Class
+      Side Effect: Side Effect
+      Biological Process: Biological Process
+      Molecular Function: Molecular Function
+      Cellular Component: Cellular Component
+      Anatomy: Anatomy
+      Drug: Compound
+      Disease: Disease
+      Gene/Protein: Gene
+      Pathway: Pathway
+    disease_id_scheme: doid              # IDs carry DOID: prefix
+    relations:
+      drug_target:  {relation: CbG}     # Compound–binds–Gene
+      drug_disease: {relation: CtD}     # Compound–treats–Disease
+      # drug_drug omitted: CrC encodes structural similarity, not clinical DDI
+
+  drkg:
+    path: data/drkg/drkg.tsv
+    entity_types:
+      Biological Process: Biological Process
+      Molecular Function: Molecular Function
+      Cellular Component: Cellular Component
+      Drug: Compound
+      Disease: Disease
+      Gene/Protein: Gene
+      Pathway: Pathway
+    disease_id_scheme: doid_mesh         # mix of DOID: and MESH: prefixed IDs
+    relations:
+      drug_target:  {relation: "DRUGBANK::target::Compound:Gene"}
+      drug_disease: {relation: "DRUGBANK::treats::Compound:Disease"}
+      drug_drug:    {relation: "DRUGBANK::ddi-interactor-in::Compound:Compound"}
+
+  openbilink:
+    path: data/openbilink/edges.csv
+    pubchem_to_drugbank_path: data/openbilink/pubchem_to_drugbank.csv
+    hq_filter: true                      # keep high-quality edges only (STRING/STITCH >= 700, Bgee gold/high; ~5M edges)
+    entity_types:
+      Drug: Drug                         # PUBCHEM.COMPOUND:* IDs
+      Disease: Disease                   # DOID:* IDs
+      Gene/Protein: Gene                 # NCBIGENE:* IDs
+      Pathway: Pathway                   # REACTOME:* and KEGG:* IDs
+    disease_id_scheme: doid              # IDs carry DOID: prefix (same as Hetionet)
+    pathway_ontology: reactome           # REACTOME:R-HSA-* IDs; KEGG also present
+    relations:
+      drug_target:  {relations: [DRUG_BINDACT_GENE, DRUG_BINDING_GENE]}
+      drug_disease: {relation: DIS_DRUG}
+      # drug_drug omitted: no clinical DDI edges in OpenBioLink
+
+
+  biokg:
+    path: data/biokg/biokg.links.tsv
+    metadata_dir: data/biokg                 # directory containing biokg.metadata.*.tsv for name lookups
+    entity_types:
+      Drug: Drug                             # DrugBank accessions (e.g. DB00001)
+      # Two labels, one canonical type. `Disease` is MeSH (D001234, C012345);
+      # `GeneticDisorder` is OMIM (MIM:100100), and 3,660 of its 3,678 nodes
+      # (99.5%) carry a MONDO disease xref, so MONDO — the same arbiter this
+      # dimension scores against — adjudicates them as diseases. Leaving the
+      # label unmapped made them invisible to every metric. 2026-09-14.
+      Disease: [Disease, GeneticDisorder]
+      Gene/Protein: Gene/Protein             # UniProt accessions (e.g. P12345)
+      Pathway: Pathway                       # mixed KEGG / Reactome / SMPDB IDs
+    disease_id_scheme: mesh                  # raw IDs are MeSH disease identifiers
+    pathway_ontology: reactome               # 1,883 human Reactome (R-HSA-*) + KEGG + SMPDB
+    relations:
+      drug_target:  {relation: DPI}          # drug–protein interaction (aggregated)
+      drug_disease: {relation: DRUG_DISEASE_ASSOCIATION}
+      drug_drug:    {relation: DDI}
+
+  matrix:
+    # Every Cure MATRIX KG (Biolink-typed). Native files are very large
+    # (~5 GB nodes.tsv, ~14 GB edges.tsv); the loader streams + filters
+    # to the canonical entity-type subset declared in keep_categories.
+    nodes_path: data/matrix/nodes.tsv
+    edges_path: data/matrix/edges.tsv
+    # 'all' keeps every node category and every edge — the full released
+    # graph, and the setting used for the reported results. Use a restricted
+    # list (e.g. [drug, disease, gene/protein, pathway, effect/phenotype]) only
+    # to scope down on memory-constrained machines; note that this evaluates
+    # MATRIX on a subset while every other KG is evaluated as released, which
+    # must be disclosed if used.
+    # Full-graph footprint at scale: ~10 GB RAM for the in-memory DataFrames,
+    # ~25 GB for the NetworkX graph in nb04; peak across nb01+nb02 exceeded
+    # 150 GB, so run_main.sbatch requests 256 GB.
+    keep_categories: all
+    # Disease ID bridges: when a disease lacks a direct MONDO ID, the loader
+    # falls back through these tables in order:
+    #   1. DOID -> MONDO          (do_diseases.csv from gold standards)
+    #   2. MESH -> DOID -> MONDO  (mesh_to_doid.csv from gold standards)
+    #   3. SSSOM ext-CURIE -> MONDO (mondo.sssom.tsv from MONDO GitHub;
+    #      run `bash scripts/download_mondo_sssom.sh` to fetch it once)
+    # The SSSOM bridge is what recovers the long tail of UMLS / OMIM /
+    # Orphanet / ICD9 / NCIT-only disease nodes.
+    doid_to_mondo_path: data/gold_standards/bridges/do_diseases.csv
+    mesh_to_doid_path: data/gold_standards/bridges/mesh_to_doid.csv
+    mondo_sssom_path: data/gold_standards/bridges/mondo.sssom.tsv
+    # Drug / gene crosswalks: rescue PubChem-only drugs and UniProt-only genes
+    # so they can join to DrugBank-keyed and Entrez-keyed gold standards.
+    pubchem_to_drugbank_path: data/openbilink/pubchem_to_drugbank.csv
+    uniprot_to_entrez_path: data/gold_standards/bridges/uniprot_genesproteins.csv
+    # Comprehensive DrugBank xref (UNII / RxCUI / ATC / KEGG.DRUG / ChEBI /
+    # ChEMBL / CAS / etc.). Build via:
+    #   python scripts/build_drugbank_xref.py
+    # which combines DrugBank's external_links.csv with the existing PubChem
+    # crosswalk. The loader degrades gracefully if this file is absent —
+    # only the smaller PubChem→DrugBank table will be used.
+    drugbank_xref_path: data/gold_standards/bridges/drugbank_xref.csv
+    entity_types:
+      Biological Process: biological_process
+      Molecular Function: molecular_function
+      Anatomy: anatomy
+      Drug: drug
+      Disease: disease
+      Gene/Protein: gene/protein
+      Pathway: pathway
+    disease_id_scheme: mondo                 # canonicalised to bare MONDO numeric at load time via equivalent_identifiers crosswalk
+    pathway_ontology: reactome               # canonicalised to R-HSA-* at load time via equivalent_identifiers crosswalk
+    relations:
+      # Drug-target: binding predicates + biolink:affects. The strict-binding
+      # predicates only capture ~3 % of Matrix's authored drug-gene relationships;
+      # the rest flow through biolink:affects (which is what Every Cure's own
+      # repurposing scoring consumes). Including affects brings Matrix's
+      # drug-target count into the same order of magnitude as the other KGs.
+      drug_target:  {relations: [directly_physically_interacts_with, physically_interacts_with, interacts_with, affects]}
+      # Drug-disease: dominant indication predicate in MATRIX
+      drug_disease: {relation: treats_or_applied_or_studied_to_treat}
+      # Drug-drug interactions (clinical + structural)
+      drug_drug:    {relations: [interacts_with, directly_physically_interacts_with]}

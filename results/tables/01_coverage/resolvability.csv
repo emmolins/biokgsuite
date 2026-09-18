@@ -1,0 +1,9 @@
+KG,Entity,raw,resolved,resolvability,canonical_ids,top_unresolved
+biokg,Disease,9490,8052,0.8485,6870,"bare:1,420; MIM:18"
+hetionet,Disease,136,136,1.0,136,
+biokg,Drug,8805,5889,0.6688,5888,"bare:2,916"
+hetionet,Drug,1538,1451,0.9434,1451,bare:87
+biokg,Gene/Protein,59204,16483,0.2784,16575,"bare:42,721"
+hetionet,Gene/Protein,19145,19028,0.9939,19028,bare:117
+biokg,Pathway,14779,1956,0.1323,1956,"bare:12,823"
+hetionet,Pathway,1822,0,0.0,0,"PC7:1,528; WP3300:1; WP474:1"

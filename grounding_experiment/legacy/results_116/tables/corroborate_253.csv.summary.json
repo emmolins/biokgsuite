@@ -1,0 +1,13 @@
+{
+  "n_pairs": 253,
+  "n_fda_attributed": 121,
+  "n_corroborated": 98,
+  "counts": {
+    "not_fda_attributed": 132,
+    "corroborated_in_census": 98,
+    "efficacy_event_outside_tiers": 18,
+    "fda_action_but_not_efficacy": 3,
+    "out_of_frame_cber": 1,
+    "NO_FDA_RECORD_review": 1
+  }
+}

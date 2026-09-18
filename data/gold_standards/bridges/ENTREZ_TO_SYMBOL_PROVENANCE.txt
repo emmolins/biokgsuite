@@ -1,0 +1,8 @@
+# Provenance for entrez_to_symbol.tsv
+# built:      2026-09-18T19:22:59+00:00
+# built_by:   tools/build_entrez_symbol_map.py
+# source:     data/crosswalks/hgnc_complete_set.txt sha256 9e07bb49393c12ac (release in data/PROVENANCE.md)
+# rule:       status == Approved and entrez_id present; one symbol per Entrez id
+# rows in:    45054  approved with Entrez id: 44407  duplicate Entrez ids dropped: 4
+# rows out:   44405
+# sha256 entrez_to_symbol.tsv: a5fc3b717a1e265f

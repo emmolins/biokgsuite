@@ -1,0 +1,9 @@
+KG,Entity Type,KG Entities,Gold Standard,Overlap,Coverage (%)
+hetionet,Drug,1451,5485,1352.0,24.65
+hetionet,Disease,136,31147,132.0,0.42
+hetionet,Gene/Protein,19028,1076,1073.0,99.72
+hetionet,Pathway,0,1386,,
+biokg,Drug,5888,5485,2584.0,47.11
+biokg,Disease,6870,31147,6617.0,21.24
+biokg,Gene/Protein,16575,1076,1076.0,100.0
+biokg,Pathway,1956,1386,1134.0,81.82

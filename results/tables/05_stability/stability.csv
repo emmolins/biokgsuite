@@ -1,0 +1,145 @@
+KG,Strategy,Pair set,Scorer,Dropout,Spearman r,Spearman SD,Pairs correlated,Pairs sampled,Trials,Top-K overlap
+hetionet,Random edge dropout,gold,Adamic-Adar,0.05,0.9877,0.0027,455,500,3,0.937
+hetionet,Random edge dropout,null,Adamic-Adar,0.05,0.9819,0.0037,271,500,3,0.967
+hetionet,Random edge dropout,gold,Common Neighbors,0.05,0.9887,0.0029,455,500,3,0.953
+hetionet,Random edge dropout,null,Common Neighbors,0.05,0.9827,0.0052,271,500,3,0.953
+hetionet,Random edge dropout,gold,Jaccard,0.05,0.984,0.0044,455,500,3,0.927
+hetionet,Random edge dropout,null,Jaccard,0.05,0.9743,0.0037,271,500,3,0.967
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.05,0.9822,0.001,455,500,3,0.99
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.05,0.9982,0.0,271,500,3,1.0
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.05,0.9849,0.0013,455,500,3,0.987
+hetionet,Periphery-first dropout,null,Common Neighbors,0.05,0.999,0.0,271,500,3,0.99
+hetionet,Periphery-first dropout,gold,Jaccard,0.05,0.9732,0.0096,455,500,3,0.95
+hetionet,Periphery-first dropout,null,Jaccard,0.05,0.996,0.0,271,500,3,0.97
+hetionet,Random edge dropout,gold,Adamic-Adar,0.1,0.9752,0.0025,455,500,3,0.917
+hetionet,Random edge dropout,null,Adamic-Adar,0.1,0.9566,0.006,271,500,3,0.94
+hetionet,Random edge dropout,gold,Common Neighbors,0.1,0.9772,0.0019,455,500,3,0.913
+hetionet,Random edge dropout,null,Common Neighbors,0.1,0.9594,0.0049,271,500,3,0.927
+hetionet,Random edge dropout,gold,Jaccard,0.1,0.97,0.0047,455,500,3,0.903
+hetionet,Random edge dropout,null,Jaccard,0.1,0.9466,0.0013,271,500,3,0.927
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.1,0.9567,0.0,455,500,3,0.99
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.1,0.9877,0.0,271,500,3,1.0
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.1,0.9628,0.0,455,500,3,0.98
+hetionet,Periphery-first dropout,null,Common Neighbors,0.1,0.9905,0.0,271,500,3,0.97
+hetionet,Periphery-first dropout,gold,Jaccard,0.1,0.8946,0.0,455,500,3,0.95
+hetionet,Periphery-first dropout,null,Jaccard,0.1,0.9726,0.0,271,500,3,0.97
+hetionet,Random edge dropout,gold,Adamic-Adar,0.15,0.9566,0.0021,455,500,3,0.903
+hetionet,Random edge dropout,null,Adamic-Adar,0.15,0.9395,0.0035,271,500,3,0.927
+hetionet,Random edge dropout,gold,Common Neighbors,0.15,0.96,0.003,455,500,3,0.903
+hetionet,Random edge dropout,null,Common Neighbors,0.15,0.9418,0.0045,271,500,3,0.92
+hetionet,Random edge dropout,gold,Jaccard,0.15,0.9478,0.0074,455,500,3,0.88
+hetionet,Random edge dropout,null,Jaccard,0.15,0.9245,0.0098,271,500,3,0.893
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.15,0.9385,0.0003,455,500,3,0.99
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.15,0.9811,0.0,271,500,3,1.0
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.15,0.9468,0.0001,455,500,3,0.98
+hetionet,Periphery-first dropout,null,Common Neighbors,0.15,0.9862,0.0,271,500,3,0.96
+hetionet,Periphery-first dropout,gold,Jaccard,0.15,0.8652,0.0001,455,500,3,0.92
+hetionet,Periphery-first dropout,null,Jaccard,0.15,0.9641,0.0,271,500,3,0.97
+hetionet,Random edge dropout,gold,Adamic-Adar,0.2,0.9374,0.0039,455,500,3,0.89
+hetionet,Random edge dropout,null,Adamic-Adar,0.2,0.9094,0.0061,271,500,3,0.897
+hetionet,Random edge dropout,gold,Common Neighbors,0.2,0.9423,0.0014,455,500,3,0.87
+hetionet,Random edge dropout,null,Common Neighbors,0.2,0.9139,0.0108,271,500,3,0.887
+hetionet,Random edge dropout,gold,Jaccard,0.2,0.9264,0.0077,455,500,3,0.873
+hetionet,Random edge dropout,null,Jaccard,0.2,0.8886,0.015,271,500,3,0.873
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.2,0.9238,0.0002,455,500,3,0.98
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.2,0.9751,0.0,271,500,3,1.0
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.2,0.9329,0.0,455,500,3,0.973
+hetionet,Periphery-first dropout,null,Common Neighbors,0.2,0.9797,0.0,271,500,3,0.97
+hetionet,Periphery-first dropout,gold,Jaccard,0.2,0.8297,0.0012,455,500,3,0.91
+hetionet,Periphery-first dropout,null,Jaccard,0.2,0.948,0.0,271,500,3,0.96
+hetionet,Random edge dropout,gold,Adamic-Adar,0.25,0.9185,0.0065,455,500,3,0.867
+hetionet,Random edge dropout,null,Adamic-Adar,0.25,0.8912,0.0096,271,500,3,0.883
+hetionet,Random edge dropout,gold,Common Neighbors,0.25,0.9233,0.0058,455,500,3,0.85
+hetionet,Random edge dropout,null,Common Neighbors,0.25,0.8965,0.0062,271,500,3,0.873
+hetionet,Random edge dropout,gold,Jaccard,0.25,0.9034,0.0119,455,500,3,0.84
+hetionet,Random edge dropout,null,Jaccard,0.25,0.8709,0.0049,271,500,3,0.85
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.25,0.9095,0.0002,455,500,3,0.98
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.25,0.9699,0.0,271,500,3,0.99
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.25,0.9216,0.0001,455,500,3,0.97
+hetionet,Periphery-first dropout,null,Common Neighbors,0.25,0.9766,0.0,271,500,3,0.94
+hetionet,Periphery-first dropout,gold,Jaccard,0.25,0.7999,0.0004,455,500,3,0.91
+hetionet,Periphery-first dropout,null,Jaccard,0.25,0.9423,0.0,271,500,3,0.94
+hetionet,Random edge dropout,gold,Adamic-Adar,0.3,0.8994,0.0067,455,500,3,0.83
+hetionet,Random edge dropout,null,Adamic-Adar,0.3,0.8764,0.0142,271,500,3,0.887
+hetionet,Random edge dropout,gold,Common Neighbors,0.3,0.905,0.0071,455,500,3,0.827
+hetionet,Random edge dropout,null,Common Neighbors,0.3,0.8802,0.013,271,500,3,0.873
+hetionet,Random edge dropout,gold,Jaccard,0.3,0.8832,0.0094,455,500,3,0.817
+hetionet,Random edge dropout,null,Jaccard,0.3,0.8437,0.0055,271,500,3,0.85
+hetionet,Periphery-first dropout,gold,Adamic-Adar,0.3,0.8755,0.0012,455,500,3,0.98
+hetionet,Periphery-first dropout,null,Adamic-Adar,0.3,0.9504,0.0027,271,500,3,0.98
+hetionet,Periphery-first dropout,gold,Common Neighbors,0.3,0.8944,0.0009,455,500,3,0.97
+hetionet,Periphery-first dropout,null,Common Neighbors,0.3,0.9557,0.0014,271,500,3,0.97
+hetionet,Periphery-first dropout,gold,Jaccard,0.3,0.7242,0.0009,455,500,3,0.86
+hetionet,Periphery-first dropout,null,Jaccard,0.3,0.9111,0.0012,271,500,3,0.93
+biokg,Random edge dropout,gold,Adamic-Adar,0.05,0.9989,0.0001,419,500,3,0.983
+biokg,Random edge dropout,null,Adamic-Adar,0.05,0.9983,0.0,357,500,3,0.983
+biokg,Random edge dropout,gold,Common Neighbors,0.05,0.999,0.0,419,500,3,0.99
+biokg,Random edge dropout,null,Common Neighbors,0.05,0.9984,0.0,357,500,3,0.983
+biokg,Random edge dropout,gold,Jaccard,0.05,0.9984,0.0001,419,500,3,0.98
+biokg,Random edge dropout,null,Jaccard,0.05,0.9956,0.0025,357,500,3,0.973
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.05,0.9999,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Adamic-Adar,0.05,1.0,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.05,0.9999,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Common Neighbors,0.05,1.0,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.05,0.9998,0.0,419,500,3,0.99
+biokg,Periphery-first dropout,null,Jaccard,0.05,0.9996,0.0,357,500,3,0.98
+biokg,Random edge dropout,gold,Adamic-Adar,0.1,0.9976,0.0002,419,500,3,0.963
+biokg,Random edge dropout,null,Adamic-Adar,0.1,0.9963,0.0002,357,500,3,0.973
+biokg,Random edge dropout,gold,Common Neighbors,0.1,0.9978,0.0002,419,500,3,0.967
+biokg,Random edge dropout,null,Common Neighbors,0.1,0.9964,0.0002,357,500,3,0.973
+biokg,Random edge dropout,gold,Jaccard,0.1,0.9963,0.0006,419,500,3,0.967
+biokg,Random edge dropout,null,Jaccard,0.1,0.9922,0.0022,357,500,3,0.953
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.1,0.9987,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Adamic-Adar,0.1,1.0,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.1,0.9987,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Common Neighbors,0.1,1.0,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.1,0.9983,0.0,419,500,3,0.98
+biokg,Periphery-first dropout,null,Jaccard,0.1,0.9988,0.0,357,500,3,0.98
+biokg,Random edge dropout,gold,Adamic-Adar,0.15,0.9964,0.0002,419,500,3,0.963
+biokg,Random edge dropout,null,Adamic-Adar,0.15,0.9938,0.0001,357,500,3,0.967
+biokg,Random edge dropout,gold,Common Neighbors,0.15,0.9966,0.0002,419,500,3,0.963
+biokg,Random edge dropout,null,Common Neighbors,0.15,0.9941,0.0001,357,500,3,0.967
+biokg,Random edge dropout,gold,Jaccard,0.15,0.9944,0.0003,419,500,3,0.967
+biokg,Random edge dropout,null,Jaccard,0.15,0.9888,0.0017,357,500,3,0.96
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.15,0.9945,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Adamic-Adar,0.15,0.9973,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.15,0.9945,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Common Neighbors,0.15,0.9973,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.15,0.9947,0.0,419,500,3,0.98
+biokg,Periphery-first dropout,null,Jaccard,0.15,0.9957,0.0001,357,500,3,0.98
+biokg,Random edge dropout,gold,Adamic-Adar,0.2,0.9951,0.0004,419,500,3,0.96
+biokg,Random edge dropout,null,Adamic-Adar,0.2,0.9907,0.0006,357,500,3,0.957
+biokg,Random edge dropout,gold,Common Neighbors,0.2,0.9953,0.0003,419,500,3,0.96
+biokg,Random edge dropout,null,Common Neighbors,0.2,0.9913,0.0005,357,500,3,0.957
+biokg,Random edge dropout,gold,Jaccard,0.2,0.9921,0.0005,419,500,3,0.953
+biokg,Random edge dropout,null,Jaccard,0.2,0.9832,0.003,357,500,3,0.943
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.2,0.9886,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Adamic-Adar,0.2,0.9925,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.2,0.9887,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Common Neighbors,0.2,0.9927,0.0001,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.2,0.9877,0.0,419,500,3,0.98
+biokg,Periphery-first dropout,null,Jaccard,0.2,0.983,0.0001,357,500,3,0.97
+biokg,Random edge dropout,gold,Adamic-Adar,0.25,0.9937,0.0004,419,500,3,0.957
+biokg,Random edge dropout,null,Adamic-Adar,0.25,0.9882,0.0014,357,500,3,0.937
+biokg,Random edge dropout,gold,Common Neighbors,0.25,0.9941,0.0005,419,500,3,0.95
+biokg,Random edge dropout,null,Common Neighbors,0.25,0.9889,0.001,357,500,3,0.94
+biokg,Random edge dropout,gold,Jaccard,0.25,0.9898,0.0008,419,500,3,0.947
+biokg,Random edge dropout,null,Jaccard,0.25,0.9793,0.003,357,500,3,0.947
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.25,0.9813,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Adamic-Adar,0.25,0.9894,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.25,0.981,0.0,419,500,3,1.0
+biokg,Periphery-first dropout,null,Common Neighbors,0.25,0.9896,0.0,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.25,0.978,0.0,419,500,3,0.97
+biokg,Periphery-first dropout,null,Jaccard,0.25,0.9636,0.0,357,500,3,0.95
+biokg,Random edge dropout,gold,Adamic-Adar,0.3,0.9916,0.0004,419,500,3,0.95
+biokg,Random edge dropout,null,Adamic-Adar,0.3,0.9854,0.0023,357,500,3,0.943
+biokg,Random edge dropout,gold,Common Neighbors,0.3,0.9919,0.0004,419,500,3,0.947
+biokg,Random edge dropout,null,Common Neighbors,0.3,0.9861,0.0018,357,500,3,0.94
+biokg,Random edge dropout,gold,Jaccard,0.3,0.9863,0.001,419,500,3,0.937
+biokg,Random edge dropout,null,Jaccard,0.3,0.975,0.0014,357,500,3,0.93
+biokg,Periphery-first dropout,gold,Adamic-Adar,0.3,0.9453,0.0,419,500,3,0.99
+biokg,Periphery-first dropout,null,Adamic-Adar,0.3,0.9515,0.0001,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Common Neighbors,0.3,0.9448,0.0,419,500,3,0.99
+biokg,Periphery-first dropout,null,Common Neighbors,0.3,0.951,0.0001,357,500,3,1.0
+biokg,Periphery-first dropout,gold,Jaccard,0.3,0.9389,0.0,419,500,3,0.95
+biokg,Periphery-first dropout,null,Jaccard,0.3,0.9087,0.0002,357,500,3,0.93

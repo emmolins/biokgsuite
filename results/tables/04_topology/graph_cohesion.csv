@@ -1,0 +1,3 @@
+KG,Nodes,LCC nodes,LCC fraction,LCC (%),Components,Isolated,Top types outside LCC
+hetionet,47031,45158,0.9601752035891221,96.02,1874,1873,"Gene (1,800), Side Effect (33), Symptom (23)"
+biokg,105524,98456,0.9330199764982373,93.3,1451,0,"Gene/Protein (5,738), Pathway (1,157), Drug (87)"

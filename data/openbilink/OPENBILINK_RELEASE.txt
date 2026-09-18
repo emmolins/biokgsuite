@@ -1,0 +1,16 @@
+dataset=openbilink
+release=OpenBioLink2020 v1.0.1 (Zenodo record 5361324, 2021-09-01)
+provenance=adopted: these files were already on disk and were recorded, not downloaded, by tools/fetch_kgs.py --adopt
+doi=10.5281/zenodo.5361324
+licence=CC-BY 4.0
+retrieved_utc=2026-09-18T16:24:22+00:00
+fetched_by=tools/fetch_kgs.py --adopt (file already on disk, not downloaded here)
+citation=Breit A, Ott S, Agibetov A, Samwald M. OpenBioLink: a benchmarking framework for large-scale biomedical link prediction. Bioinformatics 2020;36(13):4097. doi:10.1093/bioinformatics/btaa274
+raw_files:
+adoption_evidence:
+  - Zenodo record 5361324 confirmed latest on 2026-09-18; the record is immutable and OpenBioLink has published nothing since 2021-09-01
+  - edges.csv holds 28,973,555 rows in 5 tab-separated columns, the ALL_DIR (no quality cutoff) variant the loader expects, not HQ_DIR
+  - the loader quality cutoff (STRING/STITCH >= 700, Bgee gold/high, curated sources unconditional) yields 4,986,521 edges, matching the benchmark size OpenBioLink documents
+  - line endings are CRLF; the loader strips \r before comparing the source column, so the cutoff is applied as documented
+derived_files:
+  data/openbilink/edges.csv                     1,732,793,394 bytes  sha256 dd831d70f8363d62  (derived from the publisher archive; no publisher checksum covers this file)

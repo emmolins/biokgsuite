@@ -1,0 +1,3 @@
+KG,Granularity tier,Tier,Mechanism,Total edges,Edges attributed (%),Distinct source DBs,Cross-source edges (%)
+hetionet,2 - per-edge provenance,2,"Per-edge `source` property naming the database the edge was gathered from (hetnet JSON / Neo4j). NOT present in the TSV export loaded here, so Edges attributed (%) below reflects the distributed format we read, not the graph.",2250197,100.0,29,N/A
+biokg,0 - type-level,0,Implicit via metaedge type (17 types; no per-edge field),2067998,100.0,13,N/A
