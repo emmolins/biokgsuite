@@ -1,0 +1,4 @@
+retrieved_utc=2026-09-19T17:07:38Z
+source_url=https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/src_id1/src1src2.txt.gz
+rows=11169
+c3370b5727a1da2d5abbbf98e3a1f6e34f752a5f4f887c46e0f2d8702ec0d4da  /Users/shil6661/Desktop/biokgsuite-bib/data/crosswalks/unichem_drugbank_chembl.tsv

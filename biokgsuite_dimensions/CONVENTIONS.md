@@ -76,6 +76,8 @@ A silent default lets a run use a value `config/params.yaml` never mentions.
 Everything a notebook writes goes through `Outputs`, so figures, tables and
 checkpoints land under `results/{figures,tables}/<notebook>/` and
 `results/checkpoints/<notebook>.pkl`. Do not build result paths by hand.
+Figures are drawn by functions under `src/biokgsuite/viz/`, never inline in a
+notebook; how they look is fixed by `FIGURE_STYLE.md`.
 
 ## Memory
 

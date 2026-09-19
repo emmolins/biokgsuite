@@ -2,12 +2,18 @@
 """Build the task-derived entity and relation reference sets.
 
 Definitions are asymmetric by design (see data/REFERENCE_SETS.md):
-  DISEASES  every disease, including undrugged ones — repurposing exists to
-            serve them. Rule: MONDO non-obsolete, non-grouping.
-  DRUGS     approved only — you can only repurpose a drug that exists.
-            Rule: Open Targets maximumClinicalStage == 'APPROVAL'.
-  GENES     targets of the approved drug set.
-  PATHWAYS  Reactome pathways of those targets.
+  DISEASES  every human disease, including undrugged ones: repurposing exists
+            to serve them. Rule: MONDO non-obsolete, non-grouping, descendant
+            of MONDO:0700096 (human disease or disorder).
+  DRUGS     approved therapeutics, one row per active molecule: you can only
+            repurpose a drug that exists and is used for something. Rule:
+            Open Targets maximumClinicalStage == 'APPROVAL', with at least one
+            APPROVAL-stage indication (on the molecule or its ChEMBL parent),
+            not a vaccine component, collapsed to the ChEMBL parent so a salt
+            and its free base are one drug.
+  GENES     the genes the task touches: targets of the approved drugs plus
+            genes with curated disease evidence.
+  PATHWAYS  Reactome pathways of that gene set.
 
 All sources are Open Targets (ChEMBL/DailyMed derived) or MONDO, so none is
 circular with the DrugBank-ingesting graphs being scored.
@@ -66,7 +72,46 @@ def mondo_universe(obo: Path):
                 isa.add((cur['id'], p))
             cur = None
     uni = live - group
-    return uni, rare & uni, {(c, p) for c, p in isa if c in uni and p in uni}
+    return uni, rare & uni, {(c, p) for c, p in isa if c in uni and p in uni}, isa
+
+
+HUMAN_DISEASE_ROOT = '700096'     # MONDO:0700096 human disease or disorder
+
+
+def descendants(root: str, isa: set) -> set:
+    """Every term below ``root`` in the is_a graph (root included)."""
+    kids = defaultdict(set)
+    for c, p in isa:
+        kids[p].add(c)
+    seen, stack = {root}, [root]
+    while stack:
+        for k in kids.get(stack.pop(), ()):
+            if k not in seen:
+                seen.add(k); stack.append(k)
+    return seen
+
+
+def approved_therapeutics(dm: pd.DataFrame, ci: pd.DataFrame):
+    """(set of parent ChEMBL ids, child->parent map) for the drug reference set.
+
+    Rules, each stated so it can be argued with:
+      1. maximumClinicalStage == 'APPROVAL' (Open Targets, ChEMBL-derived).
+      2. At least one APPROVAL-stage indication in clinical_indication, on the
+         molecule or its parent. Drops imaging agents, excipients and
+         hormones that carry an approval but no therapeutic use.
+      3. Not a vaccine component: the post-cutoff approval set excludes
+         vaccines, and one rule should decide what a drug is in both parts.
+      4. Collapsed to the ChEMBL parent, so doxazosin and doxazosin mesylate
+         are one drug and coverage counts active molecules, not salt forms.
+    """
+    ap = dm[dm['maximumClinicalStage'] == 'APPROVAL'].copy()
+    ap['parent'] = ap['parentId'].fillna(ap['id'])
+    parent_of = dict(zip(dm['id'], dm['parentId'].fillna(dm['id'])))
+    indicated = set(ci.loc[ci['maxClinicalStage'] == 'APPROVAL', 'drugId'])
+    indicated |= {parent_of.get(d, d) for d in indicated}
+    keep = ap[(ap['id'].isin(indicated) | ap['parent'].isin(indicated))
+              & (ap['drugType'] != 'Vaccine component')]
+    return set(keep['parent']), parent_of
 
 
 def to_mondo_map(xw: Path):
@@ -107,7 +152,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--crosswalks', default='data/crosswalks')
     ap.add_argument('--out', default='data/reference_sets')
-    ap.add_argument('--benchmark', default='data/gold_standards/legacy/gold_standard_v4_bigset.tsv')
+    ap.add_argument('--benchmark', default='data/gold_standards/post_cutoff_approvals/post_cutoff_approvals.csv')
     a = ap.parse_args()
     xw, out = Path(a.crosswalks), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -122,26 +167,38 @@ def main():
     obo = xw / 'mondo.obo'
     if not obo.exists():
         print('  FATAL: mondo.obo missing. Run tools/build_crosswalks.py'); return 1
-    universe, rare, isa = mondo_universe(obo)
+    universe, rare, isa, isa_all = mondo_universe(obo)
+    human = descendants(HUMAN_DISEASE_ROOT, isa_all)
+    dropped = universe - human
+    universe, rare = universe & human, rare & human
+    isa = {(c, p) for c, p in isa if c in universe and p in universe}
     (out / 'entity_disease.txt').write_text('\n'.join(sorted(universe, key=int)) + '\n')
     (out / 'entity_disease_rare.txt').write_text('\n'.join(sorted(rare, key=int)) + '\n')
-    man['entity_disease'] = {'rule': 'MONDO non-obsolete, non-grouping',
-                             'source': 'mondo.obo', 'n': len(universe), 'n_rare': len(rare)}
-    print(f'  entity  disease        {len(universe):>8,}  ({len(rare):,} rare)')
+    man['entity_disease'] = {'rule': 'MONDO non-obsolete, non-grouping, descendant of '
+                                     'MONDO:0700096 (human disease or disorder)',
+                             'source': 'mondo.obo', 'n': len(universe), 'n_rare': len(rare),
+                             'n_outside_human_disease': len(dropped)}
+    print(f'  entity  disease        {len(universe):>8,}  ({len(rare):,} rare; '
+          f'{len(dropped)} live terms outside human disease dropped)')
 
     bridge = to_mondo_map(xw)
 
     # ---------------- entities: drug ---------------------------------------
-    dm = load_parquet(xw / 'ot_drug_molecule', ['id', 'name', 'maximumClinicalStage'])
-    if dm is None:
-        print('  FATAL: ot_drug_molecule missing'); return 1
-    appr = dm[dm['maximumClinicalStage'] == 'APPROVAL']
-    drugs = set(appr['id'])
+    dm = load_parquet(xw / 'ot_drug_molecule', ['id', 'name', 'drugType', 'parentId',
+                                                 'maximumClinicalStage'])
+    ci = load_parquet(xw / 'ot_clinical_indication', ['drugId', 'diseaseId', 'maxClinicalStage'])
+    if dm is None or ci is None:
+        print('  FATAL: ot_drug_molecule or ot_clinical_indication missing'); return 1
+    drugs, parent_of = approved_therapeutics(dm, ci)
+    n_approved = int((dm['maximumClinicalStage'] == 'APPROVAL').sum())
     (out / 'entity_drug.txt').write_text('\n'.join(sorted(drugs)) + '\n')
-    man['entity_drug'] = {'rule': "maximumClinicalStage == 'APPROVAL' (there is no "
-                                  "isApproved column in 26.06)",
-                          'source': 'ot_drug_molecule', 'n': len(drugs)}
-    print(f'  entity  drug           {len(drugs):>8,}  (approved, of {len(dm):,} molecules)')
+    man['entity_drug'] = {'rule': "maximumClinicalStage == 'APPROVAL', with an APPROVAL-stage "
+                                  "indication on the molecule or its parent, not a vaccine "
+                                  "component, collapsed to the ChEMBL parent",
+                          'source': 'ot_drug_molecule + ot_clinical_indication',
+                          'n': len(drugs), 'n_approved_molecules': n_approved}
+    print(f'  entity  drug           {len(drugs):>8,}  (approved therapeutics, parent molecules; '
+          f'{n_approved:,} approved molecule rows)')
 
     # ---------------- relation #1 drug -> gene ------------------------------
     moa = load_parquet(xw / 'ot_drug_mechanism_of_action', ['chemblIds', 'targets'])
@@ -151,16 +208,13 @@ def main():
             if cids is None or tgts is None:
                 continue
             for c in cids:
+                c = parent_of.get(c, c)          # a salt's mechanism is its parent's
                 if c in drugs:
                     for t in tgts:
                         dg.add((c, t))
-    genes = {t for _, t in dg}
-    (out / 'entity_gene.txt').write_text('\n'.join(sorted(genes)) + '\n')
+    targets = {t for _, t in dg}
     rel_counts['drug_gene'] = write('relation_drug_gene.tsv', sorted(dg), ['drug', 'gene'])
-    man['entity_gene'] = {'rule': 'targets of the approved drug set',
-                          'source': 'ot_drug_mechanism_of_action', 'n': len(genes)}
-    print(f'  entity  gene           {len(genes):>8,}  (targets of approved drugs)')
-    print(f'  rel #1  drug->gene     {len(dg):>8,}')
+    print(f'  rel #1  drug->gene     {len(dg):>8,}  ({len(targets):,} targets)')
 
     # ---------------- gene -> pathway (building block) ----------------------
     tg = load_parquet(xw / 'ot_target', ['id', 'pathways'])
@@ -174,8 +228,9 @@ def main():
                 gp.add((gid, pw['pathwayId']))
                 if pw.get('pathway'):
                     pw_names[pw['pathwayId']] = str(pw['pathway']).strip()
-    pathways = {p for g, p in gp if g in genes}
-    (out / 'entity_pathway.txt').write_text('\n'.join(sorted(pathways)) + '\n')
+    g2p = defaultdict(set)
+    for g, p in gp:
+        g2p[g].add(p)
 
     # Reactome pathway NAMES, over every pathway OT mentions rather than only
     # those of the target gene set. Used by the nb01 pathway diagnostic to
@@ -191,13 +246,6 @@ def main():
         'source': 'ot_target.pathways', 'n': len(pw_names),
         'scored': False}
     print(f'  aux     pathway names  {len(pw_names):>8,}  (for the nb01 pathway diagnostic)')
-    man['entity_pathway'] = {'rule': 'Reactome pathways of the target gene set',
-                             'source': 'ot_target.pathways', 'n': len(pathways)}
-    print(f'  entity  pathway        {len(pathways):>8,}  (of target genes)')
-
-    g2p = defaultdict(set)
-    for g, p in gp:
-        g2p[g].add(p)
 
     # ---------------- relation #2 drug -> pathway ---------------------------
     dp = {(d, p) for d, g in dg for p in g2p.get(g, ())}
@@ -222,6 +270,26 @@ def main():
     for k, v in sorted(by_src.items(), key=lambda kv: -kv[1]):
         print(f'             {k:28s} {v:>8,}')
 
+    # ---------------- entities: gene and pathway ----------------------------
+    # The genes the task touches: what approved drugs act on, and what curated
+    # evidence implicates in disease. Targets alone (about 1,100 genes) are
+    # held by every gene-centric graph, so the set would not discriminate.
+    disease_genes = {g for _, g in dgene}
+    genes = targets | disease_genes
+    (out / 'entity_gene.txt').write_text('\n'.join(sorted(genes)) + '\n')
+    man['entity_gene'] = {'rule': 'targets of the approved drugs, plus genes with curated '
+                                  'disease evidence (relation #3)',
+                          'source': 'ot_drug_mechanism_of_action + ot_evidence_*',
+                          'n': len(genes), 'n_targets': len(targets),
+                          'n_disease_genes': len(disease_genes)}
+    print(f'  entity  gene           {len(genes):>8,}  ({len(targets):,} targets + '
+          f'{len(disease_genes):,} disease genes)')
+    pathways = {p for g, p in gp if g in genes}
+    (out / 'entity_pathway.txt').write_text('\n'.join(sorted(pathways)) + '\n')
+    man['entity_pathway'] = {'rule': 'Reactome pathways of the gene reference set',
+                             'source': 'ot_target.pathways', 'n': len(pathways)}
+    print(f'  entity  pathway        {len(pathways):>8,}  (of the gene set)')
+
     # ---------------- relation #4 disease -> pathway ------------------------
     dpw = {(dz, p) for dz, g in dgene for p in g2p.get(g, ())}
     rel_counts['disease_pathway'] = write('relation_disease_pathway.tsv', sorted(dpw), ['disease', 'pathway'])
@@ -232,15 +300,15 @@ def main():
     print(f'  rel #5  dis->dis       {len(isa):>8,}  (MONDO is_a, within the universe)')
 
     # ---------------- relation #6 drug -> disease ---------------------------
-    ci = load_parquet(xw / 'ot_clinical_indication', ['drugId', 'diseaseId', 'maxClinicalStage'])
     dd, drugged = set(), set()
-    if ci is not None:
-        ci = ci.dropna(subset=['drugId', 'diseaseId'])
-        ci['m'] = ot_to_mondo(ci['diseaseId'], bridge)
-        ci = ci.dropna(subset=['m'])
-        appr_ind = ci[(ci['maxClinicalStage'] == 'APPROVAL') & (ci['drugId'].isin(drugs))]
-        dd = set(zip(appr_ind['drugId'], appr_ind['m']))
-        drugged = set(appr_ind['m']) & universe
+    cim = ci.dropna(subset=['drugId', 'diseaseId']).copy()
+    cim['m'] = ot_to_mondo(cim['diseaseId'], bridge)
+    cim = cim.dropna(subset=['m'])
+    cim['drugId'] = cim['drugId'].map(lambda d: parent_of.get(d, d))
+    appr_ind = cim[(cim['maxClinicalStage'] == 'APPROVAL') & (cim['drugId'].isin(drugs))
+                   & (cim['m'].isin(universe))]
+    dd = set(zip(appr_ind['drugId'], appr_ind['m']))
+    drugged = set(appr_ind['m'])
     rel_counts['drug_disease'] = write('relation_drug_disease.tsv', sorted(dd), ['drug', 'disease'])
     print(f'  rel #6  drug->disease  {len(dd):>8,}  (approved indications only)')
 
@@ -259,12 +327,13 @@ def main():
     # ---------------- tier 1 -----------------------------------------------
     b = Path(a.benchmark)
     if b.exists():
-        import csv
-        rows = list(csv.DictReader(b.open(), delimiter='\t'))
-        man['tier1'] = {'rule': 'entities of the prospective benchmark', 'source': b.name,
-                        'pairs': len(rows),
-                        'n_drugs': len({r['drug_id'] for r in rows if r.get('drug_id')}),
-                        'n_diseases': len({r['disease_id'] for r in rows if r.get('disease_id')})}
+        bench = pd.read_csv(b, dtype=str)
+        dcol = next((c for c in bench.columns if 'drugbank' in c.lower()), None)
+        zcol = next((c for c in bench.columns if 'mondo' in c.lower()), None)
+        man['post_cutoff_set'] = {'rule': 'entities of the post-cutoff approval set (notebook 07, Part II)',
+                                  'source': b.name, 'pairs': len(bench),
+                                  'n_drugs': int(bench[dcol].nunique()) if dcol else None,
+                                  'n_diseases': int(bench[zcol].nunique()) if zcol else None}
 
     man['relations'] = rel_counts
     (out / 'MANIFEST.json').write_text(json.dumps(man, indent=2))

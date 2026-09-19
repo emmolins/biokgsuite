@@ -12,7 +12,7 @@ LLM place the true post-cutoff repurposed drug above distractors?
 
 The stage notebooks under grounding_experiment/ are thin callers of these.
 """
-from .analysis import (arm_table, bh_fdr, capacity_table, chance_mrr, contrast_table,  # noqa: F401
+from .analysis import (absence_penalty_table, arm_table, bh_fdr, capacity_table, chance_mrr, contrast_table,  # noqa: F401
                        cross_model_corr, diagnostics, difficulty_table, load_runs,
                        mean_pairwise_corr, per_query, scaling_table, significance_tests,
                        validate_runs)

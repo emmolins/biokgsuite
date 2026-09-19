@@ -16,7 +16,7 @@ tables this stage writes.
 
 | | scored | reported, not scored |
 |---|---|---|
-| | grounding gain per (model, graph); graph contrasts, all pairs and covered-only | parse diagnostics and miss-corrected MRR; rank distribution; `basis`, `evidence_agreement`, `confidence` |
+| | grounding gain per (model, graph); graph contrasts, all pairs and evaluable-in-every-graph; the absence penalty per (model, graph) | parse diagnostics and miss-corrected MRR; rank distribution; `basis`, `evidence_agreement`, `confidence` |
 
 $$\text{gain}_{m,g} = \overline{\text{RR}}_{m,g} - \overline{\text{RR}}_{m,\text{none}}, \qquad \text{contrast}_{m,g,h} = \overline{\text{RR}}_{m,g} - \overline{\text{RR}}_{m,h}$$
 
@@ -44,6 +44,22 @@ in |difference| under that restriction is the share of the apparent ordering
 that coverage explains; the residual is what evidence quality is allowed to
 claim. The `common` family, run separately, corroborates with an independent
 draw.
+
+### The absence penalty
+
+The pooled lift on `main` scores the graph as deployed: every pair, whatever
+the graph has on it. Part of that number is a mechanism a reader should see on
+its own. When a graph holds a drug but has no gene or pathway for it, the
+positive reaches the model with no dossier while the distractors the graph
+does hold carry theirs, and the model, told to weigh the evidence, ranks the
+blank candidate down. `absence_penalty` splits each KG arm's pairs on
+`pos_has_evidence`, the flag the runner writes from what the model was shown,
+and reports the paired lift over `none` for each half. The shown half is the
+evidence effect; the absent half is what a coverage gap costs at deployment,
+and it ties the grounding experiment to dimension 01, since a coverage
+failure there becomes a ranking failure here. Pairs where no candidate
+carried a dossier are left out of the absent half, because there the arm is
+the `none` arm.
 
 ### Rank test, corrected
 

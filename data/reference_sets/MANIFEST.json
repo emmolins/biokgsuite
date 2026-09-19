@@ -1,19 +1,16 @@
 {
   "entity_disease": {
-    "rule": "MONDO non-obsolete, non-grouping",
+    "rule": "MONDO non-obsolete, non-grouping, descendant of MONDO:0700096 (human disease or disorder)",
     "source": "mondo.obo",
-    "n": 31147,
-    "n_rare": 15656
+    "n": 22276,
+    "n_rare": 15634,
+    "n_outside_human_disease": 8871
   },
   "entity_drug": {
-    "rule": "maximumClinicalStage == 'APPROVAL' (there is no isApproved column in 26.06)",
-    "source": "ot_drug_molecule",
-    "n": 5485
-  },
-  "entity_gene": {
-    "rule": "targets of the approved drug set",
-    "source": "ot_drug_mechanism_of_action",
-    "n": 1076
+    "rule": "maximumClinicalStage == 'APPROVAL', with an APPROVAL-stage indication on the molecule or its parent, not a vaccine component, collapsed to the ChEMBL parent",
+    "source": "ot_drug_molecule + ot_clinical_indication",
+    "n": 3793,
+    "n_approved_molecules": 5485
   },
   "entity_pathway_names": {
     "rule": "Reactome id -> name, all pathways mentioned by ot_target",
@@ -21,24 +18,38 @@
     "n": 2298,
     "scored": false
   },
+  "entity_gene": {
+    "rule": "targets of the approved drugs, plus genes with curated disease evidence (relation #3)",
+    "source": "ot_drug_mechanism_of_action + ot_evidence_*",
+    "n": 6210,
+    "n_targets": 1051,
+    "n_disease_genes": 5775
+  },
   "entity_pathway": {
-    "rule": "Reactome pathways of the target gene set",
+    "rule": "Reactome pathways of the gene reference set",
     "source": "ot_target.pathways",
-    "n": 1386
+    "n": 2217
   },
   "disease_strata": {
     "rule": "drugged = has >=1 APPROVAL-stage indication",
     "source": "ot_clinical_indication",
-    "n_drugged": 946,
-    "n_undrugged": 30201,
-    "n_rare_undrugged": 15234
+    "n_drugged": 928,
+    "n_undrugged": 21348,
+    "n_rare_undrugged": 15219
+  },
+  "post_cutoff_set": {
+    "rule": "entities of the post-cutoff approval set (notebook 07, Part II)",
+    "source": "post_cutoff_approvals.csv",
+    "pairs": 128,
+    "n_drugs": 88,
+    "n_diseases": 101
   },
   "relations": {
-    "drug_gene": 7922,
-    "drug_pathway": 22019,
+    "drug_gene": 5468,
+    "drug_pathway": 16250,
     "disease_gene": 18841,
     "disease_pathway": 72701,
-    "disease_disease": 37667,
-    "drug_disease": 8343
+    "disease_disease": 26537,
+    "drug_disease": 7254
   }
 }

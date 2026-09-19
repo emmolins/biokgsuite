@@ -1,0 +1,172 @@
+family,order,pair_id,area,disease,positive,distractors
+main,0,7,Cardiovascular,glycogen storage disease II,miglustat,theobromine; pertussis vaccine; zinc sulfate; ecamsule; pegvisomant; trilaciclib; actarit
+main,1,10,Immunology,pulmonary systemic sclerosis,mycophenolate mofetil,phenformin; benproperine; macitentan; pyrazinamide; perazine; ximelagatran; miconazole
+main,2,6,Infectious,adult T-cell leukemia/lymphoma,bexarotene,dordaviprone; indiplon; aumolertinib; sepiapterin; galactose; epanolol; pyridostigmine
+main,3,106,Metabolic,obesity,tirzepatide,aminopterin; pyrrobutamine; fezolinetant; methicillin; bromazepam; tebipenem pivoxil; cyclothiazide
+main,4,20,Neurology,amyotrophic lateral sclerosis,mecobalamin,ibuprofen; melitracen; nirmatrelvir; gamolenic acid; propranolol; methsuximide; turoctocog alfa pegol
+main,5,45,Oncology,endometrial cancer,olaparib,givinostat; dibromotyrosine; naftifine; erythromycin; cadralazine; glycerin; glutathione
+main,6,26,Respiratory,chronic obstructive pulmonary disease,mepolizumab,pralatrexate; isoproterenol; fingolimod; estradiol acetate; metaraminol; oliceridine; ropivacaine
+main,7,44,unclassified,chronic kidney disease,empagliflozin,benzoyl peroxide; mitapivat; corticorelin; nizatidine; inositol; ethinamate; dexrabeprazole
+main,8,110,Cardiovascular,retinal vein occlusion,faricimab,micronomicin; cefpirome; cisplatin; albendazole; barnidipine; eprozinol; pioglitazone
+main,9,109,Immunology,autoimmune thrombocytopenia,efgartigimod alfa,vildagliptin; trolamine salicylate; proguanil; maribavir; halcinonide; poldine; phanquone
+main,10,77,Infectious,Bunyaviridae infectious disease,favipiravir,diisopromine; strontium ranelate; ethosuximide; pentifylline; inavolisib; dinoprostone; glutamine
+main,11,85,Metabolic,metabolic dysfunction-associated steatohepatitis,semaglutide,hexylcaine; nifurzide; clometocillin; mepindolol; rasburicase; ximelagatran; sulfametomidine
+main,12,9,Neurology,neurodegenerative syndrome due to cerebral folate transport deficiency,leucovorin,nimorazole; iodohippurate; crizanlizumab; tegaserod; butamben; trepibutone; raxibacumab
+main,13,61,Oncology,castration-resistant prostate carcinoma,talazoparib,mivacurium; gallium citrate ga 67; pimavanserin; dexlansoprazole; gamma-aminobutyric acid; pomalidomide; bendamustine
+main,14,105,Respiratory,obstructive sleep apnea syndrome,tirzepatide,sodium tartrate; azilsartan medoxomil; triflusal; phenyltoloxamine; flumethasone pivalate; muzolimine; methylcellulose
+main,15,98,unclassified,alopecia areata,upadacitinib,thiabendazole; mequitazine; esatenolol; lasmiditan; clopamide; tegaserod; clonazepam
+main,16,115,Cardiovascular,heart failure,finerenone,plaunotol; sulfathiourea; enalapril; chloramphenicol; azathioprine; magnesium citrate; asfotase alfa
+main,17,19,Immunology,seborrheic dermatitis,roflumilast,moxalactam; dothiepin; benzydamine; ferrous ascorbate; technetium tc 99m tetrofosmin; fluticasone; chlorproguanil
+main,18,72,Infectious,gonorrhea,gepotidacin,hyaluronidase (human recombinant); tacrine; baclofen; trametinib; gadoteric acid; crinecerfont; levetiracetam
+main,19,118,Metabolic,progressive familial intrahepatic cholestasis,maralixibat,moxonidine; chloral hydrate; tremelimumab; methylpromazine; cloricromen; rafutrombopag; epinastine
+main,20,78,Neurology,myasthenia gravis,inebilizumab,ku-0058948; codeine; amorolfine; colestipol; ambuphylline; firmonertinib; triptorelin
+main,21,36,Oncology,hairy cell leukemia,dabrafenib,acarbose; mizolastine; dihydrotachysterol; dydrogesterone; brigatinib; chloroxine; betaine
+main,22,73,Respiratory,chronic obstructive pulmonary disease,dupilumab,hydroxyprogesterone; tilbroquinol; rivoceranib; leflunomide; dibucaine; pipamperone; hydroxyzine
+main,23,84,unclassified,chronic kidney disease,semaglutide,tolterodine; pyrimethamine; epinephrine; faldaprevir; pyrantel; enavogliflozin; raltegravir
+main,24,120,Cardiovascular,Alagille syndrome,odevixibat,sulfanilamide; progesterone; picotamide; delafloxacin; sivelestat; dimethindene; testolactone
+main,25,47,Immunology,psoriasis-related juvenile idiopathic arthritis,ixekizumab,esflurbiprofen; ketoprofen; mitomycin a; regorafenib; parecoxib; risperidone; ammonium chloride
+main,26,56,Infectious,herpes simplex infectious disease,amenamevir,hydrocortisone probutate; kallidinogenase; xenon xe 133; iodoform; fomivirsen; gestrinone; tapinarof
+main,27,55,Metabolic,acquired hypothalamic obesity,setmelanotide,benralizumab; tromantadine; pefloxacin; oxprenolol; chymopapain; tribromsalan; panitumumab
+main,28,111,Neurology,angioid streaks,faricimab,platinum; centhaquine; deptropine; nirogacestat; edrecolomab; nifurzide; idarubicin
+main,29,43,Oncology,ovarian cancer,pembrolizumab,ezogabine; viloxazine; tecovirimat; cyclopentamine; kaolin; defibrotide; tenoxicam
+main,30,107,unclassified,prurigo nodularis,nemolizumab,alcuronium; fondaparinux; tolazoline; phenobarbital; hexamidine; dinoprost tromethamine; landiolol
+main,31,71,Cardiovascular,eosinophilic granulomatosis with polyangiitis,benralizumab,sparfloxacin; lucinactant; ancrod; efaproxiral; lotilaner; ampiroxicam; rupatadine
+main,32,48,Immunology,enthesitis-related juvenile idiopathic arthritis,ixekizumab,dixanthogen; lithium carbonate; edetic acid; flucytosine; methotrexate; bucillamine; sertaconazole
+main,33,124,Neurology,age-related macular degeneration,pegcetacoplan,ecallantide; urea; maribavir; trastuzumab; segesterone acetate; tolcapone; dabigatran etexilate
+main,34,121,Oncology,follicular lymphoma,lisocabtagene maraleucel,iprindole; acenocoumarol; proflavine; etirinotecan pegol; dinoprost tromethamine; flumatinib; nicorandil
+main,35,119,unclassified,thalassemia,mitapivat,inositol niacinate; trimethyldiphenylpropylamine; dasotraline; dicloxacillin; calcium carbimide; cloranolol; thonzylamine
+main,36,15,Cardiovascular,Kawasaki disease,methylprednisolone,cephaloglycin; inebilizumab; oxyfedrine; nimustine; retapamulin; nifurzide; fotemustine
+main,37,65,Immunology,polyarticular juvenile idiopathic arthritis,baricitinib,sarcosine; capecitabine; sulfacarbamide; irinotecan; dilazep; perfluorohexyloctane; dicyclomine
+main,38,46,Neurology,Alzheimer disease,brexpiprazole,carprofen; adefovir dipivoxil; barnidipine; rozanolixizumab; gadolinium; abatacept; mirtazapine
+main,39,92,Oncology,small cell lung carcinoma,tislelizumab,candesartan cilexetil; fluciclovine; omega-3-acid ethyl esters; tolbutamide; vismodegib; corticotropin; quazepam
+main,40,24,unclassified,Schnitzler syndrome,canakinumab,tetrazepam; pimethixene; risedronic acid; epacadostat; malathion; pravastatin; ciprofibrate
+main,41,2,Cardiovascular,ischemic stroke,tenecteplase,"prednimustine; fluorometholone; cyclizine; ceftiofur; iobitridol; triacetin; potassium phosphate, monobasic"
+main,42,21,Immunology,pustulosis palmaris et plantaris,apremilast,croconazole; von willebrand factor human; potassium nitrate; demeclocycline; turoctocog alfa pegol; aminorex; tranexamic acid
+main,43,22,Neurology,major depressive disorder,lumateperone,paramethasone; gliclazide; encainide; nesiritide; choline salicylate; moricizine; theanine
+main,44,25,Oncology,neuroblastoma,eflornithine,triazolam; ketoprofen; sodium iodide; piperacillin; moroctocog alfa; dabigatran etexilate; dropropizine
+main,45,127,unclassified,endometriosis,linzagolix,eupatilin; creatinolfosfate; betaine; maribavir; droperidol; enmetazobactam; pazopanib
+main,46,13,Cardiovascular,vascular malformation,sirolimus,raclopride; alizapride; miglitol; oleandomycin; desflurane; halothane; sulfadiazine
+main,47,125,Immunology,immunoglobulin-mediated membranoproliferative glomerulonephritis,pegcetacoplan,flunarizine; pertussis vaccine; montmorillonite; niacinamide; perflutren; mecamylamine; hydroflumethiazide
+main,48,108,Neurology,chronic inflammatory demyelinating polyradiculoneuropathy,efgartigimod alfa,brincidofovir; acipimox; pemetrexed; iprindole; brexanolone; dasotraline; desaspidin
+main,49,69,Oncology,non-small cell lung carcinoma,binimetinib,carmofur; dimefline; thioglycolic acid; lindane; opipramol; nedocromil; meprobamate
+main,50,63,unclassified,polymyalgia rheumatica,sarilumab,givosiran; flortaucipir; mephentermine; thyrotropin alfa; ethosuximide; ceruletide; daphnetin
+main,51,102,Cardiovascular,Noonan syndrome,somapacitan,mepindolol; ergotamine; lodoxamide; deutivacaftor; cefatrizine; buthiazide; zotepine
+main,52,74,Immunology,bullous pemphigoid,dupilumab,clorindione; hesperetin; flurpiridaz f 18; lasmiditan; sequifenadine; vernakalant; picrotoxin
+main,53,49,Neurology,neuromyelitis optica,ravulizumab,tretinoin; tobramycin; perospirone; sultopride; remifentanil; amoxicillin; oridonin
+main,54,41,Oncology,biliary tract cancer,pembrolizumab,fluciclovine f18; ketamine; thiamylal; mineral oil; acitretin; icodextrin; iprazochrome
+main,55,11,unclassified,nephrotic syndrome,mycophenolate mofetil,hydrotalcite; astaxanthin; loxoprofen; barnidipine; gusperimus; eprozinol; regorafenib
+main,56,99,Cardiovascular,temporal arteritis,upadacitinib,phenelzine; repotrectinib; riboflavin; tolpropamine; eplerenone; voxilaprevir; isopropamide
+main,57,87,Immunology,ulcerative colitis,risankizumab,betahistine; sulfisomidine; tetrahydrozoline; docetaxel; dexmedetomidine; felodipine; sparsentan
+main,58,59,Oncology,thyroid cancer,encorafenib,ferric pyrophosphate; levamlodipine; isoproterenol; valganciclovir; bacampicillin; pinaverium; etomidate
+main,59,101,unclassified,fetal growth restriction,somapacitan,"pibrentasvir; haloprogin; cefotiam; emtricitabine, (+/-)-; prenalterol; doxycycline; dordaviprone"
+main,60,70,Cardiovascular,hypereosinophilic syndrome,benralizumab,benoxaprofen; altretamine; desirudin; medroxyprogesterone acetate; clavulanic acid; vanzacaftor; sulfamoxole
+main,61,122,Immunology,psoriatic arthritis,deucravacitinib,olopatadine; tavaborole; sitaxentan; cabergoline; pegvaliase; propatyl nitrate; tranexamic acid
+main,62,112,Oncology,colorectal cancer,adagrasib,cephaloglycin; epacadostat; helium; clascoterone; hesperetin; e-7090; fludiazepam
+main,63,103,unclassified,isolated short stature,somapacitan,brivudine; bictegravir; dantrolene; polyethylene glycol; haemophilus influenzae type b strain 20752 capsular polysaccharide tetanus toxoid conjugate antigen; medrysone; corticorelin ovine triflutate
+main,64,18,Immunology,atopic eczema,roflumilast,"canrenoate; vardenafil; potassium phosphate, monobasic; octinoxate; selenomethionine se 75; linopirdine; mitomycin a"
+main,65,27,Oncology,venous hemangioma,ethanolamine oleate,guanazodine; methylergonovine; prenalterol; tolazamide; gallium nitrate; gadobenate dimeglumine; naloxegol
+main,66,80,unclassified,focal segmental glomerulosclerosis,sparsentan,repotrectinib; nateglinide; velaglucerase alfa; phenacetin; isatuximab; cycrimine; unoprostone
+main,67,23,Immunology,atopic eczema,tapinarof,glycopyrronium; antithrombin iii human; tesamorelin; tisopurine; dacarbazine; aprepitant; iprazochrome
+main,68,52,Oncology,extranodal nasal NK/T cell lymphoma,atezolizumab,oxilofrine; esomeprazole; gadobutrol; dinoprost tromethamine; mebanazine; unoprostone; hydrocortisone butyrate
+main,69,16,unclassified,hyperhidrosis palmaris ET plantaris,oxybutynin,zofenopril; mifepristone; telaprevir; phenprocoumon; varenicline; paliperidone; glycerin
+main,70,62,Immunology,polyarticular juvenile idiopathic arthritis,sarilumab,amifostine; felodipine; cloridarol; technetium tc 99m tetrofosmin; potassium acetate; nebacumab; sitafloxacin
+main,71,114,Oncology,anal squamous cell carcinoma,retifanlimab,deferiprone; chlorzoxazone; meticrane; propiomazine; reboxetine; bemegride; anistreplase
+main,72,17,unclassified,"circadian rhythm sleep disorder, jet lag type",melatonin,taurine; acotiamide; biperiden; monobenzone; tiamenidine; entacapone; levocabastine
+main,73,82,Immunology,hidradenitis suppurativa,bimekizumab,tubocurarine; melarsoprol; rufinamide; spectinomycin; zimeldine; miconazole; ceftolozane
+main,74,123,Oncology,follicular lymphoma,epcoritamab,corticorelin ovine triflutate; cefditoren; hydroxocobalamin; pentastarch; octopamine; talinolol; isosulfan blue
+main,75,1,Immunology,transplant rejection,human immunoglobulin g,crizanlizumab; tridihexethyl; atenolol; azosemide; cyfluthrin; ethionamide; crinecerfont
+main,76,54,Oncology,colorectal cancer,tucatinib,morphine; benzonatate; lonidamine; clazosentan; roflumilast; promethazine; dalbavancin
+main,77,66,Immunology,Crohn disease,guselkumab,ebrotidine; soybean oil; camrelizumab; iloperidone; fenethylline; mecobalamin; diotyrosine
+main,78,94,Oncology,follicular lymphoma,zanubrutinib,tedizolid; perazine; pirarubicin; lobeglitazone; nebivolol; viminol; gemfibrozil
+main,79,64,Immunology,pustulosis palmaris et plantaris,brodalumab,abetimus; candesartan; octocrylene; ipidacrine; pramiracetam; dordaviprone; eculizumab
+main,80,86,Oncology,myelodysplastic syndrome,ivosidenib,cefixime; etofylline nicotinate; hydroxyurea; tymazoline; eflornithine; chlorprothixene; platinum
+main,81,117,Immunology,complement 3 glomerulopathy,iptacopan,caspofungin; atropine; evocalcet; barnidipine; teneligliptin; faldaprevir; epoetin delta
+main,82,12,Oncology,lymphangioma,sirolimus,flufenamic acid; ingenol mebutate; nateglinide; daprodustat; asiaticoside; umbralisib; itopride
+main,83,100,Immunology,vitiligo,upadacitinib,technetium tc 99m mebrofenin; cinalukast; tandospirone; platinum; pafolacianine; metronidazole; dihydroxyacetone
+main,84,58,Oncology,endometrial cancer,durvalumab,amrubicin; acebutolol; gamma-aminobutyric acid; mitoguazone; selumetinib; menaquinone; doxapram
+main,85,79,Immunology,immunoglobulin G4-related sclerosing disease,inebilizumab,gefapixant; tegaserod; enfortumab vedotin; castor oil; cefotiam; hydrocortisone probutate; turoctocog alfa pegol
+main,86,28,Oncology,neuroblastoma,iobenguane,ivarmacitinib; terazosin; bentiromide; propentofylline; dabrafenib; rosoxacin; givinostat
+main,87,75,Immunology,chronic idiopathic urticaria,dupilumab,vernakalant; telithromycin; nitrazepam; acemetacin; pirisudanol; emepronium; ramelteon
+main,88,104,Oncology,essential thrombocythemia,ropeginterferon alfa-2b,dexamethasone; aurothioglucose; trilaciclib; anifrolumab; adenosine diphosphate; mangafodipir; dalfopristin
+main,89,83,Immunology,psoriatic arthritis,bimekizumab,collagenase clostridium histolyticum; ipratropium; berotralstat; belinostat; metampicillin; dexborneol; semustine
+main,90,113,Oncology,colorectal cancer,sotorasib,aprotinin; taliglucerase alfa; cloridarol; dextroamphetamine; acetaminophen; ciclesonide; e-7090
+main,91,39,Immunology,hidradenitis suppurativa,secukinumab,desidustat; bromfenac; kaolin; isospaglumic acid; afelimomab; thiamylal; sorivudine
+main,92,128,Oncology,B-cell chronic lymphocytic leukemia,pirtobrutinib,felbinac; metizoline; trimethaphan; glycine; tezacaftor; sofalcone; penciclovir
+main,93,38,Immunology,lupus nephritis,obinutuzumab,selenium sulfide; secukinumab; mizolastine; pertuzumab; aprotinin; practolol; tenecteplase
+main,94,40,Oncology,skin carcinoma,nivolumab,cloranolol; carbenoxolone; etafenone; propantheline; pralsetinib; hyaluronic acid; tacalcitol
+main,95,3,Immunology,food allergy,omalizumab,promethazine; alcuronium; diphenoxylate; regadenoson; etamiphyllin; olokizumab; pipradrol
+main,96,30,Oncology,neuroendocrine neoplasm,cabozantinib,azapetine; chlorine dioxide; insulin pork; piromidic acid; larotrectinib; rimiterol; caspofungin
+main,97,97,Immunology,Crohn disease,upadacitinib,trimebutine; cetiedil; gentamicin; cefuroxime; tas-116; talniflumate; talinolol
+main,98,50,Oncology,mantle cell lymphoma,venetoclax,metopimazine; anagliptin; molidustat; azathioprine; givosiran; ponatinib; andrographolide
+main,99,126,Immunology,complement 3 glomerulopathy,pegcetacoplan,acrivastine; allopurinol; chlorphenesin carbamate; tridihexethyl; dihydrotachysterol; cisplatin; gumarontinib
+main,100,68,Oncology,thyroid cancer,binimetinib,isepamicin; desaspidin; tenonitrozole; fidaxomicin; desoximetasone; naldemedine; nitrefazole
+main,101,5,Immunology,autoimmune hemolytic anemia,rituximab,perfluorohexyloctane; ebselen; lucanthone; lovastatin; palonosetron; fidaxomicin; magnesium hydroxide
+main,102,33,Oncology,differentiated thyroid carcinoma,trametinib,nicofuranose; magnesium hydroxide; dimethylaminopropionylphenothiazine; tromantadine; aniracetam; dihydrotachysterol; lanreotide
+main,103,4,Immunology,lupus nephritis,rituximab,deptropine; folinic acid; etanautine; oridonin; palmitoleic acid; patiromer; aminocaproic acid
+main,104,95,Oncology,follicular lymphoma,tafasitamab,lusutrombopag; guanoxabenz; melagatran; captopril; mecrylate; indalpine; benzthiazide
+main,105,81,Immunology,ankylosing spondylitis,bimekizumab,darunavir; balugrastim; docosanol; pomalidomide; clorexolone; sulesomab; astemizole
+main,106,32,Oncology,ovarian serous adenocarcinoma,trametinib,triamterene; cadralazine; diethylpropion; beclomethasone; frovatriptan; potassium perchlorate; silver
+main,107,89,Immunology,Crohn disease,mirikizumab,perindopril; eluxadoline; bergapten; ethylmorphine; cicletanine; naltrexone; trapidil
+main,108,53,Oncology,gastric cancer,levofolinate,picrotoxin; inamrinone; entinostat; dyphylline; rufinamide; rolitetracycline; caspofungin
+main,109,96,Immunology,chronic rhinosinusitis,tezepelumab,paromomycin; phenethicillin; methoxsalen; cenegermin; cefditoren; roflumilast; tepotinib
+main,110,34,Oncology,hairy cell leukemia,trametinib,clozapine; alirocumab; dimethicone; nizatidine; ketazolam; acetylcarnitine; nomegestrol
+main,111,88,Immunology,pustulosis palmaris et plantaris,risankizumab,crisugabalin; ornoprostil; eteplirsen; flunarizine; dixanthogen; butalamine; fluocinonide
+main,112,35,Oncology,low grade glioma,trametinib,dichloroacetic acid; plicamycin; metformin; carbenoxolone; zonisamide; levosalbutamol; norethindrone
+main,113,8,Immunology,graft versus host disease,cyclophosphamide,guar gum; nitroglycerin; tositumomab; nitrazepam; lascufloxacin; mepolizumab; lorazepam
+main,114,76,Oncology,prostate cancer,capivasertib,piromidic acid; dihydrocodeine; eteplirsen; aspoxicillin; moricizine; floxacillin; methylprednisolone
+main,115,67,Immunology,ulcerative colitis,guselkumab,moxidectin; cysteamine; etofylline nicotinate; ciprofloxacin; ancestim; dimetofrine; triclosan
+main,116,42,Oncology,malignant pleural mesothelioma,pembrolizumab,bismuth subgallate; sibutramine; potassium iodide; meptazinol; bitolterol; diazepam; mipomersen
+main,117,116,Immunology,IgA glomerulonephritis,iptacopan,mandelic acid; ibritumomab tiuxetan; eptifibatide; calcium sulfate; clioquinol; chlortetracycline; mometasone
+main,118,60,Oncology,non-small cell lung carcinoma,encorafenib,abiraterone; tropisetron; selenious acid; arzoxifene; tolonidine; bethanidine; diethylstilbestrol
+main,119,57,Oncology,gastric adenocarcinoma,durvalumab,acalabrutinib; phenazocine; interferon alfa-n3; chlorphenoxamine; piperidione; talniflumate; levocabastine
+main,120,91,Oncology,non-small cell lung carcinoma,tislelizumab,echothiophate; trolamine salicylate; kanamycin; besilesomab; insulin glulisine; methyl salicylate; calcium citrate
+main,121,90,Oncology,gastric adenocarcinoma,tislelizumab,teprotumumab; fedrilate; triheptanoin; prilocaine; piperacetazine; dimemorfan; dichloroacetic acid
+main,122,51,Oncology,thymic carcinoma,atezolizumab,ephedrine; bamifylline; clothiapine; dibrompropamidine; iodoquinol; yohimbine; sodium feredetate
+main,123,14,Oncology,endometrial cancer,carboplatin,hexoprenaline; metahexamide; acetyldigoxin; benzylthiouracil; acetyldihydrocodeine; pibrentasvir; dronedarone
+main,124,37,Oncology,low grade glioma,dabrafenib,lesinurad; infigratinib; anrikefon; bimatoprost; meclocycline; helium; deltamethrin
+main,125,29,Oncology,diffuse large B-cell lymphoma,brentuximab vedotin,norepinephrine; triclosan; docusate; camylofin; gw501516; oxycinchophen; solifenacin
+main,126,31,Oncology,pancreatic neuroendocrine tumor,cabozantinib,nitrous oxide; montmorillonite; pralatrexate; octreotide; azatadine; methyclothiazide; levamlodipine
+main,127,93,Oncology,nasopharyngeal carcinoma,tislelizumab,doripenem; nivolumab; nepafenac; elapegademase; ospemifene; bamifylline; cefoxitin
+common,0,99,Cardiovascular,temporal arteritis,upadacitinib,elacestrant; sucrose; carbenoxolone; ebrotidine; sebetralstat; nifenazone; henagliflozin
+common,1,74,Immunology,bullous pemphigoid,dupilumab,lamotrigine; (2-benzhydryloxyethyl)diethyl-methylammonium iodide; piribedil; ipriflavone; dimethyl fumarate; fumaric acid; technetium tc 99m sestamibi
+common,2,6,Infectious,adult T-cell leukemia/lymphoma,bexarotene,retapamulin; konjac mannan; chromic chloride; isoxicam; barbital; tremelimumab; letrozole
+common,3,46,Neurology,Alzheimer disease,brexpiprazole,methdilazine; temazepam; yellow fever vaccine; etofylline nicotinate; relebactam; hydroxystilbamidine isethionate; nelarabine
+common,4,43,Oncology,ovarian cancer,pembrolizumab,momelotinib; protriptyline; aluminum clofibrate; flurithromycin; cefoxitin; aspirin; dicumarol
+common,5,73,Respiratory,chronic obstructive pulmonary disease,dupilumab,technetium tc 99m mebrofenin; ranolazine; chlornaphazine; flosequinan; tulobuterol; cyproterone acetate; almotriptan
+common,6,63,unclassified,polymyalgia rheumatica,sarilumab,tolazoline; bezlotoxumab; ferric pyrophosphate citrate; tirabrutinib; etafenone; tenapanor; arsenic trioxide
+common,7,70,Cardiovascular,hypereosinophilic syndrome,benralizumab,vilazodone; ferric derisomaltose; piflufolastat f18; propantheline; ixabepilone; troleandomycin; caplacizumab
+common,8,87,Immunology,ulcerative colitis,risankizumab,pancrelipase; sodium fluoride; acitazanolast; human c1-esterase inhibitor; sulfamazone; lenograstim; cm-4307
+common,9,49,Neurology,neuromyelitis optica,ravulizumab,solamargine; dopexamine; methyprylon; pivagabine; pyrazinamide; bepotastine; rivoceranib
+common,10,59,Oncology,thyroid cancer,encorafenib,penequinine; dibutyl phthalate; ribociclib; tetramethrin; rituximab; entacapone; diroximel fumarate
+common,11,26,Respiratory,chronic obstructive pulmonary disease,mepolizumab,brivudine; linagliptin; valganciclovir; amantadine; cefsulodin; repotrectinib; pyrrobutamine
+common,12,44,unclassified,chronic kidney disease,empagliflozin,diosmin; noscapine; norfloxacin; cannabinol; rotigotine; delamanid; foslevodopa
+common,13,7,Cardiovascular,glycogen storage disease II,miglustat,filgotinib; dibromotyrosine; xenon xe 127; favipiravir; glutathione; metipranolol; esomeprazole
+common,14,66,Immunology,Crohn disease,guselkumab,parsaclisib; nonoxynol 9; fluoride; tenofovir disoproxil; azlocillin; bupivacaine; deltamethrin
+common,15,9,Neurology,neurodegenerative syndrome due to cerebral folate transport deficiency,leucovorin,olmutinib; atorvastatin; trichlormethiazide; sulfamethizole; carboplatin; vilanterol; brompheniramine
+common,16,60,Oncology,non-small cell lung carcinoma,encorafenib,tedizolid phosphate; mebutizide; lipegfilgrastim; difemerine; dexibuprofen; cridanimod; anisindione
+common,17,24,unclassified,Schnitzler syndrome,canakinumab,doravirine; hypromellose; lanatoside c; diquafosol; peppermint oil; dimercaprol; cefetamet
+common,18,71,Cardiovascular,eosinophilic granulomatosis with polyangiitis,benralizumab,tovorafenib; sildenafil; methaqualone; tipepidine; ethosuximide; methoserpidine; potassium sulfate
+common,19,100,Immunology,vitiligo,upadacitinib,trifluridine; quazepam; acitretin; fluoxetine; rasburicase; propyphenazone; butalamine
+common,20,86,Oncology,myelodysplastic syndrome,ivosidenib,tolnaftate; lorazepam; oxametacin; selenium; diphemanil; deutetrabenazine; fluciclovine
+common,21,84,unclassified,chronic kidney disease,semaglutide,dexamethasone; ozagrel; p-toluenesulfonamide; aldesleukin; cupric sulfate; acetarsone; lanreotide
+common,22,5,Immunology,autoimmune hemolytic anemia,rituximab,ivacaftor; alpidem; phenyltoloxamine; paramethasone; dibunic acid; sulfalene; sonidegib
+common,23,58,Oncology,endometrial cancer,durvalumab,clonazepam; niceritrol; afatinib; tegaserod; galactose; pralsetinib; simoctocog alfa
+common,24,98,unclassified,alopecia areata,upadacitinib,"dipyridamole; praziquantel, (r)-; valacyclovir; siponimod; gemcitabine; vilanterol; lovastatin"
+common,25,39,Immunology,hidradenitis suppurativa,secukinumab,oxcarbazepine; propamidine; sodium chloride; nintedanib; nefopam; trofosfamide; technetium tc 99m tetrofosmin
+common,26,12,Oncology,lymphangioma,sirolimus,amphetamine; sebetralstat; rufinamide; tenecteplase; brexpiprazole; octopamine; articaine
+common,27,67,Immunology,ulcerative colitis,guselkumab,tranylcypromine; motretinide; phendimetrazine; tucatinib; brodalumab; phenelzine; oxedrine
+common,28,29,Oncology,diffuse large B-cell lymphoma,brentuximab vedotin,blinatumomab; felbinac; paclitaxel; gefitinib; diethylcarbamazine; sulconazole; melarsoprol
+common,29,38,Immunology,lupus nephritis,obinutuzumab,vorozole; palonosetron; gemfibrozil; clonazepam; acoramidis; dinoprostone; carbocysteine
+common,30,45,Oncology,endometrial cancer,olaparib,ethoxzolamide; andexanet alfa; tolcapone; tolnaftate; ubidecarenone; cefdinir; pentolinium
+common,31,4,Immunology,lupus nephritis,rituximab,gemfibrozil; capmatinib; metaxalone; tenoxicam; amlexanox; oseltamivir; ethylmorphine
+common,32,36,Oncology,hairy cell leukemia,dabrafenib,nifurzide; phenylpropanolamine; cycloserine; benzylpenicilloyl polylysine; uracil mustard; technetium tc 99m pyrophosphate; melphalan
+common,33,88,Immunology,pustulosis palmaris et plantaris,risankizumab,sulthiame; busulfan; sebelipase alfa; nateglinide; trospium; chlorproethazine; desidustat
+common,34,41,Oncology,biliary tract cancer,pembrolizumab,carumonam; linopirdine; etomidate; aceclofenac; bromhexine; mometasone furoate; oxilofrine
+common,35,19,Immunology,seborrheic dermatitis,roflumilast,tromantadine; gramicidin d; dicloxacillin; beractant; prazepam; trabectedin; hyaluronidase (ovine)
+common,36,68,Oncology,thyroid cancer,binimetinib,vosaroxin; sulfaperin; lisdexamfetamine; oxaceprol; bromisovalum; firmonertinib; tipiracil
+common,37,97,Immunology,Crohn disease,upadacitinib,rivoceranib; tamsulosin; fluspirilene; cloperastine; montelukast; etoperidone; plitidepsin
+common,38,94,Oncology,follicular lymphoma,zanubrutinib,nimorazole; kanamycin; lentinan; phenacetin; enmetazobactam; natalizumab; fondaparinux
+common,39,18,Immunology,atopic eczema,roflumilast,macimorelin; triclosan; fasudil; lifitegrast; ximelagatran; tosufloxacin; hyaluronic acid
+common,40,34,Oncology,hairy cell leukemia,trametinib,"pimozide; imidafenacin; sertaconazole; dibenzepin; sodium phosphate, dibasic, anhydrous; dupilumab; chromic chloride"
+common,41,69,Oncology,non-small cell lung carcinoma,binimetinib,crisaborole; desflurane; insulin pork; golimumab; doripenem; ingenol mebutate; dihydrostreptomycin
+common,42,30,Oncology,neuroendocrine neoplasm,cabozantinib,emicizumab; loxoprofen; acenocoumarol; dimetofrine; xylitol; flumatinib; nicorandil

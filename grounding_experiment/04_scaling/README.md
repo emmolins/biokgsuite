@@ -14,7 +14,7 @@ every pair and the lift on the pairs the graph actually covers.
 
 | | scored | reported, not scored |
 |---|---|---|
-| | MRR per arm per rung; pooled and covered lift per rung | the per-graph breakdown by rung |
+| | MRR per arm per rung; pooled and grounded lift per rung | the per-graph breakdown by rung |
 
 ## Design notes
 
@@ -26,13 +26,14 @@ generation offers five sizes, so the rungs span generations (1B and 3B from
 3.2, 8B and 405B from 3.1, 70B from 3.3); the generation is a column in the
 table so the confound stays visible.
 
-### Pooled versus covered
+### Pooled versus grounded
 
 A larger model has memorised more approvals, which raises the `none` arm and
-shrinks the pooled lift mechanically. A graph that does not contain the pair
-cannot help however capable the model, so the lift on covered pairs is the
-reading that speaks to the model's ability to use evidence, and the two are
-always shown together.
+shrinks the pooled lift mechanically. A graph with no evidence for the pair
+cannot help however capable the model, so the lift on grounded pairs (the
+positive carried a dossier in that graph, `grounded_<kg>` in the benchmark)
+is the reading that speaks to the model's ability to use evidence, and the
+two are always shown together.
 
 ### Fills in as rungs finish
 

@@ -1,31 +1,37 @@
 scope,stage,label,n,dropped,reason
-global,S0,regulator rows,1288,0,
-global,S1,"reviewed new-indication rows, both identifiers resolved",282,1006,"out-of-scope class, no disease target, identifiers pending or unresolved"
-global,S2,KG-mappable rows,256,26,"vaccines 9, combination products 1, no DrugBank id 8, diagnostic agents 2, generic disease targets 6"
-global,S3,unique drug-disease pairs,128,140,"268 (row, disease) events collapse to one pair each; 63 pairs seen by more than one regulator"
-biokg,S3,unique pairs,128,0,
-biokg,C2,covered (drug and disease nodes present),66,62,"drug absent 28, drug degree < 5: 8, disease absent 26"
-biokg,C1,"prospective (after content date, no direct edge)",58,8,"leaked edge 8, approved before content date 0, content date unknown 0"
-biokg,C3,repurposing (> 2 is_a steps from every prior indication),57,1,related to a disease the graph already links the drug to (line extension) 1
-drkg,S3,unique pairs,128,0,
-drkg,C2,covered (drug and disease nodes present),69,59,"drug absent 25, drug degree < 5: 8, disease absent 26"
-drkg,C1,"prospective (after content date, no direct edge)",60,9,"leaked edge 9, approved before content date 0, content date unknown 0"
-drkg,C3,repurposing (> 2 is_a steps from every prior indication),57,3,related to a disease the graph already links the drug to (line extension) 3
-hetionet,S3,unique pairs,128,0,
-hetionet,C2,covered (drug and disease nodes present),2,126,"drug absent 106, drug degree < 5: 0, disease absent 20"
-hetionet,C1,"prospective (after content date, no direct edge)",2,0,"leaked edge 0, approved before content date 0, content date unknown 0"
-hetionet,C3,repurposing (> 2 is_a steps from every prior indication),2,0,related to a disease the graph already links the drug to (line extension) 0
-matrix,S3,unique pairs,128,0,
-matrix,C2,covered (drug and disease nodes present),123,5,"drug absent 1, drug degree < 5: 0, disease absent 4"
-matrix,C1,"prospective (after content date, no direct edge)",1,122,"leaked edge 102, approved before content date 20, content date unknown 0"
-matrix,C3,repurposing (> 2 is_a steps from every prior indication),0,1,related to a disease the graph already links the drug to (line extension) 1
-openbilink,S3,unique pairs,128,0,
-openbilink,C2,covered (drug and disease nodes present),22,106,"drug absent 91, drug degree < 5: 8, disease absent 7"
-openbilink,C1,"prospective (after content date, no direct edge)",22,0,"leaked edge 0, approved before content date 0, content date unknown 0"
-openbilink,C3,repurposing (> 2 is_a steps from every prior indication),21,1,related to a disease the graph already links the drug to (line extension) 1
-primekg,S3,unique pairs,128,0,
-primekg,C2,covered (drug and disease nodes present),91,37,"drug absent 20, drug degree < 5: 12, disease absent 5"
-primekg,C1,"prospective (after content date, no direct edge)",90,1,"leaked edge 1, approved before content date 0, content date unknown 0"
-primekg,C3,repurposing (> 2 is_a steps from every prior indication),81,9,related to a disease the graph already links the drug to (line extension) 9
-common_support,C1,evaluable in every graph,0,0,"biokg,drkg,hetionet,matrix,openbilink,primekg"
-common_support,C3,strict in every graph,0,0,"biokg,drkg,hetionet,matrix,openbilink,primekg"
+global,S0,regulator rows,1288.0,0.0,
+global,S1,"reviewed new-indication rows, both identifiers resolved",282.0,1006.0,"out-of-scope class, no disease target, identifiers pending or unresolved"
+global,S2,KG-mappable rows,256.0,26.0,"vaccines 9, combination products 1, no DrugBank id 8, diagnostic agents 2, generic disease targets 6"
+global,S3,unique drug-disease pairs,128.0,140.0,"268 (row, disease) events collapse to one pair each; 63 pairs seen by more than one regulator"
+biokg,S3,unique pairs,128.0,0.0,
+biokg,C2,covered (drug and disease nodes present),66.0,62.0,"drug absent 28, drug degree < 5: 8, disease absent 26"
+biokg,C1,"prospective (after content date, no direct edge)",58.0,8.0,"leaked edge 8, approved before content date 0, content date unknown 0"
+biokg,C3,repurposing (> 2 is_a steps from every prior indication),57.0,1.0,related to a disease the graph already links the drug to (line extension) 1
+biokg,G,grounded (drug has a renderable gene or pathway neighbour),52.0,6.0,"covered but no gene or pathway neighbour 6, of which prospective 6"
+drkg,S3,unique pairs,128.0,0.0,
+drkg,C2,covered (drug and disease nodes present),69.0,59.0,"drug absent 25, drug degree < 5: 8, disease absent 26"
+drkg,C1,"prospective (after content date, no direct edge)",60.0,9.0,"leaked edge 9, approved before content date 0, content date unknown 0"
+drkg,C3,repurposing (> 2 is_a steps from every prior indication),57.0,3.0,related to a disease the graph already links the drug to (line extension) 3
+drkg,G,grounded (drug has a renderable gene or pathway neighbour),51.0,9.0,"covered but no gene or pathway neighbour 9, of which prospective 9"
+hetionet,S3,unique pairs,128.0,0.0,
+hetionet,C2,covered (drug and disease nodes present),2.0,126.0,"drug absent 106, drug degree < 5: 0, disease absent 20"
+hetionet,C1,"prospective (after content date, no direct edge)",2.0,0.0,"leaked edge 0, approved before content date 0, content date unknown 0"
+hetionet,C3,repurposing (> 2 is_a steps from every prior indication),2.0,0.0,related to a disease the graph already links the drug to (line extension) 0
+hetionet,G,grounded (drug has a renderable gene or pathway neighbour),,,"not computed (graph is not a grounding arm, or the view predates the check)"
+matrix,S3,unique pairs,128.0,0.0,
+matrix,C2,covered (drug and disease nodes present),123.0,5.0,"drug absent 1, drug degree < 5: 0, disease absent 4"
+matrix,C1,"prospective (after content date, no direct edge)",1.0,122.0,"leaked edge 102, approved before content date 20, content date unknown 0"
+matrix,C3,repurposing (> 2 is_a steps from every prior indication),0.0,1.0,related to a disease the graph already links the drug to (line extension) 1
+matrix,G,grounded (drug has a renderable gene or pathway neighbour),,,"not computed (graph is not a grounding arm, or the view predates the check)"
+openbilink,S3,unique pairs,128.0,0.0,
+openbilink,C2,covered (drug and disease nodes present),22.0,106.0,"drug absent 91, drug degree < 5: 8, disease absent 7"
+openbilink,C1,"prospective (after content date, no direct edge)",22.0,0.0,"leaked edge 0, approved before content date 0, content date unknown 0"
+openbilink,C3,repurposing (> 2 is_a steps from every prior indication),21.0,1.0,related to a disease the graph already links the drug to (line extension) 1
+openbilink,G,grounded (drug has a renderable gene or pathway neighbour),,,"not computed (graph is not a grounding arm, or the view predates the check)"
+primekg,S3,unique pairs,128.0,0.0,
+primekg,C2,covered (drug and disease nodes present),91.0,37.0,"drug absent 20, drug degree < 5: 12, disease absent 5"
+primekg,C1,"prospective (after content date, no direct edge)",90.0,1.0,"leaked edge 1, approved before content date 0, content date unknown 0"
+primekg,C3,repurposing (> 2 is_a steps from every prior indication),81.0,9.0,related to a disease the graph already links the drug to (line extension) 9
+primekg,G,grounded (drug has a renderable gene or pathway neighbour),81.0,9.0,"covered but no gene or pathway neighbour 9, of which prospective 9"
+common_support,C1,evaluable in every graph,0.0,0.0,"biokg,drkg,hetionet,matrix,openbilink,primekg"
+common_support,C3,strict in every graph,0.0,0.0,"biokg,drkg,hetionet,matrix,openbilink,primekg"

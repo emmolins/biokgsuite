@@ -1,0 +1,2 @@
+KG,n_evaluable,n_gold,coverage,hits@10_all,hits@10_evaluable
+primekg,85,128,0.6641,0.0703,0.1059

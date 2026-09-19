@@ -41,16 +41,23 @@ def _label(labels, key):
     return labels.get(key, key)
 
 
-def load_runs(run_dir, *, families=None, models=None):
+def load_runs(run_dir, *, families=None, models=None, allow_mock=False):
     """Concatenate the per-(family, model, seed) run CSVs under ``run_dir``.
 
     Filtering is on the ``family`` and ``model`` columns, not on file names,
-    so a file whose slug and content disagree cannot slip through.
+    so a file whose slug and content disagree cannot slip through. Rows the
+    runner produced in mock mode (a deterministic stand-in for a model, used
+    to exercise the pipeline) are refused unless ``allow_mock`` is set, so a
+    rehearsal can never be analysed as a result.
     """
     files = sorted(Path(run_dir).glob('*.csv'))
     if not files:
         raise FileNotFoundError(f'no run files under {run_dir}')
     df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
+    if 'mode' in df.columns and not allow_mock and (df['mode'] == 'mock').any():
+        bad = sorted(df.loc[df['mode'] == 'mock', 'model'].unique())
+        raise ValueError(f'{run_dir} holds mock-mode rows for {bad}; these are rehearsal '
+                         f'output, not results. Delete them or pass allow_mock=True')
     if families is not None:
         df = df[df['family'].isin(list(families))]
     if models is not None:
@@ -267,17 +274,19 @@ def capacity_table(df, params_b, arms, n_boot, rng, labels):
     return cap.reset_index(drop=True)
 
 
-def scaling_table(df, params_b, covered_pairs_by_kg, n_boot, rng):
+def scaling_table(df, params_b, grounded_pairs_by_kg, n_boot, rng):
     """Per rung of a model ladder: no-KG MRR, KG MRR pooled over every KG arm,
-    KG MRR on covered arms only, and the paired lift of each over no-KG.
+    KG MRR on grounded arms only, and the paired lift of each over no-KG.
 
-    Splitting pooled from covered is what separates two readings of a flat
-    lift: a graph that does not contain the pair cannot help however capable
-    the model, so the covered-arm lift is the one that speaks to capability.
+    Splitting pooled from grounded is what separates two readings of a flat
+    lift: a graph with no evidence for the pair cannot help however capable
+    the model, so the grounded-arm lift is the one that speaks to capability.
+    ``grounded_pairs_by_kg`` maps an arm to the pair ids whose positive has a
+    dossier in that graph (``grounded_<kg>`` in the benchmark frame).
     """
     kg_rows = df[(df['arm'] != 'none') & df['model'].isin(list(params_b))].copy()
-    kg_rows['covered'] = [pid in covered_pairs_by_kg.get(arm, set())
-                          for pid, arm in zip(kg_rows['pair_id'], kg_rows['arm'])]
+    kg_rows['grounded'] = [pid in grounded_pairs_by_kg.get(arm, set())
+                           for pid, arm in zip(kg_rows['pair_id'], kg_rows['arm'])]
     rows = []
     for model in sorted(params_b, key=params_b.get):
         sub = df[df['model'] == model]
@@ -286,21 +295,60 @@ def scaling_table(df, params_b, covered_pairs_by_kg, n_boot, rng):
         none = sub[sub['arm'] == 'none'].groupby('pair_id')['reciprocal_rank'].mean()
         kg = kg_rows[kg_rows['model'] == model]
         pooled = kg.groupby('pair_id')['reciprocal_rank'].mean()
-        cov = kg[kg['covered']].groupby('pair_id')['reciprocal_rank'].mean()
+        grd = kg[kg['grounded']].groupby('pair_id')['reciprocal_rank'].mean()
         lift_pooled = (pooled - none).dropna().to_numpy()
-        lift_cov = (cov - none).dropna().to_numpy()
+        lift_grd = (grd - none).dropna().to_numpy()
         lo_p, hi_p = boot_ci(lift_pooled, n_boot, rng)
-        lo_c, hi_c = boot_ci(lift_cov, n_boot, rng)
+        lo_g, hi_g = boot_ci(lift_grd, n_boot, rng)
         rows.append(dict(
             model=model, params_b=float(params_b[model]),
             mrr_none=float(none.mean()), mrr_kg=float(pooled.mean()),
-            mrr_kg_cov=float(cov.mean()) if len(cov) else np.nan,
+            mrr_kg_grounded=float(grd.mean()) if len(grd) else np.nan,
             lift_pooled=float(lift_pooled.mean()) if len(lift_pooled) else np.nan,
             lift_pooled_lo=lo_p, lift_pooled_hi=hi_p,
-            lift_cov=float(lift_cov.mean()) if len(lift_cov) else np.nan,
-            lift_cov_lo=lo_c, lift_cov_hi=hi_c,
-            n_pairs=len(lift_pooled), n_pairs_cov=len(lift_cov)))
+            lift_grounded=float(lift_grd.mean()) if len(lift_grd) else np.nan,
+            lift_grounded_lo=lo_g, lift_grounded_hi=hi_g,
+            n_pairs=len(lift_pooled), n_pairs_grounded=len(lift_grd)))
     return pd.DataFrame(rows).sort_values('params_b').reset_index(drop=True)
+
+
+def absence_penalty_table(df, n_boot, rng, labels):
+    """What a graph does to a positive it has nothing to say about.
+
+    In a KG arm every candidate the graph holds carries a dossier; a positive
+    the graph holds no gene or pathway for reaches the model with none while
+    its distractors carry theirs. Per (model, arm) this splits the pairs by
+    whether the positive's dossier was shown (``pos_has_evidence``, recorded
+    on the row, so this reads what the model saw rather than a benchmark
+    flag) and reports the paired lift over the ``none`` arm for each half,
+    with bootstrap intervals over pairs. The absent-positive lift is the
+    penalty a coverage gap imposes at deployment; a negative value means the
+    graph ranked its own blind spots below chance. Pairs whose eight
+    candidates were all blank are left out of the absent half, since there
+    the arm reduces to ``none``.
+    """
+    none = (df[df['arm'] == 'none'].groupby(['model', 'pair_id'])['reciprocal_rank'].mean()
+              .rename('none'))
+    kg = df[df['arm'] != 'none'].copy()
+    kg['pos_has_evidence'] = kg['pos_has_evidence'].astype(bool)
+    kg['any_evidence'] = kg['n_with_evidence'].astype(int) > 0
+    rows = []
+    for (model, arm), sub in kg.groupby(['model', 'arm'], sort=False):
+        pq = sub.groupby('pair_id').agg(rr=('reciprocal_rank', 'mean'),
+                                        shown=('pos_has_evidence', 'all'),
+                                        any_evidence=('any_evidence', 'any'))
+        pq = pq.join(none.xs(model, level='model'), how='inner')
+        halves = {'shown': pq[pq['shown']],
+                  'absent': pq[~pq['shown'] & pq['any_evidence']]}
+        for half, h in halves.items():
+            d = (h['rr'] - h['none']).to_numpy()
+            lo, hi = boot_ci(d, n_boot, rng)
+            rows.append(dict(model=model, model_label=_label(labels, model),
+                             arm=arm, arm_label=_label(labels, arm), positive=half,
+                             n_pairs=len(h), mrr=float(h['rr'].mean()) if len(h) else np.nan,
+                             mrr_none=float(h['none'].mean()) if len(h) else np.nan,
+                             lift=float(d.mean()) if len(d) else np.nan, lift_lo=lo, lift_hi=hi))
+    return pd.DataFrame(rows)
 
 
 BENCHMARK_COVARIATES = ['drugbank_id', 'mondo_id', 'drug_name', 'disease_name',
@@ -311,25 +359,25 @@ def difficulty_table(df, benchmark):
     """One row per pair: how hard it is to rank, pooled over models, seeds and
     shuffles on the KG arms, joined to the benchmark covariates.
 
-    ``mrr`` pools every KG arm, including arms whose graph lacks the pair;
-    ``mrr_covered`` uses only arms whose graph contains it. The gap between the
-    two is the empty-arm effect, and both are needed to tell "hard because
-    absent from graphs" from "hard even with evidence".
+    ``mrr`` pools every KG arm, including arms whose graph has no evidence
+    for the pair; ``mrr_grounded`` uses only arms whose graph does. The gap
+    between the two is the empty-dossier effect, and both are needed to tell
+    "hard because the graphs have nothing on it" from "hard even with
+    evidence". ``n_kg_covered`` and ``n_kg_grounded`` come from the benchmark.
     """
     kg = df[df['arm'] != 'none'].copy()
     kg_arms = sorted(kg['arm'].unique())
-    cov_cols = {arm: f'covered_{arm}' for arm in kg_arms
-                if f'covered_{arm}' in benchmark.columns}
+    grd_cols = {arm: f'grounded_{arm}' for arm in kg_arms}
+    missing = [c for c in grd_cols.values() if c not in benchmark.columns]
+    if missing:
+        raise KeyError(f'benchmark frame lacks {missing}; rebuild the pair status and rerun 01_benchmark')
     bench = benchmark.drop_duplicates('pair_id').set_index('pair_id')
 
-    if cov_cols:
-        covered = pd.Series(False, index=kg.index)
-        for arm, col in cov_cols.items():
-            hit = kg['arm'] == arm
-            covered[hit] = kg.loc[hit, 'pair_id'].map(bench[col]).fillna(False).astype(bool).to_numpy()
-        kg['covered'] = covered.to_numpy()
-    else:
-        kg['covered'] = False
+    grounded = pd.Series(False, index=kg.index)
+    for arm, col in grd_cols.items():
+        hit = kg['arm'] == arm
+        grounded[hit] = kg.loc[hit, 'pair_id'].map(bench[col]).fillna(False).astype(bool).to_numpy()
+    kg['grounded'] = grounded.to_numpy()
 
     per = (kg.groupby('pair_id')
              .agg(mrr=('reciprocal_rank', 'mean'), hit1=('hit1', 'mean'),
@@ -338,12 +386,13 @@ def difficulty_table(df, benchmark):
              .reset_index())
     per['frac_consistent'] = (per['pair_id']
                               .map((kg['pos_agreement'] == 'consistent').groupby(kg['pair_id']).mean()))
-    per['mrr_covered'] = per['pair_id'].map(
-        kg[kg['covered']].groupby('pair_id')['reciprocal_rank'].mean())
+    per['mrr_grounded'] = per['pair_id'].map(
+        kg[kg['grounded']].groupby('pair_id')['reciprocal_rank'].mean())
     per['mrr_none'] = per['pair_id'].map(
         df[df['arm'] == 'none'].groupby('pair_id')['reciprocal_rank'].mean())
-    per['n_kg_covered'] = (per['pair_id'].map(bench[list(cov_cols.values())].sum(axis=1))
-                           if cov_cols else np.nan)
+    per['n_kg_grounded'] = per['pair_id'].map(bench[list(grd_cols.values())].sum(axis=1))
+    per['n_kg_covered'] = (per['pair_id'].map(bench['n_kg_covered'])
+                           if 'n_kg_covered' in bench.columns else np.nan)
 
     model_cols = []
     for model in kg['model'].unique():

@@ -858,7 +858,7 @@ def load_matrix(nodes_path, edges_path,
                           f"{len(nodes_df):,} nodes, {len(kg):,} edges")
                 return kg, nodes_df
             elif verbose:
-                print(f"  matrix: cache stale (source files newer) — rebuilding")
+                print("  matrix: cache stale (source files newer), rebuilding")
 
     # ── Pre-compiled regexes for ID canonicalisation ─────────────────────────
     DRUGBANK_RE = re.compile(r'\b(DB\d{5,})\b')
@@ -876,7 +876,7 @@ def load_matrix(nodes_path, edges_path,
                 (hasattr(keep_categories, '__len__') and len(keep_categories) == 0))
     keep_categories = None if keep_all else set(keep_categories)
     if verbose and keep_all:
-        print(f"  matrix: keep_categories=all → retaining every typed node and edge")
+        print("  matrix: keep_categories=all, retaining every typed node and edge")
 
     # ── Optional drug / gene crosswalks for canonicalising non-DrugBank /
     #   non-Entrez node IDs (raises gold-standard join rates dramatically) ──

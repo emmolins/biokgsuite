@@ -106,7 +106,15 @@ Then, per graph, three checks applied to the 128:
 
 `post_cutoff_pair_status.csv` has the pair × graph detail (which identifier
 resolved the disease, the drug's degree, the leaked edge, the number of prior
-indications the graph holds for the drug, the nearest prior MONDO term).
+indications the graph holds for the drug, the nearest prior MONDO term). It
+also carries `grounded`, with `drug_n_mech` and `disease_n_mech`: whether the
+drug node has at least one gene or pathway neighbour that a grounding dossier
+would render, counted by the dossier code (`biokgsuite.grounding.KGDossiers`).
+A drug can clear the degree floor on drug-drug or side-effect edges alone and
+still have nothing a dossier can show. The flag is on record here and as the
+`G` row of the funnel table; notebook 07 does not use it (its scorer needs
+the node, not evidence text), and the grounding experiment folds it into its
+own evaluability (`grounding_experiment/01_benchmark/`).
 Hetionet's coverage is low because it holds 1,552 compounds, almost no
 biologics, and 137 diseases; 106 of the 128 pairs name a drug it does not
 have. BioKG's 8 leaks are the Japanese "public knowledge-based" approvals of

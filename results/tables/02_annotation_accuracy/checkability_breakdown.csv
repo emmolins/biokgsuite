@@ -1,3 +1,4 @@
 KG,Edges,Type out of scope,Out of scope (%),Endpoint unjudgeable,Unjudgeable (%),Checkable,Checkable (%),Costliest out-of-scope types
+primekg,8100498,0,0.0,0,0.0,8100498,100.0,
 hetionet,2250197,0,0.0,0,0.0,2250197,100.0,
-biokg,2067998,124216,6.0,0,0.0,1943782,94.0,"Complex x124,216"
+biokg,2067998,0,0.0,0,0.0,2067998,100.0,

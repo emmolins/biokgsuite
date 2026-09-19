@@ -14,7 +14,7 @@ reproduces from this tree plus the fetched, version-stamped inputs.
 | `config/` | `kgs.yaml` (the six graphs, their files and id schemes), `params.yaml` (every analysis parameter, by notebook), `kg_snapshots.yaml` (content date per graph) |
 | `data/` | Inputs. `MANIFEST.md` says how each was obtained, `PROVENANCE.md` (generated) records release, retrieval date and checksum of every file on disk |
 | `src/biokgsuite/` | The package the notebooks call: `io`, `graph`, `gold`, `grounding`, `stats`, `viz`, `models` |
-| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension, and `00_summary` (Fig 1). `CONVENTIONS.md` is the skeleton they all follow |
+| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension, and `00_summary` (Fig 1). `CONVENTIONS.md` is the skeleton they all follow, `FIGURE_STYLE.md` the house style every figure is drawn in |
 | `grounding_experiment/` | Part II: five stage notebooks on the post-cutoff approval set (Figs 2 to 5) |
 | `supplementary/` | Embedding cross-checks of the heuristic results (needs torch) |
 | `results/` | Everything the notebooks write: `figures/`, `tables/`, `checkpoints/`; `MANIFEST.md` (generated) lists it |
@@ -54,6 +54,7 @@ Hosted-model keys for Part II go in `.env` at the repo root (copy
 2. biokgsuite_dimensions/01_coverage ... 07_generalization      → results/, one checkpoint each
 3. biokgsuite_dimensions/00_summary                             → Fig 1
 4. python tools/build_post_cutoff_approvals.py --extract-views <kgs>; then --kgs all --figure
+   (the grounding arms' views also carry the grounded flag; re-extract them after a dossier-rule change)
    python tools/build_distractor_pool.py; python tools/build_entrez_symbol_map.py
 5. grounding_experiment/01_benchmark                            → benchmark, selection audit (Fig 2)
 6. grounding_experiment/02_run            [API keys, hours]     → results/tables/G02_run/runs/
@@ -62,20 +63,29 @@ Hosted-model keys for Part II go in `.env` at the repo root (copy
 9. python tools/results_manifest.py; python tools/regenerate_figs.py   → results/MANIFEST.md, paper/
 ```
 
-Steps 4 to 7 are already done up to the model calls; the committed
-`data/gold_standards/post_cutoff_approvals/` rebuilds byte-identically (its
-`PROVENANCE.txt` carries the source SHA-256). Only step 6 is expensive, and it
-is idempotent per (family, model, seed) file. Each notebook is run from its own
-folder:
+Step 4 is committed: `data/gold_standards/post_cutoff_approvals/` rebuilds
+byte-identically (its `PROVENANCE.txt` carries the source SHA-256). Only step 6
+is expensive, and it is idempotent per (family, model, seed) file. On a Slurm
+cluster the whole order is `hpc/README.md`, one job script per step. Each
+notebook is run from its own folder:
 
 ```bash
 cd biokgsuite_dimensions/05_stability
 jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=86400 notebook.ipynb
 ```
 
-The dimension notebooks are stored with their outputs from the run behind the
-manuscript. Figures redraw from the checkpoints without re-running anything:
-`python tools/regenerate_figs.py --only 05`.
+The notebooks are committed with their outputs cleared; the outputs of the
+run behind the manuscript are committed with the final results, so that every
+number in the tree comes from one run. Figures redraw from the checkpoints
+without re-running anything: `python tools/regenerate_figs.py --only 05`.
+
+To trial the notebooks on a laptop without loading the whole panel (MATRIX
+alone is 81 M edges), write the graphs to load into a `.trial_kgs` file at the
+repo root, for example `echo primekg,hetionet > .trial_kgs`, or set `BKG_KGS`
+in the environment before the kernel starts. Every notebook and tool then sees
+only those graphs and prints a trial-run notice; the checkpoint records the run
+as a subset, so it cannot be mistaken for the full panel. `.trial_kgs` is
+gitignored, so a clone on the cluster always runs the full six.
 
 ## Knowledge graphs
 

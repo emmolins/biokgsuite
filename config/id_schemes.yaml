@@ -44,6 +44,12 @@ id_schemes:
     - {scheme: ChEMBL,   pattern: '^CHEMBL\d+$',          example: CHEMBL941}
     - {scheme: PubChem,  pattern: '^CID\d+$',             example: CID100002244}
     - {scheme: ChEBI,    pattern: '^CHEBI:\d+$',          example: 'CHEBI:15365'}
+    - {scheme: PubChem,  pattern: '^(?i:pubchem\.compound):\d+$', example: 'PUBCHEM.COMPOUND:2244',
+       note: 'the Biolink CURIE form, as OpenBioLink writes every drug'}
+    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true,
+       example: 'MESH:D001241',
+       note: 'DRKG writes Compound::MESH:D001241 for substances it took from
+              literature mining; the MeSH prefix names both chemicals and diseases'}
     - {scheme: PubChem,  pattern: '^\d+$',   ambiguous: true, example: '2244',
        note: 'bare CID; indistinguishable from an Entrez gene id'}
     - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
@@ -59,6 +65,14 @@ id_schemes:
               short prefix, so the spelling must not decide validity'}
     - {scheme: Orphanet, pattern: '^(?i:orphanet):\d+$',  example: 'ORPHANET:377788'}
     - {scheme: EFO,      pattern: '^EFO:\d{7}$',          example: 'EFO:0009491'}
+    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true,
+       example: 'MESH:D001943',
+       note: 'the prefixed form DRKG writes (Disease::MESH:D001943); shared with Drug'}
+    - {scheme: UMLS,     pattern: '^(?i:umls):C\d{7}$',   ambiguous: true, example: 'UMLS:C0006142',
+       note: 'the prefixed form MATRIX keeps for diseases it cannot bridge to MONDO'}
+    - {scheme: ICD-9-CM, pattern: '^(?i:icd9):[EV]?\d{2,3}(\.\d{1,2})?$', example: 'ICD9:804.61',
+       note: 'MATRIX; a real disease scheme with no MONDO crosswalk, so valid in shape,
+              unresolved in coverage'}
     - {scheme: UMLS,     pattern: '^C\d{7}$',   ambiguous: true, example: C0012634,
        note: 'also the shape of a side-effect CUI; UMLS spans both'}
     - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
@@ -69,8 +83,13 @@ id_schemes:
        note: 'Supplementary Concept Record; the C space also holds SCR_Chemical
               (C000006 is "insulin, neutral"), so the shape alone does not
               separate a disease SCR from a substance SCR'}
-    - {scheme: MONDO,    pattern: '^\d{7}$',    ambiguous: true, example: '0007254',
-       note: 'bare MONDO number; indistinguishable from an Entrez gene id'}
+    - {scheme: MONDO,    pattern: '^\d{1,7}$',  ambiguous: true, example: '7254',
+       note: 'bare MONDO number, written unpadded by PrimeKG (7254, not 0007254)
+              and by the MATRIX loader after bridging; indistinguishable from an
+              Entrez gene id'}
+    - {scheme: MONDO grouped, pattern: '^\d{1,7}(_\d{1,7})+$', example: '21223_385',
+       note: 'PrimeKG merges equivalent MONDO terms into one node and joins the
+              numbers with underscores; the node names every member'}
 
   Gene/Protein:
     - {scheme: Ensembl,  pattern: '^ENSG\d{11}$',         example: ENSG00000146648}
@@ -78,6 +97,10 @@ id_schemes:
     - {scheme: UniProt,  pattern: '^[OPQ][0-9][A-Z0-9]{3}[0-9]$', example: P04217}
     - {scheme: UniProt,  pattern: '^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$',
        example: A0A075B6P5}
+    - {scheme: Entrez,   pattern: '^(?i:ncbigene):\d+$',  example: 'NCBIGENE:1956',
+       note: 'the CURIE form OpenBioLink and MATRIX write'}
+    - {scheme: Ensembl,  pattern: '^(?i:ensembl):ENSG\d{11}$', example: 'ENSEMBL:ENSG00000146648'}
+    - {scheme: UniProt,  pattern: '^(?i:uniprotkb):[A-Z0-9]{6,10}(-\d+)?$', example: 'UniProtKB:P00533'}
     - {scheme: Entrez,   pattern: '^\d+$',     ambiguous: true, example: '1956',
        note: 'bare Entrez; indistinguishable from a bare MONDO or PubChem id'}
 
@@ -91,18 +114,29 @@ id_schemes:
     - {scheme: WikiPathways, pattern: '^WP\d+(_r\d+)?$',  example: WP100_r74146}
     - {scheme: PathwayCommons, pattern: '^PC\d+_\d+$',    example: PC7_10399}
     - {scheme: KEGG,     pattern: '^[a-z]{3}\d{5}$',      example: hsa04010}
+    - {scheme: Reactome, pattern: '^(?i:reactome):R-[A-Z]{3}-\d+$', ambiguous: true,
+       example: 'REACTOME:R-HSA-109582',
+       note: 'the CURIE form OpenBioLink writes'}
+    - {scheme: KEGG,     pattern: '^(?i:kegg):[a-z]{3}\d{5}$', example: 'KEGG:hsa04010'}
     - {scheme: SMPDB,    pattern: '^SMP\d+$',             example: SMP0000001}
 
   Biological Process:
     - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0008150',
        note: 'all three GO aspects share this shape; only check 2 separates them'}
+    - {scheme: GO, pattern: '^\d{1,7}$', ambiguous: true, example: '8150',
+       note: 'bare GO number as PrimeKG writes it (8150 for GO:0008150); the
+              bare-integer shape is shared with MONDO, HPO, Entrez and UBERON'}
   Molecular Function:
     - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0003674'}
+    - {scheme: GO, pattern: '^\d{1,7}$', ambiguous: true, example: '3674'}
   Cellular Component:
     - {scheme: GO, pattern: '^GO:\d{7}$', ambiguous: true, example: 'GO:0005575'}
+    - {scheme: GO, pattern: '^\d{1,7}$', ambiguous: true, example: '5575'}
 
   Anatomy:
     - {scheme: UBERON, pattern: '^UBERON:\d{7}$',         example: 'UBERON:0000002'}
+    - {scheme: UBERON, pattern: '^\d{1,7}$', ambiguous: true, example: '2',
+       note: 'bare UBERON number as PrimeKG writes it'}
 
   Side Effect:
     - {scheme: UMLS,   pattern: '^C\d{7}$',   ambiguous: true, example: C0000727}
@@ -114,3 +148,34 @@ id_schemes:
 
   Pharmacologic Class:
     - {scheme: NDF-RT, pattern: '^N\d{10}$',              example: N0000000069}
+
+  Phenotype:
+    - {scheme: HPO,      pattern: '^HP:\d{7}$',           example: 'HP:0000118'}
+    - {scheme: HPO,      pattern: '^\d{1,7}$', ambiguous: true, example: '118',
+       note: 'bare HPO number as PrimeKG writes it; shares the bare-integer
+              shape with MONDO and Entrez'}
+
+  Exposure:
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+       example: D000393}
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+       example: C000188,
+       note: 'CTD exposure chemicals are MeSH-keyed, so the shapes are those of
+              Drug and Disease SCRs'}
+
+  Taxon:
+    - {scheme: NCBI Taxonomy, pattern: '^\d{1,7}$', ambiguous: true, example: '9606',
+       note: 'DRKG writes Tax::9606; no offline registry, so shape-checked only'}
+
+  ATC class:
+    - {scheme: ATC, pattern: '^[A-Z]\d{2}([A-Z]{2}(\d{2})?)?$|^[A-Z]\d{2}[A-Z]$', example: 'L01XE',
+       note: 'WHO ATC codes at any level, as DRKG writes them (Atc::L01XE)'}
+
+  Cell type:
+    - {scheme: Cell Ontology, pattern: '^CL:\d{7}$',   example: 'CL:0000057'}
+
+  Complex:
+    - {scheme: Reactome, pattern: '^R-[A-Z]{3}-\d+$', ambiguous: true,
+       example: R-HSA-1006173,
+       note: 'Reactome stable ids name complexes as well as pathways; the
+              pathway registry, not the shape, separates them'}

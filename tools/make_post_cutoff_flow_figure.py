@@ -71,45 +71,42 @@ def draw(c: dict, version: str, out_stem: Path):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
-    try:
-        from biokgsuite.viz.style import setup_style
-        setup_style()
-    except Exception:  # noqa: BLE001
-        pass
-    INK, MUTED, RULE, SURF, DROP, KEEP = "#1a1a1a", "#5b5b5b", "#dcdcd8", "#fcfcfb", "#c0392b", "#2e6f5e"
-    fig, ax = plt.subplots(figsize=(7.2, 10.4))
+    from biokgsuite.viz.style import DOUBLE_COL_W, MUTED, NEUTRAL, TEXT_COLOR, setup_style
+    setup_style()
+    # House style: every box the same neutral fill with a 0.5 pt ink stroke (regulators are not graphs, so
+    # they carry no colour); the final set is tinted rather than framed; annotations are muted; text 6 to 7 pt.
+    INK, FILL, FINAL_FILL = TEXT_COLOR, "#F2F2F2", "#EAF3FA"
+    fig, ax = plt.subplots(figsize=(DOUBLE_COL_W, 7.0), constrained_layout=True)
     ax.set_xlim(0, 10)
-    ax.set_ylim(-1.15, 13.4)
     ax.axis("off")
 
-    def box(x, y, w, h, hero=False, fc=None):
+    def box(x, y, w, h, hero=False):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.06",
-                                    linewidth=1.8 if hero else 1.0, edgecolor=INK if hero else RULE,
-                                    facecolor=fc or ("#f4f4f1" if hero else SURF), zorder=2))
+                                    linewidth=0.5, edgecolor=INK, facecolor=FINAL_FILL if hero else FILL, zorder=2))
 
     def arrow(x0, y0, x1, y1):
-        ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle="-|>", mutation_scale=9, color=MUTED, lw=0.9, zorder=3))
+        ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle="-|>", mutation_scale=6, color=NEUTRAL, lw=0.6, zorder=3))
 
-    # --- regulator sources
-    ax.text(0, 13.2, "Regulator records, 2023-01-01 to 2026-09-17, to the post-cutoff approval set", fontsize=8.5, fontweight="bold", color=INK, va="center")
-    bw, gap, y0, bh = 1.84, 0.2, 11.15, 1.5
+    # --- regulator sources (the figure carries no title; the caption names it)
+    bw, gap, y0, bh = 1.84, 0.2, 11.15, 1.45
     for i, reg in enumerate(ORDER):
         x = i * (bw + gap)
         box(x, y0, bw, bh)
-        ax.text(x + 0.12, y0 + bh - 0.3, f"{c['rows'][reg]:,}", fontsize=12, fontweight="bold", color=INK, va="center", zorder=3)
-        ax.text(x + 0.12, y0 + bh - 0.66, REG_LABEL[reg], fontsize=6.6, color=INK, va="center", zorder=3)
-        ax.text(x + 0.12, y0 + 0.36, REG_WHAT[reg], fontsize=5.4, color=MUTED, va="center", zorder=3, linespacing=1.1)
+        ax.text(x + 0.12, y0 + bh - 0.26, f"{c['rows'][reg]:,}", fontsize=7, color=INK, va="center", zorder=3)
+        ax.text(x + 0.12, y0 + bh - 0.6, REG_LABEL[reg], fontsize=7, color=INK, va="center", zorder=3)
+        ax.text(x + 0.12, y0 + 0.32, REG_WHAT[reg], fontsize=6, color=MUTED, va="center", zorder=3, linespacing=1.1)
         arrow(x + bw / 2, y0 - 0.04, x + bw / 2, y0 - 0.42)
 
     # --- merged table
     y = 9.55
     box(0, y, 10, 1.15, hero=False)
-    ax.text(0.3, y + 0.62, f"{c['n0']:,}", fontsize=13, fontweight="bold", color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 0.78, "candidate rows, one per regulator decision (S0); indication text from the regulator's record", fontsize=6.9, color=INK, va="center", zorder=3)
+    ax.text(0.3, y + 0.62, f"{c['n0']:,}", fontsize=7, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.78, "Candidate rows, one per regulator decision, 2023-01-01 to 2026-09-17 (S0); indication text from the regulator's record",
+            fontsize=7, color=INK, va="center", zorder=3)
     ax.text(1.75, y + 0.36, _wrap(f"FDA approval letter, “provides for” sentence ({c['text']['FDA']} of {c['rows']['FDA']}); EMA EPAR procedural-steps "
                                   f"scope matched to the opinion date ({c['text']['EMA']} of {c['rows']['EMA']}); Health Canada NOC reason, PMDA notes, "
                                   f"TGA indication (all rows)", 112),
-            fontsize=5.6, color=MUTED, va="center", zorder=3, linespacing=1.15)
+            fontsize=6, color=MUTED, va="center", zorder=3, linespacing=1.15)
 
     # --- cleaning steps (each an annotated drop)
     steps = [
@@ -129,54 +126,57 @@ def draw(c: dict, version: str, out_stem: Path):
     ]
     y = 9.55
     for name, detail, n in steps:
-        y -= 0.86
-        arrow(0.9, y + 0.86 - 0.02, 0.9, y + 0.14)
+        y -= 0.95
+        arrow(0.9, y + 0.95 - 0.02, 0.9, y + 0.14)
         if n is not None:
-            ax.text(1.6, y + 0.5, f"−{n:,}", fontsize=8, fontweight="bold", color=DROP, va="center")
-        ax.text(2.7, y + 0.62, name, fontsize=6.8, fontweight="bold", color=INK, va="center")
-        ax.text(2.7, y + 0.3, _wrap(detail, 118), fontsize=5.5, color=MUTED, va="center", linespacing=1.15)
+            ax.text(1.6, y + 0.5, f"−{n:,}", fontsize=7, color=INK, va="center")
+        # The detail hangs from just under the name, so a three-line detail cannot climb into it.
+        ax.text(2.7, y + 0.68, name[:1].upper() + name[1:], fontsize=7, color=INK, va="center")
+        ax.text(2.7, y + 0.52, _wrap(detail, 118), fontsize=6, color=MUTED, va="top", linespacing=1.15)
 
     # --- S1
-    y -= 1.05
-    box(0, y, 10, 0.95)
-    ax.text(0.3, y + 0.48, f"{c['n1']:,}", fontsize=12.5, fontweight="bold", color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 0.48, "reviewed new-indication rows with both identifiers resolved (S1)", fontsize=6.9, color=INK, va="center", zorder=3)
+    y -= 0.9
+    box(0, y, 10, 0.8)
+    ax.text(0.3, y + 0.4, f"{c['n1']:,}", fontsize=7, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.4, "Reviewed new-indication rows with both identifiers resolved (S1)", fontsize=7, color=INK, va="center", zorder=3)
     y -= 0.86
     arrow(0.9, y + 0.84, 0.9, y + 0.14)
-    ax.text(1.6, y + 0.5, f"−{sum(c['s2'].values())}", fontsize=8, fontweight="bold", color=DROP, va="center")
-    ax.text(2.7, y + 0.62, "not mappable to a graph node", fontsize=6.8, fontweight="bold", color=INK, va="center")
-    ax.text(2.7, y + 0.3, ", ".join(f"{k} {v}" for k, v in c["s2"].items()), fontsize=5.5, color=MUTED, va="center")
-    y -= 1.05
-    box(0, y, 10, 0.95)
-    ax.text(0.3, y + 0.48, f"{c['n2']:,}", fontsize=12.5, fontweight="bold", color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 0.48, "KG-mappable rows (S2): single agent with a DrugBank accession, disease a specific MONDO term", fontsize=6.9, color=INK, va="center", zorder=3)
+    ax.text(1.6, y + 0.5, f"−{sum(c['s2'].values())}", fontsize=7, color=INK, va="center")
+    ax.text(2.7, y + 0.68, "Not mappable to a graph node", fontsize=7, color=INK, va="center")
+    ax.text(2.7, y + 0.52, ", ".join(f"{k} {v}" for k, v in c["s2"].items()), fontsize=6, color=MUTED, va="top")
+    y -= 0.9
+    box(0, y, 10, 0.8)
+    ax.text(0.3, y + 0.4, f"{c['n2']:,}", fontsize=7, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.4, "KG-mappable rows (S2): single agent with a DrugBank accession, disease a specific MONDO term", fontsize=7, color=INK, va="center", zorder=3)
     y -= 0.86
     arrow(0.9, y + 0.84, 0.9, y + 0.14)
-    ax.text(1.6, y + 0.5, f"−{c['events'] - c['pairs']}", fontsize=8, fontweight="bold", color=DROP, va="center")
-    ax.text(2.7, y + 0.62, "collapse across regulators", fontsize=6.8, fontweight="bold", color=INK, va="center")
-    ax.text(2.7, y + 0.3, _wrap(f"{c['n2']} rows name {c['events']} (row, disease) events; one (DrugBank id, MONDO id) pair each, earliest "
+    ax.text(1.6, y + 0.5, f"−{c['events'] - c['pairs']}", fontsize=7, color=INK, va="center")
+    ax.text(2.7, y + 0.68, "Collapse across regulators", fontsize=7, color=INK, va="center")
+    ax.text(2.7, y + 0.52, _wrap(f"{c['n2']} rows name {c['events']} (row, disease) events; one (DrugBank id, MONDO id) pair each, earliest "
                                 f"decision date kept, every approving regulator listed; {c['multi']} pairs approved by two or more regulators", 118),
-            fontsize=5.5, color=MUTED, va="center", linespacing=1.15)
-    # --- S3 hero
-    y -= 1.5
-    box(0, y, 10, 1.4, hero=True)
-    ax.text(0.3, y + 0.95, f"{c['pairs']}", fontsize=15, fontweight="bold", color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 1.02, f"unique drug-disease pairs (S3): {c['drugs']} drugs, {c['diseases']} diseases", fontsize=7.2, fontweight="bold", color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 0.62, "approved by (a pair can count under several):  "
+            fontsize=6, color=MUTED, va="top", linespacing=1.15)
+    # --- S3, the final set: tinted, not framed
+    y -= 1.45
+    box(0, y, 10, 1.25, hero=True)
+    ax.text(0.3, y + 0.95, f"{c['pairs']}", fontsize=7, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.95, f"Unique drug-disease pairs (S3): {c['drugs']} drugs, {c['diseases']} diseases", fontsize=7, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.58, "Approved by (a pair can count under several):  "
             + "   ".join(f"{REG_LABEL[r].split(' ')[0] if r != 'HC' else 'Health Canada'} {c['any'][r]}" for r in ORDER),
-            fontsize=6.3, color=INK, va="center", zorder=3)
-    ax.text(1.75, y + 0.3, "first approved by:  " + "   ".join(f"{REG_LABEL[r].split(' ')[0] if r != 'HC' else 'Health Canada'} {c['first'].get(r, 0)}" for r in ORDER),
-            fontsize=6.3, color=MUTED, va="center", zorder=3)
+            fontsize=6.5, color=INK, va="center", zorder=3)
+    ax.text(1.75, y + 0.24, "First approved by:  " + "   ".join(f"{REG_LABEL[r].split(' ')[0] if r != 'HC' else 'Health Canada'} {c['first'].get(r, 0)}" for r in ORDER),
+            fontsize=6.5, color=MUTED, va="center", zorder=3)
     # per-regulator rows reaching S3, under the source boxes as a thin return strip
-    ax.text(0, y - 0.3, "rows per regulator that survive to a pair: " + ", ".join(f"{REG_LABEL[r].split(' ')[0] if r != 'HC' else 'Health Canada'} {c['rows_by_reg_s3'][r]} of {c['rows'][r]}" for r in ORDER),
-            fontsize=5.8, color=MUTED, va="center")
+    ax.text(0, y - 0.3, "Rows per regulator that survive to a pair: " + ", ".join(f"{REG_LABEL[r].split(' ')[0] if r != 'HC' else 'Health Canada'} {c['rows_by_reg_s3'][r]} of {c['rows'][r]}" for r in ORDER),
+            fontsize=6, color=MUTED, va="center")
     ax.text(0, y - 0.56, "Per-graph checks (coverage, no prior edge, distance from prior indications) are applied to these pairs; see 07h_post_cutoff_funnel.",
-            fontsize=5.8, color=MUTED, va="center")
-    fig.text(0.01, -0.012, f"repurposing-dataset {version}; every count re-derived by tools/make_post_cutoff_flow_figure.py from the shipped tables", fontsize=6, color=MUTED)
-    fig.tight_layout()
+            fontsize=6, color=MUTED, va="center")
+    # The y range follows what was drawn, so a longer or shorter list of steps never clips.
+    ax.set_ylim(y - 0.8, y0 + bh + 0.1)
+    fig.supxlabel(f"repurposing-dataset {version}; every count re-derived by tools/make_post_cutoff_flow_figure.py from the shipped tables",
+                  fontsize=6, color=MUTED, x=0.0, ha="left")
     out_stem.parent.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
-        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, bbox_inches="tight")
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=600, bbox_inches="tight")
     plt.close(fig)
     print("figure ->", out_stem.with_suffix(".pdf"))
 

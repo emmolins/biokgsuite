@@ -13,6 +13,11 @@ knowledge_graphs:
       Disease: disease
       Gene/Protein: gene/protein
       Pathway: pathway
+      # Declared so the schema audit records them as read; neither is scored
+      # (no reference set, no registry). HPO terms are clinical phenotypes,
+      # not drug side effects, so they are not folded into Side Effect.
+      Phenotype: effect/phenotype        # HPO terms, bare numeric ids
+      Exposure: exposure                 # CTD exposure chemicals, MeSH ids
     disease_id_scheme: mondo             # raw IDs are bare MONDO numerics
     disease_id_separator: "_"           # compound MONDO IDs joined by underscore (e.g. "1234_5678")
     pathway_ontology: reactome           # Reactome R-HSA-* IDs; eligible for Reactome gold standard
@@ -52,6 +57,14 @@ knowledge_graphs:
       Disease: Disease
       Gene/Protein: Gene
       Pathway: Pathway
+      # Hetionet-derived types, declared as in Hetionet so the two graphs are
+      # audited alike; read, not scored.
+      Anatomy: Anatomy
+      Side Effect: Side Effect
+      Symptom: Symptom
+      Pharmacologic Class: Pharmacologic Class
+      ATC class: Atc                     # DrugBank ATC codes
+      Taxon: Tax                         # NCBI taxonomy (host and pathogen organisms)
     disease_id_scheme: doid_mesh         # mix of DOID: and MESH: prefixed IDs
     relations:
       drug_target:  {relation: "DRUGBANK::target::Compound:Gene"}
@@ -67,6 +80,12 @@ knowledge_graphs:
       Disease: Disease                   # DOID:* IDs
       Gene/Protein: Gene                 # NCBIGENE:* IDs
       Pathway: Pathway                   # REACTOME:* and KEGG:* IDs
+      Anatomy: Anatomy                   # UBERON:* IDs; read, not scored
+      Phenotype: Phenotype               # HP:* IDs; read, not scored
+      Cell type: Cell                    # CL:* IDs; read, not scored
+      # GO stays unmapped: the loader types every GO:* id as one label and the
+      # three aspects can only be told apart by go.obo, which the schema audit
+      # does not consult. Reported as unmapped on the record.
     disease_id_scheme: doid              # IDs carry DOID: prefix (same as Hetionet)
     pathway_ontology: reactome           # REACTOME:R-HSA-* IDs; KEGG also present
     relations:
@@ -82,12 +101,13 @@ knowledge_graphs:
       Drug: Drug                             # DrugBank accessions (e.g. DB00001)
       # Two labels, one canonical type. `Disease` is MeSH (D001234, C012345);
       # `GeneticDisorder` is OMIM (MIM:100100), and 3,660 of its 3,678 nodes
-      # (99.5%) carry a MONDO disease xref, so MONDO — the same arbiter this
-      # dimension scores against — adjudicates them as diseases. Leaving the
+      # (99.5%) carry a MONDO disease xref, so MONDO, the same arbiter this
+      # dimension scores against, adjudicates them as diseases. Leaving the
       # label unmapped made them invisible to every metric. 2026-09-14.
       Disease: [Disease, GeneticDisorder]
       Gene/Protein: Gene/Protein             # UniProt accessions (e.g. P12345)
       Pathway: Pathway                       # mixed KEGG / Reactome / SMPDB IDs
+      Complex: Complex                       # Reactome complexes (R-HSA-*, R-NUL-*); read, not scored
     disease_id_scheme: mesh                  # raw IDs are MeSH disease identifiers
     pathway_ontology: reactome               # 1,883 human Reactome (R-HSA-*) + KEGG + SMPDB
     relations:
@@ -101,7 +121,7 @@ knowledge_graphs:
     # to the canonical entity-type subset declared in keep_categories.
     nodes_path: data/matrix/nodes.tsv
     edges_path: data/matrix/edges.tsv
-    # 'all' keeps every node category and every edge — the full released
+    # 'all' keeps every node category and every edge, the full released
     # graph, and the setting used for the reported results. Use a restricted
     # list (e.g. [drug, disease, gene/protein, pathway, effect/phenotype]) only
     # to scope down on memory-constrained machines; note that this evaluates
@@ -130,17 +150,25 @@ knowledge_graphs:
     # ChEMBL / CAS / etc.). Build via:
     #   python scripts/build_drugbank_xref.py
     # which combines DrugBank's external_links.csv with the existing PubChem
-    # crosswalk. The loader degrades gracefully if this file is absent —
+    # crosswalk. The loader degrades gracefully if this file is absent;
     # only the smaller PubChem→DrugBank table will be used.
     drugbank_xref_path: data/gold_standards/bridges/drugbank_xref.csv
     entity_types:
       Biological Process: biological_process
       Molecular Function: molecular_function
+      Cellular Component: cellular_component
       Anatomy: anatomy
       Drug: drug
       Disease: disease
       Gene/Protein: gene/protein
       Pathway: pathway
+      # Loader categories outside the scored types, declared so the schema
+      # audit records them; with keep_categories: all the remaining Biolink
+      # categories keep their own names and are listed there as unmapped.
+      Phenotype: effect/phenotype            # PhenotypicFeature, BehavioralFeature
+      Organism: organism
+      Variant: variant
+      Procedure: procedure
     disease_id_scheme: mondo                 # canonicalised to bare MONDO numeric at load time via equivalent_identifiers crosswalk
     pathway_ontology: reactome               # canonicalised to R-HSA-* at load time via equivalent_identifiers crosswalk
     relations:

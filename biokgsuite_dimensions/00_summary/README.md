@@ -30,6 +30,17 @@ rests on.
 
 ## Design notes
 
+### The overall mean is over chance-floored dimensions
+
+Every scored sub-metric runs from 0 at chance to 1. The AUROC-valued ones
+(link prediction in 06, all three axes of 07) are mapped to 2·AUROC − 1, the
+Gini coefficient, before their dimension is averaged; the proportion-valued
+ones already start at 0. This puts the seven dimensions on one scale for the
+radar, the heatmap and the overall mean, at the cost that the generalisation
+dimension sits lower than a raw-AUROC reading would put it (a raw 0.78 is a
+scored 0.55). Methods should state the map in one sentence, and the text
+should quote raw AUROCs, which every 06 and 07 table keeps.
+
 ### A partial benchmark is refused rather than rendered
 
 A missing checkpoint drops a spoke from the radar, a block from the heatmap and a

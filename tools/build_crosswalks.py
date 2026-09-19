@@ -37,6 +37,9 @@ CHEMBL_RELEASE = 'chembl_36'  # verify against ftp.ebi.ac.uk/pub/databases/chemb
 # allowlist, as is the OBO PURL.
 UBERON_TAG = 'v2026-06-23'
 GO_COMMIT  = 'f90ad02eb5c6072eb90bf73b84123eda087e16c7'   # go-edit.obo, 2026-09-14
+# HPO is the registry behind PrimeKG's effect/phenotype nodes, which are written
+# as bare numbers ('118' for HP:0000118) and would otherwise be unverifiable.
+HPO_TAG = 'v2026-09-01'
 # WikiPathways publishes one directory per pathway; the git tree is the registry.
 # data.wikipathways.org is unreachable behind the egress allowlist, as is
 # pathwaycommons.org, so PathwayCommons PC7 accessions cannot be verified at all.
@@ -69,6 +72,13 @@ SOURCES = {
         version=UBERON_TAG, out='uberon.obo',
         maps='UBERON anatomy terms',
         licence='CC-BY 3.0'),
+    'hpo': dict(
+        url=f'https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/{HPO_TAG}'
+            '/hp.obo',
+        version=HPO_TAG, out='hp.obo',
+        maps='HPO phenotype terms, live and obsolete; confirms that a bare '
+             'phenotype number names a real term',
+        licence='HPO licence (free for academic use, attribution required)'),
     'wikipathways': dict(
         url='https://api.github.com/repos/wikipathways/wikipathways-database'
             f'/git/trees/{WIKIPATHWAYS_TREE}',
@@ -221,7 +231,6 @@ def main():
                              version=spec['version'], rows=len(ids), sha=sha256(data),
                              maps=spec['maps'], licence=spec['licence']))
             print(f"  {name:15s} {len(ids):,} rows  {spec['version']}")
-            got.add(name) if 'got' in dir() else None
             continue
         if spec.get('parquet'):
             # Open Targets datasets are parquet DIRECTORIES; they are fetched by

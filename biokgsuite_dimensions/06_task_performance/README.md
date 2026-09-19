@@ -35,7 +35,8 @@ triples scored by AA(drug, *g*) × AA(*g*, disease).
 AUROC is 0.5 under the null; Recall@100 and Hits@100 are 0. Averaging the raw
 values lets a graph with no link-prediction signal contribute a third of a point
 to the dimension, which is not a claim any of the three measurements support.
-Link prediction is therefore rescaled to (AUROC − 0.5) / 0.5 before the mean,
+Link prediction is therefore mapped to (AUROC − 0.5) / 0.5, which is 2·AUROC − 1,
+the Gini coefficient, before the mean,
 under the `RESCALE_AUROC` flag, so all three run from 0 at chance to 1 at
 perfect. The unscaled AUROC is still what the figure and the table report,
 because that is the number comparable to the literature.

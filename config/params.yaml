@@ -4,7 +4,7 @@ analysis_params:
   random_seed: 42        # used by all notebooks; controls all explicit RandomState objects
   neg_ratio: 5           # negative-to-positive ratio for link prediction sampling (nb06, nb07)
 
-  # nb01 — an entity type resolving below this fraction is a missing crosswalk,
+  # nb01: an entity type resolving below this fraction is a missing crosswalk,
   # not a finding about the graph, and is raised rather than reported as coverage.
   # Nodes sampled per graph when estimating the clustering coefficient (nb04).
   # Applied uniformly to every graph: sampling k nodes costs k/n of the full
@@ -15,7 +15,7 @@ analysis_params:
   resolvability_floor: 0.05
   n_bootstrap: 1000      # bootstrap resamples for 95% CI (nb06 and nb07)
 
-  robustness:            # nb05 — network robustness
+  robustness:            # nb05, network robustness
     sample_size: 500     # entity pairs sampled per KG
     dropout_rates:
       - 0.05
@@ -33,7 +33,7 @@ analysis_params:
     # raises if it is not, rather than scoring every graph 0.0.
     primary_dropout: 0.10
 
-  validation:            # nb02 — semantic validity (live API calls)
+  validation:            # nb02, semantic validity (live API calls)
     n_samples: 250       # nodes sampled per entity type for identifier validation
     api_timeout: 15      # per-request HTTP timeout in seconds
     api_sleep: 0.15      # inter-request delay (seconds) to respect API rate limits
@@ -131,4 +131,3 @@ analysis_params:
     temperature: 0.7
     api_delay: 1.0                # seconds between hosted-API calls
     n_bootstrap: 10000            # paired bootstrap over queries for every interval
-    hits_k: [1, 3, 5]

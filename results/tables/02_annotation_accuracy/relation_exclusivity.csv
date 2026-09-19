@@ -1,4 +1,7 @@
 KG,Conflict,|A|,|B|,Shared pairs,Conflict rate (%)
+primekg,Indication vs. Contraindication,9388,30675,87,0.218
+primekg,Indication vs. Off-label,9388,2568,125,1.057
+primekg,Contraindication vs. Off-label,30675,2568,37,0.111
 hetionet,Treats (CtD) vs. Palliates (CpD),755,390,0,0.0
 hetionet,Compound: Up- vs. Downregulates Gene,18756,21102,0,0.0
 hetionet,Anatomy:  Up- vs. Downregulates Gene,97848,102240,0,0.0

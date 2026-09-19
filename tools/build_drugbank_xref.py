@@ -166,8 +166,8 @@ def main() -> None:
             n_total += n
         else:
             print(f"  [drugbank_external_links]  not found at {args.drugbank_links}")
-            print(f"     Download from https://go.drugbank.com/releases/latest#external-links "
-                  f"(free academic account) and place at that path to recover ~80% more drugs.")
+            print("     Download from https://go.drugbank.com/releases/latest#external-links "
+                  "(free academic account) and place at that path to recover ~80% more drugs.")
 
         # Source 2: pubchem_to_drugbank.csv (always present)
         if Path(args.pubchem).exists():

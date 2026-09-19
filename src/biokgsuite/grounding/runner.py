@@ -24,7 +24,7 @@ from .prompt import build_prompt, parse_response, rank_of
 
 LETTERS = list(string.ascii_uppercase)
 MOCK_EVIDENCE_P = {True: 0.9, False: 0.4}   # chance a positive / distractor gets a mock dossier
-RUN_COLUMNS = ['family', 'model', 'arm', 'condition', 'seed', 'shuffle', 'pair_id', 'drugbank_id',
+RUN_COLUMNS = ['mode', 'family', 'model', 'arm', 'condition', 'seed', 'shuffle', 'pair_id', 'drugbank_id',
                'mondo_id', 'disease', 'drug', 'pool_size', 'positive_letter', 'rank', 'reciprocal_rank',
                'hit1', 'hit3', 'hit5', 'parsed', 'error', 'pos_has_evidence', 'n_with_evidence',
                'pos_basis', 'pos_agreement', 'pos_confidence', 'pos_rationale', 'frac_basis_kg',
@@ -102,6 +102,7 @@ def run_arm(*, family, arm, queries, model, seed, shuffles, pool_size, dossiers,
             confs = [f['confidence'] for f in fields.values() if isinstance(f.get('confidence'), int)]
             pf = fields.get(pos_letter, {})
             rows.append({
+                'mode': 'mock' if mock else 'real',
                 'family': family, 'model': model, 'arm': arm, 'condition': condition, 'seed': seed,
                 'shuffle': s, 'pair_id': q['pair_id'], 'drugbank_id': q['drugbank_id'],
                 'mondo_id': q['mondo_id'], 'disease': q['disease_name'], 'drug': q['drug_name'],
@@ -130,22 +131,32 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
 
     ``dossiers`` maps KG name to a ``KGDossiers`` (or to None in mock mode). An
     existing file for (family, model, seed) is loaded, not recomputed, unless
-    ``force``; an arm that aborted on rate limits is left incomplete in the file
-    and reported, so a rerun with ``force`` can complete it.
+    ``force``. An arm that aborted on rate limits is left incomplete in the
+    file and reported; the next launch keeps the file's complete arms and
+    runs only the missing or partial ones, so a rate-limited job is finished
+    by resubmitting it, and ``force`` is only for redoing finished work.
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     frames, aborted = [], []
     arms = ['none'] + list(kgs)
+    per_arm = len(queries) * shuffles
     for model in models:
         path = run_path(out_dir, family, model, seed)
+        rows, todo = [], arms
         if path.exists() and not force:
-            frames.append(pd.read_csv(path))
-            continue
-        rows = []
-        progress = progress_factory(len(queries) * shuffles * len(arms), f'{family} {model} seed {seed}') \
+            prev = pd.read_csv(path)
+            counts = prev.groupby('arm').size() if len(prev) else {}
+            complete = [a for a in arms if counts.get(a, 0) == per_arm]
+            if len(complete) == len(arms):
+                frames.append(prev)
+                continue
+            rows = prev[prev['arm'].isin(complete)].to_dict('records')
+            todo = [a for a in arms if a not in complete]
+            print(f'{path.name}: {len(complete)} arms complete, completing {todo}')
+        progress = progress_factory(len(todo) * per_arm, f'{family} {model} seed {seed}') \
             if progress_factory else None
-        for arm in arms:
+        for arm in todo:
             arm_rows, stopped = run_arm(family=family, arm=arm, queries=queries, model=model, seed=seed,
                                         shuffles=shuffles, pool_size=pool_size,
                                         dossiers=None if arm == 'none' else dossiers.get(arm),

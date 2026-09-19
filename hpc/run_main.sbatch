@@ -10,7 +10,7 @@
 #
 # Runs the main benchmark notebooks 01-07 in order, then 00 (which aggregates
 # their checkpoints), on one CPU compute node. No GPU is requested: embedding
-# training and Gemma encoding live in nb08 (scripts/hpc/run_all.sbatch), not
+# training and Gemma encoding live in supplementary/embeddings (hpc/run_embeddings.sbatch), not
 # here. MATRIX is the memory driver: evaluated on its full released
 # graph (config/kgs.yaml keep_categories: all) it peaks above 150 GB across
 # nb01+nb02, hence 256 GB.
@@ -26,6 +26,7 @@ set -euo pipefail
 REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
 mkdir -p logs
+[ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 
 # Refuse to run against anything that is not THIS repo. The default used to
 # point at $HOME/biokgsuite, a different checkout with a different notebook

@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from biokgsuite.grounding.analysis import (RUN_KEY, arm_table, bh_fdr, boot_ci,
+from biokgsuite.grounding.analysis import (absence_penalty_table, RUN_KEY, arm_table, bh_fdr, boot_ci,
                                            capacity_table, chance_mrr, contrast_table,
                                            cross_model_corr, diagnostics,
                                            difficulty_table, load_runs, per_query,
@@ -28,9 +28,13 @@ N_PAIRS, POOL, SEEDS, SHUFFLES = 20, 8, (0, 1), (0, 1)
 AREAS = ['oncology', 'neurology', 'cardiology', 'immunology']
 
 
+ABSENT_IN = {'drkg': {3, 6, 9}}   # pairs whose positive carries no dossier in that arm
+
+
 def make_runs(family='main', seed=0, lifted_kg='primekg', p_top=0.7):
     """One row per (model, arm, seed, shuffle, pair). ``lifted_kg`` ranks the
-    positive first with probability ``p_top``; every other arm is uniform."""
+    positive first with probability ``p_top``; every other arm is uniform,
+    except that a positive with no dossier (``ABSENT_IN``) is ranked last."""
     rng = np.random.default_rng(seed)
     rows = []
     for model in MODELS:
@@ -38,7 +42,10 @@ def make_runs(family='main', seed=0, lifted_kg='primekg', p_top=0.7):
             for s in SEEDS:
                 for sh in SHUFFLES:
                     for pid in range(1, N_PAIRS + 1):
-                        if arm == lifted_kg and rng.random() < p_top:
+                        absent = pid in ABSENT_IN.get(arm, set())
+                        if absent:
+                            rank = POOL
+                        elif arm == lifted_kg and rng.random() < p_top:
                             rank = 1
                         else:
                             rank = int(rng.integers(1, POOL + 1))
@@ -51,7 +58,7 @@ def make_runs(family='main', seed=0, lifted_kg='primekg', p_top=0.7):
                             pool_size=POOL, positive_letter='A', rank=rank,
                             reciprocal_rank=1.0 / rank, hit1=int(rank <= 1),
                             hit3=int(rank <= 3), hit5=int(rank <= 5), parsed=1, error=None,
-                            pos_has_evidence=arm != 'none',
+                            pos_has_evidence=arm != 'none' and not absent,
                             n_with_evidence=0 if arm == 'none' else 3,
                             pos_basis='prior' if arm == 'none' else 'kg',
                             pos_agreement='insufficient' if arm == 'none'
@@ -74,11 +81,14 @@ def make_benchmark(seed=0):
         approval_year=rng.integers(1980, 2024, size=N_PAIRS)))
     for kg in KGS:
         bench[f'covered_{kg}'] = rng.random(N_PAIRS) < 0.7
+        bench[f'grounded_{kg}'] = bench[f'covered_{kg}'] & (rng.random(N_PAIRS) < 0.8)
+    bench['n_kg_covered'] = bench[[f'covered_{kg}' for kg in KGS]].sum(axis=1)
+    bench['n_kg_grounded'] = bench[[f'grounded_{kg}' for kg in KGS]].sum(axis=1)
     return bench
 
 
-def covered_by_kg(bench):
-    return {kg: set(bench.loc[bench[f'covered_{kg}'], 'pair_id']) for kg in KGS}
+def grounded_by_kg(bench):
+    return {kg: set(bench.loc[bench[f'grounded_{kg}'], 'pair_id']) for kg in KGS}
 
 
 def test_validate_runs_passes_on_clean_frame():
@@ -172,8 +182,8 @@ def test_bh_fdr_known_vector():
 def test_significance_tests_rows_and_fdr_monotone():
     df = make_runs()
     bench = make_benchmark()
-    common = set.intersection(*covered_by_kg(bench).values())
-    subsets = {'all pairs': df, 'covered': df[df['pair_id'].isin(common)]}
+    common = set.intersection(*grounded_by_kg(bench).values())
+    subsets = {'all pairs': df, 'evaluable in every graph': df[df['pair_id'].isin(common)]}
     pairs = [('primekg', 'drkg'), ('primekg', 'biokg'), ('biokg', 'drkg')]
     tests = significance_tests(subsets, pairs, LABELS)
     assert len(tests) == len(subsets) * len(MODELS) * len(pairs)
@@ -212,18 +222,33 @@ def test_capacity_table_sorted_by_params():
     assert set(subset['model']) == {MODELS[2]}
 
 
-def test_scaling_table_has_pooled_and_covered_lift():
+def test_scaling_table_has_pooled_and_grounded_lift():
     df = make_runs()
     bench = make_benchmark()
     rng = np.random.default_rng(0)
-    sc = scaling_table(df, PARAMS_B, covered_by_kg(bench), 200, rng)
+    sc = scaling_table(df, PARAMS_B, grounded_by_kg(bench), 200, rng)
     assert list(sc['model']) == sorted(PARAMS_B, key=PARAMS_B.get)
-    for col in ('lift_pooled', 'lift_pooled_lo', 'lift_pooled_hi',
-                'lift_cov', 'lift_cov_lo', 'lift_cov_hi', 'mrr_none', 'mrr_kg', 'mrr_kg_cov'):
+    for col in ('lift_pooled', 'lift_pooled_lo', 'lift_pooled_hi', 'lift_grounded', 'lift_grounded_lo',
+                'lift_grounded_hi', 'mrr_none', 'mrr_kg', 'mrr_kg_grounded'):
         assert col in sc.columns
     assert (sc['n_pairs'] == N_PAIRS).all()
-    assert (sc['n_pairs_cov'] <= N_PAIRS).all()
-    assert sc[['lift_pooled', 'lift_cov']].notna().all().all()
+    assert (sc['n_pairs_grounded'] <= N_PAIRS).all()
+    assert sc[['lift_pooled', 'lift_grounded']].notna().all().all()
+
+
+def test_absence_penalty_reads_what_the_model_saw():
+    df = make_runs()
+    rng = np.random.default_rng(0)
+    ap = absence_penalty_table(df, 200, rng, LABELS)
+    assert set(ap['positive']) == {'shown', 'absent'}
+    assert set(ap['arm']) == set(ARMS) - {'none'}
+    drkg = ap[ap['arm'] == 'drkg'].set_index(['model', 'positive'])
+    other = ap[ap['arm'] != 'drkg']
+    # Only DRKG has blank positives, and it ranked them last: a clear negative lift.
+    assert (other.loc[other['positive'] == 'absent', 'n_pairs'] == 0).all()
+    assert (drkg.xs('absent', level='positive')['n_pairs'] == len(ABSENT_IN['drkg'])).all()
+    assert (drkg.xs('absent', level='positive')['lift_hi'] < 0).all()
+    assert (drkg.xs('shown', level='positive')['n_pairs'] == N_PAIRS - len(ABSENT_IN['drkg'])).all()
 
 
 def test_difficulty_table_one_row_per_pair():
@@ -233,14 +258,14 @@ def test_difficulty_table_one_row_per_pair():
     assert len(per) == N_PAIRS
     assert per['pair_id'].is_unique
     assert per['mrr'].is_monotonic_increasing
-    for col in ('mrr', 'mrr_none', 'mrr_covered', 'hit1', 'n_kg_covered', 'pos_confidence',
-                'frac_consistent', 'area', 'modality', 'approval_year', 'drug_name',
-                'disease_name', 'model_spread'):
+    for col in ('mrr', 'mrr_none', 'mrr_grounded', 'hit1', 'n_kg_covered', 'n_kg_grounded',
+                'pos_confidence', 'frac_consistent', 'area', 'modality', 'approval_year',
+                'drug_name', 'disease_name', 'model_spread'):
         assert col in per.columns
-    expected = bench.set_index('pair_id')[[f'covered_{k}' for k in KGS]].sum(axis=1)
-    assert per.set_index('pair_id')['n_kg_covered'].astype(int).equals(expected.loc[per['pair_id']])
-    assert per.loc[per['n_kg_covered'] == 0, 'mrr_covered'].isna().all()
-    assert per.loc[per['n_kg_covered'] > 0, 'mrr_covered'].notna().all()
+    expected = bench.set_index('pair_id')[[f'grounded_{k}' for k in KGS]].sum(axis=1)
+    assert per.set_index('pair_id')['n_kg_grounded'].astype(int).equals(expected.loc[per['pair_id']])
+    assert per.loc[per['n_kg_grounded'] == 0, 'mrr_grounded'].isna().all()
+    assert per.loc[per['n_kg_grounded'] > 0, 'mrr_grounded'].notna().all()
     model_cols = [c for c in per.columns if c.startswith('mrr:')]
     assert sorted(c[4:] for c in model_cols) == sorted(MODELS)
     assert (per['n_runs'] == len(KGS) * len(MODELS) * len(SEEDS) * len(SHUFFLES)).all()

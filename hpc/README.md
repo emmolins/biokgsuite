@@ -1,164 +1,189 @@
-> **Paths updated 2026-09-16.** `REPO_DIR` now defaults to `$HOME/biokgsuite-bib`
-> and notebooks are executed as `biokgsuite_dimensions/<nb>/notebook.ipynb`.
-> The old default pointed at a different checkout with an `eval_notebooks/`
-> layout, so a submit ran superseded code silently. Both job scripts now
-> refuse to start if `REPO_DIR` is not this repo.
->
-> `run_all.sbatch` targets `supplementary/embeddings/notebook.ipynb` (repointed 2026-09-18).
+# Running everything on the cluster
 
-# Running nb08 on HPC, the 5-minute playbook
+Target: Oracle Cloud HPC (Ashburn), Slurm, partition `def`. CPU nodes have 96
+cores and 125 GB or more; GPU nodes carry H100 80 GB cards. The repo lives at
+`~/biokgsuite-bib` on the cluster and every script below assumes that path
+(`REPO_DIR` overrides it).
 
-Target cluster: Oracle Cloud Infrastructure HPC (Ashburn).
-Scheduler: Slurm. Hardware per compute node: AMD EPYC 9J14 (96 cores), 125 GB RAM, 8× NVIDIA H100 80GB.
+The runs, in the order they depend on each other:
 
-## What you'll do
+| Job | Script | Needs | Takes | Produces |
+|---|---|---|---|---|
+| A. Dimensions 01 to 07, then 00 | `run_main.sbatch` | 256 GB CPU node | 6 to 12 h | `results/`, executed notebooks, Fig 1 |
+| B. Grounding benchmark | `run_grounding_analysis.sbatch STAGE=benchmark` | CPU | 10 min | `G01_benchmark.pkl`, Fig G01 |
+| C. Grounding runs, hosted models | `run_grounding_api.sbatch` x 9 | `.env`, B | 3 to 6 h each | `results/tables/G02_run/runs/` |
+| D. Llama ladder, 1B to 70B | `run_llm_ladder.sbatch` x 12 | 1 H100, B | 1 to 8 h each | more run files |
+| E. Llama 405B | `run_llm_405b.sbatch` x 3 | 4 H100, B | up to 24 h each | more run files |
+| F. Grounding analysis 02 to 05 | `run_grounding_analysis.sbatch` | C (and D, E if wanted) | 30 min | Figs G03 to G05 |
+| G. Embedding supplementary | `run_embeddings.sbatch` | 1 H100, HF login | 2 to 4 h | Figs S1 to Sn |
+| H. Stability supplementary | `run_stability_embeddings.sbatch` | 1 H100 | hours | supplementary tables |
 
-1. **On your Mac**: kill the current Mac kernel + push the repo to GitHub
-2. **On HPC**: clone repo, install deps, push KG data over from your Mac
-3. **On HPC**: submit one Slurm job
-4. **Wait ~2-4 hours**
-5. **rsync results back to your Mac**
+A and B are independent of each other. C, D and E need B and can all run at
+once. F runs when the run files you want are in. G and H are independent of
+everything else.
 
-## Step 1, On your Mac (2 min)
-
-```bash
-# In Jupyter: Kernel → Shutdown
-# (The Mac was about to spend 6-8 hours encoding Gemma, we don't need it anymore.)
-
-# Push the repo so HPC can clone it
-cd ~/biokgsuite
-git add . && git commit -m "HPC scripts" && git push
-```
-
-If your repo isn't on GitHub yet, skip the push and use rsync in Step 2 instead:
-```bash
-rsync -avz --exclude .venv --exclude results/cache --exclude '*.ipynb_checkpoints' \
-    ~/biokgsuite/ ashburn-login:biokgsuite/
-```
-
-## Step 2, On HPC (~10 min, mostly waiting for `uv pip install`)
-
-SSH in and run the setup script:
+## 0. Cheat sheet
 
 ```bash
-ssh ashburn-login   # or however you ssh in
-cd ~
-
-# Get the repo
-git clone https://github.com/<you>/biokgsuite_dashboard.git biokgsuite
-# (or skip if you used rsync in step 1)
-cd biokgsuite
-
-# One-time env setup, installs deps via uv
-bash scripts/hpc/setup.sh
+ssh ashburn-login                       # log in
+squeue -u $USER                         # my jobs (ST = PD pending, R running)
+tail -f logs/<name>-<jobid>.out         # follow a job
+scancel <jobid>                         # kill one job;  scancel -u $USER  kills them all
+sacct -j <jobid> --format=JobID,State,Elapsed,MaxRSS   # after it ends: did it finish, how much memory
+srun --partition=def --cpus-per-task=8 --mem=64G --time=4:00:00 --pty bash   # interactive shell on a node
 ```
 
-When that finishes, do the **three manual steps** the setup script reminds you about:
+## 1. On the laptop: commit and push
+
+The repo has no remote yet. Once, from the laptop (a stale lock from an
+interrupted commit has to go first):
 
 ```bash
-# (a) HuggingFace auth
-huggingface-cli login        # paste your hf_... token, say "y" to git credential
-
-# (b) Accept the Gemma license at:
-#     https://huggingface.co/google/embeddinggemma-300m
-#     (one click in your browser; wait for Google approval email if not already approved)
-
-# (c) Get the KG data, rsync from your Mac:
-#     Run this command FROM YOUR MAC (in a separate terminal), NOT on HPC:
+cd ~/Desktop/biokgsuite-bib
+rm -f .git/index.lock && find .git/objects -name 'tmp_obj_*' -delete
+git add -A
+git commit -m "Identifier resolution, reference sets, grounded stage, HPC scripts"
+gh repo create emmolins/biokgsuite-bib --private --source=. --remote=origin --push
 ```
 
-On your **Mac** (separate terminal):
+Every later change is the usual pair:
 
 ```bash
-rsync -avz --progress ~/biokgsuite/data/ ashburn-login:biokgsuite/data/
+cd ~/Desktop/biokgsuite-bib && git push origin main          # laptop
+cd ~/biokgsuite-bib && git pull --ff-only                    # cluster
 ```
 
-Expected size: ~30 GB (mostly MATRIX). Transfer time depends on your home internet, typically 15-60 min on a decent connection. The login node has fast network to the compute nodes, so once it's there, the job runs fast.
+`.env`, `.trial_kgs`, the graphs under `data/` and the loader caches are
+gitignored, so a pull never carries a key, never carries the two-graph trial
+switch, and never moves data. That is what you want: the cluster runs the
+full panel because `.trial_kgs` is absent there, and every job script refuses
+to start if it finds one.
 
-Quick sanity check on HPC after rsync finishes:
+## 2. On the cluster, once: clone, environment, data, keys
 
 ```bash
-du -sh ~/biokgsuite/data/*/
-# You should see: matrix ~30G, drkg ~400M, primekg ~1G, etc.
+ssh ashburn-login
+git clone https://github.com/emmolins/biokgsuite-bib.git ~/biokgsuite-bib
+cd ~/biokgsuite-bib
+bash hpc/setup.sh            # uv venv at .venv, requirements.txt + the embedding stack; ~10 min
 ```
 
-## Step 3, Submit the Slurm job (~5 sec)
+This repo has its own `.venv`; do not activate another project's. The job
+scripts activate it themselves.
+
+The graphs are not in git. From the laptop, in a second terminal (about
+25 GB; the MATRIX loader caches are left behind because their file name is
+keyed on the laptop's absolute paths and would not be reused, and `data/raw`
+holds only the fetch snapshots the notebooks never read):
 
 ```bash
-cd ~/biokgsuite
-sbatch scripts/hpc/run_all.sbatch
+rsync -avz --progress --exclude '_cache_matrix_*' --exclude 'raw' \
+      ~/Desktop/biokgsuite-bib/data/ ashburn-login:biokgsuite-bib/data/
+scp ~/Desktop/biokgsuite-bib/.env ashburn-login:biokgsuite-bib/.env
 ```
 
-Slurm prints a job ID like `Submitted batch job 1234567`. That's all you need to do, the rest is automated.
+Then on the cluster: `du -sh ~/biokgsuite-bib/data/*/` should show matrix
+about 12 GB, openbilink 1.7 GB, primekg 0.9 GB, and `cat .env` should show the
+three keys. The first job that loads MATRIX rebuilds its cache on the cluster
+(20 minutes or so, once).
 
-## Step 4, Wait, and monitor (~2-4 hours)
+Only for the embedding supplementary (G): `huggingface-cli login` with your
+token, and accept the EmbeddingGemma licence in a browser.
+
+## 3. Submit
+
+Everything from `~/biokgsuite-bib`. Each `sbatch` prints a job id; the log is
+`logs/<name>-<jobid>.out`.
 
 ```bash
-# See your job's status
-squeue -u $USER
+# A. dimensions 01-07 then 00, one CPU job
+sbatch hpc/run_main.sbatch
 
-# Live log
-tail -f logs/nb08-1234567.out
+# B. grounding benchmark; wait for it to finish (squeue) before C, D, E
+sbatch --export=ALL,STAGE=benchmark hpc/run_grounding_analysis.sbatch
 
-# What the log will show, in order:
-#   - module load + venv activation
-#   - nvidia-smi shows the H100
-#   - existing TransE/RotatE single-run training (~20-40 min total across 6 KGs)
-#   - Gemma encoding on GPU (~30-60 min for all 6 KGs)
-#   - Multi-rerun resampling loop:
-#       Rerun 1: TransE+RotatE on all 6 KGs (~30 min)
-#       Rerun 2: same, repeated N_RERUNS times
-#   - Gemma re-scoring across reruns (~30 min total)
-#   - Aggregation + resampled figures
+# C. hosted models: one job per (model, seed). Same --job-name per provider
+#    plus --dependency=singleton in the script means one job per provider at
+#    a time (its rate limit), three providers in parallel.
+for S in 0 1 2; do
+  sbatch --job-name=ground-gpt    --export=ALL,MODEL=gpt-4.1-mini,SEED=$S                 hpc/run_grounding_api.sbatch
+  sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S hpc/run_grounding_api.sbatch
+  sbatch --job-name=ground-groq   --export=ALL,MODEL=groq:llama-3.3-70b-versatile,SEED=$S hpc/run_grounding_api.sbatch
+done
+
+# D. Llama ladder on single H100s, one job per (model, seed)
+for M in llama3.2:1b llama3.2:3b llama3.1:8b llama3.3:70b; do
+  for S in 0 1 2; do sbatch --export=ALL,MODEL=$M,SEED=$S hpc/run_llm_ladder.sbatch; done
+done
+
+# E. Llama 405B on 4 H100s, one seed at a time; read the pre-flight notes in the script first
+sbatch --export=ALL,SEED=0 hpc/run_llm_405b.sbatch
+
+# F. once every run you want is in: 02 (reloads all files), 03, 04, 05
+sbatch hpc/run_grounding_analysis.sbatch
+
+# G, H. supplementaries
+sbatch hpc/run_embeddings.sbatch
+sbatch hpc/run_stability_embeddings.sbatch
 ```
 
-If the job dies for any reason (preemption, transient error), just `sbatch` again, the notebook is resumable via per-rerun caches.
+Seeds are 0, 1, 2 (`config/params.yaml`, `grounding.seeds`). The model names
+are the keys of `grounding.models` and `grounding.capacity_models` there; a
+name not in the config is a config edit, not a command-line one.
 
-## Step 5, Pull results back to your Mac
+## 4. What to check while it runs
 
-When `squeue -u $USER` shows your job is gone (= completed):
+`run_main`: the log prints one banner per notebook; 01 and 02 are the MATRIX
+memory peak, 04 (Louvain) and 06 the slow ones. `sacct ... MaxRSS` after the
+job says whether 256 GB was needed.
 
-On your **Mac**:
+Grounding jobs: the first lines say `MODE=real models=[...] families=[...]`
+and `loading primekg ...`; a `tqdm` line then appears every 30 s. Watch for
+`incomplete (rate-limited) arms` at the end: that job stopped early on eight
+consecutive rate-limit errors. Resubmit the same command; the runner keeps the
+file's complete arms and runs only the missing ones. `pos_has_evidence agrees
+with grounded_<kg>` must print on every run job; a `RuntimeError` there means
+the dossier and the status builder disagree and nothing should be analysed
+until that is understood.
+
+`ls results/tables/G02_run/runs/` shows one `<family>__<model>__seed<k>.csv`
+per finished (family, model, seed); C alone gives 18 files, D adds 12 and E
+adds 3 (`main` only for the ladder).
+
+## 5. Pull results back to the laptop
+
+When `squeue -u $USER` is empty, from the laptop:
 
 ```bash
-rsync -avz ashburn-login:biokgsuite/results/ ~/biokgsuite/results/
-rsync -avz ashburn-login:biokgsuite/supplementary/embeddings/notebook.ipynb \
-       ~/biokgsuite-bib/supplementary/embeddings/
+rsync -avz ashburn-login:biokgsuite-bib/results/ ~/Desktop/biokgsuite-bib/results/
+rsync -avz ashburn-login:biokgsuite-bib/biokgsuite_dimensions/ ~/Desktop/biokgsuite-bib/biokgsuite_dimensions/
+rsync -avz ashburn-login:biokgsuite-bib/grounding_experiment/ ~/Desktop/biokgsuite-bib/grounding_experiment/
+rsync -avz ashburn-login:biokgsuite-bib/supplementary/ ~/Desktop/biokgsuite-bib/supplementary/
 ```
 
-That brings down:
-- `results/tables/08_embedding_comparison_resampled.csv`, the long-form numbers (one row per rerun)
-- `results/figures/08_embedding_validation/08_resampled_auroc.{pdf,png}` and `08_lift_over_gemma.{pdf,png}`, the resampling figures
-- `supplementary/embeddings/notebook.ipynb`, the executed notebook with all cell outputs
-
-Open the notebook locally to see all the inline figures.
+That brings the figures, tables, checkpoints, run files and the executed
+notebooks with their outputs. Then on the laptop: `python tools/results_manifest.py`,
+`python tools/regenerate_figs.py`, commit, push. Leave the laptop's
+`.trial_kgs` where it is; it only affects the dimension notebooks when they
+are run there, and the checkpoints just pulled from the cluster carry
+`full_panel: true`.
 
 ## Troubleshooting
 
-| Symptom | Likely cause | Fix |
+| Symptom | Cause | Fix |
 |---|---|---|
-| `module: command not found` | login env not loaded | `source /etc/profile.d/modules.sh` first |
-| `cuda is False` in log | CUDA module not loaded | The sbatch script already tries `module load cuda`, if it fails, ask cluster admin which CUDA module name to use |
-| Slurm rejects job: `Invalid partition` | Partition name differs | Check `sinfo` and edit `--partition=` in run_all.sbatch |
-| `GatedRepoError` for Gemma | License not yet approved | Either wait for Google's email, or temporarily set `GEMMA_ENABLED = False` in the nb08 Gemma config cell and resubmit |
-| Job hits the 24 hr walltime | MATRIX training was slow | Re-`sbatch`, it resumes from cached per-rerun results, only re-doing what's missing |
-| `Permission denied` writing to results/ | Repo on read-only filesystem | Don't put repo on a snapshot mount; `~` is fine |
-| Want to skip MATRIX (long pole) | n/a | In the nb08 config cell, change `KG_NAMES = list(config['knowledge_graphs'].keys())` to exclude `'matrix'` |
-
-## Costs
-
-The single sbatch job uses:
-- 1 H100 GPU x ~2 hr (for Gemma encoding, only if re-encoding)
-- 32 CPU cores x ~2-3 hr (for TransE/RotatE training x N_RERUNS reruns)
-- 0 dollars (your account is presumably pre-allocated)
-
-After the job completes, the key artifacts are:
-- `results/figures/08_embedding_validation/08_resampled_auroc.png`, TransE/RotatE/Gemma per KG with rerun-empirical 95% CIs
-- `results/figures/08_embedding_validation/08_lift_over_gemma.png`, per-rerun lift of each trained model over the Gemma name prior
+| `module: command not found` | login environment not loaded | `source /etc/profile.d/modules.sh` first |
+| `FATAL: ... is not biokgsuite-bib` | `REPO_DIR` points elsewhere | `export REPO_DIR=~/biokgsuite-bib` or run from that directory |
+| `FATAL: .trial_kgs is present` | the laptop's trial switch was copied | `rm ~/biokgsuite-bib/.trial_kgs` |
+| `FATAL: no .env` | keys not copied | `scp` step in section 2 |
+| `FATAL: run grounding_experiment/01_benchmark first` | B has not run | submit B, wait, resubmit |
+| grounding job ends with `incomplete (rate-limited) arms` | provider rate limit | resubmit the same command; only the missing arms rerun |
+| `Invalid partition` | partition name differs | `sinfo`, then edit `--partition=` |
+| `cuda is False` | CUDA module missing on that node | the script tries `module load cuda`; ask the admins for the module name |
+| `GatedRepoError` for Gemma | licence not approved yet | wait for the approval mail, or set `GEMMA_ENABLED = False` in the notebook |
+| job killed at the wall time | MATRIX or a long ladder rung | resubmit; every notebook and every run file resumes from what finished |
 
 ## legacy/
 
-`run_llm_ollama.sbatch` and `run_llm_ollama_76.sbatch` drove the 2026-09 runs on the
-superseded 116-pair and 76-pair sets through a runner that no longer exists. Kept for the
-record; `run_llm_ladder.sbatch` and `run_llm_405b.sbatch` now launch
-`grounding_experiment/02_run/notebook.ipynb` on the post-cutoff approval set.
+`run_llm_ollama.sbatch` and `run_llm_ollama_76.sbatch` drove the 2026-09 runs
+on the superseded 116-pair and 76-pair sets. Kept for the record.

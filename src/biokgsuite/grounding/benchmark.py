@@ -9,11 +9,21 @@ the checks the paper describes for notebook 07.
 
 Two families of queries are drawn from the same pairs:
 
-* ``main``    every pair, in every arm; the coverage-controlled analysis then
-              restricts post hoc using the flags carried on each row.
-* ``common``  only the pairs evaluable in every KG arm (the graph holds both
-              nodes and no direct edge), so the paired comparison between
-              graphs holds evidence availability constant by construction.
+* ``main``    every pair, in every arm; the analysis then restricts post hoc
+              using the flags carried on each row.
+* ``common``  only the pairs evaluable in every KG arm, so the paired
+              comparison between graphs holds evidence availability constant
+              by construction.
+
+Evaluable here is stricter than for notebook 07. The builder's ``evaluable``
+says the graph holds the drug at the degree floor and the disease, carries no
+direct edge, and predates the approval. A grounding dossier renders only gene
+and pathway neighbours, so a drug can be covered (degree from drug-drug or
+side-effect edges) and still reach the model with no evidence line; the
+builder records that as ``grounded``. For the grounding experiment
+``evaluable_<kg>`` = builder evaluable and grounded, and the three flags are
+carried separately (``covered_<kg>``, ``grounded_<kg>``, ``evaluable_<kg>``)
+so an analysis can condition on whichever it means.
 
 Distractors are approved drugs from Open Targets that are not indicated for
 the target disease or any of its MONDO descendants (``tools/build_distractor_pool.py``).
@@ -45,9 +55,10 @@ def load_benchmark(base, *, kgs, strict=False) -> pd.DataFrame:
     ``pair_id`` is the 1-based row number of ``post_cutoff_approvals.csv``,
     which the builder writes in a fixed sort order, so the id is stable across
     rebuilds as long as the set itself does not change (the set's SHA-256 is
-    in its PROVENANCE.txt). ``evaluable_<kg>`` is ``evaluable_strict`` when
-    ``strict`` is set, otherwise ``evaluable``; ``common`` is their conjunction
-    over ``kgs``.
+    in its PROVENANCE.txt). ``evaluable_<kg>`` is the builder's
+    ``evaluable_strict`` when ``strict`` is set, otherwise ``evaluable``, and
+    in either case also requires ``grounded``; ``common`` is their conjunction
+    over ``kgs``. ``n_kg_covered`` and ``n_kg_grounded`` count graphs per pair.
     """
     base = Path(base)
     gold = pd.read_csv(base / SET_DIR / 'post_cutoff_approvals.csv')
@@ -63,12 +74,25 @@ def load_benchmark(base, *, kgs, strict=False) -> pd.DataFrame:
     bench['first_agency'] = bench.agencies.str.split(';').str[0]
 
     flag = 'evaluable_strict' if strict else 'evaluable'
+    if 'grounded' not in status.columns:
+        raise ValueError('post_cutoff_pair_status.csv has no grounded column; rebuild it with '
+                         'tools/build_post_cutoff_approvals.py after re-extracting the views')
     for kg in kgs:
         s = status[status.kg == kg].set_index(['drugbank_id', 'mondo_id'])
+        # The builder leaves grounded empty for a graph whose view carries no
+        # neighbour count; for a grounding arm that is a stale view, not a False.
+        g = s['grounded']
+        if g.isna().any():
+            raise ValueError(f'grounded is not computed for {kg} ({int(g.isna().sum())} empty rows); '
+                             f'rerun tools/build_post_cutoff_approvals.py --extract-views {kg}, then --kgs all')
+        s = s.assign(grounded=g.map({True: True, False: False, 'True': True, 'False': False}).astype(bool))
         key = pd.MultiIndex.from_frame(bench[['drugbank_id', 'mondo_id']])
-        for col, name in (('covered', f'covered_{kg}'), ('leaked', f'leaked_{kg}'), (flag, f'evaluable_{kg}')):
+        for col, name in (('covered', f'covered_{kg}'), ('leaked', f'leaked_{kg}'),
+                          ('grounded', f'grounded_{kg}'), (flag, f'evaluable_{kg}')):
             bench[name] = s[col].reindex(key).fillna(False).astype(bool).to_numpy()
+        bench[f'evaluable_{kg}'] &= bench[f'grounded_{kg}']
     bench['n_kg_covered'] = bench[[f'covered_{kg}' for kg in kgs]].sum(axis=1)
+    bench['n_kg_grounded'] = bench[[f'grounded_{kg}' for kg in kgs]].sum(axis=1)
     bench['common'] = bench[[f'evaluable_{kg}' for kg in kgs]].all(axis=1)
 
     clf = OntologyClassifier(base)
@@ -179,7 +203,7 @@ def selection_frame(bench: pd.DataFrame) -> pd.DataFrame:
     ``kept`` marks the pairs the ``common`` family keeps. The audit asks whether
     that selection favours some kinds of pair (modality, area, year, how many
     regulators approved it), which is the assumption behind reading the
-    coverage-controlled result as a fair comparison between graphs.
+    evidence-controlled result as a fair comparison between graphs.
     """
     df = bench.copy()
     df['kept'] = df.common

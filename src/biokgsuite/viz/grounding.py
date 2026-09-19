@@ -3,13 +3,14 @@
 Every function returns its Figure and saves nothing: the notebooks write
 through ``biokgsuite.io.Outputs`` so each figure lands in the results manifest.
 Graphs are coloured from ``KG_PALETTE``; models get the small fixed palette
-below, assigned in the order the caller lists them. Display names come from
-the ``*_label`` columns of the analysis tables or from a ``labels`` dict
-(raw tag to display name), never from this module.
+below, assigned in the order the caller lists them, doubled by a marker shape
+so a figure that compares models still reads in greyscale. The no-KG arm and
+every other baseline is ``NEUTRAL`` grey. Display names come from the
+``*_label`` columns of the analysis tables or from a ``labels`` dict (raw tag
+to display name), never from this module.
 """
 from itertools import combinations
 
-import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
@@ -19,40 +20,35 @@ from matplotlib.patches import Patch
 from biokgsuite.grounding.analysis import (NONE_LABEL, cross_model_corr,
                                            mean_pairwise_corr, model_columns)
 from biokgsuite.grounding.bias import odds_ratio
-from biokgsuite.viz.style import (GRID_COLOR, KG_PALETTE, TEXT_COLOR, fig_size,
-                                  panel_label, setup_style)
+from biokgsuite.viz.primitives import (facet_grid, human_label, panel_letters,
+                                       ref_line, truncate)
+from biokgsuite.viz.style import (DOUBLE_COL_W, FAINT, HEATMAP_CMAP, KG_PALETTE, MUTED, NEUTRAL, SINGLE_COL_W, TEXT_COLOR, clean_ax,
+                                  facet_title, fig_size, panel_label, setup_style)
 
 setup_style()
 
-# Models are drawn beside graph colours in several panels, so their palette
-# avoids the KG hues: no ocean blue, rust, sage, amber or plum.
-MODEL_PALETTE = ['#3A4F7A', '#B07A2A', '#4E8A78', '#7A4E7A', '#8A6A4E', '#4E6A8A']
+INK = TEXT_COLOR
 
-INK, MUTED, FAINT = '#1A1A1A', '#8C8C8C', '#BFBFBF'
+# Models are not graphs, so they never borrow a KG hue. Three muted hues
+# (periwinkle, ochre, wine) that pass the dataviz palette validator among
+# themselves under protan, deutan and normal vision, and sit as far from the
+# Okabe-Ito graph hues as the remaining hue circle allows. A marker shape is
+# always drawn with the colour, so the assignment survives greyscale print.
+MODEL_PALETTE = ['#8085C8', '#977D30', '#84446A']
+MODEL_MARKERS = ['o', 's', '^']
 
-# Pooled-vs-covered comparisons: covered takes the house blue because it is
-# the arm that carries the claim, pooled is grey, and the no-KG baseline is
-# the house rust so it reads as the reference line everywhere.
-C_COVERED, C_POOLED, C_NOKG = '#2E6B8A', '#9A9A9A', '#C46A52'
-
-# Bias audit: kept in the house blue, dropped in grey, a significant deficit
-# in rust, a non-significant effect in neutral grey.
-KEPT_COLOUR, DROPPED_COLOUR, NEG_COLOUR, NEUTRAL_COLOUR = '#2E6B8A', '#9A9A9A', '#C46A52', '#8C8C8C'
-
-# Rank bins from best to worst: three blues fading to grey, then rust for a
-# miss, so the eye reads "how much is dark" as "how often the drug was found".
-RANK_RAMP = ['#2E6B8A', '#6D9BB5', '#A9C4D3', '#D9D9D9', '#C46A52']
+# Rank bins from best to worst: three steps of the magnitude ramp, dark to
+# light, then faint grey for the tail and a white cell with a hairline edge
+# for a miss, so "how much is dark" reads as "how often the drug was found"
+# without a warning colour for what is only the last bin.
+RANK_RAMP = [HEATMAP_CMAP(0.92), HEATMAP_CMAP(0.62), HEATMAP_CMAP(0.36), FAINT, 'white']
 
 # The evidence_agreement vocabulary of the ranking schema (prompt.RANKING_SCHEMA).
 AGREEMENT_ORDER = ['consistent', 'conflicting', 'insufficient']
-AGREEMENT_COLOURS = {'consistent': '#6A8A6B', 'conflicting': '#C49A3C',
-                     'insufficient': '#C46A52'}
-AGREEMENT_LABELS = {'consistent': 'Consistent\nevidence', 'conflicting': 'Conflicting',
-                    'insufficient': 'Insufficient /\nmissing'}
+AGREEMENT_LABELS = {'consistent': 'Consistent', 'conflicting': 'Conflicting',
+                    'insufficient': 'Insufficient or missing'}
 
-# Ordinal ramp from light grey to the house blue, for "share of consistent
-# evidence" and confidence colouring.
-SEQ_CMAP = mcolors.LinearSegmentedColormap.from_list('grey_blue', [GRID_COLOR, '#2E6B8A'])
+BAR_W = 0.6
 
 
 def _label(labels, key):
@@ -65,36 +61,61 @@ def _model_colours(models):
     return {m: MODEL_PALETTE[i % len(MODEL_PALETTE)] for i, m in enumerate(models)}
 
 
+def _model_markers(models):
+    return {m: MODEL_MARKERS[i % len(MODEL_MARKERS)] for i, m in enumerate(models)}
+
+
 def _kg_colour(kg):
-    return KG_PALETTE.get(kg, MUTED)
+    return KG_PALETTE.get(kg, NEUTRAL)
 
 
-def _title(ax, title, subtitle=None, pad=10):
-    ax.set_title(title, fontsize=11, fontweight='bold', loc='left', color=TEXT_COLOR, pad=pad)
-    if subtitle:
-        ax.text(0, 1.02, subtitle, transform=ax.transAxes, fontsize=8.5, color='#777',
-                va='bottom', ha='left')
+def _two_lines(label, limit=12):
+    """Break a long model name at its second hyphen so three names fit under
+    one axis without rotating; short names stay on one line."""
+    lab = str(label)
+    if len(lab) <= limit or lab.count('-') < 2:
+        return lab
+    first = lab.find('-', lab.find('-') + 1)
+    return lab[:first] + '-\n' + lab[first + 1:]
 
 
-def _panel(ax, letter, title, x=-0.13):
-    panel_label(ax, letter, x=x, y=1.10, fontsize=9)
-    ax.text(x + 0.02, 1.095, title, transform=ax.transAxes, fontsize=7.6,
-            va='top', ha='left', color=INK)
-
-
-def _bare(ax, spines=('top', 'right')):
-    ax.grid(False)
-    for side in spines:
-        ax.spines[side].set_visible(False)
+def _vref(ax, x, label, pad_pt=2):
+    """Vertical counterpart of ``ref_line``: grey dashed with a 6 pt muted
+    label just above the top of the axes."""
+    ax.axvline(x, color=FAINT, ls='--', lw=0.6, zorder=1)
+    ax.annotate(label, xy=(x, 1), xycoords=('data', 'axes fraction'),
+                xytext=(0, pad_pt), textcoords='offset points',
+                ha='center', va='bottom', fontsize=6, color=MUTED, annotation_clip=False)
 
 
 def _logx(ax, params):
+    """Parameter count on a log axis with the rungs themselves as ticks."""
     xs = sorted(set(float(p) for p in params))
     ax.set_xscale('log')
     ax.set_xticks(xs)
     ax.set_xticklabels([f'{p:g}B' for p in xs])
     ax.minorticks_off()
-    ax.set_xlabel('Parameters (billions, log scale)')
+    ax.set_xlabel('Parameters (billions)')
+
+
+def _end_labels_or_legend(ax, ends, loc='best', min_gap=0.07):
+    """Direct labels at the line ends when they are a text height apart,
+    otherwise a 6 pt frameless legend. ``ends`` is {label: (x, y, colour)}."""
+    ys = sorted(v[1] for v in ends.values() if v[1] == v[1])
+    lo, hi = ax.get_ylim()
+    gaps = np.diff(ys) if len(ys) > 1 else np.array([np.inf])
+    if ends and gaps.min() >= min_gap * (hi - lo):
+        x0, x1 = ax.get_xlim()
+        if ax.get_xscale() == 'log':
+            ax.set_xlim(x0, x1 * (x1 / x0) ** 0.22)
+        else:
+            ax.set_xlim(x0, x1 + 0.22 * (x1 - x0))
+        for label, (x, y, colour) in ends.items():
+            if y == y:
+                ax.annotate(label, (x, y), xytext=(4, 0), textcoords='offset points',
+                            ha='left', va='center', fontsize=6, color=colour)
+    elif len(ends) > 1:
+        ax.legend(loc=loc)
 
 
 def _first_seen(values):
@@ -112,22 +133,32 @@ def _pool_size(df):
     return int(sizes[0])
 
 
+def _dark(colour):
+    r, g, b = plt.matplotlib.colors.to_rgb(colour)
+    return 0.299 * r + 0.587 * g + 0.114 * b < 0.5
+
+
 def fig_grounding_gain(arms_main, con_main, con_cov, model_order, kg_order, n_pairs, n_cov_pairs):
     """Two panels: the lift of every KG arm over no-KG per model, and every
     between-graph contrast on all pairs beside the same contrast on the pairs
-    every graph covers.
+    every graph can evaluate (holds and has evidence for).
 
-    No gridlines, one reference rule per panel and direct labels instead of a
-    legend. Panel b pairs each contrast on adjacent rows so the attenuation
-    under coverage control reads as one movement rather than a scatter of
+    Panel b pairs each contrast on adjacent rows so the attenuation under
+    evidence control reads as one movement rather than a scatter of
     intervals. The contrasts drawn are exactly those in ``con_main``; pass a
     filtered table to show fewer.
     """
-    fig, (axa, axb) = plt.subplots(1, 2, figsize=(fig_size(2)[0], 3.3),
+    contrasts = _first_seen(con_main['contrast'])
+    n_rows = len(model_order) * (len(contrasts) + 1)
+    # Nine contrast rows (three models, three graphs) fit the standard row
+    # height; fifteen contrasts per model need the panel to grow with them.
+    height = max(fig_size(2)[1] * 1.3, 0.13 * n_rows + 0.7)
+    fig, (axa, axb) = plt.subplots(1, 2, figsize=(fig_size(2)[0], height),
                                    gridspec_kw={'width_ratios': [1.0, 1.3]})
-    plt.subplots_adjust(left=0.085, right=0.985, bottom=0.155, top=0.86, wspace=0.50)
+    plt.subplots_adjust(left=0.08, right=0.985, bottom=0.6 / height, top=1 - 0.22 / height,
+                        wspace=0.5)
 
-    width = 0.22
+    width = min(0.22, 0.8 / max(len(kg_order), 1))
     offsets = {kg: (j - (len(kg_order) - 1) / 2) * width for j, kg in enumerate(kg_order)}
     lo_all, hi_all = [], []
     for kg in kg_order:
@@ -138,34 +169,31 @@ def fig_grounding_gain(arms_main, con_main, con_cov, model_order, kg_order, n_pa
             r = hit.iloc[0]
             x = i + offsets[kg]
             colour = _kg_colour(kg)
-            axa.plot([x, x], [r['lift_lo'], r['lift_hi']], color=colour, lw=1.1,
-                     solid_capstyle='round', zorder=2)
-            axa.plot([x], [r['lift']], marker='o', ms=4.4, color=colour, mec='white',
-                     mew=0.7, zorder=3)
+            axa.plot([x, x], [r['lift_lo'], r['lift_hi']], color=colour, lw=0.75,
+                     solid_capstyle='butt', zorder=2)
+            axa.plot([x], [r['lift']], marker='o', ms=3.5, color=colour, mec='white',
+                     mew=0.5, zorder=3)
             lo_all.append(r['lift_lo'])
             hi_all.append(r['lift_hi'])
             if i == 0:
-                axa.annotate(r['arm_label'], (x, r['lift_hi']), xytext=(0, 5),
-                             textcoords='offset points', ha='center', fontsize=6.3,
-                             color=colour)
+                # The graph is named once, above its first interval, in its own
+                # colour: a direct label in place of a legend.
+                axa.annotate(r['arm_label'], (x, r['lift_hi']), xytext=(0, 3),
+                             textcoords='offset points', ha='center', va='bottom',
+                             fontsize=6, color=colour)
     model_labels = [arms_main.loc[arms_main['model'] == m, 'model_label'].iloc[0]
                     if (arms_main['model'] == m).any() else m for m in model_order]
     axa.set_xticks(range(len(model_order)))
-    # Long model names collide at three per axis; break at the second hyphen
-    # so each label sits on two lines under its own group.
-    axa.set_xticklabels([lab.replace('-', '-\n', 1) if lab.count('-') >= 2 and len(lab) > 14 else lab
-                         for lab in model_labels], fontsize=6.6)
-    axa.set_ylabel('MRR gain over no-KG baseline', labelpad=3)
+    axa.set_xticklabels([_two_lines(lab) for lab in model_labels])
     if lo_all:
-        span = max(hi_all) - min(lo_all)
-        axa.set_ylim(min(lo_all) - 0.15 * span, max(hi_all) + 0.30 * span)
-    axa.axhline(0, color=FAINT, lw=0.7, zorder=1)
+        # The axis always includes zero: a gain is read against no gain.
+        span = max(hi_all) - min(lo_all + [0])
+        axa.set_ylim(min(lo_all + [0]) - 0.05 * span, max(hi_all) + 0.30 * span)
     axa.set_xlim(-0.55, len(model_order) - 0.45)
-    axa.tick_params(axis='x', length=0, pad=4)
-    _bare(axa)
-    _panel(axa, 'a', f'Grounding gain, all {n_pairs} pairs', x=-0.15)
+    ref_line(axa, 0, 'no gain')
+    clean_ax(axa, ylabel='MRR gain over no-KG')
+    axa.tick_params(axis='x', length=0)
 
-    contrasts = _first_seen(con_main['contrast'])
     pair_off = 0.21
     y, ticks, tick_labels, heads = 0.0, [], [], []
     for model in model_order:
@@ -173,43 +201,46 @@ def fig_grounding_gain(arms_main, con_main, con_cov, model_order, kg_order, n_pa
                       if (con_main['model'] == model).any() else model)
         heads.append((y - 0.62, head_label))
         for con in contrasts:
-            for frame, colour, off, lw, ms in ((con_main, FAINT, -pair_off, 1.0, 3.8),
-                                               (con_cov, INK, pair_off, 1.3, 4.2)):
+            for frame, colour, off, ms in ((con_main, FAINT, -pair_off, 3.0),
+                                           (con_cov, INK, pair_off, 3.5)):
                 hit = frame[(frame['model'] == model) & (frame['contrast'] == con)]
                 if hit.empty:
                     continue
                 r = hit.iloc[0]
-                axb.plot([r['lo'], r['hi']], [y + off, y + off], color=colour, lw=lw,
-                         solid_capstyle='round', zorder=2)
+                axb.plot([r['lo'], r['hi']], [y + off, y + off], color=colour, lw=0.75,
+                         solid_capstyle='butt', zorder=2)
                 axb.plot([r['diff']], [y + off], marker='o', ms=ms, zorder=3,
                          mfc=colour if (r['separates'] and colour == INK) else 'white',
-                         mec=colour, mew=1.0)
+                         mec=colour, mew=0.75)
             ticks.append(y)
             tick_labels.append(con.replace(' - ', ' − '))
             y += 1.30
         y += 0.95
 
-    axb.axvline(0, color=INK, lw=0.8, zorder=1)
+    axb.axvline(0, color=FAINT, ls='--', lw=0.6, zorder=1)
     axb.set_yticks(ticks)
-    axb.set_yticklabels(tick_labels, fontsize=6.6)
+    axb.set_yticklabels(tick_labels)
     axb.set_ylim(y - 0.95 - 0.45, -1.25)
-    axb.set_xlabel('Difference in MRR gain between graphs', labelpad=3)
     both = pd.concat([con_main, con_cov])
     if not both.empty:
         lo, hi = both['lo'].min(), both['hi'].max()
         span = hi - lo
         axb.set_xlim(min(lo, 0) - 0.15 * span, max(hi, 0) + 0.15 * span)
+    clean_ax(axb, xlabel='Difference in MRR gain between graphs')
+    axb.spines['left'].set_visible(False)
     axb.tick_params(axis='y', length=0, pad=2)
-    _bare(axb, spines=('top', 'right', 'left'))
+    # Model headings sit at the left edge of the panel at the same size as the
+    # tick labels, regular weight: only panel letters are bold.
     x_head = axb.get_xlim()[0]
     for yh, label in heads:
-        axb.text(x_head, yh, label, fontsize=6.9, fontweight='bold', color=INK,
-                 va='center', ha='left')
-    axb.annotate(f'pale, all {n_pairs} pairs   ·   dark, the {n_cov_pairs} covered by '
-                 'every graph   ·   filled, excludes zero',
-                 xy=(0.5, -0.155), xycoords='axes fraction', ha='center', va='top',
-                 fontsize=6.2, color=MUTED)
-    _panel(axb, 'b', 'Differences shrink under coverage control', x=-0.30)
+        axb.text(x_head, yh, label, fontsize=6.5, color=INK, va='center', ha='left')
+    axb.annotate(f'pale, all {n_pairs} pairs; dark, the {n_cov_pairs} evaluable in every graph;\n'
+                 'filled, interval excludes zero',
+                 xy=(0, 0), xycoords='axes fraction', xytext=(0, -26),
+                 textcoords='offset points', ha='left', va='top', fontsize=6,
+                 color=MUTED, annotation_clip=False)
+    panel_label(axa, 'a', x=-0.28, y=1.02)
+    panel_label(axb, 'b', x=-0.30, y=1.02)
     return fig
 
 
@@ -217,8 +248,7 @@ def fig_capacity(cap, chance_mrr, kg_order):
     """Model ladder: MRR per arm against parameter count, and the lift of each
     KG arm over no-KG. A flat no-KG line with a rising lift says the ability to
     use evidence, not prior knowledge, is what scales."""
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(fig_size(2)[0], 2.75))
-    plt.subplots_adjust(left=0.085, right=0.985, bottom=0.20, top=0.86, wspace=0.34)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=fig_size(2, 1), constrained_layout=True)
     cx = cap.sort_values('params_b')
     xs = sorted(cx['params_b'].unique())
 
@@ -226,17 +256,14 @@ def fig_capacity(cap, chance_mrr, kg_order):
         s = cx[cx['arm'] == arm].sort_values('params_b')
         if s.empty:
             continue
-        ax1.plot(s['params_b'], s['mrr'], '-o', ms=3.6, lw=1.1, color=_kg_colour(arm),
-                 label=s['arm_label'].iloc[0], zorder=3 if arm != 'none' else 2)
-    ax1.axhline(chance_mrr, color=FAINT, ls=(0, (2, 2)), lw=0.7, zorder=1)
-    ax1.text(xs[0], chance_mrr + 0.012, 'chance', fontsize=6, color=MUTED)
+        none = arm == 'none'
+        ax1.plot(s['params_b'], s['mrr'], ls='--' if none else '-', marker='s' if none else 'o',
+                 ms=3.5, lw=1, color=_kg_colour(arm), label=s['arm_label'].iloc[0],
+                 zorder=2 if none else 3)
+    ref_line(ax1, chance_mrr, 'chance')
     _logx(ax1, xs)
-    ax1.set_ylabel('Mean reciprocal rank', labelpad=3)
-    ax1.grid(color=GRID_COLOR, lw=0.5)
-    ax1.set_axisbelow(True)
-    ax1.legend(frameon=False, loc='upper left', handletextpad=0.4, labelspacing=0.3,
-               borderaxespad=0.3)
-    _panel(ax1, 'a', 'Ungrounded performance is flat')
+    clean_ax(ax1, ylabel='Mean reciprocal rank')
+    ax1.legend(loc='best', ncol=1 if len(kg_order) <= 3 else 2)
 
     for arm in kg_order:
         s = cx[cx['arm'] == arm].sort_values('params_b')
@@ -245,58 +272,57 @@ def fig_capacity(cap, chance_mrr, kg_order):
         colour = _kg_colour(arm)
         ax2.errorbar(s['params_b'], s['lift'],
                      yerr=[s['lift'] - s['lift_lo'], s['lift_hi'] - s['lift']],
-                     fmt='-o', ms=4.0, lw=1.1, color=colour, ecolor=colour,
-                     elinewidth=0.9, capsize=0, zorder=3, label=s['arm_label'].iloc[0])
-    ax2.axhline(0, color=INK, lw=0.7, zorder=1)
+                     fmt='-o', ms=3.5, lw=1, color=colour, ecolor=colour,
+                     elinewidth=0.75, capsize=0, zorder=3, label=s['arm_label'].iloc[0])
+    ref_line(ax2, 0, 'no gain')
     _logx(ax2, xs)
-    ax2.set_ylabel('MRR lift over no-KG', labelpad=3)
-    ax2.grid(color=GRID_COLOR, lw=0.5)
-    ax2.set_axisbelow(True)
-    ax2.legend(frameon=False, loc='upper left', handletextpad=0.4, labelspacing=0.3,
-               borderaxespad=0.3)
-    _panel(ax2, 'b', 'Ability to use evidence is what scales')
+    clean_ax(ax2, ylabel='MRR gain over no-KG')
+    ax2.legend(loc='best', ncol=1 if len(kg_order) <= 3 else 2)
+    panel_letters(fig, [ax1, ax2])
     return fig
 
 
 def fig_lift_vs_size(scaling):
-    """KG lift against model size, pooled over every KG arm and on covered
-    arms only, with bootstrap intervals."""
+    """KG lift against model size, pooled over every KG arm and on grounded
+    arms only (the graph had evidence for the positive), with bootstrap
+    intervals. Neither series is a graph, so the grounded arm is ink and the
+    pooled arm grey."""
     s = scaling.sort_values('params_b')
-    fig, ax = plt.subplots(figsize=(7.6, 4.8))
-    ax.axhline(0, color=FAINT, ls='--', lw=0.8, zorder=1)
+    fig, ax = plt.subplots(figsize=fig_size(1, 1), constrained_layout=True)
+    ends = {}
     for name, colour, marker, lo, hi, val in [
-            ('covered arm', C_COVERED, 'D', s['lift_cov_lo'], s['lift_cov_hi'], s['lift_cov']),
-            ('pooled (all KG arms)', C_POOLED, 'o', s['lift_pooled_lo'], s['lift_pooled_hi'],
+            ('Grounded arms', INK, 'D', s['lift_grounded_lo'], s['lift_grounded_hi'], s['lift_grounded']),
+            ('Pooled, all KG arms', NEUTRAL, 'o', s['lift_pooled_lo'], s['lift_pooled_hi'],
              s['lift_pooled'])]:
-        ax.vlines(s['params_b'], lo, hi, color=colour, lw=1, zorder=2)
-        ax.plot(s['params_b'], val, marker=marker, ls='-', color=colour, lw=1.6, mfc='white',
-                mec=colour, mew=1.4, ms=8, label=name, zorder=3)
+        ax.vlines(s['params_b'], lo, hi, color=colour, lw=0.75, zorder=2)
+        ax.plot(s['params_b'], val, marker=marker, ls='-', color=colour, lw=1, mfc='white',
+                mec=colour, mew=0.75, ms=3.5, label=name, zorder=3)
+        if len(s):
+            ends[name] = (s['params_b'].iloc[-1], val.iloc[-1], colour)
+    ref_line(ax, 0, 'no gain')
     _logx(ax, s['params_b'])
-    ax.set_ylabel('MRR lift (KG minus no-KG)')
-    _title(ax, 'KG lift vs model size',
-           'Mean reciprocal-rank lift over no-KG, pooled vs covered arm, 95% CI', pad=26)
-    ax.legend(loc='lower right', handlelength=1.8)
-    fig.tight_layout()
+    clean_ax(ax, ylabel='MRR gain over no-KG')
+    _end_labels_or_legend(ax, ends)
     return fig
 
 
 def fig_mrr_vs_size(scaling):
-    """Prior-only, pooled-KG and covered-arm MRR against model size. A flat
+    """No-KG, pooled-KG and grounded-arm MRR against model size. A flat
     no-KG line rules out memorisation as the source of the lift."""
     s = scaling.sort_values('params_b')
-    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    fig, ax = plt.subplots(figsize=fig_size(1, 1), constrained_layout=True)
+    ends = {}
     for name, colour, marker, ls, val in [
-            ('KG arm (covered)', C_COVERED, 'D', '-', s['mrr_kg_cov']),
-            ('KG arm (pooled)', C_POOLED, 'o', '-', s['mrr_kg']),
-            ('no-KG (prior only)', C_NOKG, 's', '--', s['mrr_none'])]:
-        ax.plot(s['params_b'], val, marker=marker, ls=ls, color=colour, lw=1.6, mfc='white',
-                mec=colour, mew=1.4, ms=7.5, label=name, zorder=3)
+            ('Grounded arms', INK, 'D', '-', s['mrr_kg_grounded']),
+            ('Pooled, all KG arms', INK, 'o', ':', s['mrr_kg']),
+            ('No KG', NEUTRAL, 's', '--', s['mrr_none'])]:
+        ax.plot(s['params_b'], val, marker=marker, ls=ls, color=colour, lw=1, mfc='white',
+                mec=colour, mew=0.75, ms=3.5, label=name, zorder=3)
+        if len(s):
+            ends[name] = (s['params_b'].iloc[-1], val.iloc[-1], colour)
     _logx(ax, s['params_b'])
-    ax.set_ylabel('Mean reciprocal rank')
-    _title(ax, 'Prior-only vs KG-grounded MRR by model size',
-           'no-KG, pooled KG and covered-arm MRR across the ladder', pad=26)
-    ax.legend(loc='lower right', handlelength=2.2)
-    fig.tight_layout()
+    clean_ax(ax, ylabel='Mean reciprocal rank')
+    _end_labels_or_legend(ax, ends)
     return fig
 
 
@@ -307,20 +333,23 @@ def fig_kg_by_model(df, params_b, kg_order, labels=None):
     arms = ['none'] + list(kg_order)
     mrr = df[df['model'].isin(models)].groupby(['model', 'arm'])['reciprocal_rank'].mean()
     x = np.arange(len(models))
-    w = 0.8 / len(arms)
-    fig, ax = plt.subplots(figsize=(max(6.0, 1.9 * len(models) + 2.0), 4.8))
+    w = BAR_W / len(arms)
+    cols = 1 if len(models) * len(arms) <= 16 else 2
+    fig, ax = plt.subplots(figsize=fig_size(cols, 1), constrained_layout=True)
+    top = 0
     for i, arm in enumerate(arms):
         vals = [mrr.get((m, arm), np.nan) for m in models]
+        top = max(top, np.nanmax(vals) if np.isfinite(vals).any() else 0)
         ax.bar(x + (i - (len(arms) - 1) / 2) * w, vals, w, label=_label(labels, arm),
-               color=_kg_colour(arm), edgecolor='white', linewidth=0.6, zorder=2)
+               color=_kg_colour(arm), zorder=2)
     ax.set_xticks(x)
-    ax.set_xticklabels([_label(labels, m) for m in models])
-    ax.set_ylabel('Mean reciprocal rank')
-    ax.set_ylim(0, None)
-    _title(ax, 'MRR by knowledge graph and model size',
-           'Mean reciprocal rank per KG arm vs the no-KG baseline', pad=26)
-    ax.legend(ncol=len(arms), loc='upper left', columnspacing=1.3, handlelength=1.1)
-    fig.tight_layout()
+    ax.set_xticklabels([_two_lines(_label(labels, m)) for m in models])
+    ax.set_xlim(-0.6, len(models) - 0.4)
+    # Head room for a frameless legend above the tallest bar.
+    ax.set_ylim(0, top * 1.3 if top else 1)
+    clean_ax(ax, ylabel='Mean reciprocal rank')
+    ax.tick_params(axis='x', length=0)
+    ax.legend(loc='upper left', ncol=min(len(arms), 4))
     return fig
 
 
@@ -334,11 +363,9 @@ def fig_rank_distribution(df, models, arms, labels=None):
     """Stacked bars of where the true drug landed, one row per arm and one
     panel per model. The miss bin is rank > pool size."""
     pool_size = _pool_size(df)
-    bins = ['Rank 1', 'Rank 2', 'Rank 3', f'Rank 4-{pool_size}', 'Missed']
-    fig, axes = plt.subplots(1, len(models), figsize=(4.3 * len(models) + 0.2, 5.0),
-                             sharex=True, squeeze=False)
-    axes = axes[0]
-    fig.subplots_adjust(left=0.05, right=0.985, top=0.80, bottom=0.11, wspace=0.08)
+    bins = ['Rank 1', 'Rank 2', 'Rank 3', f'Rank 4–{pool_size}', 'Missed']
+    row_h = max(fig_size(1)[1], 0.16 * len(arms) + 0.7)
+    fig, axes, ncol = facet_grid(len(models), row_h=row_h)
     for k, (ax, model) in enumerate(zip(axes, models)):
         for i, arm in enumerate(arms):
             sub = df[(df['model'] == model) & (df['arm'] == arm)]
@@ -347,22 +374,28 @@ def fig_rank_distribution(df, models, arms, labels=None):
             for v, colour in zip(vals, RANK_RAMP):
                 if np.isnan(v):
                     continue
-                ax.barh(y, v, left=left, height=0.72, color=colour, edgecolor='white', lw=0.6)
-                if v > 0.05:
+                miss = colour == 'white'
+                ax.barh(y, v, left=left, height=BAR_W, color=colour,
+                        edgecolor=NEUTRAL if miss else 'white', lw=0.4, zorder=2)
+                # A two-digit count needs about 8 pt; a segment narrower than
+                # 7% of a 55 mm panel cannot hold it.
+                if v > 0.07:
                     ax.text(left + v / 2, y, f'{v * 100:.0f}', ha='center', va='center',
-                            fontsize=8.5,
-                            color='white' if colour in (RANK_RAMP[0], RANK_RAMP[-1]) else '#333')
+                            fontsize=6, color='white' if _dark(colour) else TEXT_COLOR)
                 left += v
         ax.set_yticks(range(len(arms)))
-        ax.set_yticklabels([_label(labels, a) for a in arms][::-1] if k == 0 else [], fontsize=10)
+        ax.set_yticklabels([_label(labels, a) for a in arms][::-1] if k % ncol == 0 else [])
+        ax.set_ylim(-0.6, len(arms) - 0.4)
         ax.set_xlim(0, 1)
         ax.set_xticks([0, 0.5, 1])
-        ax.set_xlabel('Fraction of queries', fontsize=10)
-        ax.set_title(_label(labels, model), fontsize=12, fontweight='bold', pad=4)
-        _bare(ax)
-    handles = [Patch(color=c) for c in RANK_RAMP]
-    fig.legend(handles, bins, ncol=5, loc='upper center', bbox_to_anchor=(0.5, 0.96),
-               fontsize=10, handlelength=1.1)
+        clean_ax(ax, xlabel='Fraction of queries' if k >= len(models) - ncol else '')
+        ax.tick_params(axis='y', length=0)
+        facet_title(ax, _label(labels, model))
+    handles = [Patch(facecolor=c, edgecolor=NEUTRAL if c == 'white' else 'none', lw=0.4)
+               for c in RANK_RAMP]
+    fig.legend(handles, bins, ncol=5, loc='outside lower center')
+    if len(models) > 1:
+        panel_letters(fig, axes)
     return fig
 
 
@@ -372,53 +405,43 @@ def fig_evidence_quality(df):
     the no-KG arm has no evidence to agree with."""
     kg = df[df['arm'] != 'none']
     pool_size = _pool_size(df)
-    fig, (ax_l, ax_r) = plt.subplots(1, 2, figsize=(13.0, 5.4),
+    fig, (ax_l, ax_r) = plt.subplots(1, 2, figsize=fig_size(2, 1), constrained_layout=True,
                                      gridspec_kw=dict(width_ratios=[1.15, 1]))
-    fig.subplots_adjust(left=0.10, right=0.97, top=0.84, bottom=0.13, wspace=0.55)
 
     for i, key in enumerate(AGREEMENT_ORDER):
         s = kg[kg['pos_agreement'] == key]
         y = len(AGREEMENT_ORDER) - 1 - i
         if len(s) == 0:
             continue
-        colour = AGREEMENT_COLOURS[key]
         mean_rank = s['rank'].mean()
         top1 = (s['rank'] == 1).mean() * 100
-        ax_l.plot([0, mean_rank], [y, y], color=colour, lw=4, solid_capstyle='round', zorder=2)
-        ax_l.scatter(mean_rank, y, s=520, color=colour, zorder=3)
-        ax_l.text(mean_rank, y, f'{mean_rank:.1f}', ha='center', va='center', color='white',
-                  fontsize=10, fontweight='bold')
-        ax_l.annotate(f'{top1:.0f}% ranked #1\n(n={len(s):,})', xy=(pool_size + 0.6, y),
-                      ha='right', va='center', fontsize=10.5, color=colour, fontweight='bold')
+        ax_l.plot([0, mean_rank], [y, y], color=INK, lw=1, solid_capstyle='butt', zorder=2)
+        ax_l.plot([mean_rank], [y], marker='o', ms=3.5, color=INK, zorder=3)
+        ax_l.annotate(f'{mean_rank:.1f}', (mean_rank, y), xytext=(0, 4),
+                      textcoords='offset points', ha='center', va='bottom', fontsize=6,
+                      color=TEXT_COLOR)
+        ax_l.annotate(f'{top1:.0f}% ranked first (n = {len(s):,})', xy=(1, y),
+                      xycoords=('axes fraction', 'data'), xytext=(-2, 0),
+                      textcoords='offset points', ha='right', va='center', fontsize=6,
+                      color=MUTED)
     ax_l.set_yticks(range(len(AGREEMENT_ORDER)))
-    ax_l.set_yticklabels([AGREEMENT_LABELS[k] for k in AGREEMENT_ORDER][::-1], fontsize=10.5)
+    ax_l.set_yticklabels([AGREEMENT_LABELS[k] for k in AGREEMENT_ORDER][::-1])
     ax_l.set_xlim(0, pool_size + 3.5)
     ax_l.set_xticks(range(0, pool_size + 1))
     ax_l.set_ylim(-0.6, len(AGREEMENT_ORDER) - 0.4)
-    ax_l.set_xlabel(f'Mean rank of the true drug (1 = best, {pool_size} = worst)', fontsize=10)
-    ax_l.set_title('Mean rank of the true drug by KG evidence', fontsize=11.5,
-                   fontweight='bold', loc='left', color=TEXT_COLOR, pad=6)
-    _bare(ax_l)
+    clean_ax(ax_l, xlabel=f'Mean rank of the true drug (1 best, {pool_size} worst)')
+    ax_l.tick_params(axis='y', length=0)
+    facet_title(ax_l, 'By reported evidence agreement')
 
     g = kg.groupby('pos_confidence')['hit1'].mean()
     x, yv = g.index.to_numpy(dtype=float), g.to_numpy(dtype=float)
-    ax_r.grid(axis='y', color=GRID_COLOR, lw=0.8)
-    ax_r.set_axisbelow(True)
-    ax_r.plot(x, yv, color=MUTED, lw=1.6, zorder=2)
-    ax_r.scatter(x, yv, s=300, c=[SEQ_CMAP(v) for v in yv], edgecolor='white', linewidth=1.3,
-                 zorder=3)
-    for xi, yi in zip(x, yv):
-        ax_r.annotate(f'{yi * 100:.0f}%', (xi, yi), xytext=(0, 12), textcoords='offset points',
-                      ha='center', fontsize=9.5, fontweight='bold', color='#333')
+    ax_r.plot(x, yv, color=INK, lw=1, marker='o', ms=3.5, zorder=3)
     ax_r.set_xticks([1, 2, 3, 4, 5])
     ax_r.set_xlim(0.6, 5.4)
-    ax_r.set_ylim(-0.04, 1.1)
-    ax_r.set_xlabel("Model's self-reported confidence (1-5)", fontsize=10)
-    ax_r.set_ylabel('Hits@1', fontsize=10)
-    ax_r.set_title('Hits@1 by model confidence', fontsize=11.5, fontweight='bold', loc='left',
-                   color=TEXT_COLOR, pad=6)
-    fig.suptitle('True-drug rank and hits@1 vs KG evidence', fontsize=14, fontweight='bold',
-                 y=0.97, color=TEXT_COLOR)
+    ax_r.set_ylim(0, 1.0)
+    clean_ax(ax_r, xlabel='Self-reported confidence (1 low, 5 high)', ylabel='Hits@1')
+    facet_title(ax_r, 'By reported confidence')
+    panel_letters(fig, [ax_l, ax_r])
     return fig
 
 
@@ -426,41 +449,44 @@ def fig_hardest_pairs(per, n=20, labels=None):
     """The ``n`` hardest pairs: pooled KG-arm MRR as a bar, per-model MRR as
     dots, so a pair that is hard for one model alone stands out."""
     cols = model_columns(per)
-    colours = _model_colours(list(cols.values()))
+    models = list(cols.values())
+    colours, markers = _model_colours(models), _model_markers(models)
     h = per.head(n).iloc[::-1]
-    fig, ax = plt.subplots(figsize=(8.4, 0.34 * len(h) + 1.4))
+    # Forty-character pair names take a third of the double column at 6 pt.
+    fig, ax = plt.subplots(figsize=(DOUBLE_COL_W, 0.13 * len(h) + 0.55), constrained_layout=True)
     y = np.arange(len(h))
-    ax.barh(y, h['mrr'], color=GRID_COLOR, height=0.64, zorder=1)
+    ax.barh(y, h['mrr'], color=FAINT, height=BAR_W, zorder=1)
     for col, model in cols.items():
-        ax.scatter(h[col], y, s=26, color=colours[model], zorder=3, edgecolor='white',
-                   lw=0.4, label=_label(labels, model))
+        ax.scatter(h[col], y, s=12, color=colours[model], marker=markers[model], zorder=3,
+                   edgecolor='white', lw=0.3, label=_label(labels, model))
     ax.set_yticks(y)
-    ax.set_yticklabels([f'{str(r.disease_name)[:40]}\n({str(r.drug_name)[:26]} · {r.area})'
-                        for r in h.itertuples()], fontsize=6.8)
+    ax.set_yticklabels([truncate(f'{r.disease_name} ({r.drug_name})', 40) for r in h.itertuples()])
     ax.set_xlim(0, 1.0)
-    ax.set_xlabel('Mean MRR on KG arms (grey = pooled, dots = per model)')
-    ax.legend(loc='lower right', fontsize=8, title='per-model MRR', title_fontsize=7.5)
-    _title(ax, f'The {len(h)} hardest-to-rank drug-disease pairs', pad=10)
-    _bare(ax)
-    fig.tight_layout()
+    ax.set_ylim(-0.6, len(h) - 0.4)
+    clean_ax(ax, xlabel='Mean reciprocal rank on KG arms (bar, pooled; dots, per model)')
+    ax.tick_params(axis='y', length=0)
+    ax.legend(loc='lower right')
     return fig
 
 
 def fig_difficulty_drivers(per):
     """Per-pair MRR against the model's mean self-reported confidence, coloured
     by the share of runs that read the KG evidence as consistent."""
-    fig, ax = plt.subplots(figsize=(6.4, 4.8))
-    sc = ax.scatter(per['pos_confidence'], per['mrr'], c=per['frac_consistent'], cmap=SEQ_CMAP,
-                    s=46, edgecolor='white', lw=0.4, vmin=0, vmax=1)
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 2.4), constrained_layout=True)
+    sc = ax.scatter(per['pos_confidence'], per['mrr'], c=per['frac_consistent'],
+                    cmap=HEATMAP_CMAP, s=10, alpha=0.8, lw=0, vmin=0, vmax=1, zorder=2)
     r = per[['pos_confidence', 'mrr']].corr().iloc[0, 1]
-    ax.text(0.04, 0.96, f'Pearson r = {r:.2f}', transform=ax.transAxes, va='top', fontsize=10,
-            color=INK, fontweight='bold')
-    cb = fig.colorbar(sc, ax=ax, fraction=0.045, pad=0.02)
-    cb.set_label('share of consistent KG evidence', fontsize=9)
-    ax.set_xlabel("model's self-reported confidence (1-5)")
-    ax.set_ylabel('mean MRR on KG arms')
-    _title(ax, 'Per-pair MRR vs model confidence', pad=10)
-    fig.tight_layout()
+    ax.text(0.03, 0.97, f'Pearson r = {r:.2f}', transform=ax.transAxes, va='top', ha='left',
+            fontsize=6, color=MUTED)
+    cb = fig.colorbar(sc, ax=ax, fraction=0.05, pad=0.02)
+    cb.ax.tick_params(labelsize=6, length=2, width=0.5, colors=TEXT_COLOR)
+    cb.outline.set_linewidth(0.5)
+    cb.set_label('Share of consistent evidence', fontsize=6, color=TEXT_COLOR, labelpad=3)
+    # Confidence is reported on a fixed 1 to 5 scale, so the axis shows it whole.
+    ax.set_xlim(0.8, 5.2)
+    ax.set_xticks([1, 2, 3, 4, 5])
+    ax.set_ylim(0, 1.02)
+    clean_ax(ax, xlabel='Self-reported confidence (1 low, 5 high)', ylabel='Mean MRR on KG arms')
     return fig
 
 
@@ -474,98 +500,86 @@ def fig_difficulty_by_area(per, min_n=4):
     stat = d.groupby('area')['mrr'].agg(['mean', 'size']).sort_values('mean', ascending=False)
     order = stat.index.tolist()
     rng = np.random.default_rng(7)
-    fig, ax = plt.subplots(figsize=(8.0, 0.62 * max(len(order), 1) + 1.3))
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 0.16 * max(len(order), 1) + 0.7),
+                           constrained_layout=True)
     overall = per['mrr'].mean()
-    ax.axvline(overall, color=FAINT, ls='--', lw=1, zorder=1)
     for i, area in enumerate(order):
         y = len(order) - 1 - i
         sub = d[d['area'] == area]
-        ax.scatter(sub['mrr'], y + rng.uniform(-0.15, 0.15, len(sub)), s=34, color='#A9C4D3',
-                   alpha=0.9, edgecolor='white', lw=0.3, zorder=2)
-        ax.scatter(sub['mrr'].mean(), y, s=150, color=C_COVERED, marker='D', zorder=4,
-                   edgecolor='white', lw=1)
+        ax.scatter(sub['mrr'], y + rng.uniform(-0.15, 0.15, len(sub)), s=8, color=NEUTRAL,
+                   alpha=0.6, lw=0, zorder=2, label='Pair' if i == 0 else None)
+        ax.scatter(sub['mrr'].mean(), y, s=18, color=INK, marker='D', zorder=4,
+                   edgecolor='white', lw=0.4, label='Area mean' if i == 0 else None)
     ax.set_yticks(range(len(order)))
-    ax.set_yticklabels([f'{a}  (n={int(stat.loc[a, "size"])})' for a in order[::-1]],
-                       fontsize=9.5)
+    ax.set_yticklabels([f'{a} (n = {int(stat.loc[a, "size"])})' for a in order[::-1]])
     ax.set_xlim(0, 1.02)
     ax.set_ylim(-0.6, max(len(order), 1) - 0.4)
-    ax.set_xlabel('MRR on KG arms (small dot = pair, diamond = area mean)')
-    ax.text(overall, len(order) - 0.5, 'overall mean', fontsize=8, color=MUTED, ha='center')
-    _title(ax, 'Ranking difficulty by therapeutic area', pad=10)
-    _bare(ax)
-    fig.tight_layout()
+    _vref(ax, overall, 'overall mean')
+    clean_ax(ax, xlabel='Mean reciprocal rank on KG arms')
+    ax.tick_params(axis='y', length=0)
+    if order:
+        ax.legend(loc='lower right')
     return fig
 
 
 def fig_intrinsic_difficulty(per, labels=None):
     """Per-pair MRR of every model against every other, with the diagonal and
     Pearson r. Points hugging the diagonal mean difficulty is intrinsic to the
-    pair rather than to the model."""
+    pair rather than to the model. The mean pairwise r is computed for the
+    caption and the notebook, not drawn."""
     cols = model_columns(per)
     pairs = list(combinations(list(cols), 2))
-    fig, axes = plt.subplots(1, max(len(pairs), 1), figsize=(4.0 * max(len(pairs), 1), 4.2),
-                             squeeze=False)
-    axes = axes[0]
+    n = max(len(pairs), 1)
+    # Square panels: three of them across the double column are 55 mm wide.
+    row_h = (SINGLE_COL_W if n == 1 else DOUBLE_COL_W / min(n, 3)) + 0.25
+    fig, axes, ncol = facet_grid(n, row_h=row_h)
     for ax, (a, b) in zip(axes, pairs):
         d = per[[a, b]].dropna()
-        ax.plot([0, 1], [0, 1], color=FAINT, ls='--', lw=1, zorder=1)
-        ax.scatter(d[a], d[b], s=34, color=C_COVERED, alpha=0.7, edgecolor='white', lw=0.3,
-                   zorder=2)
+        ax.plot([0, 1], [0, 1], color=FAINT, ls='--', lw=0.6, zorder=1)
+        ax.scatter(d[a], d[b], s=8, color=INK, alpha=0.6, lw=0, zorder=2)
         r = d[a].corr(d[b]) if len(d) > 1 else np.nan
-        ax.text(0.04, 0.93, f'r = {r:.2f}', transform=ax.transAxes, fontsize=11,
-                fontweight='bold', color=INK)
+        ax.text(0.04, 0.96, f'r = {r:.2f}', transform=ax.transAxes, fontsize=6, va='top',
+                color=MUTED)
         ax.set_xlim(0, 1.02)
         ax.set_ylim(0, 1.02)
         ax.set_aspect('equal')
-        ax.set_xlabel(f'{_label(labels, cols[a])}, MRR')
-        ax.set_ylabel(f'{_label(labels, cols[b])}, MRR')
-    for ax in axes[len(pairs):]:
-        ax.set_visible(False)
-    r_mean = mean_pairwise_corr(cross_model_corr(per))
-    fig.suptitle(f'Per-pair MRR agreement between models (mean pairwise r = {r_mean:.2f})',
-                 fontsize=12, fontweight='bold', color=TEXT_COLOR, y=1.02)
-    fig.tight_layout()
+        clean_ax(ax, xlabel=f'{_label(labels, cols[a])}, MRR',
+                 ylabel=f'{_label(labels, cols[b])}, MRR')
+    mean_pairwise_corr(cross_model_corr(per))
+    if len(pairs) > 1:
+        panel_letters(fig, axes)
     return fig
 
 
 def fig_coverage_fair(per):
-    """MRR by the number of graphs covering the pair: pooled over every KG arm
-    against covered arms only. A flat covered line under a rising pooled line
-    means the coverage slope is the empty-arm effect, not pair difficulty."""
-    d = per.dropna(subset=['n_kg_covered']).copy()
-    d['n_kg_covered'] = d['n_kg_covered'].astype(int)
-    d = d[d['n_kg_covered'] > 0]
-    pooled = d.groupby('n_kg_covered')['mrr'].mean()
-    covered = d.groupby('n_kg_covered')['mrr_covered'].mean()
+    """MRR by the number of graphs with evidence for the pair: pooled over
+    every KG arm against grounded arms only. A flat grounded line under a
+    rising pooled line means the slope is the empty-dossier effect, not pair
+    difficulty."""
+    d = per.dropna(subset=['n_kg_grounded']).copy()
+    d['n_kg_grounded'] = d['n_kg_grounded'].astype(int)
+    d = d[d['n_kg_grounded'] > 0]
+    pooled = d.groupby('n_kg_grounded')['mrr'].mean()
+    grounded = d.groupby('n_kg_grounded')['mrr_grounded'].mean()
     none = per['mrr_none'].mean()
-    xs = sorted(d['n_kg_covered'].unique())
-    fig, ax = plt.subplots(figsize=(6.4, 4.8))
-    ax.axhline(none, color=FAINT, ls=':', lw=1.2)
-    if xs:
-        ax.text(xs[-1] + 0.05, none, ' no-KG', va='center', fontsize=8.5, color=MUTED)
-    ax.plot(xs, [pooled.get(k, np.nan) for k in xs], '-o', color=C_POOLED, lw=1.8, ms=9,
-            mfc='white', mec=C_POOLED, mew=1.4, label='pooled (all KG arms)')
-    ax.plot(xs, [covered.get(k, np.nan) for k in xs], '-D', color=C_COVERED, lw=1.8, ms=9,
-            mfc='white', mec=C_COVERED, mew=1.4, label='covered arms only')
-    for k in xs:
-        if k in covered.index and not np.isnan(covered[k]):
-            ax.text(k, covered[k] + 0.03, f'{covered[k]:.2f}', ha='center', fontsize=9,
-                    color=C_COVERED, fontweight='bold')
-        if k in pooled.index:
-            ax.text(k, pooled[k] - 0.045, f'{pooled[k]:.2f}', ha='center', fontsize=9,
-                    color=MUTED, fontweight='bold')
+    xs = sorted(d['n_kg_grounded'].unique())
+    fig, ax = plt.subplots(figsize=fig_size(1, 1), constrained_layout=True)
+    ends = {}
+    for name, series, colour, marker, ls in [('Pooled, all KG arms', pooled, NEUTRAL, 'o', '-'),
+                                             ('Grounded arms only', grounded, INK, 'D', '-')]:
+        ys = [series.get(k, np.nan) for k in xs]
+        ax.plot(xs, ys, ls=ls, marker=marker, color=colour, lw=1, ms=3.5, mfc='white',
+                mec=colour, mew=0.75, label=name, zorder=3)
+        if xs:
+            ends[name] = (xs[-1], ys[-1], colour)
     ax.set_xticks(xs)
-    ax.set_xticklabels([f'{k} KG' + ('s' if k > 1 else '') for k in xs])
+    ax.set_xticklabels([f'{k} graph' + ('s' if k > 1 else '') for k in xs])
     if xs:
-        ax.set_xlim(xs[0] - 0.3, xs[-1] + 0.5)
+        ax.set_xlim(xs[0] - 0.3, xs[-1] + 0.3)
     ax.set_ylim(0, 1.0)
-    ax.set_xlabel('number of KGs covering the pair')
-    ax.set_ylabel('MRR on KG arms')
-    ax.legend(loc='lower right')
-    _title(ax, 'MRR by number of KGs covering the pair',
-           'pooled over every arm vs covered arms only; the gap is the empty-arm effect',
-           pad=26)
-    fig.tight_layout()
+    ref_line(ax, none, 'no KG')
+    clean_ax(ax, xlabel='Graphs with evidence for the pair', ylabel='Mean reciprocal rank on KG arms')
+    _end_labels_or_legend(ax, ends)
     return fig
 
 
@@ -578,63 +592,71 @@ def _odds_rows(df, kept_col, traits):
 
 def fig_bias_forest(df, kept_col, traits, title='Odds of being kept, by trait'):
     """Forest plot of the odds of being kept for every trait in ``traits``
-    ({label: boolean Series}), sorted by effect, log scale."""
+    ({label: boolean Series}), sorted by effect, log scale. A trait whose
+    interval excludes one is drawn in ink, the rest in grey. ``title`` is
+    accepted for the notebooks and not drawn: the caption carries it."""
     data = _odds_rows(df, kept_col, traits)
-    fig, ax = plt.subplots(figsize=(7.2, 0.55 * len(data) + 1.4))
-    ax.axvline(1, color='#999', lw=1.1)
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 0.18 * len(data) + 0.65), constrained_layout=True)
     for i, (label, orr, lo, hi, p) in enumerate(data):
         sig = p < 0.05
-        colour = NEG_COLOUR if (sig and orr < 1) else (KEPT_COLOUR if sig else NEUTRAL_COLOUR)
-        ax.plot([lo, hi], [i, i], color=colour, lw=2.2, solid_capstyle='round', zorder=2)
-        ax.scatter(orr, i, s=80, color=colour, zorder=3, edgecolor='white', lw=1.1)
-        ax.text(-0.02, i, label, transform=ax.get_yaxis_transform(), ha='right', va='center',
-                fontsize=9)
+        colour = INK if sig else NEUTRAL
+        ax.plot([lo, hi], [i, i], color=colour, lw=0.75, solid_capstyle='butt', zorder=2)
+        ax.plot([orr], [i], marker='o', ms=3.5, color=colour, mfc=colour if sig else 'white',
+                mec=colour, mew=0.75, zorder=3)
         star = '***' if p < .001 else '**' if p < .01 else '*' if p < .05 else 'n.s.'
-        ax.text(hi * 1.05, i, star, va='center', fontsize=8.5, color=colour,
-                fontweight='bold' if sig else 'normal')
+        ax.annotate(star, (hi, i), xytext=(3, 0), textcoords='offset points', va='center',
+                    ha='left', fontsize=6, color=colour)
     ax.set_xscale('log')
-    # Plain numbers on the log axis: an odds ratio reads as 0.5 or 2, not 2x10^0.
-    ax.xaxis.set_major_formatter(mticker.ScalarFormatter())
+    # Plain numbers on the log axis: an odds ratio reads as 0.5 or 2, not 2x10^0,
+    # and the doubling steps are fixed so a narrow range still gets ticks.
+    lo_x, hi_x = ax.get_xlim()
+    ax.set_xticks([t for t in (0.1, 0.25, 0.5, 1, 2, 4, 8, 16, 32) if lo_x <= t <= hi_x])
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _p: f'{v:g}'))
     ax.xaxis.set_minor_formatter(mticker.NullFormatter())
-    ax.set_yticks([])
+    ax.minorticks_off()
+    ax.set_yticks(range(len(data)))
+    ax.set_yticklabels([r[0] for r in data])
     ax.set_ylim(-0.7, len(data) - 0.3)
-    ax.set_xlabel('odds of being kept (95% CI, log scale)')
-    _bare(ax)
-    _title(ax, title, pad=12)
-    fig.tight_layout()
+    _vref(ax, 1, 'OR = 1')
+    clean_ax(ax, xlabel='Odds of being kept (95% CI)')
+    ax.tick_params(axis='y', length=0)
     return fig
 
 
 def fig_bias_distribution(df, kept_col, var, title=None):
     """Strip plot of one continuous covariate, kept above dropped, with a bar
-    at each median."""
+    at each median. ``title`` is accepted and not drawn."""
     kept = df[kept_col].astype(bool)
-    groups = [('kept', df[kept], KEPT_COLOUR), ('dropped', df[~kept], DROPPED_COLOUR)]
-    fig, ax = plt.subplots(figsize=(7.2, 2.8))
+    groups = [('Kept', df[kept], INK), ('Dropped', df[~kept], NEUTRAL)]
+    fig, ax = plt.subplots(figsize=(SINGLE_COL_W, 1.3), constrained_layout=True)
     rng = np.random.default_rng(3)
+    ticks, tick_labels = [], []
     for i, (label, sub, colour) in enumerate(groups):
         v = sub[var].dropna()
         y0 = 1 - i
+        ticks.append(y0)
+        tick_labels.append(f'{label} (n = {len(v)})')
         if len(v) == 0:
             continue
-        ax.scatter(v, y0 + rng.uniform(-0.16, 0.16, len(v)), s=26, color=colour, alpha=0.55,
-                   edgecolor='white', lw=0.3)
+        ax.scatter(v, y0 + rng.uniform(-0.18, 0.18, len(v)), s=8, color=colour, alpha=0.5,
+                   lw=0, zorder=2)
         med = v.median()
-        ax.plot([med, med], [y0 - 0.33, y0 + 0.33], color=colour, lw=3, solid_capstyle='round')
-        ax.text(v.min(), y0, f'  {label} (n={len(v)})', ha='left', va='center', fontsize=9,
-                color=colour, fontweight='bold')
-    ax.set_yticks([])
-    ax.set_ylim(-0.7, 1.7)
-    ax.set_xlabel(var)
-    _bare(ax, spines=('top', 'right', 'left'))
-    _title(ax, title or f'{var}: kept vs dropped', pad=10)
-    fig.tight_layout()
+        ax.plot([med, med], [y0 - 0.3, y0 + 0.3], color=colour, lw=1, solid_capstyle='butt',
+                zorder=3)
+    ax.set_yticks(ticks)
+    ax.set_yticklabels(tick_labels)
+    ax.set_ylim(-0.6, 1.6)
+    # Years are integers; a half-year tick would be a fiction of the locator.
+    ax.xaxis.set_major_locator(mticker.MaxNLocator(integer=True, nbins=8))
+    clean_ax(ax, xlabel=human_label(var))
+    ax.tick_params(axis='y', length=0)
     return fig
 
 
 def fig_bias_composition(df, kept_col, cat_vars, title='Composition of kept vs dropped'):
     """Diverging paired bars (dropped to the left, kept to the right) of the
-    within-group share of every level, one panel per categorical covariate."""
+    within-group share of every level, one panel per categorical covariate.
+    ``title`` is accepted and not drawn."""
     kept = df[kept_col].astype(bool)
     grp = np.where(kept, 'kept', 'dropped')
     tables = []
@@ -643,38 +665,127 @@ def fig_bias_composition(df, kept_col, cat_vars, title='Composition of kept vs d
         ct = ct.loc[ct.sum(axis=1).sort_values().index]
         tables.append((var, ct))
     n_max = max(len(ct) for _, ct in tables)
-    fig, axes = plt.subplots(1, len(tables), figsize=(3.3 * len(tables) + 0.6, 0.62 * n_max + 1.6),
-                             squeeze=False)
-    axes = axes[0]
+    fig, axes, ncol = facet_grid(len(tables), row_h=0.16 * n_max + 0.75)
     n_k, n_d = int(kept.sum()), int((~kept).sum())
+    # One x scale for every panel, so a bar's length means the same share in each.
+    shares = [ct[c] / max(ct[c].sum(), 1) * 100 for _, ct in tables for c in ('kept', 'dropped')]
+    mx = max([s.max() for s in shares if len(s)] + [1e-9])
     for ax, (var, ct) in zip(axes, tables):
-        k = ct['kept'] / max(ct['kept'].sum(), 1)
-        d = ct['dropped'] / max(ct['dropped'].sum(), 1)
+        k = ct['kept'] / max(ct['kept'].sum(), 1) * 100
+        d = ct['dropped'] / max(ct['dropped'].sum(), 1) * 100
         n = len(ct)
-        y = np.arange(n) + (n_max - n) / 2.0
-        ax.barh(y, -d.to_numpy(), color=DROPPED_COLOUR, height=0.58)
-        ax.barh(y, k.to_numpy(), color=KEPT_COLOUR, height=0.58)
-        ax.axvline(0, color='#bbb', lw=1.0)
-        mx = max(k.max(), d.max(), 1e-9)
+        # Panels share a y extent and hang from the top, so the largest
+        # level of every covariate sits on the same line across the figure.
+        y = np.arange(n) + (n_max - n)
+        ax.barh(y, -d.to_numpy(), color=NEUTRAL, height=BAR_W, zorder=2)
+        ax.barh(y, k.to_numpy(), color=INK, height=BAR_W, zorder=2)
+        ax.axvline(0, color=TEXT_COLOR, lw=0.5, zorder=3)
+        # A percentage label is about 12 pt wide; on a 55 mm panel spanning
+        # 2.3 times the widest bar it needs a quarter of that bar's length.
         for yi, cat in zip(y, ct.index):
-            ax.text(0, yi + 0.46, str(cat), ha='center', va='bottom', fontsize=9, color='#333')
-            if d[cat] > 0.012:
-                ax.text(-d[cat] - mx * 0.03, yi, f'{d[cat] * 100:.0f}%', ha='right',
-                        va='center', fontsize=7.8, color=DROPPED_COLOUR)
-            if k[cat] > 0.012:
-                ax.text(k[cat] + mx * 0.03, yi, f'{k[cat] * 100:.0f}%', ha='left', va='center',
-                        fontsize=7.8, color=KEPT_COLOUR)
-        ax.set_xlim(-mx * 1.32, mx * 1.32)
-        ax.set_ylim(-0.6, n_max - 0.3)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.grid(False)
-        for spine in ax.spines.values():
-            spine.set_visible(False)
-        ax.set_title(var, fontsize=10.5, fontweight='bold', pad=16)
-    fig.legend(handles=[Patch(color=DROPPED_COLOUR, label=f'dropped (n={n_d})'),
-                        Patch(color=KEPT_COLOUR, label=f'kept (n={n_k})')],
-               loc='upper center', ncol=2, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, 1.0))
-    fig.suptitle(title, fontsize=12, fontweight='bold', color=TEXT_COLOR, y=1.08)
-    fig.tight_layout()
+            if d[cat] > 0.25 * mx:
+                ax.text(-d[cat] / 2, yi, f'{d[cat]:.0f}%', ha='center', va='center',
+                        fontsize=6, color='white')
+            if k[cat] > 0.25 * mx:
+                ax.text(k[cat] / 2, yi, f'{k[cat]:.0f}%', ha='center', va='center',
+                        fontsize=6, color='white')
+        ax.set_xlim(-mx * 1.15, mx * 1.15)
+        ax.set_ylim(-0.6, n_max - 0.4)
+        ax.set_yticks(y)
+        ax.set_yticklabels([str(c) for c in ct.index])
+        ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _p: f'{abs(v):.0f}'))
+        clean_ax(ax, xlabel='Share of group (%)')
+        ax.tick_params(axis='y', length=0)
+        facet_title(ax, human_label(var))
+    fig.legend(handles=[Patch(color=NEUTRAL, label=f'Dropped (n = {n_d})'),
+                        Patch(color=INK, label=f'Kept (n = {n_k})')],
+               loc='outside lower center', ncol=2)
+    if len(tables) > 1:
+        panel_letters(fig, axes)
+    return fig
+
+
+# ───────────────────────── benchmark overview (G01) ─────────────────────────
+def fig_benchmark_overview(bench, content_dates, kgs):
+    """Three panels a reviewer asks for before any result: when the approvals
+    fall relative to each graph's content date, what each graph can evaluate,
+    and how many graphs can evaluate each pair.
+
+    ``bench`` is the benchmark frame from ``load_benchmark`` (needs
+    ``approval_date``, ``covered_<kg>``, ``leaked_<kg>``, ``grounded_<kg>``,
+    ``evaluable_<kg>`` and ``n_kg_grounded``); ``content_dates`` maps a graph to its content date
+    (``config/kg_snapshots.yaml``); ``kgs`` are the KG arms in KG_ORDER.
+    """
+    from biokgsuite.viz.style import KG_NAMES, KG_ORDER
+    kgs = [k for k in KG_ORDER if k in kgs]
+    fig, axes = plt.subplots(1, 3, figsize=fig_size(2, 1, row_h=2.0), constrained_layout=True,
+                             gridspec_kw={'width_ratios': [1.5, 1.0, 0.8]})
+    ax_t, ax_s, ax_n = axes
+
+    # a: approvals per quarter, with every graph's content date as a marker.
+    # The bars sit in the lower part of the panel; the date labels take the
+    # upper part in staggered rows, ordered by date, so a cluster of graphs
+    # built in the same year stays legible.
+    dates = pd.to_datetime(bench['approval_date'])
+    quarters = dates.dt.to_period('Q')
+    counts = quarters.value_counts().sort_index()
+    x = [p.start_time for p in counts.index]
+    ax_t.bar(x, counts.values, width=80, color=NEUTRAL, align='edge')
+    ymax = counts.max() * 1.55
+    shown = sorted(((k, pd.Timestamp(content_dates[k])) for k in KG_ORDER
+                    if content_dates.get(k) is not None), key=lambda t: t[1])
+    rows = 3
+    for i, (kg, d) in enumerate(shown):
+        colour = KG_PALETTE.get(kg, NEUTRAL)
+        ax_t.axvline(d, color=colour, lw=0.8, ls='--', zorder=1)
+        ax_t.annotate(KG_NAMES.get(kg, kg), xy=(d, ymax), xytext=(2, -1 - 7.5 * (i % rows)),
+                      textcoords='offset points', ha='left', va='top', fontsize=6,
+                      color=colour, annotation_clip=False)
+    lo = min(min(d for _, d in shown), dates.min()) - pd.Timedelta(days=200)
+    ax_t.set_xlim(lo, dates.max() + pd.Timedelta(days=150))
+    ax_t.set_ylim(0, ymax)
+    import matplotlib.dates as mdates
+    ax_t.xaxis.set_major_locator(mdates.YearLocator(2))
+    ax_t.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+    clean_ax(ax_t, xlabel='Approval date (by quarter)', ylabel='Approvals')
+
+    # b: what each graph can evaluate. Evaluable in the graph colour; covered
+    # but already carrying the edge (a leak) hatched; covered but with no
+    # gene or pathway neighbour to show (not grounded) outlined; not covered
+    # FAINT. The legend swatches are neutral because the colour belongs to
+    # the graph.
+    n = len(bench)
+    for i, kg in enumerate(kgs):
+        colour = KG_PALETTE.get(kg, NEUTRAL)
+        cov, ev = bench[f'covered_{kg}'], bench[f'evaluable_{kg}']
+        leaked = bench[f'leaked_{kg}'] if f'leaked_{kg}' in bench.columns else pd.Series(False, index=bench.index)
+        grounded = bench[f'grounded_{kg}'] if f'grounded_{kg}' in bench.columns else cov
+        n_ev = int(ev.sum())
+        n_leak = int((cov & ~ev & leaked).sum())
+        n_blank = int((cov & ~ev & ~leaked & ~grounded).sum())
+        n_miss = n - n_ev - n_leak - n_blank
+        ax_s.barh(i, n_ev, color=colour, height=0.6)
+        ax_s.barh(i, n_leak, left=n_ev, color='white', edgecolor=colour, hatch='////', linewidth=0.5, height=0.6)
+        ax_s.barh(i, n_blank, left=n_ev + n_leak, color='white', edgecolor=colour, linewidth=0.5, height=0.6)
+        ax_s.barh(i, n_miss, left=n_ev + n_leak + n_blank, color=FAINT, height=0.6)
+        ax_s.text(n + 2, i, f'{n_ev}', va='center', ha='left', fontsize=6, color=TEXT_COLOR)
+    ax_s.set_yticks(range(len(kgs)))
+    ax_s.set_yticklabels([KG_NAMES.get(k, k) for k in kgs])
+    ax_s.invert_yaxis()
+    ax_s.set_xlim(0, n * 1.16)
+    clean_ax(ax_s, xlabel='Pairs')
+    ax_s.legend(handles=[Patch(color=NEUTRAL, label='evaluable'),
+                         Patch(facecolor='white', edgecolor=NEUTRAL, hatch='////', linewidth=0.5,
+                               label='covered, edge already present'),
+                         Patch(facecolor='white', edgecolor=NEUTRAL, linewidth=0.5,
+                               label='covered, no evidence to show'),
+                         Patch(color=FAINT, label='not covered')],
+                loc='upper center', bbox_to_anchor=(0.5, -0.34), ncol=1, fontsize=6, frameon=False)
+
+    # c: how many graphs have evidence for each pair.
+    dist = bench['n_kg_grounded'].value_counts().reindex(range(len(kgs) + 1), fill_value=0)
+    ax_n.bar(dist.index, dist.values, width=0.6, color=NEUTRAL)
+    ax_n.set_xticks(range(len(kgs) + 1))
+    clean_ax(ax_n, xlabel='Graphs with evidence for the pair', ylabel='Pairs')
+    panel_letters(fig, axes)
     return fig

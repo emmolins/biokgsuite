@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-# PubChem CID -> ChEMBL crosswalk, from EBI UniChem.
+# PubChem CID -> ChEMBL and DrugBank -> ChEMBL crosswalks, from EBI UniChem.
 #
 # Why this is a separate script: Open Targets' drug crossReferences has no
-# PubChem source, so without this mapping any graph that keys drugs by PubChem
-# CID (OpenBioLink) resolves no drugs at all and is scored as holding none.
+# PubChem source, so without the first mapping any graph that keys drugs by
+# PubChem CID (OpenBioLink) resolves no drugs at all and is scored as holding
+# none. Its DrugBank source covers only about half of the approved molecules
+# (varenicline, insulin glargine and enoxaparin are among the missing), so
+# without the second mapping every DrugBank-keyed graph (PrimeKG, Hetionet,
+# DRKG, BioKG) is capped at whatever the xref table happens to hold.
 #
 # Run this from a normal terminal on a machine with unrestricted internet.
 # It will NOT work from the Claude session shells, which sit behind an egress
@@ -11,30 +15,32 @@
 #
 #   bash tools/fetch_unichem.sh
 #
-# UniChem source ids: 1 = ChEMBL, 22 = PubChem.
+# UniChem source ids: 1 = ChEMBL, 2 = DrugBank, 22 = PubChem.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT="$ROOT/data/crosswalks"
-URL="https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/src_id1/src1src22.txt.gz"
-
+BASE="https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/src_id1"
 mkdir -p "$OUT"
-echo "Fetching UniChem ChEMBL<->PubChem mapping"
-echo "  $URL"
-curl -fSL --retry 3 -o "$OUT/src1src22.txt.gz" "$URL"
 
-gunzip -c "$OUT/src1src22.txt.gz" > "$OUT/unichem_pubchem_chembl.tsv"
-rm -f "$OUT/src1src22.txt.gz"
+fetch () {           # fetch <src file> <output stem>
+  local url="$BASE/$1.gz" stem="$2"
+  echo "Fetching $url"
+  curl -fSL --retry 3 -o "$OUT/$1.gz" "$url"
+  gunzip -c "$OUT/$1.gz" > "$OUT/$stem.tsv"
+  rm -f "$OUT/$1.gz"
+  local n; n=$(wc -l < "$OUT/$stem.tsv" | tr -d ' ')
+  date -u +"retrieved_utc=%Y-%m-%dT%H:%M:%SZ" >  "$OUT/$stem.release.txt"
+  echo "source_url=$url"                       >> "$OUT/$stem.release.txt"
+  echo "rows=$n"                               >> "$OUT/$stem.release.txt"
+  if command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "$OUT/$stem.tsv"             >> "$OUT/$stem.release.txt"
+  fi
+  echo "Wrote $OUT/$stem.tsv  ($n rows); release record $OUT/$stem.release.txt"
+}
 
-N=$(wc -l < "$OUT/unichem_pubchem_chembl.tsv" | tr -d ' ')
-date -u +"retrieved_utc=%Y-%m-%dT%H:%M:%SZ" >  "$OUT/unichem_pubchem_chembl.release.txt"
-echo "source_url=$URL"                        >> "$OUT/unichem_pubchem_chembl.release.txt"
-echo "rows=$N"                                >> "$OUT/unichem_pubchem_chembl.release.txt"
-if command -v shasum >/dev/null 2>&1; then
-  shasum -a 256 "$OUT/unichem_pubchem_chembl.tsv" >> "$OUT/unichem_pubchem_chembl.release.txt"
-fi
+fetch src1src22.txt unichem_pubchem_chembl
+fetch src1src2.txt  unichem_drugbank_chembl
 
-echo "Wrote $OUT/unichem_pubchem_chembl.tsv  ($N rows)"
-echo "Release record: $OUT/unichem_pubchem_chembl.release.txt"
 echo
 echo "Then re-run:  python tools/provenance.py"

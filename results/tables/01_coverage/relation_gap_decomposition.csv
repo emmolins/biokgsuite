@@ -1,11 +1,17 @@
 KG,Relation,Missing,Both present (edge absent),One entity absent,Both entities absent
-hetionet,drug_gene,5633,966,4664,3
-biokg,drug_gene,4911,1529,3382,0
-biokg,drug_pathway,22019,9154,11201,1664
+primekg,drug_gene,3988,3123,865,0
+hetionet,drug_gene,4428,1321,3104,3
+biokg,drug_gene,3332,2455,877,0
+primekg,drug_pathway,22019,16495,5094,430
+biokg,drug_pathway,22019,15418,6030,571
+primekg,disease_gene,8937,7235,1699,3
 hetionet,disease_gene,18421,456,17736,229
 biokg,disease_gene,13557,4639,8648,270
+primekg,disease_pathway,72701,56528,15199,974
 biokg,disease_pathway,72701,32174,34068,6459
+primekg,disease_disease,20216,5096,4369,10751
 hetionet,disease_disease,37661,1,923,36737
 biokg,disease_disease,37170,3136,13548,20486
-hetionet,drug_disease,7943,249,3363,4331
-biokg,drug_disease,7046,2292,4020,734
+primekg,drug_disease,5926,4526,1395,5
+hetionet,drug_disease,7754,362,4111,3281
+biokg,drug_disease,6321,3719,2383,219

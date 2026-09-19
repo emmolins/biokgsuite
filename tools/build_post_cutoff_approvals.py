@@ -46,6 +46,21 @@ Per graph (check 1 to 3 from the design note), each applied to the S3 pairs:
   evaluable_strict = evaluable and repurposing
   common support   = evaluable(_strict) in every graph of the panel
 
+  G   grounded       the drug node has at least one neighbour a grounding
+                     dossier would render (a gene or pathway, ADME relations
+                     excluded where the graph labels them), counted by the
+                     dossier code itself (biokgsuite.grounding.KGDossiers).
+                     A drug can clear the degree floor on drug-drug or
+                     side-effect edges alone and still reach a language model
+                     with no evidence line. Computed only for the graphs in
+                     analysis_params.grounding.kgs (the dossier index is the
+                     whole graph's adjacency, which the other views do not
+                     need); elsewhere the column is empty. Recorded per pair
+                     and as a funnel row; folded into evaluability by the
+                     grounding experiment only (load_benchmark), never by
+                     notebook 07, whose link-prediction scorer needs the
+                     node, not the evidence text.
+
 Check 4 (evaluation design: one scorer, rank-based metrics, clustered
 bootstrap) lives in the notebook; this script only produces the pair table and
 the per-graph status the notebook reads.
@@ -55,15 +70,16 @@ OUTPUTS
   data/gold_standards/post_cutoff_approvals/post_cutoff_approvals.csv       S3 pairs in the loader
         schema (post_cutoff_approvals.py) plus provenance columns
   data/gold_standards/post_cutoff_approvals/post_cutoff_pair_status.csv         pair x graph: covered,
-        date_ok, leaked, related_to_prior, evaluable, evaluable_strict
+        date_ok, leaked, related_to_prior, evaluable, evaluable_strict, grounded (with drug_n_mech,
+        disease_n_mech)
   data/gold_standards/post_cutoff_approvals/post_cutoff_funnel.csv              stage counts (global
         and per graph) with the drop reasons; the figure is drawn from this
   data/gold_standards/post_cutoff_approvals/post_cutoff_dropped.csv             every source row that
         left the funnel, with the stage and reason
   data/gold_standards/post_cutoff_approvals/PROVENANCE.txt
   results/checkpoints/07_kg_views/<kg>_{nodes,edges}.csv  compact per-graph
-        views (drug/disease nodes with degree, drug-disease edges) so the checks
-        rerun without reloading the graphs
+        views (drug/disease nodes with degree and dossier neighbour count,
+        drug-disease edges) so the checks rerun without reloading the graphs
   results/figures/07_generalization/07h_post_cutoff_funnel.{pdf,png}
 
 USAGE
@@ -368,6 +384,7 @@ def add_disease_xrefs(pairs: pd.DataFrame, br: Bridges) -> pd.DataFrame:
 def extract_view(kg_name: str, config: dict, out_dir: Path):
     """Load one graph with the biokgsuite loader and write the compact view the checks need."""
     from biokgsuite.io import load_kg
+    from biokgsuite.grounding import KGDossiers, load_entrez_to_symbol
     cfg = config["knowledge_graphs"][kg_name]
     kg, nodes = load_kg(kg_name, config)
     dt = tuple(cfg["entity_types"]["Drug"]) if not isinstance(cfg["entity_types"]["Drug"], str) else (cfg["entity_types"]["Drug"],)
@@ -378,6 +395,20 @@ def extract_view(kg_name: str, config: dict, out_dir: Path):
     sub = nodes[nodes["type"].isin(dt + dst)].copy()
     sub["degree"] = sub["idx"].map(deg).fillna(0).astype(int)
     sub["role"] = ["drug" if t in dt else "disease" for t in sub["type"]]
+    # How many evidence lines a grounding dossier could render for the node,
+    # by the dossier code's own rule (gene and pathway neighbours for a drug,
+    # ADME relations excluded where labelled; gene, pathway and related
+    # disease for a disease). The cap does not apply: this asks whether there
+    # is anything to show, not how much is shown. Only the grounding arms
+    # need it, and only they get the whole-graph adjacency built here.
+    g = config["analysis_params"]["grounding"]
+    if kg_name in g["kgs"]:
+        dossiers = KGDossiers(kg_name, config, ROOT, cap=g["cap"], anonymize_genes=g["anonymize_genes"],
+                              bridge_mode=g["bridge_mode"], entrez_to_symbol=load_entrez_to_symbol(ROOT), loaded=(kg, nodes))
+        sub["n_mech"] = [dossiers.n_mechanistic(int(i), role) for i, role in zip(sub["idx"], sub["role"])]
+        del dossiers
+    else:
+        sub["n_mech"] = pd.NA
     # Every edge between a drug node and a disease node, whatever its relation: any direct edge is a
     # leak for the prospective test, while only the indication relations count as prior indications.
     ntype = dict(zip(nodes["idx"], nodes["type"]))
@@ -389,19 +420,25 @@ def extract_view(kg_name: str, config: dict, out_dir: Path):
                           "relation": pd.concat([kg.loc[fwd, "relation"], kg.loc[rev, "relation"]])}).drop_duplicates()
     edges["is_indication"] = edges["relation"].isin(rels)
     out_dir.mkdir(parents=True, exist_ok=True)
-    sub[["idx", "id", "type", "name", "role", "degree"] + (["uid"] if "uid" in sub.columns else [])].to_csv(out_dir / f"{kg_name}_nodes.csv", index=False)
+    sub[["idx", "id", "type", "name", "role", "degree", "n_mech"] + (["uid"] if "uid" in sub.columns else [])].to_csv(out_dir / f"{kg_name}_nodes.csv", index=False)
     edges.to_csv(out_dir / f"{kg_name}_edges.csv", index=False)
     meta = dict(kg=kg_name, extracted_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 n_nodes_total=int(len(nodes)), n_edges_total=int(len(kg)), n_drug_nodes=int((sub["role"] == "drug").sum()),
                 n_disease_nodes=int((sub["role"] == "disease").sum()), n_drug_disease_edges=int(len(edges)), n_indication_edges=int(edges["is_indication"].sum()),
+                n_drug_nodes_grounded=(int(((sub["role"] == "drug") & (sub["n_mech"].fillna(0) > 0)).sum())
+                                       if kg_name in g["kgs"] else None),
                 indication_relations=rels, drug_types=list(dt), disease_types=list(dst))
     (out_dir / f"{kg_name}_meta.json").write_text(json.dumps(meta, indent=1))
-    print(f"{kg_name}: {meta['n_drug_nodes']:,} drug nodes, {meta['n_disease_nodes']:,} disease nodes, "
+    grounded = (f" ({meta['n_drug_nodes_grounded']:,} with a renderable gene or pathway neighbour)"
+                if meta["n_drug_nodes_grounded"] is not None else "")
+    print(f"{kg_name}: {meta['n_drug_nodes']:,} drug nodes{grounded}, {meta['n_disease_nodes']:,} disease nodes, "
           f"{meta['n_drug_disease_edges']:,} drug-disease edges -> {out_dir}")
 
 
 def load_view(kg_name: str, view_dir: Path, config: dict):
     nodes = pd.read_csv(view_dir / f"{kg_name}_nodes.csv", dtype={"id": str, "name": str})
+    if "n_mech" not in nodes.columns:
+        nodes["n_mech"] = float("nan")      # a view from before the grounded check, or a graph that is not a grounding arm
     edges = pd.read_csv(view_dir / f"{kg_name}_edges.csv")
     meta = json.loads((view_dir / f"{kg_name}_meta.json").read_text())
     cfg = config["knowledge_graphs"][kg_name]
@@ -431,12 +468,13 @@ def load_view(kg_name: str, view_dir: Path, config: dict):
         for p in parts:
             dis_idx.setdefault(norm_curie(p), i)
     degree = dict(zip(nodes["idx"], nodes["degree"]))
+    n_mech = {i: (None if pd.isna(v) else int(v)) for i, v in zip(nodes["idx"], nodes["n_mech"])}
     node_curie = {i: norm_curie(nid) for i, nid in zip(nodes["idx"], nodes["id"])}
     edge_set = set(zip(edges["drug_idx"], edges["disease_idx"]))          # any relation: leakage
     prior = defaultdict(set)                                              # indication relations only
     for d, z in zip(edges.loc[edges["is_indication"], "drug_idx"], edges.loc[edges["is_indication"], "disease_idx"]):
         prior[d].add(z)
-    return dict(meta=meta, drug_idx=drug_idx, dis_idx=dis_idx, degree=degree, node_curie=node_curie,
+    return dict(meta=meta, drug_idx=drug_idx, dis_idx=dis_idx, degree=degree, n_mech=n_mech, node_curie=node_curie,
                 edge_set=edge_set, prior=prior, n_drugs=len(drugs), n_diseases=int((nodes["role"] == "disease").sum()))
 
 
@@ -479,14 +517,22 @@ def check_pairs(pairs: pd.DataFrame, kg_name: str, view: dict, br: Bridges, snap
                     related, nearest = True, pm
                     break
         evaluable = bool(covered and not leaked and date_ok == "True")
+        # None when the view carries no neighbour count (not a grounding arm, or extracted before the check)
+        drug_n_mech = view["n_mech"].get(d_idx) if drug_present else 0
+        dz = [view["n_mech"].get(zi) for zi in z_nodes]
+        disease_n_mech = max((v for v in dz if v is not None), default=(0 if z_nodes and None not in dz else None))
+        grounded = None if (covered and drug_n_mech is None) else bool(covered and drug_n_mech > 0)
         rows.append(dict(kg=kg_name, drugbank_id=r.drugbank_id, mondo_id=r.mondo_id,
                          drug_present=drug_present, drug_degree=int(view["degree"].get(d_idx, 0)) if drug_present else 0,
                          disease_present=z_idx is not None, disease_resolved_by=how, covered=covered,
                          date_ok=date_ok, leaked=leaked, n_prior_indications=n_prior,
                          related_to_prior=related, nearest_prior_mondo=nearest,
-                         evaluable=evaluable, evaluable_strict=bool(evaluable and not related)))
+                         evaluable=evaluable, evaluable_strict=bool(evaluable and not related),
+                         drug_n_mech=drug_n_mech, disease_n_mech=disease_n_mech, grounded=grounded))
     st = pd.DataFrame(rows)
     n = len(st)
+    known = st.grounded.notna()
+    grd = st.grounded.map(lambda v: bool(v) if v is not None else False)
     funnel = [
         dict(scope=kg_name, stage="S3", label="unique pairs", n=n, dropped=0, reason=""),
         dict(scope=kg_name, stage="C2", label="covered (drug and disease nodes present)", n=int(st.covered.sum()),
@@ -498,73 +544,101 @@ def check_pairs(pairs: pd.DataFrame, kg_name: str, view: dict, br: Bridges, snap
         dict(scope=kg_name, stage="C3", label=f"repurposing (> {max_hops} is_a steps from every prior indication)", n=int(st.evaluable_strict.sum()),
              dropped=int(st.evaluable.sum() - st.evaluable_strict.sum()),
              reason=f"related to a disease the graph already links the drug to (line extension) {int((st.evaluable & st.related_to_prior).sum())}"),
+        # Grounding experiment only (the notebook 07 figure reindexes to S3, C2, C1, C3 and ignores this
+        # row): of the prospective pairs, those whose drug node has a neighbour a dossier would render.
+        # On record so "the graph lacks the pair" and "the graph holds the pair but has nothing to say
+        # about it" are counted apart.
+        dict(scope=kg_name, stage="G", label="grounded (drug has a renderable gene or pathway neighbour)",
+             n=int((st.evaluable & grd).sum()) if known.all() else None,
+             dropped=int((st.evaluable & ~grd).sum()) if known.all() else None,
+             reason=(f"covered but no gene or pathway neighbour {int((st.covered & ~grd).sum())}, "
+                     f"of which prospective {int((st.evaluable & ~grd).sum())}") if known.all()
+                    else "not computed (graph is not a grounding arm, or the view predates the check)"),
     ]
     return st, funnel
 
 
 # --------------------------------------------------------------------------- figure
 def draw_funnel(funnel: pd.DataFrame, out_stem: Path, kg_order: list, version: str):
+    """Two panels: the global stages as a box funnel (a) and the per-graph checks as grouped bars (b).
+
+    Drawn in the house style (FIGURE_STYLE_SPEC.md): 183 mm wide, 6 to 7 pt text, panel letters, graph
+    colours from KG_PALETTE with the published graph names, and no title (the caption carries it).
+    """
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
-    try:
-        from biokgsuite.viz.style import KG_PALETTE, setup_style
-        setup_style()
-    except Exception:  # noqa: BLE001
-        KG_PALETTE = {}
-    INK, MUTED, RULE, SURF, DROP = "#1a1a1a", "#5b5b5b", "#dcdcd8", "#fcfcfb", "#c0392b"
+    from biokgsuite.viz.style import (DOUBLE_COL_W, KG_NAMES, KG_ORDER, KG_PALETTE, MUTED, NEUTRAL, TEXT_COLOR,
+                                      clean_ax, facet_title, panel_label, setup_style)
+    setup_style()
+    FILL, FINAL_FILL = "#F2F2F2", "#EAF3FA"   # one neutral fill for every box; the final set is tinted, not framed
     g = funnel[funnel.scope == "global"].reset_index(drop=True)
-    kgs = [k for k in kg_order if k in set(funnel.scope)]
-    fig_w = 7.2 if kgs else 4.2
-    fig, axes = plt.subplots(1, 2 if kgs else 1, figsize=(fig_w, 4.6), gridspec_kw=dict(width_ratios=[1.15, 1]) if kgs else None)
-    ax = axes[0] if kgs else axes
+    present = set(funnel.scope)
+    kgs = [k for k in KG_ORDER if k in present] + [k for k in kg_order if k in present and k not in KG_ORDER]
+    fig_w = DOUBLE_COL_W if kgs else DOUBLE_COL_W / 2
+    fig, axes = plt.subplots(1, 2 if kgs else 1, figsize=(fig_w, 3.3), squeeze=False,
+                             gridspec_kw=dict(width_ratios=[1.15, 1]) if kgs else None, constrained_layout=True)
+    axes = axes[0]
+    ax = axes[0]
     ax.set_xlim(0, 10); ax.set_ylim(0, 10.6); ax.axis("off")
-    top, h, gap = 9.9, 1.35, 0.95
+    top, h, gap = 10.5, 1.5, 1.15
     for i, r in g.iterrows():
         y = top - i * (h + gap)
-        hero = i == len(g) - 1
-        ax.add_patch(FancyBboxPatch((0, y - h), 6.4, h, boxstyle="round,pad=0.02,rounding_size=0.06",
-                                    linewidth=1.8 if hero else 1.0, edgecolor=INK if hero else RULE,
-                                    facecolor="#f4f4f1" if hero else SURF, zorder=2))
-        ax.text(0.3, y - h / 2, f"{r.n:,}", fontsize=14 if hero else 12.5, fontweight="bold", color=INK, va="center", zorder=3)
-        ax.text(2.25, y - 0.45, _wrap(r.label, 34), fontsize=7.2, color=INK, va="center", zorder=3, linespacing=1.1)
-        ax.text(2.25, y - 1.02, r.stage, fontsize=6.3, color=MUTED, va="center", zorder=3)
+        final = i == len(g) - 1
+        ax.add_patch(FancyBboxPatch((0, y - h), 6.8, h, boxstyle="round,pad=0.02,rounding_size=0.06",
+                                    linewidth=0.5, edgecolor=TEXT_COLOR, facecolor=FINAL_FILL if final else FILL, zorder=2))
+        # Count and stage code stacked at the left; the label has the rest of the box and may take two lines.
+        ax.text(0.3, y - h / 2 + 0.3, f"{r.n:,}", fontsize=7, color=TEXT_COLOR, va="center", zorder=3)
+        ax.text(0.3, y - h / 2 - 0.35, r.stage, fontsize=6, color=MUTED, va="center", zorder=3)
+        label = str(r.label)[:1].upper() + str(r.label)[1:]
+        ax.text(1.7, y - h / 2, _wrap(label, 44), fontsize=7, color=TEXT_COLOR, va="center", zorder=3, linespacing=1.1)
         if i < len(g) - 1:
             nxt = g.iloc[i + 1]
-            ax.add_patch(FancyArrowPatch((0.9, y - h - 0.05), (0.9, y - h - gap + 0.08), arrowstyle="-|>", mutation_scale=9, color=MUTED, lw=0.9, zorder=3))
-            ax.text(1.6, y - h - gap / 2 + 0.05, f"−{int(nxt.dropped):,}", fontsize=8, fontweight="bold", color=DROP, va="center")
-            ax.text(2.7, y - h - gap / 2 + 0.05, _wrap(nxt.reason, 46), fontsize=5.9, color=MUTED, va="center", linespacing=1.15)
-    ax.text(0, 10.45, "a  Global stages (independent of any graph)", fontsize=8.5, fontweight="bold", color=INK, va="center")
+            ax.add_patch(FancyArrowPatch((0.6, y - h - 0.05), (0.6, y - h - gap + 0.1), arrowstyle="-|>",
+                                         mutation_scale=6, color=NEUTRAL, lw=0.6, zorder=3))
+            ax.text(1.0, y - h - gap / 2 + 0.02, f"−{int(nxt.dropped):,}", fontsize=7, color=TEXT_COLOR, va="center")
+            ax.text(2.1, y - h - gap / 2 + 0.02, _wrap(nxt.reason, 66), fontsize=6, color=MUTED, va="center", linespacing=1.15)
+    facet_title(ax, "Global stages")
+    footer = ""
     if kgs:
         ax2 = axes[1]
         stages = ["S3", "C2", "C1", "C3"]
-        labels = ["unique\npairs", "covered\n(C2)", "prospective\n(C1)", "repurposing\n(C3)"]
+        labels = ["Unique\npairs", "Covered\n(C2)", "Prospective\n(C1)", "Repurposing\n(C3)"]
         x = range(len(stages))
-        width = 0.8 / max(len(kgs), 1)
+        width = 0.6 / max(len(kgs), 1)
+        # A count on every bar only when the panel is sparse enough to read them (two graphs, eight bars).
+        show_values = len(kgs) * len(stages) <= 8
         for j, k in enumerate(kgs):
             sub = funnel[funnel.scope == k].set_index("stage").reindex(stages)
-            col = KG_PALETTE.get(k, "#888888")
-            bars = ax2.bar([xi + (j - (len(kgs) - 1) / 2) * width for xi in x], sub["n"].fillna(0), width=width * 0.92, color=col, label=k, zorder=2)
-            for b, v in zip(bars, sub["n"].fillna(0)):
-                ax2.text(b.get_x() + b.get_width() / 2, b.get_height() + 1, f"{int(v)}", ha="center", va="bottom", fontsize=6.3, color=INK)
-        ax2.set_xticks(list(x)); ax2.set_xticklabels(labels, fontsize=7)
-        ax2.set_ylabel("pairs", fontsize=8)
-        ax2.tick_params(axis="y", labelsize=7)
-        for s in ("top", "right"):
-            ax2.spines[s].set_visible(False)
-        ax2.legend(frameon=False, fontsize=7, loc="upper right")
-        ax2.set_title("b  Per-graph checks, applied to the S3 pairs", fontsize=8.5, fontweight="bold", color=INK, loc="left")
-        ax2.grid(False)
+            col = KG_PALETTE.get(k, NEUTRAL)
+            bars = ax2.bar([xi + (j - (len(kgs) - 1) / 2) * width for xi in x], sub["n"].fillna(0), width=width,
+                           color=col, label=KG_NAMES.get(k, k), zorder=2)
+            if show_values:
+                for b, v in zip(bars, sub["n"].fillna(0)):
+                    ax2.text(b.get_x() + b.get_width() / 2, b.get_height() + 1, f"{int(v)}", ha="center", va="bottom",
+                             fontsize=6, color=TEXT_COLOR)
+        ax2.set_xticks(list(x)); ax2.set_xticklabels(labels)
+        ax2.set_xlim(-0.5, len(stages) - 0.5)
+        ax2.set_ylim(0, ax2.get_ylim()[1] * (1.06 if show_values else 1.0))
+        clean_ax(ax2, ylabel="Pairs")
+        facet_title(ax2, "Per-graph checks on the S3 pairs")
+        # Every graph keeps every S3 pair, so the tallest group is at the left and the top right is free.
+        ax2.legend(loc="upper right", ncol=1 if len(kgs) <= 3 else 2)
         cs = funnel[funnel.scope == "common_support"]
         if len(cs):
-            txt = "; ".join(f"{r.label}: {r.n}" for r in cs.itertuples())
-            ax2.text(0, -0.2, _wrap("common support over " + ", ".join(kgs) + ": " + txt, 60), transform=ax2.transAxes, fontsize=6.3, color=MUTED, va="top")
-    fig.text(0.01, 0.01, f"post-cutoff approval set {version}; counts re-derived by tools/build_post_cutoff_approvals.py", fontsize=6, color=MUTED)
-    fig.tight_layout()
+            counts = {r.label: int(r.n) for r in cs.itertuples()}
+            ev = counts.get("evaluable in every graph"); st = counts.get("strict in every graph")
+            footer = f"Pairs evaluable in all {len(kgs)} graphs: {ev}" + (f" (strict rule: {st})" if st is not None else "")
+        for a, letter in zip(axes, "ab"):
+            panel_label(a, letter, x=-0.02 if a is ax else -0.2)
+    # Only the common-support count goes under the panels; the set version and
+    # the script that derived the counts are in PROVENANCE.txt and the caption.
+    if footer:
+        fig.supxlabel(_wrap(footer, 150), fontsize=6, color=MUTED, x=0.0, ha="left", linespacing=1.2)
     out_stem.parent.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
-        fig.savefig(out_stem.with_suffix("." + ext), dpi=300, bbox_inches="tight")
+        fig.savefig(out_stem.with_suffix("." + ext), dpi=600, bbox_inches="tight")
     plt.close(fig)
     print("figure ->", out_stem.with_suffix(".pdf"))
 
@@ -594,10 +668,10 @@ def main():
     a = ap.parse_args()
 
     from biokgsuite.io import load_config
-    config = load_config(ROOT)
+    config = load_config(ROOT, trial_subset=False)   # graphs are named on the command line, not by the trial file
     snaps = yaml.safe_load((ROOT / "config/kg_snapshots.yaml").read_text())["snapshots"]
     if a.max_hops is None:
-        a.max_hops = int(config["analysis_params"].get("prospective_max_hops", MAX_HOPS))
+        a.max_hops = int(config["analysis_params"]["prospective_max_hops"])   # no silent default
 
     if a.extract_views:
         for k in a.extract_views:

@@ -57,6 +57,27 @@ Unresolvable identifiers are excluded from both denominators rather than
 counted as wrong. That is a gap in our crosswalks, which nb01 reports as
 resolvability, not a mislabelling by the curator.
 
+### Bare numbers
+
+Check 1 reads the shape of an identifier, and a bare number has almost none:
+`8150` fits MONDO, Entrez, GO, UBERON and HPO alike. PrimeKG writes five of
+its node types that way (its `x_source` column says which registry each is:
+MONDO for diseases, NCBI for genes, GO, UBERON, HPO), Hetionet and DRKG write
+genes as `Gene::1956`, and the MATRIX loader emits bare MONDO and Entrez
+numbers after bridging. `config/id_schemes.yaml` therefore declares the bare
+shape under every type that a graph writes it for, marked ambiguous, so the
+declared type decides how the number is read, and the reading is then checked
+against the registry rather than assumed. `tools/audit_identifiers.py`
+reports, per graph and declared type, every identifier shape and the share
+each registry confirms. On PrimeKG the bare numbers confirm at 94.6%
+(MONDO), 98.8% (Entrez), 84.5%, 90.0% and 98.9% (GO biological process,
+molecular function, cellular component), 99.8% (UBERON) and 100% (HPO). The
+shortfall is retired terms: PrimeKG was built on 2022 releases, and a term
+retired since resolves to its `replaced_by` successor when one is named and
+is otherwise unconfirmed. Before the bare shapes were declared, every one of
+those nodes was judged a mislabelled gene and 47% of PrimeKG's edges were
+counted as type violations, which put its annotation accuracy at 0.76.
+
 ### Live API spot-check
 
 Removed from the notebook. It hit eight external services, cached transient

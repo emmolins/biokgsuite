@@ -173,7 +173,6 @@ def load_post_cutoff_approvals(
         if strict:
             raise ValueError(msg)
         df = df.drop(_no_id.index)
-    _only_name = int(df[DISEASE_ID_COLS].notna().sum(axis=1).eq(0).sum())
     rep.n_with_doid = int(df.doid.notna().sum()) if "doid" in df else 0
     rep.n_mondo_only = int((df.doid.isna() & df.mondo_id.notna()).sum())
 

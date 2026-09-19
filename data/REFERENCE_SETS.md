@@ -20,33 +20,80 @@ drug-target standards off DrugBank for exactly this reason.
 
 | Entity | Rule | Source | Release | Independent? | In score? |
 |---|---|---|---|---|---|
-| **Drug** | approved drugs only | OT `drug_molecule`, `maximumClinicalStage == 'APPROVAL'` | 26.06 | **Yes** — ChEMBL-derived | scored |
-| **Disease** | all diseases, incl. undrugged | MONDO, non-obsolete, non-grouping | v2026-08-04 | **Yes** | scored |
-| **Gene/Protein** | targets of the approved drug set | Open Targets `drug_mechanism_of_action` → `target` | 26.06 | **Yes** — ChEMBL-derived | scored |
-| **Pathway** | Reactome pathways containing those targets | OT `target.pathways` (no separate Reactome download needed) | 26.06 | **Yes** | *reported, not scored* |
+| **Drug** | approved therapeutics, one row per active molecule: `maximumClinicalStage == 'APPROVAL'`, with at least one APPROVAL-stage indication on the molecule or its ChEMBL parent, not a vaccine component, collapsed to the ChEMBL parent | OT `drug_molecule` + `clinical_indication` | 26.06 | **Yes**, ChEMBL-derived | scored |
+| **Disease** | every human disease, incl. undrugged: MONDO non-obsolete, non-grouping, descendant of `MONDO:0700096` (human disease or disorder) | MONDO `mondo.obo`, `is_a` only | v2026-08-04 | **Yes** | scored |
+| **Gene/Protein** | the genes the task touches: targets of the approved drugs, plus genes with curated disease evidence (relation #3) | OT `drug_mechanism_of_action` + the seven `evidence_*` datasets | 26.06 | **Yes** | scored |
+| **Pathway** | Reactome pathways containing any gene of that set | OT `target.pathways` (no separate Reactome download needed) | 26.06 | **Yes** | *reported, not scored* |
+
+Sizes on 26.06 and MONDO v2026-08-04: 3,793 drugs (from 5,485 approved
+molecule rows), 22,276 diseases, 6,210 genes (1,051 targets and 5,775 disease
+genes), 2,217 pathways. `data/reference_sets/MANIFEST.json` carries the rule
+and the count for every set, written by the builder.
 
 Disease is stratified, and the strata are the interesting result:
 
 | Stratum | n | from |
 |---|---|---|
-| all (the denominator) | 31,147 | MONDO non-obsolete, non-grouping |
-| rare-tagged | 15,656 | MONDO `subset: rare` |
-| with >=1 approved indication | — | OT `clinical_indication` |
-| **no known indication** | — | complement; the repurposing frontier |
+| all (the denominator) | 22,276 | MONDO human disease, non-obsolete, non-grouping |
+| rare-tagged | 15,634 | MONDO `subset: rare` |
+| with >=1 approved indication | 928 | OT `clinical_indication`, APPROVAL stage |
+| **no known indication** | 21,348 | complement; the repurposing frontier |
 
-On the previous (DOID-keyed) data these were 643 drugged vs 29,583 undrugged,
-so ~95% of the disease space has no approved drug. Recompute on 26.06.
+So 95.8% of the human disease space has no approved drug, and 15,219 of the
+undrugged diseases are rare-tagged.
+
+### Why each drug rule is there
+
+An APPROVAL-stage molecule with no indication record is, in Open Targets,
+almost always a diagnostic or an excipient (technetium imaging agents, soybean
+oil, polyethylene glycol, silver): 820 of the 5,485 rows. A repurposing
+candidate is a therapeutic with a known use, so the rule asks for one. Vaccine
+components (55) are excluded because the post-cutoff approval set excludes
+vaccines, and one rule should decide what a drug is in both parts of the
+paper. The parent collapse makes the unit the active molecule: ChEMBL gives
+doxazosin and doxazosin mesylate separate ids, DrugBank gives them one, and
+counting both in a denominator a DrugBank-keyed graph can only ever match once
+would understate every such graph. The resolver expands a graph's drug to its
+ChEMBL family for the same reason, on the other side of the intersection.
+
+### Why the disease rule is `is_a` under human disease
+
+MONDO v2026-08 carries a veterinary branch (`MONDO:0005583` non-human animal
+disease: "wry nose, giraffe", "bullous pemphigoid, pig", 8,319 live terms), 491
+OMIM susceptibility loci ("psoriasis 4, susceptibility to"), 41 disease
+characteristics ("idiopathic", "iatrogenic") and 18 injuries, all non-obsolete
+and non-grouping. None is a target for drug repurposing. Walking `is_a` from
+`MONDO:0700096` keeps the 22,276 human diseases and drops the 8,871 others.
+The walk uses the asserted `is_a` edges only: the reasoned hierarchy in
+`data/gold_standards/bridges/mondo_hierarchy.csv` (built for notebook 07's
+therapeutic-area classifier) includes logical-definition edges that place the
+animal branch under human disease, and is not used here.
+
+### Why the gene set is the union, and why it still saturates
+
+Targets of approved drugs alone (1,051 genes) are held by every gene-centric
+graph (PrimeKG 99.8%, BioKG 100%), so a third of entity coverage would be a
+constant. Adding the genes with curated disease evidence gives 6,210, the set
+the task actually touches. It still saturates for graphs that ingest the human
+gene set (PrimeKG 99.7%, BioKG 96.0%); that is a property of the graphs, not
+of the set, and Methods should say that entity coverage of genes separates
+graphs that carry genes from those that do not, while relation coverage
+(disease-gene: PrimeKG 53%, BioKG 28%, Hetionet 2%) is where the signal is.
 
 ### What changed, and why
-- **Drug** was DrugBank approved **+ investigational** (10,909). Two problems:
-  investigational drugs are not repurposing candidates, and DrugBank is
-  ingested by all six graphs. Now approved-only and ChEMBL-derived.
-- **Disease** was DOID (11,932). DOID is reachable from only 35% of Orphanet
-  and 52% of OMIM/UMLS, which silently penalised graphs that do not speak DOID
-  and capped rare-disease measurement. MONDO has no such ceiling and is already
-  the namespace of the relation gold.
-- **Gene** was the whole UniProt human proteome — not a task-derived set.
-- **Pathway** was all of Reactome — likewise.
+- **Drug** was DrugBank approved **+ investigational** (10,909), then every
+  approved Open Targets molecule (5,485). Investigational drugs are not
+  repurposing candidates, DrugBank is ingested by all six graphs, and the
+  5,485 counted salts twice and diagnostics at all. Now 3,793 approved
+  therapeutics, ChEMBL-derived, one per active molecule.
+- **Disease** was DOID (11,932), then all of MONDO (31,147). DOID is reachable
+  from only 35% of Orphanet and 52% of OMIM/UMLS, which silently penalised
+  graphs that do not speak DOID and capped rare-disease measurement; all of
+  MONDO included 8,871 terms that are not human diseases. Now 22,276.
+- **Gene** was the whole UniProt human proteome, then the 1,076 targets of
+  approved drugs. Neither is the set the task touches. Now 6,210.
+- **Pathway** was all of Reactome, then the pathways of the targets. Now the
+  pathways of the gene set, 2,217.
 
 ---
 
@@ -384,8 +431,8 @@ The multi-hop standard could instead be derived from the Open Targets reference
 sets already here: joining `relation_drug_gene` with `relation_disease_gene`,
 restricted to approved indications, yields **396 (drug, gene, disease) triples**
 over 249 drugs, 84 genes and 79 diseases. That keeps one arbiter across every
-dimension and needs no download, at the cost of a narrower gene set (the 1,076
-targets of approved drugs). CTD was kept for breadth; if a reviewer asks why this
+dimension and needs no download, at the cost of a narrower gene set (the targets of
+approved drugs). CTD was kept for breadth; if a reviewer asks why this
 dimension uses a second source, that is the trade that was made.
 
 

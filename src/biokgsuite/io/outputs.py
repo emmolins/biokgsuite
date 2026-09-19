@@ -35,7 +35,7 @@ class Outputs:
         out.checkpoint(ckpt)                    -> results/checkpoints/01_coverage.pkl
     """
 
-    def __init__(self, notebook: str, base, dpi: int = 300):
+    def __init__(self, notebook: str, base, dpi: int = 600):
         self.notebook = notebook
         self.base = Path(base)
         self.dpi = dpi
@@ -46,7 +46,9 @@ class Outputs:
 
     # ------------------------------------------------------------------ write
     def figure(self, fig, name: str) -> Path:
-        """Save a figure as both PDF (for the manuscript) and PNG (for review)."""
+        """Save a figure as PDF (vector, the manuscript master) and PNG at
+        ``dpi``; 600 meets the line-art floor of Nature-family and BiB artwork.
+        """
         self.figures.mkdir(parents=True, exist_ok=True)
         save_fig(fig, self.figures, name, dpi=self.dpi)
         for ext in ('pdf', 'png'):

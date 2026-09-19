@@ -15,96 +15,162 @@ silently absent from the manifest because nothing tracked them.
 import numpy as np
 import matplotlib.pyplot as plt
 
-from biokgsuite.viz.style import TEXT_COLOR, ALERT_RED
-from biokgsuite.viz.primitives import kgc, _present, _xlabels, _title, _df, NICE
+from biokgsuite.viz.primitives import (NICE, _df, _present, _xlabels, facet_grid, kgc,
+                                       panel_letters, ref_line)
+from biokgsuite.viz.style import (MUTED, NEUTRAL, TEXT_COLOR, clean_ax, facet_title,
+                                  fig_size)
+
+BAR_W = 0.6
+
+
+def _values_above(ax, xs, vals, texts, log=False):
+    """6 pt value above each bar; used only where the number is the message."""
+    for x, v, t in zip(xs, vals, texts):
+        y = v * 1.12 if log else v + 0.012 * ax.get_ylim()[1]
+        ax.text(x, y, t, ha='center', va='bottom', fontsize=6, color=TEXT_COLOR)
+
 
 # ───────────────────────── 04 · clustering coefficient ──────────────────────────
 def fig04_clustering(clust):
-    cl = _df(clust); cl = cl.reindex(_present(cl.index)); order = list(cl.index)
-    cols = [kgc(k) for k in order]
-    fig, ax = plt.subplots(figsize=(7.4, 4.7))
-    ax.bar(range(len(order)), cl['C / C_ER'], color=cols, edgecolor='white', linewidth=0.5, zorder=2); ax.set_yscale('log')
-    for i, val in enumerate(cl['C / C_ER']):
-        ax.text(i, val * 1.18, f'{val:.0f}×', ha='center', fontsize=8, fontweight='bold', color=TEXT_COLOR)
-    ax.axhline(1, color='#bbb', ls=':', lw=1)
-    _xlabels(ax, order); ax.set_ylabel('clustering vs random  (C / C$_{ER}$, log)')
-    _title(ax, 'Clustering coefficient relative to a random graph', 'values > 1 indicate small-world structure', pad=12)
-    fig.tight_layout(); return fig
+    """Clustering coefficient relative to an Erdos-Renyi graph of the same size.
 
+    The multiplier is the finding (57x, 380x), so it is printed above each bar;
+    the log axis alone would hide a five-fold difference between graphs.
+    """
+    cl = _df(clust)
+    cl = cl.reindex(_present(cl.index))
+    order = list(cl.index)
+    vals = cl['C / C_ER'].values
+    xs = np.arange(len(order))
 
-# ───────────────────────── 04c · known-pair recovery ────────────────────────────
+    fig, ax = plt.subplots(figsize=fig_size(1, 1), constrained_layout=True)
+    ax.bar(xs, vals, width=BAR_W, color=[kgc(k) for k in order], zorder=2)
+    ax.set_yscale('log')
+    # Head room for the value labels, then the 1x line labelled past the axis.
+    ax.set_ylim(min(0.5, np.nanmin(vals) / 2), np.nanmax(vals) * 3)
+    ax.set_xlim(-0.6, len(order) - 0.4)
+    _values_above(ax, xs, vals, [f'{v:.0f}×' for v in vals], log=True)
+    ref_line(ax, 1, '1× (random)')
+    _xlabels(ax, order)
+    clean_ax(ax, ylabel='Clustering vs random, C / C$_{ER}$')
+    return fig
 
 
 # ───────────────────────── 04 · graph cohesion ──────────────────────────────────
 def fig04_cohesion(conn):
-    conn = _df(conn); conn = conn.reindex(_present(conn.index)); order = list(conn.index)
+    """Share of nodes in the largest component, and the number of components."""
+    conn = _df(conn)
+    conn = conn.reindex(_present(conn.index))
+    order = list(conn.index)
     cols = [kgc(k) for k in order]
-    fig, axes = plt.subplots(1, 2, figsize=(9.6, 4.6))
+    xs = np.arange(len(order))
+
+    fig, axes = plt.subplots(1, 2, figsize=fig_size(2, 1), constrained_layout=True)
+
     ax = axes[0]
-    ax.bar(range(len(order)), conn['LCC (%)'], color=cols, edgecolor='white', linewidth=0.5, zorder=2)
-    ax.axhline(95, color=ALERT_RED, ls='--', lw=1.2, label='95% threshold'); ax.set_ylim(0, 112)
-    for i, val in enumerate(conn['LCC (%)']):
-        ax.text(i, val + 1.5, f'{val:.1f}%', ha='center', fontsize=8, fontweight='bold', color=TEXT_COLOR)
-    _xlabels(ax, order); ax.set_ylabel('% of nodes in LCC'); ax.legend(loc='lower left')
-    _title(ax, 'Largest connected component')
+    lcc = conn['LCC (%)'].values
+    ax.bar(xs, lcc, width=BAR_W, color=cols, zorder=2)
+    ax.set_ylim(0, 112)
+    ax.set_xlim(-0.6, len(order) - 0.4)
+    _values_above(ax, xs, lcc, [f'{v:.1f}' for v in lcc])
+    ref_line(ax, 95, '95%')
+    _xlabels(ax, order)
+    clean_ax(ax, ylabel='Nodes in largest component (%)')
+    facet_title(ax, 'Largest connected component')
+
     ax = axes[1]
     comp = conn['Components'].values
-    ax.bar(range(len(order)), comp, color=cols, edgecolor='white', linewidth=0.5, zorder=2); ax.set_yscale('log')
-    for i, val in enumerate(comp):
-        ax.text(i, val * 1.25, f'{int(val):,}', ha='center', fontsize=8, fontweight='bold', color=TEXT_COLOR)
-    _xlabels(ax, order); ax.set_ylabel('component count (log scale)')
-    _title(ax, 'Connected components')
-    fig.tight_layout(); return fig
+    ax.bar(xs, comp, width=BAR_W, color=cols, zorder=2)
+    ax.set_yscale('log')
+    ax.set_ylim(1, np.nanmax(comp) * 4)
+    ax.set_xlim(-0.6, len(order) - 0.4)
+    _values_above(ax, xs, comp, [f'{int(v):,}' for v in comp], log=True)
+    _xlabels(ax, order)
+    clean_ax(ax, ylabel='Connected components')
+    facet_title(ax, 'Connected components')
 
-
-# ───────────────────────── 04 · clustering coefficient ──────────────────────────
+    panel_letters(fig, axes)
+    return fig
 
 
 # ───────────────────────── 04c · known-pair recovery ────────────────────────────
 def fig04_recovery(recovery_results):
+    """Share of known drug-disease pairs reachable within k hops, per graph.
+
+    Graphs are named at the line ends when the ends are far enough apart to
+    read; otherwise (most graphs saturate near 100% at k = 5) a legend.
+    """
     ks = [1, 2, 3, 4, 5]
-    fig, ax = plt.subplots(figsize=(7.4, 4.7))
-    for kg in _present(recovery_results.keys()):
+    kgs = _present(recovery_results.keys())
+    fig, ax = plt.subplots(figsize=fig_size(1, 1), constrained_layout=True)
+    ends = {}
+    for kg in kgs:
         r = recovery_results.get(kg, {}).get('recovery', {})
         ys = [r.get(k, np.nan) * 100 for k in ks]
-        ax.plot(ks, ys, marker='o', ms=5, lw=1.6, color=kgc(kg), mfc='white', mec=kgc(kg),
-                mew=1.4, label=NICE.get(kg, kg))
-    ax.set_xticks(ks); ax.set_xlabel('hop distance (k)')
-    ax.set_ylabel('% of known pairs recovered within k hops'); ax.set_ylim(0, 104)
-    ax.legend(loc='lower right', ncol=2)
-    _title(ax, 'Known drug–disease pair recovery by hop distance')
-    fig.tight_layout(); return fig
+        ax.plot(ks, ys, marker='o', ms=3.5, lw=1, color=kgc(kg), mfc='white',
+                mec=kgc(kg), mew=0.75, label=NICE.get(kg, kg), zorder=3)
+        ends[kg] = ys[-1]
+    ax.set_xticks(ks)
+    ax.set_ylim(0, 105)
+    ax.set_xlim(0.8, 5.2)
+    clean_ax(ax, xlabel='Hop distance (k)', ylabel='Known pairs recovered (%)')
 
-
-# ───────────────────────── 04 · differential resilience (dropout curves) ────────
+    # Direct labels need one text height between neighbouring line ends;
+    # 6 pt text is about 6% of a 50 mm panel, so ask for 7% of the y range.
+    finite = sorted(v for v in ends.values() if v == v)
+    gaps = np.diff(finite) if len(finite) > 1 else np.array([np.inf])
+    if kgs and gaps.min() >= 0.07 * 105:
+        ax.set_xlim(0.8, 5.9)
+        for kg, y in ends.items():
+            if y == y:
+                ax.text(5.12, y, NICE.get(kg, kg), fontsize=6, color=TEXT_COLOR,
+                        ha='left', va='center')
+    elif len(kgs) > 1:
+        ax.legend(loc='lower right', ncol=1 if len(kgs) <= 3 else 2)
+    return fig
 
 
 # ───────────────────────── 04 · differential resilience (dropout curves) ────────
 def fig04_resilience(diversity_results):
+    """Recovery of gold-standard versus random pairs as edges are dropped.
+
+    The band between the two curves is the resilience the graph owes to
+    therapeutic structure rather than to density; DR summarises its area.
+    """
     from matplotlib.lines import Line2D
     kgs = _present(diversity_results.keys())
-    ncol = len(kgs)
-    fig, axes = plt.subplots(1, ncol, figsize=(2.7 * ncol + 0.6, 4.2), sharey=True)
-    axes = np.atleast_1d(axes)
-    for ax, kg in zip(axes, kgs):
+    fig, axes, ncol = facet_grid(len(kgs))
+    for idx, (ax, kg) in enumerate(zip(axes, kgs)):
         r = diversity_results[kg]
         x = [v * 100 for v in r['drop_rates']]
-        gc, rc = r['gold_curve'], r['rand_curve']; c = kgc(kg)
-        ax.plot(x, gc, '-o', color=c, lw=2, ms=5, label='gold standard')
-        ax.plot(x, rc, '--s', color='#9A9A9A', lw=1.8, ms=5, label='random pairs')
-        ax.fill_between(x, rc, gc, where=[g >= rr for g, rr in zip(gc, rc)], alpha=0.15, color=c)
-        ax.text(0.96, 0.05, f"DR {r['dr_score']:.2f}", transform=ax.transAxes, ha='right', va='bottom',
-                fontsize=8.5, fontweight='bold', color=TEXT_COLOR,
-                bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='#ddd'))
-        ax.set_title(NICE.get(kg, kg), fontsize=10.5, fontweight='bold', color=TEXT_COLOR)
-        ax.set_xlabel('edge dropout (%)', fontsize=8.5); ax.set_ylim(0, 1.05); ax.set_xlim(-2, max(x) + 2)
-    axes[0].set_ylabel('recovery fraction', fontsize=9)
-    axes[0].legend(handles=[Line2D([0], [0], color='#555', lw=2, marker='o', ms=5, label='gold standard'),
-                            Line2D([0], [0], color='#9A9A9A', lw=1.8, ls='--', marker='s', ms=5, label='random pairs')],
-                   loc='lower left', fontsize=8)
-    fig.suptitle('Differential resilience to edge dropout: gold vs random pairs', fontsize=12,
-                 fontweight='bold', x=0.012, ha='left', color=TEXT_COLOR, y=1.0)
-    fig.tight_layout(rect=[0, 0, 1, 0.94]); return fig
+        gc, rc = list(r['gold_curve']), list(r['rand_curve'])
+        c = kgc(kg)
+        ax.plot(x, gc, '-o', color=c, lw=1, ms=3.5, zorder=3)
+        ax.plot(x, rc, '--s', color=NEUTRAL, lw=1, ms=3.5, zorder=3)
+        ax.fill_between(x, rc, gc, where=[g >= rr for g, rr in zip(gc, rc)],
+                        alpha=0.12, color=c, lw=0, zorder=2)
+        ax.set_ylim(0, 1.05)
+        ax.set_xlim(-2, max(x) + 2)
+        ax.set_xticks(x)
+        # The score sits bottom right, lifted just above whichever curve
+        # reaches into that corner so it never lands on a marker.
+        right = [i for i, xv in enumerate(x) if xv >= max(x) * 0.7]
+        floor = max([rc[i] for i in right] + [gc[i] for i in right if gc[i] < 0.3] + [0])
+        ax.text(0.97, max(0.04, floor / 1.05 + 0.04), f"DR {r['dr_score']:.2f}",
+                transform=ax.transAxes, ha='right', va='bottom', fontsize=6, color=MUTED)
+        clean_ax(ax, xlabel='Edge dropout (%)' if idx >= len(kgs) - ncol else '',
+                 ylabel='Recovery fraction' if idx % ncol == 0 else '')
+        if idx % ncol:
+            ax.tick_params(labelleft=False)
+        facet_title(ax, NICE.get(kg, kg))
 
-
-# ───────────────────────── 05 · ranking stability under dropout ─────────────────
+    # The gold series is a different colour in every facet, so its legend
+    # swatch is neutral ink; the facet title already says which graph it is.
+    handles = [Line2D([0], [0], color=TEXT_COLOR, lw=1, marker='o', ms=3.5,
+                      label='Gold-standard pairs'),
+               Line2D([0], [0], color=NEUTRAL, lw=1, ls='--', marker='s', ms=3.5,
+                      label='Random pairs')]
+    fig.legend(handles=handles, loc='outside lower center', ncol=2)
+    if len(kgs) > 1:
+        panel_letters(fig, axes)
+    return fig

@@ -8,8 +8,8 @@ supplied the evidence? Five stages, run in order; only `02_run` calls models.
 |---|---|---|
 | `01_benchmark/` | the 128 post-cutoff pairs, their per-graph status, the candidate pools, the selection audit | `G01_benchmark.pkl`, Fig G01 |
 | `02_run/` | the ranking loop over models, arms, seeds and shuffles (`mock` or `real`) | `results/tables/G02_run/runs/` |
-| `03_analysis/` | paired bootstrap, graph contrasts, coverage control, FDR | tables and Fig G03 (main text) |
-| `04_scaling/` | the Llama capacity ladder, pooled versus covered lift | Fig G04 (supplement) |
+| `03_analysis/` | paired bootstrap, graph contrasts, evidence control, absence penalty, FDR | tables and Fig G03 (main text) |
+| `04_scaling/` | the Llama capacity ladder, pooled versus grounded lift | Fig G04 (supplement) |
 | `05_diagnostic/` | which pairs are hard and why | Fig G05 (supplement) |
 
 The benchmark is the same post-cutoff approval set notebook 07 scores
@@ -26,9 +26,10 @@ under `results/{figures,tables}/G0N_<stage>/` and `results/checkpoints/`.
 
 ## Run
 
-    # once: the distractor pool (Open Targets) and the gene-symbol map (HGNC), both from vendored releases
+    # once: the pair status with the grounded flag (loads each grounding graph), then the distractor pool
+    python tools/build_post_cutoff_approvals.py --extract-views primekg drkg biokg
+    python tools/build_post_cutoff_approvals.py --kgs all --figure
     python tools/build_distractor_pool.py
-    python tools/build_entrez_symbol_map.py
 
     # stages, from the repo root; 02 in mock mode first, then real
     jupyter nbconvert --to notebook --execute grounding_experiment/01_benchmark/notebook.ipynb
@@ -38,8 +39,13 @@ under `results/{figures,tables}/G0N_<stage>/` and `results/checkpoints/`.
     jupyter nbconvert --to notebook --execute grounding_experiment/03_analysis/notebook.ipynb
 
 `02_run` is idempotent per (family, model, seed) file; `BKG_MODELS`, `BKG_SEEDS`,
-`BKG_FAMILIES` and `BKG_FORCE=1` scope one launch. Hosted models read their
-key from the environment or from `.env` at the repo root (gitignored).
+`BKG_FAMILIES` and `BKG_FORCE=1` scope one launch, and `BKG_LIMIT=n` runs real
+calls on the first n queries per family into `runs_smoke/` as a smoke test. Hosted models read their
+key from the environment or from `.env` at the repo root (gitignored). Real is
+the default mode. `BKG_MODE=mock` rehearses the pipeline with a deterministic
+stand-in for the model and writes to `runs_mock/`, and every run row carries a
+`mode` column; the analysis stages read `runs/` and refuse a mock row unless
+they are themselves launched with `BKG_MODE=mock`.
 
 ## legacy/
 

@@ -14,7 +14,7 @@ family), `results/checkpoints/G01_benchmark.pkl`, `config/params.yaml` (`groundi
 
 | | measured | reported, not scored |
 |---|---|---|
-| | per-pair MRR (all KG arms, covered arms only, `none`); cross-model correlation | tertile summaries, covariate correlations, area means |
+| | per-pair MRR (all KG arms, grounded arms only, `none`); cross-model correlation | tertile summaries, covariate correlations, area means |
 
 Nothing here is a score; the stage explains the G03 result.
 
@@ -28,11 +28,12 @@ little about), not in the model. That is what the cross-model matrix tests.
 
 ### Coverage attributed fairly
 
-`mrr_covered` averages only the arms whose graph holds the pair, so a pair
-looks hard only when the evidence was there and did not help, not because two
-graphs had nothing to say. The number of covering graphs is the covariate
-that predicts difficulty in the earlier experiment; the figure keeps both
-readings side by side.
+`mrr_grounded` averages only the arms whose graph had evidence for the pair,
+so a pair looks hard only when the evidence was there and did not help, not
+because two graphs had nothing to say. The number of graphs with evidence is
+the covariate that predicts difficulty in the earlier experiment; the figure
+keeps both readings side by side, and `n_kg_covered` stays in the table so
+the two counts can be compared.
 
 ### Covariates come from the benchmark, not from names
 

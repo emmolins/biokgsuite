@@ -8,47 +8,37 @@ repo root; and all five directories named the module `figures`, so Python's
 module cache returned whichever was imported first to every notebook that ran
 afterwards in the same kernel.
 """
-import math
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-from biokgsuite.viz.style import TEXT_COLOR
-from biokgsuite.viz.primitives import kgc
+from biokgsuite.viz.primitives import KGS, NICE, facet_grid, kgc, panel_letters, truncate
+from biokgsuite.viz.style import clean_ax, facet_title, si_formatter
 
 
 def fig03_source_diversity(kg_counts, panel_config, top_n=8):
-    """Top sources by edge count, one panel per graph."""
-    kgs = [k for k in panel_config if k in kg_counts]
+    """Top sources by edge count, one panel per graph.
+
+    Source labels are each graph's own names (Hetionet metaedge codes, BioKG
+    predicates) because they are what a reader will look up in that graph's
+    documentation; they are only truncated, never translated.
+    """
+    kgs = [k for k in KGS if k in panel_config and k in kg_counts]
+    kgs += [k for k in panel_config if k in kg_counts and k not in kgs]
     if not kgs:
         raise ValueError('no graph in panel_config has counts to plot')
-    ncol = min(3, len(kgs))
-    nrow = math.ceil(len(kgs) / ncol)
-    fig, axes = plt.subplots(nrow, ncol, figsize=(5.0 * ncol, 3.2 * nrow + 0.5))
-    axes = np.atleast_1d(np.array(axes)).reshape(-1)
 
+    fig, axes, _ = facet_grid(len(kgs))
     for ax, kg in zip(axes, kgs):
         cfg = panel_config[kg]
         col = cfg['label_col']
         d = kg_counts[kg].sort_values('n_edges', ascending=False).head(top_n).iloc[::-1]
-        lab = [str(s)[:24] + ('…' if len(str(s)) > 24 else '') for s in d[col]]
-        ax.barh(range(len(d)), d['n_edges'], color=kgc(kg),
-                edgecolor='white', lw=0.5, zorder=2)
+        ax.barh(range(len(d)), d['n_edges'], height=0.6, color=kgc(kg), zorder=2)
         ax.set_yticks(range(len(d)))
-        ax.set_yticklabels(lab, fontsize=7.5)
-        ax.set_xlabel('edge count', fontsize=8.5)
-        ax.tick_params(axis='x', labelsize=7.5)
-        ax.set_title(cfg['title'], fontsize=10.5, fontweight='bold',
-                     loc='left', color=TEXT_COLOR, pad=6)
-        ax.set_xlim(0, d['n_edges'].max() * 1.18)
+        ax.set_yticklabels([truncate(s, 28) for s in d[col]])
+        ax.set_ylim(-0.6, len(d) - 0.4)
+        ax.set_xlim(0, d['n_edges'].max() * 1.05)
+        ax.xaxis.set_major_formatter(si_formatter())
+        ax.locator_params(axis='x', nbins=4)
+        clean_ax(ax, xlabel='Edge count')
+        facet_title(ax, NICE.get(kg, cfg.get('title', kg)))
 
-    for ax in axes[len(kgs):]:
-        ax.set_visible(False)
-
-    fig.suptitle('Source-database diversity across knowledge graphs', fontsize=13,
-                 fontweight='bold', x=0.015, ha='left', color=TEXT_COLOR, y=0.99)
-    fig.text(0.015, 0.945, f'top {top_n} sources by edge count per knowledge graph',
-             fontsize=9.5, color='#777', ha='left')
-    fig.subplots_adjust(left=0.13, right=0.97, top=0.88, bottom=0.09,
-                        wspace=0.55, hspace=0.55)
+    if len(kgs) > 1:
+        panel_letters(fig, axes)
     return fig

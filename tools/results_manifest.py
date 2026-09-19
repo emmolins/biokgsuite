@@ -110,7 +110,7 @@ def main() -> int:
 
     for nb in nbs:
         desc = DIMENSIONS.get(nb, '')
-        L += [f'## `{nb}`' + (f' — {desc}' if desc else ''), '']
+        L += [f'## `{nb}`' + (f': {desc}' if desc else ''), '']
 
         ckpt = RESULTS / 'checkpoints' / f'{nb}.pkl'
         if ckpt.exists():

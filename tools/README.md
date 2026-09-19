@@ -33,6 +33,7 @@ docstring gives its usage.
 | `results_manifest.py` | regenerates `results/MANIFEST.md` from the files on disk |
 | `regenerate_figs.py` | redraws every dimension figure from the checkpoints, without re-running the notebooks |
 | `run_notebook.py` | executes a notebook headlessly where jupyter is not installed |
+| `audit_identifiers.py` | per graph and declared type, every identifier shape and the share each registry confirms; the check behind reading a bare number as the type the graph declares. Writes `results/tables/id_audit/` |
 | `measure_shared_retrieval_set.py` | diagnostic: sizes a shared disease-gene retrieval benchmark; writes nothing |
 | `cleanup.sh` | removes `_to_delete/`, caches and OS files (`--yes` to delete) |
 

@@ -494,7 +494,7 @@ def summary():
           f'{len(non_fda["drug_id"].astype(str) + non_fda["disease_id"].astype(str))}')
     print(f'\nUnique drugs: {unique["drug_id"].nunique()}')
     print(f'Unique diseases: {unique["disease_id"].nunique()}')
-    print(f'\nTherapeutic areas:')
+    print('\nTherapeutic areas:')
     for area, count in unique['therapeutic_area'].value_counts().items():
         print(f'  {area}: {count}')
 

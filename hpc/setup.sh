@@ -1,79 +1,49 @@
 #!/usr/bin/env bash
-# One-time HPC setup. Run this ONCE on the login node before submitting any
-# Slurm jobs. Idempotent — safe to re-run if anything fails partway through.
+# One-time HPC setup. Run ONCE on the login node, from the repo root, before
+# submitting any job. Idempotent: safe to rerun if it fails partway.
 #
-# Usage:   bash scripts/hpc/setup.sh
+#   cd ~/biokgsuite-bib && bash hpc/setup.sh
 #
-# What this does:
-#   1. Loads required modules (python 3.12, uv)
-#   2. Creates a uv-managed venv at ~/biokgsuite/.venv
-#   3. Installs all deps (biokgsuite + torch + transformers + sentence-transformers)
-#   4. Reminds you to do the manual steps (HF login, KG data, accept Gemma license)
+# Creates .venv (uv, Python 3.12) and installs requirements.txt plus the
+# embedding stack (requirements-embeddings.txt, torch) that only
+# supplementary/embeddings needs. Then lists the manual steps: the KG data
+# (rsync from the laptop), the API keys (.env) and, for the embedding
+# supplementary, the Hugging Face login.
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
+for marker in config/kgs.yaml biokgsuite_dimensions src/biokgsuite requirements.txt; do
+    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite-bib (missing $marker)"; exit 1; }
+done
 
-echo "================================================================="
-echo "BioKGSuite HPC setup"
-echo "  repo:    $REPO_DIR"
-echo "  python:  3.12.11"
-echo "================================================================="
-
-# ── 1. Modules ──────────────────────────────────────────────────────
-echo
-echo "[1/4] Loading modules..."
+echo "== BioKGSuite HPC setup in $REPO_DIR"
 module purge
 module load python/3.12.11
 module load uv/latest
-echo "      python: $(which python) ($(python --version))"
-echo "      uv:     $(uv --version)"
+echo "   python $(python --version 2>&1)   uv $(uv --version)"
 
-# ── 2. Virtualenv ───────────────────────────────────────────────────
-echo
-echo "[2/4] Creating venv at .venv ..."
-if [[ -d .venv ]]; then
-    echo "      .venv already exists — skipping creation"
-else
+if [[ ! -d .venv ]]; then
     uv venv --python 3.12
 fi
 source .venv/bin/activate
+uv pip install -r requirements.txt
+uv pip install -r requirements-embeddings.txt transformers sentence-transformers "huggingface_hub[cli]"
+uv pip install requests            # tools/fetch_*.py; not needed by the notebooks
+python -c "import pandas, numpy, scipy, sklearn, networkx, matplotlib, pyarrow, yaml, tqdm, nbconvert" \
+    && echo "   notebook stack imports"
+python -c "import torch; print('   torch', torch.__version__, 'cuda build', torch.version.cuda)"
 
-# ── 3. Deps ──────────────────────────────────────────────────────────
+mkdir -p logs data results/tables/G02_run/runs
 echo
-echo "[3/4] Installing dependencies..."
-# Note: we deliberately do NOT `uv pip install -e .` because the project's
-# pyproject.toml uses a legacy setuptools build backend that fails under uv.
-# The notebooks don't need biokgsuite to be installed as a package — they
-# add src/ to sys.path directly via sys.path.insert(0, str(_root)).
-#
-# Notebook execution. Papermill streams cell outputs to stdout in real-time
-# (much friendlier for `tail -f` on Slurm logs than nbconvert's silent mode).
-uv pip install jupyter nbconvert ipykernel papermill
-# Gemma stack
-uv pip install torch transformers sentence-transformers
-# HF auth helper
-uv pip install huggingface_hub[cli]
-# Scientific stack (don't rely on the legacy pyproject.toml pulling these in).
-# networkx is needed by the main notebooks 00-07 (topology + community detection).
-uv pip install numpy pandas scipy scikit-learn networkx matplotlib pyarrow tqdm pyyaml requests
-
-echo "      installed: $(pip list 2>/dev/null | grep -iE '^(torch|transformers|sentence|numpy|pandas|scipy|matplotlib|jupyter)' | wc -l) key packages"
-
-# ── 4. Reminders ────────────────────────────────────────────────────
-echo
-echo "[4/4] DONE. Three manual steps before you can submit jobs:"
-echo
-echo "  (a) HuggingFace auth (one-time, paste your hf_... token):"
-echo "        huggingface-cli login"
-echo
-echo "  (b) Accept the EmbeddingGemma license at:"
-echo "        https://huggingface.co/google/embeddinggemma-300m"
-echo "      (wait for Google's review email if not already approved)"
-echo
-echo "  (c) Get the KG data files under data/  (see scripts/hpc/README.md"
-echo "      for the rsync recipe)."
-echo
-echo "Once those are done, submit the run with:"
-echo "  sbatch scripts/hpc/run_all.sbatch"
+echo "== Done. Before submitting:"
+echo "   1. KG data: from the laptop,"
+echo "        rsync -avz --progress --exclude '_cache_matrix_*' --exclude 'raw' \\"
+echo "              ~/Desktop/biokgsuite-bib/data/ ashburn-login:biokgsuite-bib/data/"
+echo "   2. API keys for the grounding runs: from the laptop,"
+echo "        scp ~/Desktop/biokgsuite-bib/.env ashburn-login:biokgsuite-bib/.env"
+echo "   3. Embedding supplementary only: huggingface-cli login, and accept the"
+echo "      EmbeddingGemma licence at https://huggingface.co/google/embeddinggemma-300m"
+echo "   4. Check the graphs arrived:  du -sh data/*/"
+echo "   Then follow hpc/README.md."

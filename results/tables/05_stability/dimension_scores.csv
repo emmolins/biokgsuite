@@ -1,3 +1,3 @@
 KG,stability,random_stability,periphery_stability,gold - null (random),gold - null (periphery)
-hetionet,0.983,0.9876,0.9784,0.0186,-0.031
-biokg,0.999,0.9988,0.9993,0.0013,-0.0013
+primekg,0.9766,0.9994,0.9538,-0.0003,-0.0388
+hetionet,0.983,0.9876,0.9784,0.0202,-0.0312

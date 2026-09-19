@@ -23,9 +23,14 @@ the KG files named in `kgs.yaml`, `data/gold_standards/bridges/do_diseases.csv`,
 |---|---|---|
 | | data-sparse, cross-domain and prospective generalisation | the Q4 → Q1 degradation profile, per-area coefficient of variation, the rank distribution of prospective hits, the network-proximity replication |
 
-$$\text{Generalisation} = \tfrac{1}{3}\left(\text{AUROC}_{Q1} + \overline{\text{AUROC}}_{\text{area}} + \text{AUROC}_{\text{prospective}}\right)$$
+$$\text{Generalisation} = \tfrac{1}{3}\sum_{s \in \{Q1,\ \text{area},\ \text{prospective}\}} \frac{\text{AUROC}_s - 0.5}{0.5}$$
 
-A sub-metric whose data is too thin scores N/A and is excluded from the mean,
+Each AUROC is mapped to 2·AUROC − 1, the Gini coefficient (Somers' D for a
+binary outcome), so that it runs from 0 at chance to 1, as notebook 06 does for
+link prediction, so that the two dimensions share a floor in Fig 1; the raw
+AUROCs are kept in the checkpoint (`sub_scores_raw`) and in `prospective.csv`,
+`sparse_tiers.csv` and `cross_domain.csv`, and are the numbers to quote against
+the literature. A sub-metric whose data is too thin scores N/A and is excluded from the mean,
 rather than scoring 0: no signal and no evidence are different claims and a graph
 should not be penalised for the second as though it were the first.
 

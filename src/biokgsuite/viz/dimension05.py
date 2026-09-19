@@ -10,29 +10,25 @@ Each function RETURNS its figure rather than saving it. Saving belongs to
 `biokgsuite.io.Outputs`, so every notebook writes through one path, uses one
 naming convention, and reports what it produced.
 """
-import math
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+from matplotlib.patches import Patch
 
-from biokgsuite.viz.style import TEXT_COLOR
-from biokgsuite.viz.primitives import kgc, _present, NICE
+from biokgsuite.viz.primitives import NICE, _present, facet_grid, kgc, panel_letters, ref_line
+from biokgsuite.viz.style import NEUTRAL, TEXT_COLOR, clean_ax, facet_title, fig_size
 
 # Interpretive reference lines, not scoring thresholds.
 HIGH_STABILITY = 0.95
 FRAGILE = 0.85
-
-# The null is drawn in grey in every panel: colour carries the pair set, not the KG.
-NULL_COLOR = '#A8A29A'
 
 
 def fig05_stability(raw_r, dropout_rates, raw_r_null=None):
     """Spearman r vs edge dropout, one panel per KG.
 
     Two encoding channels, held constant across every panel:
-      colour     the pair set   -- KG colour for therapeutic pairs, grey for null
-      linestyle  the strategy   -- solid for random dropout, dashed for periphery
+      colour     the pair set   (KG colour for therapeutic pairs, grey for null)
+      linestyle  the strategy   (solid for random dropout, dashed for periphery)
 
     `raw_r_null` draws the degree-matched null. Adamic-Adar is degree-driven, so
     the therapeutic curve alone cannot be read as evidence of robust therapeutic
@@ -50,15 +46,11 @@ def fig05_stability(raw_r, dropout_rates, raw_r_null=None):
     finite = [v for v in values if v == v]
     lo = min([*finite, FRAGILE]) if finite else FRAGILE
 
-    ncol = min(3, max(1, len(kgs)))
-    nrow = math.ceil(len(kgs) / ncol)
-    fig, axes = plt.subplots(nrow, ncol, figsize=(4.6 * ncol, 3.7 * nrow),
-                             sharey=True, squeeze=False)
-    axes = axes.reshape(-1)
+    fig, axes, ncol = facet_grid(len(kgs))
 
     def series(ax, ys, color, ls, marker):
-        ax.plot(pct, ys, ls=ls, marker=marker, color=color, lw=1.9, ms=5,
-                markeredgecolor='white', markeredgewidth=0.6, zorder=3)
+        ax.plot(pct, ys, ls=ls, marker=marker, color=color, lw=1, ms=3.5,
+                markeredgecolor='white', markeredgewidth=0.5, zorder=3)
 
     for idx, (ax, kg) in enumerate(zip(axes, kgs)):
         c = kgc(kg)
@@ -66,52 +58,35 @@ def fig05_stability(raw_r, dropout_rates, raw_r_null=None):
         series(ax, [raw_r[kg]['periphery'].get(r, np.nan) for r in rates], c, '--', 's')
         if raw_r_null and kg in raw_r_null:
             series(ax, [raw_r_null[kg]['random'].get(r, np.nan) for r in rates],
-                   NULL_COLOR, '-', 'o')
+                   NEUTRAL, '-', 'o')
             series(ax, [raw_r_null[kg]['periphery'].get(r, np.nan) for r in rates],
-                   NULL_COLOR, '--', 's')
-        ax.axhline(HIGH_STABILITY, color='#655F55', ls=':', lw=0.9, alpha=0.8, zorder=1)
-        ax.axhline(FRAGILE, color='#E69F00', ls=':', lw=0.9, alpha=0.8, zorder=1)
+                   NEUTRAL, '--', 's')
+        ref_line(ax, HIGH_STABILITY, f'r = {HIGH_STABILITY}')
+        ref_line(ax, FRAGILE, f'r = {FRAGILE}')
         ax.set_xticks(pct)
-        ax.set_xticklabels([f'{p:g}%' for p in pct])
+        ax.set_xticklabels([f'{p:g}' for p in pct])
         ax.set_ylim(min(lo - 0.02, FRAGILE - 0.02), 1.005)
-        if idx % ncol == 0:
-            ax.set_ylabel('Spearman r')
-        if idx >= len(kgs) - ncol:
-            ax.set_xlabel('edge dropout (%)')
-        ax.set_title(NICE.get(kg, kg), fontsize=10.5, fontweight='bold',
-                     loc='left', color=TEXT_COLOR, pad=6)
-
-    for ax in axes[len(kgs):]:
-        ax.set_visible(False)
+        clean_ax(ax, xlabel='Edge dropout (%)' if idx >= len(kgs) - ncol else '',
+                 ylabel='Spearman r' if idx % ncol == 0 else '')
+        if idx % ncol:
+            ax.tick_params(labelleft=False)
+        facet_title(ax, NICE.get(kg, kg))
 
     # One legend for the whole figure, below the panels, so it never sits over
-    # data and does not have to be repeated. Colour and linestyle are named
-    # separately because they are independent channels.
-    # The legend carries only the linestyle channel. The colour channel is stated
-    # in the subtitle instead: a legend swatch for "therapeutic pairs" would have
-    # to be drawn in some single colour, and every such colour either collides
-    # with the null's grey or misrepresents a per-KG palette.
-    swatch = '#555555'
+    # data and is not repeated. The therapeutic swatches are drawn in neutral
+    # ink because their colour is the graph's, which the facet title names.
     handles = [
-        Line2D([0], [0], color=swatch, lw=1.9, ls='-', marker='o', ms=5,
-               label='random dropout'),
-        Line2D([0], [0], color=swatch, lw=1.9, ls='--', marker='s', ms=5,
-               label='periphery dropout'),
-        Line2D([0], [0], color='#655F55', lw=0.9, ls=':', label=f'r = {HIGH_STABILITY}'),
-        Line2D([0], [0], color='#E69F00', lw=0.9, ls=':', label=f'r = {FRAGILE}'),
+        Line2D([0], [0], color=TEXT_COLOR, lw=1, ls='-', marker='o', ms=3.5,
+               label='Random dropout'),
+        Line2D([0], [0], color=TEXT_COLOR, lw=1, ls='--', marker='s', ms=3.5,
+               label='Periphery dropout'),
     ]
-    fig.legend(handles=handles, loc='lower center', ncol=4, fontsize=8,
-               frameon=False, bbox_to_anchor=(0.5, 0.005))
-
-    fig.suptitle('Ranking stability under edge dropout', fontsize=12.5,
-                 fontweight='bold', x=0.008, ha='left', color=TEXT_COLOR, y=0.985)
     if raw_r_null:
-        fig.text(0.008, 0.905,
-                 'coloured: therapeutic pairs      grey: degree-matched null '
-                 '(same endpoint degrees, no therapeutic relation)',
-                 ha='left', fontsize=9, color=TEXT_COLOR, alpha=0.8)
-    fig.subplots_adjust(left=0.085, right=0.98, top=0.84, bottom=0.22,
-                        wspace=0.12, hspace=0.45)
+        handles.append(Line2D([0], [0], color=NEUTRAL, lw=1, ls='-', marker='o', ms=3.5,
+                              label='Degree-matched null'))
+    fig.legend(handles=handles, loc='outside lower center', ncol=len(handles))
+    if len(kgs) > 1:
+        panel_letters(fig, axes)
     return fig
 
 
@@ -127,40 +102,34 @@ def fig05_scorers(stab_df, primary_rate, scorer_names, scored_by):
     kgs = _present(df['KG'].unique())
     strategies = list(dict.fromkeys(df['Strategy']))
 
-    fig, axes = plt.subplots(1, len(strategies),
-                             figsize=(5.0 * len(strategies), 3.9),
-                             sharey=True, squeeze=False)
+    fig, axes = plt.subplots(1, len(strategies), figsize=fig_size(2, 1),
+                             sharey=True, squeeze=False, constrained_layout=True)
     axes = axes.reshape(-1)
-    width = 0.36
+    # Each scorer owns one unit slot; the graphs share 0.8 of it, and within a
+    # graph the therapeutic bar and its null bar sit side by side.
+    slot = 0.8 / max(1, len(kgs))
+    width = slot * 0.45
 
     for ax, strategy in zip(axes, strategies):
         sub = df[df['Strategy'] == strategy]
         x = np.arange(len(scorer_names))
         for k, kg in enumerate(kgs):
-            for j, (pair_set, alpha, hatch) in enumerate(
-                    (('gold', 1.0, None), ('null', 0.45, '///'))):
+            centre = x + (k - (len(kgs) - 1) / 2) * slot
+            for j, (pair_set, colour) in enumerate((('gold', kgc(kg)), ('null', NEUTRAL))):
                 vals = [sub[(sub['KG'] == kg) & (sub['Scorer'] == sc)
                             & (sub['Pair set'] == pair_set)]['Spearman r'].mean()
                         for sc in scorer_names]
-                ax.bar(x + (k - (len(kgs) - 1) / 2) * width + (j - 0.5) * width / 2,
-                       vals, width / 2, color=kgc(kg), alpha=alpha, hatch=hatch,
-                       edgecolor='white', linewidth=0.5, zorder=2)
+                ax.bar(centre + (j - 0.5) * width, vals, width, color=colour, zorder=2)
         ax.set_xticks(x)
         ax.set_xticklabels([sc + ('\n(scored)' if sc == scored_by else '')
-                            for sc in scorer_names], fontsize=8.5)
-        ax.set_title(strategy, fontsize=10.5, fontweight='bold', loc='left',
-                     color=TEXT_COLOR, pad=6)
+                            for sc in scorer_names])
         ax.set_ylim(min(0.8, float(df['Spearman r'].min()) - 0.02), 1.005)
-    axes[0].set_ylabel('Spearman r')
+        clean_ax(ax, ylabel='Spearman r' if ax is axes[0] else '')
+        facet_title(ax, strategy)
 
-    handles = ([Line2D([0], [0], color=kgc(kg), lw=6, label=NICE.get(kg, kg))
-                for kg in kgs]
-               + [Line2D([0], [0], color='#555555', lw=6, label='therapeutic pairs'),
-                  Line2D([0], [0], color='#555555', lw=6, alpha=0.45,
-                         label='degree-matched null (hatched)')])
-    fig.legend(handles=handles, loc='lower center', ncol=len(handles), fontsize=8.5,
-               frameon=False, bbox_to_anchor=(0.5, 0.005))
-    fig.suptitle(f'Scorer agreement at {primary_rate:.0%} dropout', fontsize=12.5,
-                 fontweight='bold', x=0.008, ha='left', color=TEXT_COLOR, y=0.985)
-    fig.subplots_adjust(left=0.075, right=0.98, top=0.85, bottom=0.26, wspace=0.10)
+    handles = ([Patch(color=kgc(kg), label=NICE.get(kg, kg)) for kg in kgs]
+               + [Patch(color=NEUTRAL, label='Degree-matched null')])
+    fig.legend(handles=handles, loc='outside lower center', ncol=len(handles),
+               handlelength=1.0)
+    panel_letters(fig, axes)
     return fig

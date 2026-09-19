@@ -48,12 +48,13 @@ from typing import Iterable
 import pandas as pd
 
 # Every canonical type check 1 can adjudicate, which is every type declared in
-# config/id_schemes.yaml. Not all are resolver-backed: Symptom and Pharmacologic
-# Class have declared shapes but no registry, so they are shape-checked only and
-# `resolve_types` skips them deliberately.
+# config/id_schemes.yaml. Not all are resolver-backed: Symptom, Pharmacologic
+# Class, Phenotype, Exposure and Complex have declared shapes but no registry,
+# so they are shape-checked only and `resolve_types` skips them deliberately.
 TYPES = ('Drug', 'Disease', 'Gene/Protein', 'Pathway',
          'Biological Process', 'Molecular Function', 'Cellular Component',
-         'Anatomy', 'Side Effect', 'Symptom', 'Pharmacologic Class')
+         'Anatomy', 'Side Effect', 'Symptom', 'Pharmacologic Class',
+         'Phenotype', 'Exposure', 'Complex', 'Taxon', 'ATC class', 'Cell type')
 
 # The three verdicts check 1 can return.
 CORRECT      = 'correct'        # the shape fits a scheme the declared type accepts
@@ -255,6 +256,46 @@ def identifier_ambiguity(resolvers: dict) -> pd.DataFrame:
             'Ambiguous (%)': round(100 * len(multi) / len(resolved), 2) if resolved else float('nan'),
             'Most common overlap': ' + '.join(pairs.most_common(1)[0][0]) if pairs else '',
         })
+    return pd.DataFrame(rows)
+
+
+# Registry each bare number is read against, by the type the graph declares.
+# A bare number carries no namespace, so the declared type is the only thing
+# that says what it is; this table is that decision, made once and reported.
+BARE_READ_AS = {'Disease': 'MONDO', 'Gene/Protein': 'NCBI Entrez',
+                'Biological Process': 'GO', 'Molecular Function': 'GO',
+                'Cellular Component': 'GO', 'Anatomy': 'UBERON', 'Phenotype': 'HPO',
+                'Drug': 'PubChem CID', 'Taxon': 'NCBI Taxonomy', 'Side Effect': 'MedDRA'}
+
+
+def bare_number_types(kgs: dict, type_maps: dict) -> pd.DataFrame:
+    """Every declared type a graph keys by bare numbers, and what they are read as.
+
+    Flagged rather than silently accepted. Unprefixed integers are the one
+    identifier shape that fits several registries at once (a bare 8150 is a
+    valid MONDO, Entrez, GO, UBERON and HPO number), so the metrics can only
+    read them by trusting the declared type. That trust is checked by
+    ``tools/audit_identifiers.py`` (registry membership and name agreement)
+    and is stated here so a reader of the tables knows it was made.
+    """
+    rows = []
+    for kg, data in kgs.items():
+        canon_of = _canonical_of(type_maps[kg])
+        nodes = data['nodes']
+        for label, canon in canon_of.items():
+            ids = nodes.loc[nodes['type'] == label, 'id'].astype(str)
+            if ids.empty:
+                continue
+            stripped = ids.str.split('::').str[-1].str.strip()
+            bare = stripped.str.fullmatch(r'\d+')
+            grouped = stripped.str.fullmatch(r'\d+(_\d+)+')
+            n_bare, n_grp = int(bare.sum()), int(grouped.sum())
+            if not n_bare and not n_grp:
+                continue
+            rows.append({'KG': kg, 'Declared type': label, 'Canonical': canon,
+                         'Nodes': len(ids), 'Bare numbers': n_bare, 'Grouped numbers': n_grp,
+                         'Bare (%)': round(100 * (n_bare + n_grp) / len(ids), 1),
+                         'Read as': BARE_READ_AS.get(canon, 'shape only, no registry')})
     return pd.DataFrame(rows)
 
 

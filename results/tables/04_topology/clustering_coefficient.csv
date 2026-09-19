@@ -1,3 +1,4 @@
 KG,Nodes sampled,Sampled (%),C (empirical),C SE,C_ER (random),C / C_ER,SW score,SW score SE
+primekg,10000,7.7,0.0742,0.0017,0.000484,153.3,0.7285,0.0033
 hetionet,10000,21.3,0.1092,0.0018,0.001906,57.3,0.586,0.0023
 biokg,10000,9.5,0.1396,0.0025,0.000367,380.3,0.8601,0.0026

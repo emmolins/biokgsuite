@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=biokgsuite-nb08
+#SBATCH --job-name=biokgsuite-embeddings
 #SBATCH --partition=def
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=96G
 #SBATCH --gres=gpu:H100:1
-#SBATCH --output=logs/nb08-%j.out
-#SBATCH --error=logs/nb08-%j.err
+#SBATCH --output=logs/embeddings-%j.out
+#SBATCH --error=logs/embeddings-%j.err
 #
-# Runs notebook 08 end-to-end on one HPC compute node with 1 H100.
+# Runs supplementary/embeddings/notebook.ipynb end-to-end on one compute node with 1 H100.
 #
 #   - 32 CPU cores: plenty for TransE/RotatE training (NumPy, multi-threaded BLAS)
 #                   plus loading 30 GB of MATRIX edges
@@ -18,21 +18,22 @@
 #   - 24 hr wall:   generous; expected wall time is 2-4 hr
 #
 # Submit:
-#   sbatch scripts/hpc/run_all.sbatch
+#   sbatch hpc/run_embeddings.sbatch
 #
 # Monitor:
 #   squeue -u $USER
-#   tail -f logs/nb08-<jobid>.out
+#   tail -f logs/embeddings-<jobid>.out
 #
-# Resumable: if the job is killed mid-run, just sbatch again. nb08 caches
+# Resumable: if the job is killed mid-run, just sbatch again. the notebook caches
 # per-rerun per-KG results to results/cache/embedding_<kg>_resampled.json
 # and skips completed combos.
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
 mkdir -p logs
+[ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 
 echo "================================================================="
 echo "HOST:     $(hostname)"
@@ -72,7 +73,7 @@ export TQDM_DISABLE_RICH=1       # plain-text bars, not rich
 # Disable the matplotlib interactive backend (we're headless)
 export MPLBACKEND=Agg
 
-# ── Run nb08 end-to-end ─────────────────────────────────────────────
+# ── Run the embedding supplementary end-to-end ─────────────────────────────────────────────
 echo "Executing supplementary/embeddings/notebook.ipynb ..."
 echo "This runs ALL sections:"
 echo "  - existing single-run TransE/RotatE + bootstrap CIs"
@@ -92,9 +93,9 @@ echo
 # --log-level=INFO to get a "Executing notebook..." marker at start.
 #
 # To monitor progress while running, in another SSH session:
-#   ls -la ~/biokgsuite/results/cache/   # cache files grow as cells finish
-#   ls -la ~/biokgsuite/supplementary/embeddings/notebook.ipynb   # mtime updates as cells finish
-#   ls -la ~/biokgsuite/results/figures/  # new figures appear as cells finish
+#   ls -la ~/biokgsuite-bib/results/cache/   # cache files grow as cells finish
+#   ls -la ~/biokgsuite-bib/supplementary/embeddings/notebook.ipynb   # mtime updates as cells finish
+#   ls -la ~/biokgsuite-bib/results/figures/  # new figures appear as cells finish
 jupyter nbconvert \
     --to notebook --execute --inplace \
     --log-level=INFO \
@@ -111,5 +112,5 @@ echo "  - results/figures/08_heuristic_vs_embedding_scatter.{pdf,png}"
 echo "  - results/checkpoints/08_embedding_validation.pkl"
 echo
 echo "To pull results back to your Mac:"
-echo "  rsync -avz ashburn-login:biokgsuite/results/ ~/biokgsuite/results/"
+echo "  rsync -avz ashburn-login:biokgsuite-bib/results/ ~/biokgsuite-bib/results/"
 echo "================================================================="

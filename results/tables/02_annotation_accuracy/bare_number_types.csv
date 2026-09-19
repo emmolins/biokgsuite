@@ -1,0 +1,9 @@
+KG,Declared type,Canonical,Nodes,Bare numbers,Grouped numbers,Bare (%),Read as
+primekg,biological_process,Biological Process,28642,28642,0,100.0,GO
+primekg,molecular_function,Molecular Function,11169,11169,0,100.0,GO
+primekg,cellular_component,Cellular Component,4176,4176,0,100.0,GO
+primekg,anatomy,Anatomy,14035,14035,0,100.0,UBERON
+primekg,disease,Disease,17080,15813,1267,100.0,MONDO
+primekg,gene/protein,Gene/Protein,27671,27671,0,100.0,NCBI Entrez
+primekg,effect/phenotype,Phenotype,15311,15311,0,100.0,HPO
+hetionet,Gene,Gene/Protein,20945,20945,0,100.0,NCBI Entrez

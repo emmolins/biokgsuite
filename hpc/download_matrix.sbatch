@@ -15,12 +15,12 @@
 # node because of better NFS access + dedicated network bandwidth.
 # Expected wall time: 5-15 min.
 #
-# Submit:    sbatch scripts/hpc/download_matrix.sbatch
+# Submit:    sbatch hpc/download_matrix.sbatch
 # Monitor:   tail -f logs/matrix-dl-<jobid>.out
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
 mkdir -p logs
 
@@ -42,4 +42,4 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME="$HOME/.cache/huggingface"
 export PYTHONUNBUFFERED=1
 
-python -u scripts/hpc/download_matrix.py
+python -u hpc/download_matrix.py

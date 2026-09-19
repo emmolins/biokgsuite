@@ -18,7 +18,7 @@ from biokgsuite.grounding.analysis import (arm_table, capacity_table, chance_mrr
                                            scaling_table)
 from biokgsuite.viz import grounding as viz  # noqa: E402
 from test_grounding_analysis import (ARMS, KGS, LABELS, MODELS, PARAMS_B, POOL,  # noqa: E402
-                                     covered_by_kg, make_benchmark, make_runs)
+                                     grounded_by_kg, make_benchmark, make_runs)
 
 KG_PAIRS = [('primekg', 'drkg'), ('primekg', 'biokg'), ('biokg', 'drkg')]
 
@@ -36,14 +36,14 @@ def bench():
 @pytest.fixture(scope='module')
 def tables(runs, bench):
     rng = np.random.default_rng(0)
-    common = set.intersection(*covered_by_kg(bench).values())
+    common = set.intersection(*grounded_by_kg(bench).values())
     cov = runs[runs['pair_id'].isin(common)].assign(family='covered')
     return dict(
         arms=arm_table(runs, 'main', ARMS, 100, rng, LABELS),
         con_main=contrast_table(runs, 'main', KG_PAIRS, 100, rng, LABELS),
         con_cov=contrast_table(cov, 'covered', KG_PAIRS, 100, rng, LABELS),
         cap=capacity_table(runs, PARAMS_B, ARMS, 100, rng, LABELS),
-        scaling=scaling_table(runs, PARAMS_B, covered_by_kg(bench), 100, rng),
+        scaling=scaling_table(runs, PARAMS_B, grounded_by_kg(bench), 100, rng),
         per=difficulty_table(runs, bench),
         n_cov=len(common))
 
@@ -102,3 +102,16 @@ def test_fig_bias(selection):
     _check(viz.fig_bias_forest(selection, 'kept', traits))
     _check(viz.fig_bias_distribution(selection, 'kept', 'approval_year'))
     _check(viz.fig_bias_composition(selection, 'kept', ['area', 'modality']))
+
+
+def test_fig_benchmark_overview(bench):
+    # The real frame carries approval_date, leaked_<kg> and evaluable_<kg>;
+    # the mock has the covered and grounded flags, so derive the rest as the loader does.
+    rng = np.random.default_rng(3)
+    b = bench.copy()
+    b['approval_date'] = pd.to_datetime('2023-01-01') + pd.to_timedelta(rng.integers(0, 900, len(b)), unit='D')
+    for kg in KGS:
+        b[f'leaked_{kg}'] = b[f'covered_{kg}'] & (rng.random(len(b)) < 0.1)
+        b[f'evaluable_{kg}'] = b[f'grounded_{kg}'] & ~b[f'leaked_{kg}']
+    dates = {'primekg': '2022-05-01', 'drkg': '2020-04-19', 'biokg': '2020-06-01', 'hetionet': None}
+    _check(viz.fig_benchmark_overview(b, dates, KGS))

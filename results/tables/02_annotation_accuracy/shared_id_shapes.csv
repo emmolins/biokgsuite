@@ -1,6 +1,9 @@
 Pattern,Entity types,N types
-^C(\d{6}|\d{9})$,"Disease, Drug",2
+^(?i:mesh):[CD](\d{6}|\d{9})$,"Disease, Drug",2
+^C(\d{6}|\d{9})$,"Disease, Drug, Exposure",3
 ^C\d{7}$,"Disease, Side Effect",2
-^D(\d{6}|\d{9})$,"Disease, Symptom",2
+^D(\d{6}|\d{9})$,"Disease, Exposure, Symptom",3
 ^GO:\d{7}$,"Biological Process, Cellular Component, Molecular Function",3
+^R-[A-Z]{3}-\d+$,"Complex, Pathway",2
 ^\d+$,"Drug, Gene/Protein",2
+"^\d{1,7}$","Anatomy, Biological Process, Cellular Component, Disease, Molecular Function, Phenotype, Taxon",7

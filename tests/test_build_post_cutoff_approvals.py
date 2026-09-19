@@ -72,6 +72,7 @@ def test_per_graph_checks():
         dict(drugbank_id="DB00009", mondo_id="MONDO:1", doid="DOID:10", mesh_id="", approval_date="2024-01-01"),
     ])
     view = dict(drug_idx={"DB00001": 1}, dis_idx={"DOID:10": 10, "DOID:20": 20}, degree={1: 9, 10: 3, 20: 3},
+                n_mech={1: 4, 10: 2, 20: 0},
                 node_curie={1: "DB00001", 10: "DOID:10", 20: "DOID:20"},
                 edge_set={(1, 20)}, prior={1: {20}})
     st, funnel = B.check_pairs(pairs, "toy", view, br, {"content_date": "2020-01-01"}, 2)
@@ -79,6 +80,20 @@ def test_per_graph_checks():
     assert r1.covered and not r1.leaked and r1.date_ok == "True"
     assert r1.related_to_prior and r1.nearest_prior_mondo == "MONDO:2"    # sibling of the prior indication
     assert r1.evaluable and not r1.evaluable_strict
+    assert r1.grounded and r1.drug_n_mech == 4 and r1.disease_n_mech == 2
+    assert [f["stage"] for f in funnel] == ["S3", "C2", "C1", "C3", "G"]
+    assert funnel[-1]["n"] == 1 and funnel[-1]["dropped"] == 0
+    # a drug that clears the degree floor on edges a dossier never renders is covered, not grounded;
+    # evaluable (notebook 07) is unchanged by it
+    blank = dict(view, n_mech={1: 0, 10: 2, 20: 0})
+    st_b, funnel_b = B.check_pairs(pairs, "toy", blank, br, {"content_date": "2020-01-01"}, 2)
+    assert st_b.iloc[0].covered and st_b.iloc[0].evaluable and not st_b.iloc[0].grounded
+    assert funnel_b[-1]["n"] == 0 and funnel_b[-1]["dropped"] == 1
+    # a view with no neighbour counts (not a grounding arm) leaves grounded empty and the G row unfilled
+    old = dict(view, n_mech={})
+    st_o, funnel_o = B.check_pairs(pairs, "toy", old, br, {"content_date": "2020-01-01"}, 2)
+    assert st_o.iloc[0].grounded is None and st_o.iloc[0].evaluable
+    assert funnel_o[-1]["n"] is None and "not computed" in funnel_o[-1]["reason"]
     assert not st.iloc[1].covered                                         # MONDO:3 has no DOID, graph keys by DOID
     assert not st.iloc[2].drug_present
     # a snapshot with no content date leaves date_ok unknown and nothing evaluable

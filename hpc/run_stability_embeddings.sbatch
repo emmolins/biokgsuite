@@ -31,6 +31,7 @@ set -euo pipefail
 REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
 mkdir -p logs
+[ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 
 for marker in config/kgs.yaml src/biokgsuite/models/embedding.py; do
     if [ ! -e "$REPO_DIR/$marker" ]; then

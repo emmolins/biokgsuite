@@ -32,7 +32,7 @@ FAMILIES="${FAMILIES:-main}"                       # main = all 128 post-cutoff 
 SAFE="$(echo "$MODEL" | tr ':/.' '___')"
 OUT="results/tables/G02_run/runs/main__${SAFE}__seed${SEED}.csv"   # written by grounding_experiment/02_run
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"; mkdir -p logs
 echo "HOST $(hostname)  DATE $(date)  JOB ${SLURM_JOB_ID:-none}  MODEL $MODEL  SEED $SEED  GPUS ${CUDA_VISIBLE_DEVICES:-?}  -> $OUT"
 
@@ -67,6 +67,6 @@ ollama pull "$MODEL"
 
 BKG_MODE=real BKG_MODELS="$MODEL" BKG_SEEDS="$SEED" BKG_FAMILIES="$FAMILIES" \
     jupyter nbconvert --to notebook --execute grounding_experiment/02_run/notebook.ipynb \
-    --output "logs/02_run_${SAFE}_s${SEED}.ipynb" --ExecutePreprocessor.timeout=-1
+    --output "$REPO_DIR/logs/02_run_${SAFE}_s${SEED}.ipynb" --ExecutePreprocessor.timeout=-1
 
 echo "DONE -> $OUT"

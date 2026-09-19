@@ -55,6 +55,35 @@ the coverage that graph can attain for pipeline reasons rather than content
 reasons, and the relation gap decomposition splits every missing gold pair into
 entity-absent, unresolved, or relation-absent.
 
+Two graphs key diseases by the bare MONDO number rather than a CURIE: PrimeKG
+natively (`7254`, and grouped nodes such as `21223_385` that name several
+terms), and MATRIX after its loader bridges DOID, MeSH and SSSOM identifiers.
+The resolver checks a bare number against the MONDO registry in
+`data/crosswalks/mondo.obo` and follows `replaced_by` for ids retired since
+the graph was built. What remains unresolved in MATRIX is outside MONDO by
+construction (UMLS findings, ICD-9 codes, non-human genes, transcripts and
+proteins) and is reported, not scored.
+
+Drugs resolve to ChEMBL through three tiers, each used only where the one
+before says nothing: Open Targets cross-references, UniChem's structure
+mapping (`tools/fetch_unichem.sh`), and the graphs' own drug names matched to
+Open Targets names, synonyms and trade names (`tools/build_drug_name_xref.py`,
+unambiguous names only). The first two agree with each other and together
+reach 72% of the approved reference set from any DrugBank accession, because
+UniChem's DrugBank feed holds about 11,000 structures and omits biologics and
+a tail of small molecules; the name tier lifts that ceiling to 83% and the
+resolver prints how many accessions it reached. Every ChEMBL id is then
+expanded to its parent and salt forms, so a graph holding doxazosin is
+credited with doxazosin mesylate.
+
+Low resolvability is not always a crosswalk gap. BioKG holds 59,204 proteins
+across more than twenty species; 16,526 are human and 99.7% of those resolve
+to an Ensembl gene, while the mouse, rat, bovine and yeast proteins cannot,
+because the reference sets are human. The resolvability table names unprefixed
+identifiers by their shape (`UniProt`, `integer`, `DrugBank`, `MeSH`) so that
+a species boundary reads as one, and the same applies to the non-human Entrez
+ids in MATRIX.
+
 ## Run
 ```bash
 jupyter nbconvert --execute --inplace notebook.ipynb

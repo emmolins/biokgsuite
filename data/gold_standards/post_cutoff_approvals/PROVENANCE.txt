@@ -1,5 +1,5 @@
 # Provenance for post_cutoff_approvals.csv, post_cutoff_pair_status.csv, post_cutoff_funnel.csv
-# built:          2026-09-18T18:12:12+00:00
+# built:          2026-09-19T19:00:26+00:00
 # built_by:       tools/build_post_cutoff_approvals.py
 # source:         data/gold_standards/source/repurposing-dataset-v0.6.0/candidates_reviewed.csv
 # source_version: 0.6.0+20260918

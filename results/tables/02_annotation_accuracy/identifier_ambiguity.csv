@@ -1,3 +1,4 @@
 KG,Identifiers,Resolvable,Ambiguous,Ambiguous (%),Most common overlap
-hetionet,47031,21179,0,0.0,
-biokg,105524,32380,0,0.0,
+primekg,90067,51004,8387,16.44,Disease + Gene/Protein
+hetionet,47031,21320,7804,36.6,Disease + Gene/Protein
+biokg,105524,33228,0,0.0,

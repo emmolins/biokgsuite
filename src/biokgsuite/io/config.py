@@ -9,6 +9,7 @@ The repo keeps configuration in two files under ``config/``:
 (``knowledge_graphs``, ``analysis_params``, ``_base_dir``), so notebook code
 is unchanged from the pre-split layout.
 """
+import os
 from pathlib import Path
 import yaml
 
@@ -35,9 +36,17 @@ def find_config(start: Path = None) -> Path:
     return find_repo_root(start)
 
 
-def load_config(root=None):
+def load_config(root=None, *, trial_subset=True):
     """Load and merge the config files. *root* may be a repo root or a path
-    inside it; a legacy single ``config.yaml`` is still honoured."""
+    inside it; a legacy single ``config.yaml`` is still honoured.
+
+    ``trial_subset`` applies ``BKG_KGS`` or ``.trial_kgs`` (see
+    ``_apply_kg_subset``). It is for the dimension panel, notebooks 00 to 07,
+    whose cost is the whole panel. The grounding experiment and the set
+    builder name their graphs explicitly (``params.grounding.kgs``, ``--kgs``)
+    and pass ``trial_subset=False``, so a laptop trial file never removes a
+    graph they need.
+    """
     root = find_repo_root(root if root is None else Path(root))
     if (root / 'config' / 'kgs.yaml').exists():
         cfg = yaml.safe_load((root / 'config' / 'kgs.yaml').read_text()) or {}
@@ -46,7 +55,43 @@ def load_config(root=None):
         cfg = yaml.safe_load((root / 'config.yaml').read_text()) or {}
     cfg['_base_dir'] = root
     _normalise_entity_types(cfg)
+    if trial_subset:
+        _apply_kg_subset(cfg)
     return cfg
+
+
+def _apply_kg_subset(cfg: dict) -> None:
+    """Restrict the panel for trial runs: ``BKG_KGS`` or a ``.trial_kgs`` file.
+
+    Loading the full panel takes hours because of MATRIX (81 M edges). With
+    ``BKG_KGS=primekg`` in the environment, or a gitignored ``.trial_kgs``
+    file at the repo root naming the graphs (``primekg,hetionet``), every
+    notebook and tool sees a config that declares only those graphs, so
+    nothing else is loaded and no notebook needs editing. The file form is for
+    a laptop: it is never committed, so a clone on the cluster runs the full
+    panel. The full declared panel is kept under ``_full_panel`` so the panel
+    guard can record that the run was a deliberate subset rather than a silent
+    one.
+    """
+    raw = os.environ.get('BKG_KGS', '').strip()
+    source = 'BKG_KGS'
+    trial_file = Path(cfg['_base_dir']) / '.trial_kgs'
+    if not raw and trial_file.exists():
+        raw = ' '.join(l.split('#')[0] for l in trial_file.read_text().splitlines()).replace(' ', '').strip(',')
+        source = '.trial_kgs'
+    graphs = cfg.get('knowledge_graphs') or {}
+    if not raw or not graphs:
+        return
+    wanted = [k.strip() for k in raw.split(',') if k.strip()]
+    unknown = [k for k in wanted if k not in graphs]
+    if unknown:
+        raise KeyError(f'{source} names graphs not in config/kgs.yaml: {unknown}; '
+                       f'known: {list(graphs)}')
+    cfg['_full_panel'] = list(graphs)
+    cfg['knowledge_graphs'] = {k: graphs[k] for k in graphs if k in wanted}
+    print(f'{source}={raw}: TRIAL RUN on {len(wanted)} of {len(graphs)} graphs; '
+          f'checkpoints will record the reduced panel'
+          + ('  (delete .trial_kgs for the full panel)' if source == '.trial_kgs' else ''))
 
 
 def _normalise_entity_types(cfg: dict) -> None:
@@ -131,10 +176,20 @@ def assert_full_panel(loaded, config, allow_partial=False, notebook=None):
     got = list(loaded)
     missing = [n for n in expected if n not in got]
     report = {"expected_kgs": expected, "loaded_kgs": got, "missing_kgs": missing}
+    # A BKG_KGS trial run is a subset by construction: say so in the record
+    # and in the message, so the checkpoint can never pass for a full run.
+    full = config.get("_full_panel") if isinstance(config, dict) else None
+    if full and len(full) > len(expected):
+        report["full_panel"] = list(full)
+        report["subset_via"] = "BKG_KGS"
 
     where = f"{notebook}: " if notebook else ""
     if not missing:
-        print(f"{where}panel complete, {len(got)}/{len(expected)} graphs loaded")
+        if "subset_via" in report:
+            print(f"{where}trial subset complete, {len(got)} of {len(full)} declared graphs "
+                  f"loaded (BKG_KGS); not a full-panel run")
+        else:
+            print(f"{where}panel complete, {len(got)}/{len(expected)} graphs loaded")
         return report
 
     msg = (f"{where}{len(got)}/{len(expected)} graphs loaded; missing "

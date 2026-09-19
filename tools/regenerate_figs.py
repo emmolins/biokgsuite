@@ -154,7 +154,57 @@ def _render_06(ck, out) -> int:
     return n
 
 
+# The summary reads every dimension checkpoint, so the stem is None and the
+# renderer does its own loading. What it finds is printed; the manuscript
+# figure needs all seven, and a partial set is drawn only so the layout can
+# be checked before the last notebook has run.
+SUMMARY_CKPTS = {
+    'coverage':            '01_coverage',
+    'annotation_accuracy': '02_annotation_accuracy',
+    'trustworthiness':     '03_trustworthiness',
+    'topology':            '04_topology',
+    'stability':           '05_stability',
+    'task_performance':    '06_task_performance',
+    'generalisation':      '07_generalization',
+}
+
+
+def _render_00(ck, out) -> int:
+    """Figure 1 and its companions, from the seven dimension checkpoints."""
+    from biokgsuite.io import load_config
+    from biokgsuite.viz.summary import (CATEGORIES, DIM_LABELS, category_means,
+                                        dimension_scores, fig00_category_scores,
+                                        fig00_dimension_scores, fig00_metric_heatmap,
+                                        fig00_quality_profiles, metric_matrix)
+    ckpts = {dim: _load(stem) for dim, stem in SUMMARY_CKPTS.items()}
+    missing = [f'{SUMMARY_CKPTS[d]}.pkl' for d, c in ckpts.items() if c is None]
+    ckpts = {d: c for d, c in ckpts.items() if c is not None}
+    if not ckpts:
+        print('    no dimension checkpoint cached; run the dimension notebooks first')
+        return 0
+    if missing:
+        print(f'    {len(missing)} of {len(SUMMARY_CKPTS)} dimension checkpoints missing '
+              f'({", ".join(missing)}); drawing the {len(ckpts)} found, as n/a elsewhere')
+
+    kgs = list(load_config(ROOT)['knowledge_graphs'])
+    dims = list(SUMMARY_CKPTS)
+    summary_scores = dimension_scores(ckpts, kgs)
+    category_scores = category_means(summary_scores, CATEGORIES)
+    heat, labels, dim_of_metric, dim_data, col_labels = metric_matrix(ckpts, kgs)
+
+    out.figure(fig00_dimension_scores(summary_scores, dims, DIM_LABELS, kgs), 'dimension_scores')
+    # As in the notebook, the radar carries only the loaded dimensions as
+    # spokes; the dot plot and the heatmap show the missing ones as n/a.
+    out.figure(fig00_quality_profiles(summary_scores, [d for d in dims if d in ckpts],
+                                      DIM_LABELS, kgs), 'quality_profiles')
+    out.figure(fig00_category_scores(category_scores, CATEGORIES, kgs), 'category_scores')
+    out.figure(fig00_metric_heatmap(heat, labels, dim_of_metric, DIM_LABELS, dim_data,
+                                    col_labels, kgs), 'metric_heatmap')
+    return 4
+
+
 RENDERERS = {
+    '00_summary':         (None,                 _render_00),
     '01_coverage':        ('01_coverage',        _render_01),
     '02_annotation_accuracy': ('02_annotation_accuracy', _render_02),
     '03_trustworthiness': ('03_trustworthiness', _render_03),
@@ -186,13 +236,20 @@ def main() -> None:
     total = 0
     for nb in wanted:
         stem, render = RENDERERS[nb]
-        ck = _load(stem)
-        if ck is None:
-            print(f'  {nb:22s} SKIP  ({stem}.pkl not cached — run the notebook once)')
-            continue
-        if a.check:
-            print(f'  {nb:22s} ready')
-            continue
+        if stem is None:                       # renderer loads its own inputs
+            ck = {}
+            if a.check:
+                have = [s for s in SUMMARY_CKPTS.values() if (CKPT / f'{s}.pkl').exists()]
+                print(f'  {nb:22s} {len(have)}/{len(SUMMARY_CKPTS)} dimension checkpoints cached')
+                continue
+        else:
+            ck = _load(stem)
+            if ck is None:
+                print(f'  {nb:22s} SKIP  ({stem}.pkl not cached — run the notebook once)')
+                continue
+            if a.check:
+                print(f'  {nb:22s} ready')
+                continue
         n = render(ck, Outputs(nb, ROOT))
         print(f'  {nb:22s} {n} figure(s) redrawn')
         total += n

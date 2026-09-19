@@ -18,8 +18,14 @@ __pycache__/
 # OS
 .DS_Store
 
+# The Claude desktop app's output folder, if a session is linked to this tree
+Claude outputs/
+
 # Retired work, removed by tools/cleanup.sh
 _to_delete/
+
+# Laptop trial runs: the graphs to load, never committed (see README, Reproduction order)
+.trial_kgs
 
 # Transfer archives
 _incoming_*.tar.gz
@@ -50,6 +56,9 @@ data/gold_standards/ctd/*.gz
 # ── Results that are regenerated, or too large ───────────────────────────────
 # per-graph views (300 MB), rebuilt by build_post_cutoff_approvals.py --extract-views
 results/checkpoints/07_kg_views/
+# grounding rehearsals and smoke tests, never results
+results/tables/G02_run/runs_mock/
+results/tables/G02_run/runs_smoke/
 # loader cache
 data/matrix/_cache_matrix_*
 logs/

@@ -1,3 +1,4 @@
 KG,Node types,Mapped,Unmapped,Nodes,Nodes mapped (%),Unmapped types
+primekg,10,10,0,129375,100.0,-
 hetionet,11,11,0,47031,100.0,-
-biokg,6,5,1,105524,87.4,"Complex x13,246"
+biokg,6,6,0,105524,100.0,-

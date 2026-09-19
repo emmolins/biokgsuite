@@ -10,11 +10,11 @@
 #
 # Launches a Jupyter Lab server on a CPU compute node so you can run the main
 # notebooks (00-07) interactively and see the figures render inline. No GPU is
-# requested (embedding training lives in nb08). MATRIX is the memory driver,
+# requested (embedding training lives in supplementary/embeddings). MATRIX is the memory driver,
 # hence 120 GB.
 #
 # Usage:
-#   1. sbatch scripts/hpc/run_jupyter.sbatch
+#   1. sbatch hpc/run_jupyter.sbatch
 #   2. tail -f logs/jupyter-<jobid>.out      # wait for the "JUPYTER READY" block
 #   3. On your Mac, run the printed `ssh -N -L ...` tunnel command (new terminal)
 #   4. Open the printed http://127.0.0.1:<port>/lab?token=... URL in your browser
@@ -24,9 +24,10 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"
 mkdir -p logs
+[ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 
 module purge
 module load python/3.12.11

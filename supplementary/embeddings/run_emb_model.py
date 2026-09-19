@@ -105,9 +105,9 @@ def _run_gemma(kg_name, p, dim=768, batch_size=64, seed=42):
     print(f'{kg_name}/Gemma: {n_ent} entities | ~{pct_id:.1f}% look ID-only '
           f'(opaque alphanumerics)', flush=True)
     if pct_id > 50:
-        print(f'  WARNING: majority of names look like IDs, not human-readable.\n'
-              f'  Word-priors result for this KG will be near-noise without '
-              f'external name resolution.', flush=True)
+        print('  WARNING: majority of names look like IDs, not human-readable.\n'
+              '  Word-priors result for this KG will be near-noise without '
+              'external name resolution.', flush=True)
 
     # Cache the embedding matrix per (kg, model, dim) so repeated runs don't
     # re-encode (encoding is the slow part).

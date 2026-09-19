@@ -10,18 +10,38 @@ pair from the rest.
 `data/gold_standards/post_cutoff_approvals/{post_cutoff_approvals.csv, post_cutoff_pair_status.csv}`,
 `data/gold_standards/bridges/{approved_drug_pool.csv, approved_indications.csv, mondo_hierarchy.csv, do_diseases.csv, mesh_to_doid.csv}`
 **Outputs.** `results/{figures,tables}/G01_benchmark/`, `results/checkpoints/G01_benchmark.pkl`
-**Display item.** Supplementary figure (selection audit)
+**Display item.** Benchmark overview (`G01d_benchmark_overview`: approvals
+against each graph's content date, per-graph evaluability, how many graphs can
+evaluate each pair), intended for the main text; `G01a` to `G01c` (selection
+audit) for the supplement
 
 ## What is measured
 
 | | measured | reported, not scored |
 |---|---|---|
-| | per-graph covered / leaked / evaluable counts; size of the `common` subset | benchmark composition, distractor-pool statistics, the selection audit |
+| | per-graph covered / grounded / leaked / evaluable counts; size of the `common` subset | benchmark composition, distractor-pool statistics, the selection audit |
 
-Nothing here is a score. `evaluable_<kg>` is the builder's flag: the graph
-holds both nodes, the approval postdates the graph's content date, and the
-graph carries no direct edge. With `grounding.strict` it also excludes pairs
-within `prospective_max_hops` of a prior indication.
+Nothing here is a score. `covered_<kg>` is the builder's flag: the graph
+holds the drug at the degree floor and the disease. `grounded_<kg>` is the
+builder's second flag, computed by the dossier code itself: the drug has at
+least one gene or pathway neighbour a dossier would render, so it does not
+reach the model blank. `evaluable_<kg>` needs both, plus an approval that
+postdates the graph's content date and no direct edge; with `grounding.strict`
+it also excludes pairs within `prospective_max_hops` of a prior indication.
+Notebook 07 uses the same status table without the grounded flag, because a
+link-prediction scorer needs the node, not evidence text; the grounding
+experiment folds it in because a blank dossier is what the model is scored on.
+
+### Covered is not grounded
+
+A drug can clear the degree floor on drug-drug interaction or side-effect
+edges alone. Such a drug is in the graph, and notebook 07 can score it, but a
+dossier (gene and pathway neighbours only, ADME relations dropped where the
+graph labels them) has nothing to render, and the positive reaches the model
+as a bare label beside distractors that carry evidence. The two flags are kept
+apart, the gap between them is tabulated per graph (`graph_status.csv`), and
+G03 measures what that gap costs (the absence penalty) instead of folding it
+into the pooled lift unseen.
 
 ## Design notes
 

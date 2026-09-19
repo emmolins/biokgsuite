@@ -1,9 +1,13 @@
 KG,Entity,raw,resolved,resolvability,canonical_ids,top_unresolved
-biokg,Disease,9490,8052,0.8485,6870,"bare:1,420; MIM:18"
+biokg,Disease,9490,8052,0.8485,6870,"MeSH:1,420; MIM:18"
 hetionet,Disease,136,136,1.0,136,
-biokg,Drug,8805,5889,0.6688,5888,"bare:2,916"
-hetionet,Drug,1538,1451,0.9434,1451,bare:87
-biokg,Gene/Protein,59204,16483,0.2784,16575,"bare:42,721"
-hetionet,Gene/Protein,19145,19028,0.9939,19028,bare:117
-biokg,Pathway,14779,1956,0.1323,1956,"bare:12,823"
-hetionet,Pathway,1822,0,0.0,0,"PC7:1,528; WP3300:1; WP474:1"
+primekg,Disease,17080,16152,0.9457,20817,integer:910; grouped:18
+biokg,Drug,8805,6737,0.7651,9871,"DrugBank:2,068"
+hetionet,Drug,1538,1524,0.9909,3023,DrugBank:14
+primekg,Drug,7957,6210,0.7804,9222,"DrugBank:1,747"
+biokg,Gene/Protein,59204,16483,0.2784,16575,"UniProt:42,721"
+hetionet,Gene/Protein,19145,19028,0.9939,19028,integer:117
+primekg,Gene/Protein,27610,27272,0.9878,27273,integer:338
+biokg,Pathway,14779,1956,0.1323,1956,"Reactome:9,031; bare:3,792"
+hetionet,Pathway,1822,0,0.0,0,"PathwayCommons:1,528; WikiPathways:294"
+primekg,Pathway,2516,2492,0.9905,2492,Reactome:24

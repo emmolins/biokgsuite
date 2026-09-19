@@ -281,10 +281,14 @@ class KGDossiers:
     entrez_to_symbol : dict or None
         Entrez ID -> HGNC symbol; renders numeric gene IDs (DRKG 'Gene::3716',
         OpenBioLink 'NCBIGENE:3716') as symbols the model can reason over.
+    loaded : (edges, nodes) or None
+        A graph already in memory, as ``load_kg`` returns it, so a caller
+        that has loaded the graph for another purpose (the status builder's
+        view extraction) does not load it twice.
     """
 
     def __init__(self, kg_name, config, base, *, cap, anonymize_genes=False,
-                 bridge_mode='full', entrez_to_symbol=None):
+                 bridge_mode='full', entrez_to_symbol=None, loaded=None):
         self.kg_name = kg_name
         self.cap = cap
         self.anonymize_genes = anonymize_genes
@@ -293,7 +297,7 @@ class KGDossiers:
         spec = config['knowledge_graphs'][kg_name]
         et = spec['entity_types']
 
-        kg_df, nodes_df = load_kg(kg_name, config)
+        kg_df, nodes_df = loaded if loaded is not None else load_kg(kg_name, config)
         self.name_map = build_lookup_maps(nodes_df)['node_name_map']
         self.idx_to_type = dict(zip(nodes_df['idx'].astype(int), nodes_df['type'].astype(str)))
 
@@ -377,10 +381,12 @@ class KGDossiers:
             return m[name]
         return code
 
-    def _triples(self, node_idx, subject, disease_id, role, exclude_idx=()):
-        """One "<subject> <phrase> <object>" per kept neighbour. Gene edges
-        render the KG's interaction or regulation modality where available,
-        else the generic phrase; pathway and disease use fixed phrases.
+    def _neighbours(self, node_idx, role, exclude_idx=()):
+        """The neighbours a dossier for ``node_idx`` may render, before the
+        cap: {phrase: [neighbour idx, ...]} in the order the cap keeps them
+        (lowest degree first, one per rendered name). A drug keeps gene and
+        pathway neighbours, minus the ADME relations in PK_EXCLUDE and gene
+        nodes with no readable name; a disease also keeps disease neighbours.
         Drug-disease neighbours are excluded structurally (leakage)."""
         allowed = ('gene', 'pathway') if role == 'drug' else ('gene', 'pathway', 'disease')
         nb_rels, nb_role_of = defaultdict(set), {}
@@ -399,8 +405,7 @@ class KGDossiers:
             nb = nb_role_of[v]
             phrase = gene_verb(role, rels) if nb == 'gene' else phrases[nb]
             groups[phrase].append(v)
-        coder = self._gene_coder(disease_id) if self.anonymize_genes else None
-        out = []
+        out = {}
         for phrase in sorted(groups):
             seen, seen_names, nbrs = set(exclude_idx), set(), []
             for v in sorted(groups[phrase], key=lambda n: self.degree.get(n, 0)):
@@ -417,9 +422,26 @@ class KGDossiers:
                     continue
                 seen_names.add(name)
                 nbrs.append(v)
-                if len(nbrs) >= self.cap:
-                    break
-            for v in nbrs:
+            if nbrs:
+                out[phrase] = nbrs
+        return out
+
+    def n_mechanistic(self, node_idx, role='drug'):
+        """How many evidence lines a dossier for this node could carry before
+        the cap: zero means the node reaches the model with no evidence even
+        though the graph holds it. This is the ``grounded`` test the status
+        builder records per pair, computed by the same rule as the dossier."""
+        return sum(len(v) for v in self._neighbours(node_idx, role).values())
+
+    def _triples(self, node_idx, subject, disease_id, role, exclude_idx=()):
+        """One "<subject> <phrase> <object>" per kept neighbour, ``cap`` per
+        phrase. Gene edges render the KG's interaction or regulation modality
+        where available, else the generic phrase; pathway and disease use
+        fixed phrases."""
+        coder = self._gene_coder(disease_id) if self.anonymize_genes else None
+        out = []
+        for phrase, nbrs in self._neighbours(node_idx, role, exclude_idx).items():
+            for v in nbrs[:self.cap]:
                 nm = self.name_map.get(v, str(v))
                 if coder and self.idx_to_type.get(v) in self.gene_types:
                     nm = coder(nm)
