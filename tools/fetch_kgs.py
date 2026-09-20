@@ -314,11 +314,14 @@ def _check_latest(kg: str) -> None:
 
 
 def _member(archive_names, *, endswith: str, must_contain: str = '') -> str:
-    """Find exactly one archive member by suffix, or fail with the listing.
+    """Find exactly one archive member by file name, or fail with the listing.
 
-    The archives are looked into rather than assumed: a publisher that moves a
-    file inside its own zip should make this stop, not make it read the wrong
-    file.
+    ``endswith`` is matched against the member's own file name, not its path,
+    and the whole name must match: OpenBioLink's zip holds both
+    ``graph_files/edges.csv`` and ``graph_files/TN_edges.csv`` (the true
+    negatives), and a suffix match on ``edges.csv`` finds both. The archives
+    are looked into rather than assumed: a publisher that moves a file inside
+    its own zip should make this stop, not make it read the wrong file.
     """
     # Skip macOS packaging debris. DRKG's published tarball was rolled on a Mac
     # and carries an AppleDouble sidecar for every file ('._drkg.tsv'), which
@@ -329,11 +332,11 @@ def _member(archive_names, *, endswith: str, must_contain: str = '') -> str:
         return parts[0] == '__MACOSX' or any(q.startswith('._') for q in parts)
 
     hits = [n for n in archive_names
-            if n.endswith(endswith) and must_contain in n and not _is_debris(n)]
+            if n.rsplit('/', 1)[-1] == endswith and must_contain in n and not _is_debris(n)]
     if len(hits) != 1:
         listing = '\n      '.join(sorted(archive_names)[:40])
         raise RuntimeError(
-            f'expected exactly one member ending in {endswith!r}'
+            f'expected exactly one member named {endswith!r}'
             f'{" under " + must_contain if must_contain else ""}, found {len(hits)}: {hits}\n'
             f'    archive contains:\n      {listing}')
     return hits[0]

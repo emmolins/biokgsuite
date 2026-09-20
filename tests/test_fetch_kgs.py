@@ -118,6 +118,15 @@ def test_archive_member_is_found_not_assumed():
                       must_contain='graph_files') == 'ALL_DIR/graph_files/edges.csv'
 
 
+def test_member_matches_the_whole_file_name():
+    # The real OpenBioLink zip: TN_edges.csv (true negatives) sits beside edges.csv
+    # under graph_files, so a suffix match found two members and stopped the fetch.
+    names = ['ALL_DIR/graph_files/edges.csv', 'ALL_DIR/graph_files/TN_edges.csv',
+             'ALL_DIR/graph_files/edges_list.csv', 'ALL_DIR/graph_files/TN_edges_list.csv']
+    assert fk._member(names, endswith='edges.csv',
+                      must_contain='graph_files') == 'ALL_DIR/graph_files/edges.csv'
+
+
 def test_ambiguous_archive_member_raises():
     with pytest.raises(RuntimeError):
         fk._member(['a/edges.csv', 'b/edges.csv'], endswith='edges.csv')
