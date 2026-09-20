@@ -72,9 +72,10 @@ def candidate_view(candidates, *, arm, dossiers, disease_id, rng, mock, anonymiz
 
 
 # An error that no retry will cure: a wrong or inaccessible model, a missing
-# or rejected key, a malformed request, or an exhausted daily quota. One such
+# or rejected key, a malformed request, exhausted prepaid credits (402) or an
+# exhausted daily quota. One such
 # reply means every further call in the arm would fail the same way.
-FATAL_PREFIXES = ('400', '401', '403', '404', 'no key', 'not an API model', '429 daily quota')
+FATAL_PREFIXES = ('400', '401', '402', '403', '404', 'no key', 'not an API model', '429 daily quota')
 
 
 def is_fatal_error(error):

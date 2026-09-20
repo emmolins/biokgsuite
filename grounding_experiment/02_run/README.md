@@ -111,8 +111,11 @@ see the exact prompts the model received, one per arm.
 
 Real mode loads the three graphs once (several GB) and makes
 `queries x arms x shuffles` calls per model and seed (128 x 4 x 3 = 1,536
-for `main`). Keys: `OPENAI_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`, or
-Ollama for local tags.
+for `main`). Keys: `OPENAI_API_KEY` and `GEMINI_API_KEY` for the hosted
+models; Ollama serves local tags such as `llama3.3:70b`. Only rows without
+an error count as scored: a relaunch redoes the errored or missing calls,
+and a fatal reply (wrong model, no key, daily quota) stops the job after
+saving what was scored.
 
 The loop is `src/biokgsuite/grounding/runner.py`; prompt and parsing
 `prompt.py`; model dispatch `clients.py`; dossiers `dossiers.py`.
