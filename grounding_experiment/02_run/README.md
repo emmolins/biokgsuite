@@ -59,6 +59,15 @@ covered drug can still reach the model with no evidence line. Per row,
 `n_with_evidence` how many of the eight candidates carried one. An analysis
 of what the evidence did should condition on these, not on `covered`.
 
+The reverse also holds: a dossier is rendered whenever the graph holds the
+drug with a gene or pathway neighbour, even when the pair is not covered
+(drug degree below the floor, or the disease absent from the graph). The
+benchmark carries this as `shown_<kg>`, and the post-run check requires
+`pos_has_evidence` to equal it row for row; `grounded_<kg>` (shown and
+covered) is the stricter flag that the evaluable set is built on. So the
+pooled reading and the absence penalty condition on what was shown, and the
+evidence-controlled reading on what was evaluable.
+
 ### Repeats and seeds
 
 Three seeds redraw the distractors; three shuffles reorder the candidates.

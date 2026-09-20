@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from biokgsuite.grounding.analysis import (absence_penalty_table, RUN_KEY, arm_table, bh_fdr, boot_ci,
+from biokgsuite.grounding.analysis import (absence_penalty_table, fabrication_rate, variance_decomposition, RUN_KEY, arm_table, bh_fdr, boot_ci,
                                            capacity_table, chance_mrr, contrast_table,
                                            cross_model_corr, diagnostics,
                                            difficulty_table, load_runs, per_query,
@@ -296,3 +296,25 @@ def test_odds_ratio_and_bias_tests():
     cont = res[res['kind'] == 'continuous'].iloc[0]
     assert cont['effect'] == pytest.approx(cont['median_kept'] - cont['median_dropped'])
     assert res.loc[res['trait'] == 'area = a', 'effect'].iloc[0] == pytest.approx(orr)
+
+
+def test_variance_decomposition_shares_sum_to_one_and_find_the_lifted_arm():
+    df = make_runs(lifted_kg='primekg', p_top=0.9)
+    rng = np.random.default_rng(0)
+    vd = variance_decomposition(df, 'main', ARMS, 100, rng).set_index('quantity')
+    shares = vd.loc[['share_arm', 'share_model', 'share_interaction'], 'value']
+    assert abs(shares.sum() - 1) < 1e-9 and (shares >= 0).all()
+    # Every model is uniform except on the lifted arm, so the arm lever dominates.
+    assert vd.loc['share_arm', 'value'] > vd.loc['share_model', 'value']
+    assert vd.loc['ratio', 'value'] > 1
+    assert (vd['lo'] <= vd['value']).all() and (vd['value'] <= vd['hi']).all()
+    with pytest.raises(ValueError):
+        variance_decomposition(df[df.model == MODELS[0]], 'main', ARMS, 10, rng)
+
+
+def test_fabrication_rate_reads_the_none_arm_only():
+    df = make_runs()
+    df.loc[(df.arm == 'none') & (df.pair_id <= 2), 'pos_basis'] = 'both'
+    fr = fabrication_rate(df)
+    assert set(fr.model) == set(MODELS) and (fr.n == N_PAIRS * len(SEEDS) * len(SHUFFLES)).all()
+    assert np.allclose(fr.claimed_kg, 2 / N_PAIRS)

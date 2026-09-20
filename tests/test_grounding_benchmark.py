@@ -35,7 +35,9 @@ def base(tmp_path):
             n_mech = 0 if (kg == 'kgb' and db == 'DB1') else 3   # kgb holds pair 1 but has no gene or pathway for it
             rows.append(dict(kg=kg, drugbank_id=db, mondo_id=m, covered=cov, leaked=leak,
                              evaluable=cov and not leak, evaluable_strict=cov and not leak and db != 'DB2',
-                             drug_n_mech=n_mech if cov else 0, disease_n_mech=2, grounded=cov and n_mech > 0))
+                             # the builder counts neighbours whenever the drug node exists, covered or not:
+                             # kgb holds DB3 with neighbours but not its disease
+                             drug_n_mech=n_mech, disease_n_mech=2, grounded=cov and n_mech > 0))
     pd.DataFrame(rows).to_csv(root / B.SET_DIR / 'post_cutoff_pair_status.csv', index=False)
     (root / B.SET_DIR / 'PROVENANCE.txt').write_text('# source_sha256:  abc\n')
     # bridges the classifier and the pool need
@@ -64,6 +66,9 @@ def test_benchmark_flags_and_common(base):
     assert b.common.tolist() == [False, True, False, False]
     assert b.n_kg_covered.tolist() == [2, 2, 1, 2]
     assert b.n_kg_grounded.tolist() == [1, 2, 1, 2]
+    # shown is what a dossier would render, so kgb's pair 3 is shown though not covered
+    assert b.shown_kgb.tolist() == [False, True, True, True]
+    assert b.n_kg_shown.tolist() == [1, 2, 2, 2]
     assert b.approval_year.tolist() == [2023, 2024, 2025, 2026]
     assert b.modality.tolist() == ['small molecule'] * 4
     strict = B.load_benchmark(base, kgs=KGS, strict=True)

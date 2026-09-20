@@ -16,7 +16,7 @@ tables this stage writes.
 
 | | scored | reported, not scored |
 |---|---|---|
-| | grounding gain per (model, graph); graph contrasts, all pairs and evaluable-in-every-graph; the absence penalty per (model, graph) | parse diagnostics and miss-corrected MRR; rank distribution; `basis`, `evidence_agreement`, `confidence` |
+| | grounding gain per (model, graph); graph contrasts, all pairs and evaluable-in-every-graph; the absence penalty per (model, graph); the KG-against-LLM lever decomposition | parse diagnostics and miss-corrected MRR; rank distribution; `basis`, `evidence_agreement`, `confidence` |
 
 $$\text{gain}_{m,g} = \overline{\text{RR}}_{m,g} - \overline{\text{RR}}_{m,\text{none}}, \qquad \text{contrast}_{m,g,h} = \overline{\text{RR}}_{m,g} - \overline{\text{RR}}_{m,h}$$
 
@@ -60,6 +60,21 @@ and it ties the grounding experiment to dimension 01, since a coverage
 failure there becomes a ranking failure here. Pairs where no candidate
 carried a dossier are left out of the absent half, because there the arm is
 the `none` arm.
+
+### Two levers, one decomposition
+
+The claim that the graph and the model contribute independently needs a
+number. `lever_decomposition` takes the model-by-arm table of mean per-pair
+reciprocal rank on the `main` family and splits its variation into a model
+term, an arm term and an interaction term, the ordinary two-way decomposition
+of cell means; the shares are each over the total. A small interaction share
+is what "each graph adds the same increment whatever model it grounds" means.
+The paired scale beside it is the range of the arm means against the range of
+the model means, and their ratio. All of it is bootstrapped over pairs, since
+every cell mean averages the same pairs. `fabrication_rate` is the companion
+diagnostic: the ungrounded arm answers the same prompt, so its `basis` field
+describes no evidence, and the share of rows claiming `kg` or `both` is
+reported as the rate at which the model invented support.
 
 ### Rank test, corrected
 

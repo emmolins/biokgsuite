@@ -59,6 +59,12 @@ def load_benchmark(base, *, kgs, strict=False) -> pd.DataFrame:
     ``evaluable_strict`` when ``strict`` is set, otherwise ``evaluable``, and
     in either case also requires ``grounded``; ``common`` is their conjunction
     over ``kgs``. ``n_kg_covered`` and ``n_kg_grounded`` count graphs per pair.
+    ``shown_<kg>`` is looser than ``grounded_<kg>``: the graph holds the drug
+    with at least one renderable gene or pathway neighbour, whatever its degree
+    and whether or not the disease is in the graph. It is what the runner's
+    dossier renders for the positive on that arm, so it is the flag
+    ``pos_has_evidence`` must agree with; ``grounded`` additionally requires
+    coverage and is the flag the evaluable set is built on.
     """
     base = Path(base)
     gold = pd.read_csv(base / SET_DIR / 'post_cutoff_approvals.csv')
@@ -85,14 +91,16 @@ def load_benchmark(base, *, kgs, strict=False) -> pd.DataFrame:
         if g.isna().any():
             raise ValueError(f'grounded is not computed for {kg} ({int(g.isna().sum())} empty rows); '
                              f'rerun tools/build_post_cutoff_approvals.py --extract-views {kg}, then --kgs all')
-        s = s.assign(grounded=g.map({True: True, False: False, 'True': True, 'False': False}).astype(bool))
+        s = s.assign(grounded=g.map({True: True, False: False, 'True': True, 'False': False}).astype(bool),
+                     shown=pd.to_numeric(s['drug_n_mech'], errors='coerce').fillna(0) > 0)
         key = pd.MultiIndex.from_frame(bench[['drugbank_id', 'mondo_id']])
         for col, name in (('covered', f'covered_{kg}'), ('leaked', f'leaked_{kg}'),
-                          ('grounded', f'grounded_{kg}'), (flag, f'evaluable_{kg}')):
+                          ('grounded', f'grounded_{kg}'), ('shown', f'shown_{kg}'), (flag, f'evaluable_{kg}')):
             bench[name] = s[col].reindex(key).fillna(False).astype(bool).to_numpy()
         bench[f'evaluable_{kg}'] &= bench[f'grounded_{kg}']
     bench['n_kg_covered'] = bench[[f'covered_{kg}' for kg in kgs]].sum(axis=1)
     bench['n_kg_grounded'] = bench[[f'grounded_{kg}' for kg in kgs]].sum(axis=1)
+    bench['n_kg_shown'] = bench[[f'shown_{kg}' for kg in kgs]].sum(axis=1)
     bench['common'] = bench[[f'evaluable_{kg}' for kg in kgs]].all(axis=1)
 
     clf = OntologyClassifier(base)

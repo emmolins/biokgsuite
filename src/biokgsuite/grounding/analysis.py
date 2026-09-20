@@ -351,6 +351,79 @@ def absence_penalty_table(df, n_boot, rng, labels):
     return pd.DataFrame(rows)
 
 
+def variance_decomposition(df, family, arms, n_boot, rng):
+    """How much of the variation between conditions the graph, the model and
+    their interaction account for, on one family.
+
+    The unit is the (model, arm) cell mean of per-pair MRR. A two-way
+    decomposition of those cell means gives sums of squares for model, arm
+    and interaction; the shares are each over the total. Alongside, the
+    paired scale a reader can picture: the range of the arm means (the KG
+    lever) against the range of the model means (the LLM lever) and their
+    ratio. Every quantity is bootstrapped over pairs, because the cell means
+    are averages over the same pairs.
+    """
+    sub = df[df['family'] == family]
+    if sub.empty:
+        raise ValueError(f'no rows for family {family!r}')
+    pq = per_query(sub)
+    pq = pq[[a for a in arms if a in pq.columns]]
+    models = pq.index.get_level_values('model').unique()
+    if len(models) < 2 or pq.shape[1] < 2:
+        raise ValueError('the decomposition needs at least two models and two arms')
+
+    def one(frame):
+        cells = frame.groupby(level='model').mean()          # model x arm table of means
+        grand = cells.values.mean()
+        model_eff = cells.mean(axis=1) - grand
+        arm_eff = cells.mean(axis=0) - grand
+        n_m, n_a = cells.shape
+        ss_model = n_a * float((model_eff ** 2).sum())
+        ss_arm = n_m * float((arm_eff ** 2).sum())
+        resid = cells - grand - model_eff.values[:, None] - arm_eff.values[None, :]
+        ss_int = float((resid.values ** 2).sum())
+        total = ss_model + ss_arm + ss_int
+        arm_range = float(cells.mean(axis=0).max() - cells.mean(axis=0).min())
+        model_range = float(cells.mean(axis=1).max() - cells.mean(axis=1).min())
+        return dict(share_arm=ss_arm / total if total else np.nan,
+                    share_model=ss_model / total if total else np.nan,
+                    share_interaction=ss_int / total if total else np.nan,
+                    arm_range=arm_range, model_range=model_range,
+                    ratio=arm_range / model_range if model_range else np.nan)
+
+    point = one(pq)
+    pairs = pq.index.get_level_values('pair_id').unique().to_numpy()
+    boots = {k: [] for k in point}
+    for _ in range(n_boot):
+        draw = rng.choice(pairs, size=len(pairs), replace=True)
+        # resample pairs with replacement, keeping every model's rows for each drawn pair
+        frame = pd.concat([pq.xs(p, level='pair_id', drop_level=False) for p in draw])
+        for k, v in one(frame).items():
+            boots[k].append(v)
+    rows = []
+    for k, v in point.items():
+        b = np.asarray(boots[k], dtype=float)
+        rows.append(dict(family=family, quantity=k, value=v,
+                         lo=float(np.nanpercentile(b, 2.5)), hi=float(np.nanpercentile(b, 97.5)),
+                         n_pairs=len(pairs), n_models=len(models), n_arms=pq.shape[1]))
+    return pd.DataFrame(rows)
+
+
+def fabrication_rate(df):
+    """Share of ungrounded-arm rows in which the model reported using
+    knowledge-graph evidence (basis 'kg' or 'both') although none was shown,
+    per model and family. The prompt is identical across arms, so the
+    ungrounded arm still returns the evidence-use fields; this is the rate at
+    which they describe evidence that did not exist."""
+    none = df[df['arm'] == 'none']
+    out = (none.assign(claimed=none['pos_basis'].isin(['kg', 'both']))
+               .groupby(['family', 'model'])
+               .agg(n=('claimed', 'size'), claimed_kg=('claimed', 'mean'),
+                    mean_frac_basis_kg=('frac_basis_kg', 'mean'))
+               .reset_index())
+    return out
+
+
 BENCHMARK_COVARIATES = ['drugbank_id', 'mondo_id', 'drug_name', 'disease_name',
                         'area', 'modality', 'approval_year']
 
