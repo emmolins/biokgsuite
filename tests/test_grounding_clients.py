@@ -2,6 +2,8 @@
 
     python -m pytest tests/test_grounding_clients.py -q
 """
+import sys
+
 import pytest
 
 from biokgsuite.grounding import clients
