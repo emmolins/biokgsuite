@@ -163,3 +163,54 @@ def test_shuffle_streams_are_independent_of_order():
     b = R._shuffle_rng(0, 7, 1, 'kga').permutation(8).tolist()
     c = R._shuffle_rng(0, 7, 1, 'kgb').permutation(8).tolist()
     assert a == b and a != c
+
+
+def test_errored_rows_are_redone_and_scored_rows_kept(base, tmp_path):
+    b = B.load_benchmark(base, kgs=KGS)
+    q = B.build_queries(b, B.load_distractor_pool(base), family='main', pool_size=8, seed=0)
+    out = tmp_path / 'runs'
+    df, _ = R.run_family(family='main', queries=q, models=['m1'], kgs=KGS, dossiers={}, mock=True, seed=0,
+                         shuffles=2, pool_size=8, anonymize=True, temperature=0.7, api_delay=0, out_dir=out)
+    path = R.run_path(out, 'main', 'm1', 0)
+    # A file whose kga arm is full-length but half of it is failed calls, as a
+    # dead model produces: the failed rows must not count as scored.
+    bad = df.copy()
+    idx = bad.index[bad.arm == 'kga'][:4]
+    bad.loc[idx, ['error', 'rank', 'reciprocal_rank', 'parsed']] = ['404 no such model', 9, 1 / 9, 0]
+    bad.to_csv(path, index=False)
+    df2, aborted = R.run_family(family='main', queries=q, models=['m1'], kgs=KGS, dossiers={}, mock=True, seed=0,
+                                shuffles=2, pool_size=8, anonymize=True, temperature=0.7, api_delay=0, out_dir=out)
+    assert not aborted and df2.error.isna().all()
+    assert df2.groupby('arm').size().to_dict() == {'none': 8, 'kga': 8, 'kgb': 8}
+    cols = ['arm', 'pair_id', 'shuffle', 'positive_letter', 'rank']
+    pd.testing.assert_frame_equal(df2[cols].reset_index(drop=True), df[cols].reset_index(drop=True),
+                                  check_dtype=False)
+
+
+def test_fatal_api_error_saves_scored_rows_and_raises(base, tmp_path, monkeypatch):
+    b = B.load_benchmark(base, kgs=KGS)
+    q = B.build_queries(b, B.load_distractor_pool(base), family='main', pool_size=8, seed=0)
+    out = tmp_path / 'runs'
+    calls, real = [], R.rank_call
+
+    def dead_model(model, prompt, candidates, seed, *, mock, temperature, api_delay):
+        calls.append(1)
+        return real(model, prompt, candidates, seed, mock=True, temperature=temperature, api_delay=0) \
+            if len(calls) <= 8 else '__ERROR__ 404 {"error": "model does not exist"}'
+
+    class Blank:                      # a dossier index with nothing to show
+        def drug_dossier(self, *a, **k):
+            return None
+
+        def disease_profile(self, *a, **k):
+            return None
+
+    monkeypatch.setattr(R, 'rank_call', dead_model)
+    with pytest.raises(R.FatalAPIError, match='404'):
+        R.run_family(family='main', queries=q, models=['m1'], kgs=KGS, dossiers={'kga': Blank(), 'kgb': Blank()},
+                     mock=False, seed=0, shuffles=2, pool_size=8, anonymize=True, temperature=0.7,
+                     api_delay=0, out_dir=out)
+    saved = pd.read_csv(R.run_path(out, 'main', 'm1', 0))
+    # the none arm was scored in full; the first failed call stopped the job
+    assert saved.groupby('arm').size().to_dict() == {'none': 8}
+    assert saved.error.isna().all() and len(calls) == 9

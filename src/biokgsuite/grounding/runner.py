@@ -71,13 +71,32 @@ def candidate_view(candidates, *, arm, dossiers, disease_id, rng, mock, anonymiz
     return view, pos_letter
 
 
+# An error that no retry will cure: a wrong or inaccessible model, a missing
+# or rejected key, a malformed request, or an exhausted daily quota. One such
+# reply means every further call in the arm would fail the same way.
+FATAL_PREFIXES = ('400', '401', '403', '404', 'no key', 'not an API model', '429 daily quota')
+
+
+def is_fatal_error(error):
+    return error is not None and error.startswith(FATAL_PREFIXES)
+
+
+class FatalAPIError(RuntimeError):
+    """Raised by ``run_family`` after saving what was scored, so a job with a
+    dead model stops at once instead of filing a placeholder row per call."""
+
+
 def run_arm(*, family, arm, queries, model, seed, shuffles, pool_size, dossiers, mock, anonymize,
-            temperature, api_delay, example_dir=None, progress=None, abort_after=8):
-    """All queries in one arm for one model and seed. Returns (rows, aborted)."""
+            temperature, api_delay, example_dir=None, progress=None, abort_after=8, skip=frozenset()):
+    """All queries in one arm for one model and seed. Returns (rows, stopped),
+    where ``stopped`` is None, ``'rate_limited'`` or ``'fatal: <error>'``.
+    ``skip`` holds (pair_id, shuffle) already scored, which are not rerun."""
     condition = 'no_kg' if arm == 'none' else 'kg'
     rows, rate_limited, example_written = [], 0, False
     for q in queries:
         for s in range(shuffles):
+            if (q['pair_id'], s) in skip:
+                continue
             rng = _shuffle_rng(seed, q['pair_id'], s, arm)
             view, pos_letter = candidate_view(q['candidates'], arm=arm, dossiers=dossiers,
                                               disease_id=q['mondo_id'], rng=rng, mock=mock, anonymize=anonymize)
@@ -95,6 +114,8 @@ def run_arm(*, family, arm, queries, model, seed, shuffles, pool_size, dossiers,
                                  mock=mock, temperature=temperature, api_delay=api_delay)
             error = (response[len('__ERROR__'):].strip()[:200]
                      if isinstance(response, str) and response.startswith('__ERROR__') else None)
+            if is_fatal_error(error):
+                return rows, f'fatal: {error}'
             rate_limited = rate_limited + 1 if (error and '429' in error) else 0
             ordered, fields = parse_response(response, [c['letter'] for c in view])
             r = rank_of(pos_letter, ordered, pool_size)
@@ -121,8 +142,8 @@ def run_arm(*, family, arm, queries, model, seed, shuffles, pool_size, dossiers,
             if rate_limited >= abort_after:
                 # Every further call would fail the same way; keep what was scored
                 # and let the caller decide whether to retry the arm later.
-                return rows, True
-    return rows, False
+                return rows, 'rate_limited'
+    return rows, None
 
 
 def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, pool_size, anonymize,
@@ -131,10 +152,13 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
 
     ``dossiers`` maps KG name to a ``KGDossiers`` (or to None in mock mode). An
     existing file for (family, model, seed) is loaded, not recomputed, unless
-    ``force``. An arm that aborted on rate limits is left incomplete in the
-    file and reported; the next launch keeps the file's complete arms and
-    runs only the missing or partial ones, so a rate-limited job is finished
-    by resubmitting it, and ``force`` is only for redoing finished work.
+    ``force``. Only rows without an error count as scored: an arm that aborted
+    on rate limits, or whose calls failed, is left incomplete in the file and
+    reported; the next launch keeps every scored row and runs only the
+    (pair, shuffle) calls that are missing or errored, so a rate-limited job
+    is finished by resubmitting it, and ``force`` is only for redoing finished
+    work. A fatal API error (wrong model, no key, daily quota) saves the file
+    and raises ``FatalAPIError``.
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -143,32 +167,44 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
     per_arm = len(queries) * shuffles
     for model in models:
         path = run_path(out_dir, family, model, seed)
-        rows, todo = [], arms
+        rows, todo, done = [], arms, {}
         if path.exists() and not force:
             prev = pd.read_csv(path)
-            counts = prev.groupby('arm').size() if len(prev) else {}
+            ok = prev[prev['error'].isna()] if len(prev) else prev
+            n_err = len(prev) - len(ok)
+            counts = ok.groupby('arm').size() if len(ok) else {}
             complete = [a for a in arms if counts.get(a, 0) == per_arm]
             if len(complete) == len(arms):
-                frames.append(prev)
+                frames.append(ok.reset_index(drop=True))
                 continue
-            rows = prev[prev['arm'].isin(complete)].to_dict('records')
+            rows = ok.to_dict('records')
+            done = {a: set(zip(g.pair_id, g.shuffle)) for a, g in ok.groupby('arm')}
             todo = [a for a in arms if a not in complete]
-            print(f'{path.name}: {len(complete)} arms complete, completing {todo}')
-        progress = progress_factory(len(todo) * per_arm, f'{family} {model} seed {seed}') \
-            if progress_factory else None
+            print(f'{path.name}: {len(complete)} arms complete, completing {todo} '
+                  f'({len(ok)} rows kept, {n_err} errored rows redone)')
+        n_calls = sum(per_arm - len(done.get(a, ())) for a in todo)
+        progress = progress_factory(n_calls, f'{family} {model} seed {seed}') if progress_factory else None
+        fatal = None
         for arm in todo:
             arm_rows, stopped = run_arm(family=family, arm=arm, queries=queries, model=model, seed=seed,
                                         shuffles=shuffles, pool_size=pool_size,
                                         dossiers=None if arm == 'none' else dossiers.get(arm),
                                         mock=mock, anonymize=anonymize, temperature=temperature,
-                                        api_delay=api_delay, example_dir=example_dir, progress=progress)
+                                        api_delay=api_delay, example_dir=example_dir, progress=progress,
+                                        skip=frozenset(done.get(arm, ())))
             rows += arm_rows
             if stopped:
                 aborted.append((model, arm))
+                if stopped.startswith('fatal'):
+                    fatal = f'{model} on arm {arm}: {stopped}'
                 break
         if progress is not None:
             progress.close()
         df = pd.DataFrame(rows, columns=RUN_COLUMNS)
+        df = df.sort_values(['arm', 'pair_id', 'shuffle'], key=lambda c: c.map(arms.index) if c.name == 'arm' else c,
+                            kind='stable').reset_index(drop=True)
         df.to_csv(path, index=False)
         frames.append(df)
+        if fatal:
+            raise FatalAPIError(f'{fatal}; {len(df)} scored rows saved to {path.name}')
     return pd.concat(frames, ignore_index=True), aborted

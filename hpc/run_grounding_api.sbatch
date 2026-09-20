@@ -23,14 +23,15 @@
 #   for S in 0 1 2; do
 #     sbatch --job-name=ground-gpt    --export=ALL,MODEL=gpt-4.1-mini,SEED=$S                    hpc/run_grounding_api.sbatch
 #     sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S    hpc/run_grounding_api.sbatch
-#     sbatch --job-name=ground-groq   --export=ALL,MODEL=groq:llama-3.3-70b-versatile,SEED=$S    hpc/run_grounding_api.sbatch
 #   done
+#   Llama 3.3 70B runs locally instead (hpc/run_llm_ladder.sbatch with
+#   FAMILIES=main,common); Groq's hosted 70B is enterprise-only since 2026.
 #
 # Monitor:   squeue -u $USER;  tail -f logs/ground-<jobid>.out
 # Resumable: a (family, model, seed) file that exists is loaded, not rerun, so
 #            resubmit a job that died or was rate-limited (the log says
 #            "incomplete (rate-limited) arms") and it completes the file.
-# Keys:      .env at the repo root (OPENAI_API_KEY, GEMINI_API_KEY, GROQ_API_KEY).
+# Keys:      .env at the repo root (OPENAI_API_KEY, GEMINI_API_KEY).
 
 set -euo pipefail
 MODEL="${MODEL:?set MODEL, e.g. --export=ALL,MODEL=gpt-4.1-mini,SEED=0}"

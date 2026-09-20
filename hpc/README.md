@@ -133,7 +133,9 @@ sbatch --export=ALL,STAGE=benchmark hpc/run_grounding_analysis.sbatch
 for S in 0 1 2; do
   sbatch --job-name=ground-gpt    --export=ALL,MODEL=gpt-4.1-mini,SEED=$S                 hpc/run_grounding_api.sbatch
   sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S hpc/run_grounding_api.sbatch
-  sbatch --job-name=ground-groq   --export=ALL,MODEL=groq:llama-3.3-70b-versatile,SEED=$S hpc/run_grounding_api.sbatch
+  # Llama 3.3 70B is the third headline model and the 70B ladder rung in one
+  # run: local Ollama on an H100, both families, about 9 hours per seed.
+  sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main,common hpc/run_llm_ladder.sbatch
 done
 
 # D. Llama ladder on single H100s, one job per (model, seed)

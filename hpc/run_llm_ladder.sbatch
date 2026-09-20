@@ -21,6 +21,10 @@
 #     done
 #   done
 #
+# The 70B rung doubles as the third headline model, so it needs both
+# families and more time than the small rungs:
+#   sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main,common hpc/run_llm_ladder.sbatch
+#
 # Monitor:   tail -f logs/ladder-<jobid>.out
 # Resumable: just resubmit a job if it dies (idempotent output name per model+seed).
 

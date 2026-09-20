@@ -22,4 +22,4 @@ from .bias import run_bias_tests  # noqa: F401
 from .clients import api_key_for, is_api_model, load_dotenv, ollama_models_available, rank_call  # noqa: F401
 from .dossiers import KGDossiers, load_entrez_to_symbol  # noqa: F401
 from .prompt import build_prompt, parse_response, rank_of  # noqa: F401
-from .runner import run_family, run_path  # noqa: F401
+from .runner import FatalAPIError, is_fatal_error, run_family, run_path  # noqa: F401
