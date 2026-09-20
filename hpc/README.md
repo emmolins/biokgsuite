@@ -71,16 +71,32 @@ bash hpc/setup.sh            # uv venv at .venv, requirements.txt + the embeddin
 This repo has its own `.venv`; do not activate another project's. The job
 scripts activate it themselves.
 
-The graphs are not in git. From the laptop, in a second terminal (about
-25 GB; the MATRIX loader caches are left behind because their file name is
-keyed on the laptop's absolute paths and would not be reused, and `data/raw`
-holds only the fetch snapshots the notebooks never read):
+The graphs are not in git. The fast way is to let the cluster fetch them
+from the publishers at the pinned releases and check every derived file
+against the record committed in `data/<kg>/<KG>_RELEASE.txt`, so the cluster
+is known to hold the laptop's bytes:
 
 ```bash
-rsync -avz --progress --exclude '_cache_matrix_*' --exclude 'raw' \
+sbatch hpc/fetch_data.sbatch            # primekg, openbilink, matrix; 20 to 40 minutes
+tail -f logs/fetch-<jobid>.out          # must end with every line OK and DONE
+```
+
+Hetionet, BioKG and DRKG are small and come from the laptop with rsync (DRKG
+is fetchable too, but its publisher posts no checksum). From the laptop:
+
+```bash
+rsync -avz --partial --progress --exclude '_cache_matrix_*' --exclude 'raw' \
+      --include='/hetionet/***' --include='/biokg/***' --include='/drkg/***' --include='/crosswalks/***' \
+      --include='/gold_standards/***' --include='/*.md' --exclude='*' \
       ~/Desktop/biokgsuite-bib/data/ ashburn-login:biokgsuite-bib/data/
 scp ~/Desktop/biokgsuite-bib/.env ashburn-login:biokgsuite-bib/.env
 ```
+
+Pushing everything from the laptop instead (about 25 GB) also works and is
+the same command without the include lines; the MATRIX loader caches are
+left behind because their file name is keyed on the laptop's absolute paths
+and would not be reused, and `data/raw` holds only the fetch snapshots the
+notebooks never read.
 
 Then on the cluster: `du -sh ~/biokgsuite-bib/data/*/` should show matrix
 about 12 GB, openbilink 1.7 GB, primekg 0.9 GB, and `cat .env` should show the

@@ -42,6 +42,8 @@ data/drkg/*
 data/hetionet/*
 data/matrix/*
 data/openbilink/*
+# a 130 KB curated crosswalk that no fetch script rebuilds: kept in git
+!data/openbilink/pubchem_to_drugbank.csv
 data/primekg/*
 !data/*/*_RELEASE.txt
 !data/*/README.md
