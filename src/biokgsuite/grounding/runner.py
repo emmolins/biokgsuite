@@ -93,7 +93,7 @@ def run_arm(*, family, arm, queries, model, seed, shuffles, pool_size, dossiers,
                 example_written = True
             response = rank_call(model, prompt, view, seed * 100_000 + q['pair_id'] * 10 + s,
                                  mock=mock, temperature=temperature, api_delay=api_delay)
-            error = (response[len('__ERROR__'):].strip()[:120]
+            error = (response[len('__ERROR__'):].strip()[:200]
                      if isinstance(response, str) and response.startswith('__ERROR__') else None)
             rate_limited = rate_limited + 1 if (error and '429' in error) else 0
             ordered, fields = parse_response(response, [c['letter'] for c in view])

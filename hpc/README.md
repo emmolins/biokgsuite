@@ -118,6 +118,15 @@ sbatch hpc/run_main.sbatch
 # B. grounding benchmark; wait for it to finish (squeue) before C, D, E
 sbatch --export=ALL,STAGE=benchmark hpc/run_grounding_analysis.sbatch
 
+# Rate limits. A run that stops with "incomplete (rate-limited) arms" in the
+# log kept every completed arm; resubmit the same (model, seed) and it finishes
+# the file. The error column of the runs file says which limit was hit: a
+# per-minute limit clears between retries, a per-day quota does not, and the
+# client now aborts at once on a per-day quota. If Gemini reports
+# GenerateRequestsPerDay..., the key is on a free tier: enable billing on the
+# Google AI Studio project (or use a paid key) before resubmitting, or the job
+# will stop again after the same number of calls the next day.
+#
 # C. hosted models: one job per (model, seed). Same --job-name per provider
 #    plus --dependency=singleton in the script means one job per provider at
 #    a time (its rate limit), three providers in parallel.

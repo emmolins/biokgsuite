@@ -124,6 +124,7 @@ def _post_with_backoff(url, headers, body, timeout=180, max_retries=8):
     """
     import requests
     delay = 3.0
+    detail = ''
     for _ in range(max_retries):
         try:
             r = requests.post(url, headers=headers, json=body, timeout=timeout)
@@ -132,6 +133,11 @@ def _post_with_backoff(url, headers, body, timeout=180, max_retries=8):
             delay = min(delay * 2, 60)
             continue
         if r.status_code == 429:
+            detail = ' '.join(r.text.split())[:200]
+            if is_daily_quota(detail):
+                # A per-day quota does not reopen within any retry ladder;
+                # report it at once so the arm aborts instead of idling.
+                return None, f'__ERROR__ 429 daily quota exhausted: {detail}'
             ra = r.headers.get('retry-after', '')
             try:
                 wait = float(ra)
@@ -141,7 +147,15 @@ def _post_with_backoff(url, headers, body, timeout=180, max_retries=8):
             delay = min(delay * 2, 60)
             continue
         return r, None
-    return None, '__ERROR__ 429 rate-limited (gave up after retries)'
+    return None, f'__ERROR__ 429 rate-limited (gave up after retries): {detail}'
+
+
+def is_daily_quota(text):
+    """True when a 429 body names a per-day quota (Gemini's
+    GenerateRequestsPerDay..., Groq's tokens per day), which a retry ladder
+    cannot wait out."""
+    t = text.lower()
+    return 'perday' in t or 'per day' in t or 'daily' in t
 
 
 def api_rank(name, prompt, temperature):

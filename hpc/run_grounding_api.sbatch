@@ -36,7 +36,7 @@ set -euo pipefail
 MODEL="${MODEL:?set MODEL, e.g. --export=ALL,MODEL=gpt-4.1-mini,SEED=0}"
 SEED="${SEED:?set SEED, e.g. --export=ALL,MODEL=gpt-4.1-mini,SEED=0}"
 FAMILIES="${FAMILIES:-main,common}"
-SAFE="$(echo "$MODEL" | tr ':/.' '___')"
+SAFE="$(echo "$MODEL" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/_/g; s/^_//; s/_$//')"   # same slug as runner.model_slug
 
 REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"; mkdir -p logs
