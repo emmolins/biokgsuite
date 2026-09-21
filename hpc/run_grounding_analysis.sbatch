@@ -20,7 +20,11 @@
 #                     Submit after every run_grounding_api / run_llm_* job
 #                     has finished.
 #
+#   STAGE=provisional 02_run and 03_analysis over the finished models only
+#                     (BKG_MODELS=a+b), while other models are still running.
+#
 #   sbatch --export=ALL,STAGE=benchmark hpc/run_grounding_analysis.sbatch
+#   sbatch --export=ALL,STAGE=provisional,BKG_MODELS=gpt-4.1-mini+gemini:gemini-3.5-flash-lite hpc/run_grounding_analysis.sbatch
 #   sbatch hpc/run_grounding_analysis.sbatch
 
 set -euo pipefail
@@ -56,7 +60,16 @@ case "$STAGE" in
     run 03_analysis
     run 04_scaling
     run 05_diagnostic ;;
-  *) echo "FATAL: STAGE must be benchmark or analysis"; exit 1 ;;
+  provisional)
+    # A scoped pass while some model's runs are still in progress: BKG_MODELS
+    # (plus-separated) names the finished models, 02_run loads only their files
+    # and never starts a call, 03_analysis reads the same subset. Tables it
+    # writes are provisional; rerun STAGE=analysis when every model is in.
+    [ -n "${BKG_MODELS:-}" ] || { echo "FATAL: STAGE=provisional needs BKG_MODELS, e.g. --export=ALL,STAGE=provisional,BKG_MODELS=gpt-4.1-mini+gemini:gemini-3.5-flash-lite"; exit 1; }
+    echo "PROVISIONAL analysis over $BKG_MODELS"
+    BKG_MODE=real run 02_run
+    run 03_analysis ;;
+  *) echo "FATAL: STAGE must be benchmark, analysis or provisional"; exit 1 ;;
 esac
 
 echo; echo ">>> tests"; python -m pytest tests -q -k grounding
