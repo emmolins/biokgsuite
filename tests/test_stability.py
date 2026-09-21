@@ -128,6 +128,22 @@ def test_build_graph_keeps_every_predicate_and_counts_triples():
     assert sum(d['n_triples'] for *_, d in G.edges(data=True)) == 6
 
 
+def test_build_graph_counts_assertions_not_rows():
+    """A predicate stored in both directions (PrimeKG) or repeated is one
+    assertion; two different predicates on one pair are two."""
+    import pandas as pd
+    from biokgsuite.graph.graph_utils import build_graph
+    kg = pd.DataFrame({
+        'x_index': [1, 2, 1, 3, 3, 4],
+        'y_index': [2, 1, 2, 4, 4, 3],
+        'relation': ['a', 'a', 'a', 'd', 'e', 'd'],
+    })
+    nodes = pd.DataFrame({'idx': [1, 2, 3, 4], 'type': ['T'] * 4, 'name': list('vwxy')})
+    G = build_graph(kg, nodes)
+    assert G[1][2]['n_triples'] == 1 and G[1][2]['relations'] == frozenset({'a'})
+    assert G[3][4]['n_triples'] == 2 and G[3][4]['relations'] == frozenset({'d', 'e'})
+
+
 def test_indexed_edges_defaults_to_one_triple_when_absent():
     G = nx.Graph()
     G.add_edge(1, 2)

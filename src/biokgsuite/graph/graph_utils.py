@@ -19,15 +19,22 @@ def build_graph(kg: pd.DataFrame, nodes: pd.DataFrame) -> nx.Graph:
     carries:
 
     ``relations``   frozenset of every predicate asserted between the pair
-    ``n_triples``   how many rows of the edge table assert it
+    ``n_triples``   how many DISTINCT predicates assert it (len(relations))
 
     The previous version stored a single ``relation`` and let the LAST row win,
     silently dropping the others: 142,473 Hetionet pairs carry two predicates
     and 15 carry three, so one of each was lost. Keeping the full set also lets
     a caller perturb the graph at the level of ASSERTIONS rather than of pairs,
     which is what incompleteness in a real KG looks like — a pair supported by
-    three triples should survive losing one of them. ``n_triples`` counts rows,
-    so a predicate asserted twice counts twice.
+    three predicates should survive losing one of them.
+
+    ``n_triples`` counts distinct predicates, not rows. Rows overcount: PrimeKG
+    stores every undirected edge in both directions, so counting rows gave every
+    PrimeKG pair a multiplicity of exactly 2.000 and a 30% triple loss severed
+    only 9% of its pairs, against 27 to 30% for graphs that store each edge
+    once. A predicate repeated in the reverse direction, or repeated outright,
+    is one assertion; a pair carried by two different predicates (DRKG's
+    DrugBank and GNBR relations, say) is two.
 
     The frozensets are interned: distinct predicate sets number in the hundreds
     while edges number in the millions, so one shared object per distinct set
@@ -96,7 +103,7 @@ def build_graph(kg: pd.DataFrame, nodes: pd.DataFrame) -> nx.Graph:
     pair_lo = uniq // span
     pair_hi = uniq % span
     G.add_edges_from(
-        (int(u), int(v), {'relations': sets[i], 'n_triples': int(mult[i])})
+        (int(u), int(v), {'relations': sets[i], 'n_triples': len(sets[i])})
         for i, (u, v) in enumerate(zip(pair_lo, pair_hi))
     )
     return G
