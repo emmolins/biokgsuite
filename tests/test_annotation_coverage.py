@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 from biokgsuite.io.schemes import IdSchemes
-from biokgsuite.stats.annotation import (CORRECT, UNKNOWN, WRONG_SCHEME, bare_number_types,
+from biokgsuite.stats.annotation import (AGNOSTIC, CORRECT, UNKNOWN, WRONG_SCHEME, bare_number_types,
                                          verdict)
 from biokgsuite.stats.coverage import coverage, schema_coverage
 
@@ -46,6 +46,14 @@ def schemes():
     ('DB00590', 'Disease', WRONG_SCHEME),                  # a drug accession filed as a disease
     ('R-HSA-109582', 'Drug', WRONG_SCHEME),
     ('not-an-id', 'Drug', UNKNOWN),
+    # A UMLS CUI names any kind of concept: under Disease it is a recognised
+    # shape, under Anatomy it is not a mislabelling but an identifier the
+    # check cannot judge (MATRIX files 110,327 of them under AnatomicalEntity).
+    ('UMLS:C0006142', 'Disease', CORRECT),
+    ('UMLS:C0006142', 'Anatomy', AGNOSTIC),
+    ('C0000727', 'Gene/Protein', AGNOSTIC),
+    ('MESH:D001943', 'Anatomy', AGNOSTIC),
+    ('EFO:0009491', 'Phenotype', AGNOSTIC),
 ])
 def test_verdict_on_real_shapes(schemes, raw, declared, expected):
     assert verdict(raw, declared, schemes) == expected

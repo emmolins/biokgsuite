@@ -43,6 +43,12 @@ class IdSchemes:
             etype: [(e['scheme'], re.compile(e['pattern']), bool(e.get('ambiguous')))
                     for e in entries]
             for etype, entries in raw.items()}
+        # Schemes that name concepts of every kind (UMLS, MeSH, EFO). Their
+        # shape is recognised, but fitting one under another type is not
+        # evidence of a mislabelling: see `types_evidencing`.
+        self.agnostic = {
+            etype: {e['scheme'] for e in entries if e.get('agnostic')}
+            for etype, entries in raw.items()}
         self._raw = raw
 
     # ------------------------------------------------------------- matching
@@ -60,21 +66,30 @@ class IdSchemes:
         return None, False
 
     def types_matching(self, raw) -> set:
-        """Every entity type whose declared shapes this identifier fits.
-
-        Used to tell a mislabelling from an unrecognised identifier: a value
-        that fits some other type's shape is evidence of the former.
-        """
+        """Every entity type whose declared shapes this identifier fits."""
         s = self._bare(raw)
         return {etype for etype, entries in self.schemes.items()
                 if any(rx.match(s) for _, rx, _ in entries)}
+
+    def types_evidencing(self, raw) -> set:
+        """Types whose TYPE-SPECIFIC shapes this identifier fits.
+
+        Used to tell a mislabelling from an identifier the check cannot judge:
+        a DrugBank accession under Anatomy fits a drug-only shape and is a
+        mislabelling; a UMLS CUI under Anatomy fits only schemes that name
+        every kind of concept, and says nothing about the type.
+        """
+        s = self._bare(raw)
+        return {etype for etype, entries in self.schemes.items()
+                if any(rx.match(s) and scheme not in self.agnostic.get(etype, ())
+                       for scheme, rx, _ in entries)}
 
     # ------------------------------------------------------------ reporting
     def table(self):
         """The declared schemes, for printing beside the results."""
         return [{'Entity type': etype, 'Scheme': e['scheme'], 'Pattern': e['pattern'],
                  'Example': e['example'], 'Shared shape': bool(e.get('ambiguous')),
-                 'Note': e.get('note', '')}
+                 'Type-agnostic': bool(e.get('agnostic')), 'Note': e.get('note', '')}
                 for etype, entries in self._raw.items() for e in entries]
 
     def shared_shapes(self):

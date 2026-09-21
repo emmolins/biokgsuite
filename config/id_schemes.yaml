@@ -36,6 +36,16 @@
 #             This corrects the arbiter, not any graph's score: identifiers that
 #             match no shape were already outside the scored denominator, so the
 #             change moves `nodes_judged_pct`, not `entity_validity`.
+# 2026-09-21  Type-agnostic schemes. UMLS, MeSH and EFO name concepts of every
+#             kind (a CUI is an anatomical structure, a procedure or a protein
+#             as readily as a disease), so an identifier from one of them says
+#             nothing about the type a graph declares. They stay declared where
+#             graphs write them, so the shape is still recognised, but they are
+#             marked `agnostic: true`: fitting one of them under some OTHER type
+#             is no longer a mislabelling, only an identifier the check cannot
+#             adjudicate. Found on MATRIX, which files 110,327 UMLS CUIs under
+#             AnatomicalEntity and was charged for every one of them; the
+#             change moves those nodes out of the judged denominator.
 
 id_schemes:
 
@@ -46,13 +56,13 @@ id_schemes:
     - {scheme: ChEBI,    pattern: '^CHEBI:\d+$',          example: 'CHEBI:15365'}
     - {scheme: PubChem,  pattern: '^(?i:pubchem\.compound):\d+$', example: 'PUBCHEM.COMPOUND:2244',
        note: 'the Biolink CURIE form, as OpenBioLink writes every drug'}
-    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: 'MESH:D001241',
        note: 'DRKG writes Compound::MESH:D001241 for substances it took from
               literature mining; the MeSH prefix names both chemicals and diseases'}
     - {scheme: PubChem,  pattern: '^\d+$',   ambiguous: true, example: '2244',
        note: 'bare CID; indistinguishable from an Entrez gene id'}
-    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: C000006,
        note: 'most Supplementary Concept Records are substances; declared here
               as well as under Disease because the shape truly is shared'}
@@ -64,21 +74,21 @@ id_schemes:
        note: 'MIM: and OMIM: name one registry; BioKG and others write the
               short prefix, so the spelling must not decide validity'}
     - {scheme: Orphanet, pattern: '^(?i:orphanet):\d+$',  example: 'ORPHANET:377788'}
-    - {scheme: EFO,      pattern: '^EFO:\d{7}$',          example: 'EFO:0009491'}
-    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: EFO,      pattern: '^EFO:\d{7}$', agnostic: true,          example: 'EFO:0009491'}
+    - {scheme: MeSH,     pattern: '^(?i:mesh):[CD](\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: 'MESH:D001943',
        note: 'the prefixed form DRKG writes (Disease::MESH:D001943); shared with Drug'}
-    - {scheme: UMLS,     pattern: '^(?i:umls):C\d{7}$',   ambiguous: true, example: 'UMLS:C0006142',
+    - {scheme: UMLS,     pattern: '^(?i:umls):C\d{7}$',   ambiguous: true, agnostic: true, example: 'UMLS:C0006142',
        note: 'the prefixed form MATRIX keeps for diseases it cannot bridge to MONDO'}
     - {scheme: ICD-9-CM, pattern: '^(?i:icd9):[EV]?\d{2,3}(\.\d{1,2})?$', example: 'ICD9:804.61',
        note: 'MATRIX; a real disease scheme with no MONDO crosswalk, so valid in shape,
               unresolved in coverage'}
-    - {scheme: UMLS,     pattern: '^C\d{7}$',   ambiguous: true, example: C0012634,
+    - {scheme: UMLS,     pattern: '^C\d{7}$',   ambiguous: true, agnostic: true, example: C0012634,
        note: 'also the shape of a side-effect CUI; UMLS spans both'}
-    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: D004194,
        note: 'D+6 legacy and D+9 modern UIs; descriptors also cover symptoms'}
-    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: C531609,
        note: 'Supplementary Concept Record; the C space also holds SCR_Chemical
               (C000006 is "insulin, neutral"), so the shape alone does not
@@ -139,11 +149,11 @@ id_schemes:
        note: 'bare UBERON number as PrimeKG writes it'}
 
   Side Effect:
-    - {scheme: UMLS,   pattern: '^C\d{7}$',   ambiguous: true, example: C0000727}
+    - {scheme: UMLS,   pattern: '^C\d{7}$',   ambiguous: true, agnostic: true, example: C0000727}
     - {scheme: MedDRA, pattern: '^\d{8}$',    ambiguous: true, example: '10000647'}
 
   Symptom:
-    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: D000006}
 
   Pharmacologic Class:
@@ -156,9 +166,9 @@ id_schemes:
               shape with MONDO and Entrez'}
 
   Exposure:
-    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH descriptor, pattern: '^D(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: D000393}
-    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true,
+    - {scheme: MeSH SCR, pattern: '^C(\d{6}|\d{9})$', ambiguous: true, agnostic: true,
        example: C000188,
        note: 'CTD exposure chemicals are MeSH-keyed, so the shapes are those of
               Drug and Disease SCRs'}

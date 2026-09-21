@@ -34,9 +34,12 @@ These are Table 1's names for the two metrics and the names nb00 reads out of
 the checkpoint; keep them in step with the manuscript.
 
 An identifier matching no declared shape at all is neither right nor wrong: it
-is excluded from both denominators and counted separately.  That exclusion is
-load-bearing and is why the score must be read beside `nodes_judged_pct` and
-`edges_checkable_pct`, which say how much of the graph the check could see.
+is excluded from both denominators and counted separately.  So is an
+identifier whose only matching schemes are type-agnostic (UMLS, MeSH, EFO name
+concepts of every kind, so a CUI under Anatomy is no evidence of mislabelling).
+Those exclusions are load-bearing and are why the score must be read beside
+`nodes_judged_pct` and `edges_checkable_pct`, which say how much of the graph
+the check could see.
 
 Used by ``biokgsuite_dimensions/02_annotation_accuracy``.
 """
@@ -56,9 +59,10 @@ TYPES = ('Drug', 'Disease', 'Gene/Protein', 'Pathway',
          'Anatomy', 'Side Effect', 'Symptom', 'Pharmacologic Class',
          'Phenotype', 'Exposure', 'Complex', 'Taxon', 'ATC class', 'Cell type')
 
-# The three verdicts check 1 can return.
+# The four verdicts check 1 can return.
 CORRECT      = 'correct'        # the shape fits a scheme the declared type accepts
-WRONG_SCHEME = 'wrong_scheme'   # the shape fits some OTHER type: a mislabelling
+WRONG_SCHEME = 'wrong_scheme'   # the shape fits some OTHER type's own scheme: a mislabelling
+AGNOSTIC     = 'agnostic'       # the shape fits only schemes that name every kind of concept
 UNKNOWN      = 'unknown'        # the shape fits no declared scheme at all
 
 # Scored: a graph is charged only for shapes that belong to a type it did not
@@ -116,7 +120,9 @@ def verdict(raw: str, declared: str, schemes) -> str:
     scheme, _ambiguous = schemes.match(raw, declared)
     if scheme is not None:
         return CORRECT
-    return WRONG_SCHEME if schemes.types_matching(raw) else UNKNOWN
+    if schemes.types_evidencing(raw):
+        return WRONG_SCHEME
+    return AGNOSTIC if schemes.types_matching(raw) else UNKNOWN
 
 
 def _canonical_of(type_map: dict) -> dict:
@@ -159,8 +165,8 @@ def entity_validity(kgs: dict, type_maps: dict, resolvers: dict,
 
         entity validity = valid / (valid + wrong scheme)
 
-    Identifiers matching no declared shape are excluded from that denominator
-    and given their own column. They are a gap on our side as readily as an
+    Identifiers matching no declared shape, or only a type-agnostic one, are
+    excluded from that denominator and given their own columns. They are a gap on our side as readily as an
     error on the curator's, so `Nodes` is carried beside the rate to show how
     much of the type the accuracy actually speaks for.
     """
@@ -181,7 +187,7 @@ def entity_validity(kgs: dict, type_maps: dict, resolvers: dict,
                 if canon in lookup.get(raw, ()):        # check 2, reported only
                     n_registry += 1
                 if v == WRONG_SCHEME:
-                    actually.update(schemes.types_matching(raw))
+                    actually.update(schemes.types_evidencing(raw))
             judged = counts[CORRECT] + counts[WRONG_SCHEME]
             # Registry confirmation is reported for the three types drug
             # repurposing turns on, and for no others. Everything else is
@@ -194,6 +200,7 @@ def entity_validity(kgs: dict, type_maps: dict, resolvers: dict,
                 'Nodes': len(sub),
                 'Valid': counts[CORRECT],
                 'Wrong scheme': counts[WRONG_SCHEME],
+                'Type-agnostic scheme': counts[AGNOSTIC],
                 'Unrecognised shape': counts[UNKNOWN],
                 'Validity (%)': round(100 * counts[CORRECT] / judged, 2) if judged else float('nan'),
                 # Reported, never scored. The complement is NOT an error rate:
@@ -223,7 +230,7 @@ def pool_by_canonical(entity_acc: pd.DataFrame) -> pd.DataFrame:
     keys = ['KG', 'Canonical']
     g = (entity_acc.groupby(keys, as_index=False)
          .agg({'Nodes': 'sum', 'Valid': 'sum', 'Wrong scheme': 'sum',
-               'Unrecognised shape': 'sum'}))
+               'Type-agnostic scheme': 'sum', 'Unrecognised shape': 'sum'}))
     judged = g['Valid'] + g['Wrong scheme']
     g['Validity (%)'] = (100 * g['Valid'] / judged.where(judged > 0)).round(2)
 
