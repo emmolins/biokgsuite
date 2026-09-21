@@ -185,6 +185,17 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
                   f'({len(ok)} rows kept, {n_err} errored rows redone)')
         n_calls = sum(per_arm - len(done.get(a, ())) for a in todo)
         progress = progress_factory(n_calls, f'{family} {model} seed {seed}') if progress_factory else None
+
+        def save():
+            # Written after every arm, so a job killed by its time limit keeps
+            # the arms it finished and the next launch runs only the rest.
+            df = pd.DataFrame(rows, columns=RUN_COLUMNS)
+            df = df.sort_values(['arm', 'pair_id', 'shuffle'],
+                                key=lambda c: c.map(arms.index) if c.name == 'arm' else c,
+                                kind='stable').reset_index(drop=True)
+            df.to_csv(path, index=False)
+            return df
+
         fatal = None
         for arm in todo:
             arm_rows, stopped = run_arm(family=family, arm=arm, queries=queries, model=model, seed=seed,
@@ -194,6 +205,7 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
                                         api_delay=api_delay, example_dir=example_dir, progress=progress,
                                         skip=frozenset(done.get(arm, ())))
             rows += arm_rows
+            save()
             if stopped:
                 aborted.append((model, arm))
                 if stopped.startswith('fatal'):
@@ -201,10 +213,7 @@ def run_family(*, family, queries, models, kgs, dossiers, mock, seed, shuffles, 
                 break
         if progress is not None:
             progress.close()
-        df = pd.DataFrame(rows, columns=RUN_COLUMNS)
-        df = df.sort_values(['arm', 'pair_id', 'shuffle'], key=lambda c: c.map(arms.index) if c.name == 'arm' else c,
-                            kind='stable').reset_index(drop=True)
-        df.to_csv(path, index=False)
+        df = save()
         frames.append(df)
         if fatal:
             raise FatalAPIError(f'{fatal}; {len(df)} scored rows saved to {path.name}')

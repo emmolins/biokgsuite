@@ -28,9 +28,11 @@ def prepare_kg(kg_name, seed=42, neg_ratio=5):
     kg_cfg = config['knowledge_graphs'][kg_name]
     etypes = kg_cfg['entity_types']
     type_map = dict(zip(nodes_df['idx'], nodes_df['type']))
-    drug_idx = {i for i, t in type_map.items() if t == etypes.get('Drug', 'Drug')}
-    disease_idx = {i for i, t in type_map.items() if t == etypes.get('Disease', 'Disease')}
-    gene_idx = {i for i, t in type_map.items() if t == etypes.get('Gene/Protein', 'Gene')}
+    # entity_types values are tuples after load_config; membership, not equality.
+    _lab = lambda k, d: tuple(etypes.get(k, d)) if isinstance(etypes.get(k, d), (list, tuple)) else (etypes.get(k, d),)
+    drug_idx = {i for i, t in type_map.items() if t in _lab('Drug', 'Drug')}
+    disease_idx = {i for i, t in type_map.items() if t in _lab('Disease', 'Disease')}
+    gene_idx = {i for i, t in type_map.items() if t in _lab('Gene/Protein', 'Gene')}
 
     dd = kg_cfg.get('relations', {}).get('drug_disease', {})
     ind_rels = [dd['relation']] if 'relation' in dd else dd.get('relations', [])
