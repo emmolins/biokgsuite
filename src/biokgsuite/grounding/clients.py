@@ -13,8 +13,19 @@ import time
 
 import numpy as np
 
-OLLAMA_URL = 'http://localhost:11434/api/generate'
-TAGS_URL = 'http://localhost:11434/api/tags'
+# The Ollama server this process talks to. OLLAMA_HOST is the variable the
+# ollama binary itself reads, so one setting names the server for both sides;
+# a Slurm job sets it to a port of its own so two jobs on one node never share
+# (and stall) a single server.
+def _ollama_base():
+    host = os.environ.get('OLLAMA_HOST', '127.0.0.1:11434').strip()
+    if not host.startswith('http'):
+        host = 'http://' + host
+    return host.rstrip('/')
+
+
+OLLAMA_URL = _ollama_base() + '/api/generate'
+TAGS_URL = _ollama_base() + '/api/tags'
 
 API_PROVIDERS = {
     'anthropic':  dict(url='https://api.anthropic.com/v1/messages',

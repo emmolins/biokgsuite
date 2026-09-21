@@ -44,7 +44,12 @@ python -c "import sys; print('python', sys.version.split()[0])" || { echo "FATAL
 export PYTHONUNBUFFERED=1 TQDM_MININTERVAL=30
 
 export OLLAMA_MODELS="${OLLAMA_MODELS:-$HOME/.ollama/models}"
-export OLLAMA_HOST=127.0.0.1:11434
+# One server per job. Slurm can place several ladder jobs on one node, and
+# every job binding 11434 would silently share the first job's server (the
+# others' `ollama serve` fails on the port), so one instance ends up swapping
+# models between jobs and every job crawls. The port is derived from the job id.
+OLLAMA_PORT=$(( 20000 + ${SLURM_JOB_ID:-0} % 20000 ))
+export OLLAMA_HOST=127.0.0.1:${OLLAMA_PORT}
 export OLLAMA_SCHED_SPREAD=1          # spread layers across all 4 GPUs
 mkdir -p "$HOME/.local/bin" "$OLLAMA_MODELS"
 if ! command -v ollama >/dev/null 2>&1 && [[ ! -x "$HOME/.local/bin/ollama" ]]; then
@@ -59,8 +64,10 @@ nvidia-smi || true
 ollama serve > "logs/ollama-405b-${SLURM_JOB_ID:-local}.log" 2>&1 &
 OLLAMA_PID=$!
 trap 'kill $OLLAMA_PID 2>/dev/null || true' EXIT
-for i in $(seq 1 60); do curl -sf http://127.0.0.1:11434/api/tags >/dev/null && break; sleep 2; done
-echo "[ollama] up"
+for i in $(seq 1 60); do curl -sf "http://${OLLAMA_HOST}/api/tags" >/dev/null && break; sleep 2; done
+curl -sf "http://${OLLAMA_HOST}/api/tags" >/dev/null \
+    || { echo "FATAL: ollama did not come up on ${OLLAMA_HOST}; see logs/ollama-${SLURM_JOB_ID:-local}.log"; exit 1; }
+echo "[ollama] up on ${OLLAMA_HOST}"
 
 echo "[ollama] pulling $MODEL (~230 GB first time, be patient)..."
 ollama pull "$MODEL"
