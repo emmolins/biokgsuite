@@ -23,7 +23,7 @@
 #
 # The 70B rung doubles as the third headline model, so it needs both
 # families and more time than the small rungs:
-#   sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main,common hpc/run_llm_ladder.sbatch
+#   sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main+common hpc/run_llm_ladder.sbatch
 #
 # Monitor:   tail -f logs/ladder-<jobid>.out
 # Resumable: just resubmit a job if it dies (idempotent output name per model+seed).
@@ -31,7 +31,7 @@
 set -euo pipefail
 MODEL="${MODEL:?set MODEL, e.g. --export=ALL,MODEL=llama3.1:8b,SEED=1}"
 SEED="${SEED:-1}"
-FAMILIES="${FAMILIES:-main}"                       # main = all 128 post-cutoff pairs; add common for the paired family
+FAMILIES="${FAMILIES:-main}"; FAMILIES="${FAMILIES//+/,}"   # main = all 128 pairs; main+common adds the paired family (+ not comma: --export splits on commas)
 SAFE="$(echo "$MODEL" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/_/g; s/^_//; s/_$//')"   # same slug as runner.model_slug
 OUT="results/tables/G02_run/runs/main__${SAFE}__seed${SEED}.csv"   # written by grounding_experiment/02_run
 

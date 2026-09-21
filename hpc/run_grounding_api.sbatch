@@ -25,7 +25,7 @@
 #     sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S    hpc/run_grounding_api.sbatch
 #   done
 #   Llama 3.3 70B runs locally instead (hpc/run_llm_ladder.sbatch with
-#   FAMILIES=main,common); Groq's hosted 70B is enterprise-only since 2026.
+#   FAMILIES=main+common); Groq's hosted 70B is enterprise-only since 2026.
 #
 # Monitor:   squeue -u $USER;  tail -f logs/ground-<jobid>.out
 # Resumable: a (family, model, seed) file that exists is loaded, not rerun, so

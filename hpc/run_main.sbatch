@@ -67,9 +67,13 @@ export MPLBACKEND=Agg         # headless matplotlib
 # Notebooks live one per directory as <dir>/notebook.ipynb; nbconvert is run
 # from inside that directory so each notebook's root-finding bootstrap and its
 # relative paths behave exactly as they do interactively.
-for nb in 01_coverage 02_annotation_accuracy 03_trustworthiness \
-          04_topology 05_stability 06_task_performance \
-          07_generalization 00_summary; do
+# NOTEBOOKS overrides the list, for a rerun from the notebook that failed:
+#   sbatch --export=ALL,NOTEBOOKS=06_task_performance+07_generalization+00_summary hpc/run_main.sbatch
+# Each notebook reads its inputs from results/checkpoints, so the earlier
+# ones need not be rerun as long as their checkpoints are from this panel.
+NOTEBOOKS="${NOTEBOOKS:-01_coverage 02_annotation_accuracy 03_trustworthiness 04_topology 05_stability 06_task_performance 07_generalization 00_summary}"
+NOTEBOOKS="${NOTEBOOKS//+/ }"      # + separates names on the sbatch line
+for nb in $NOTEBOOKS; do
     target="biokgsuite_dimensions/${nb}/notebook.ipynb"
     if [ ! -f "$target" ]; then
         echo "FATAL: $target not found."; exit 1

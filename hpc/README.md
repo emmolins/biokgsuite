@@ -127,6 +127,13 @@ sbatch --export=ALL,STAGE=benchmark hpc/run_grounding_analysis.sbatch
 # Google AI Studio project (or use a paid key) before resubmitting, or the job
 # will stop again after the same number of calls the next day.
 #
+# Rerun from a failed notebook. Each dimension notebook reads its inputs from
+# results/checkpoints, so after a failure in 06 only 06, 07 and 00 need to run:
+#   sbatch --export=ALL,NOTEBOOKS=06_task_performance+07_generalization+00_summary hpc/run_main.sbatch
+# The multi-hop benchmark (data/gold_standards/derived/multihop_benchmark_v1.*)
+# is built for the panel that first ran 06. A run on a different panel refuses
+# it: delete both files, let 06 rebuild them, then commit the rebuilt pair.
+#
 # C. hosted models: one job per (model, seed). Same --job-name per provider
 #    plus --dependency=singleton in the script means one job per provider at
 #    a time (its rate limit), three providers in parallel.
@@ -135,7 +142,7 @@ for S in 0 1 2; do
   sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S hpc/run_grounding_api.sbatch
   # Llama 3.3 70B is the third headline model and the 70B ladder rung in one
   # run: local Ollama on an H100, both families, about 9 hours per seed.
-  sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main,common hpc/run_llm_ladder.sbatch
+  sbatch --time=16:00:00 --export=ALL,MODEL=llama3.3:70b,SEED=$S,FAMILIES=main+common hpc/run_llm_ladder.sbatch
 done
 
 # D. Llama ladder on single H100s, one job per (model, seed)

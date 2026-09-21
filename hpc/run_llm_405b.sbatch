@@ -28,7 +28,7 @@
 set -euo pipefail
 MODEL="${MODEL:-llama3.1:405b}"
 SEED="${SEED:-1}"
-FAMILIES="${FAMILIES:-main}"                       # main = all 128 post-cutoff pairs; add common for the paired family
+FAMILIES="${FAMILIES:-main}"; FAMILIES="${FAMILIES//+/,}"   # main = all 128 pairs; main+common adds the paired family (+ not comma: --export splits on commas)
 SAFE="$(echo "$MODEL" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/_/g; s/^_//; s/_$//')"   # same slug as runner.model_slug
 OUT="results/tables/G02_run/runs/main__${SAFE}__seed${SEED}.csv"   # written by grounding_experiment/02_run
 
