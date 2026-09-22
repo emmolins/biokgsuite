@@ -24,11 +24,14 @@
 # One graph, or a few, per job (MATRIX on its own is wise):
 #   sbatch --export=ALL,KGS=matrix hpc/run_lp_embeddings.sbatch
 #   sbatch --export=ALL,KGS=primekg+drkg+openbilink hpc/run_lp_embeddings.sbatch
+# Redo graphs already in the table (for example ones scored at another dimension):
+#   sbatch --export=ALL,KGS=hetionet+biokg,FORCE=1 hpc/run_lp_embeddings.sbatch
 
 set -euo pipefail
 REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
 cd "$REPO_DIR"; mkdir -p logs
 KGS="${KGS:-}"; KGS="${KGS//+/,}"          # + not comma: --export splits on commas
+FORCE="${FORCE:-}"
 echo "HOST $(hostname)  DATE $(date)  JOB ${SLURM_JOB_ID:-none}  KGS ${KGS:-all}"
 
 module purge
@@ -39,5 +42,5 @@ source .venv/bin/activate
 echo "  torch: $(python -c 'import torch; print(torch.__version__, "cuda=", torch.cuda.is_available())' 2>&1)"
 export PYTHONUNBUFFERED=1 TQDM_MININTERVAL=30 MPLBACKEND=Agg
 
-python supplementary/embeddings/run_link_prediction_embeddings.py ${KGS:+--kgs "$KGS"}
+python supplementary/embeddings/run_link_prediction_embeddings.py ${KGS:+--kgs "$KGS"} ${FORCE:+--force}
 echo "DONE"
