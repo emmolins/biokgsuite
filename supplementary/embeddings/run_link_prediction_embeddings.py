@@ -75,6 +75,10 @@ def main():
     ap.add_argument('--dim', type=int, default=128)
     ap.add_argument('--val-frac', type=float, default=0.1)
     ap.add_argument('--seed', type=int, default=42)
+    ap.add_argument('--kgs', default='',
+                    help='comma-separated graphs to run (default: every graph in the checkpoint)')
+    ap.add_argument('--force', action='store_true',
+                    help='recompute graphs already present in the output table')
     args = ap.parse_args()
 
     if not CKPT.exists():
@@ -105,8 +109,26 @@ def main():
     aa = {r['kg']: r['auroc'] for r in ckpt['link_records']
           if r['heuristic'] == 'Adamic-Adar' and r['strategy'] == ANCHOR_STRAT}
 
-    rows = []
-    for name in ckpt['splits']:
+    # The table is written after every graph and read back at the start, so a
+    # job that stops at the wall clock keeps what it finished and the next
+    # launch skips it. MATRIX alone can take most of a day.
+    out_path = OUT_DIR / 'link_prediction_embeddings.csv'
+    prev = pd.read_csv(out_path) if out_path.exists() and not args.force else pd.DataFrame()
+    rows = prev.to_dict('records')
+    have = {(r['kg'], r['model']) for r in rows}
+    wanted = [k.strip() for k in args.kgs.split(',') if k.strip()] or list(ckpt['splits'])
+    unknown = [k for k in wanted if k not in ckpt['splits']]
+    if unknown:
+        sys.exit(f'not in the 06 checkpoint: {unknown}; known: {list(ckpt["splits"])}')
+
+    def write():
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows).to_csv(out_path, index=False)
+
+    for name in wanted:
+        if all((name, m) in have for m in model_names):
+            print(f'{name}: already in {out_path.name}, skipped (use --force to redo)')
+            continue
         sp = ckpt['splits'][name]
         neg = ckpt['negatives'][name][ANCHOR_STRAT]
         kg_df, _nodes = load_kg(name, cfg)
@@ -139,6 +161,8 @@ def main():
         n_rel = len(rel_to_idx)
 
         for mname in model_names:
+            if (name, mname) in have:
+                continue
             cls = MODELS[mname]
             m = cls(n_ent, n_rel, dim=args.dim, seed=args.seed)
             # Incremental training: fit() continues from the current weights, so
@@ -178,13 +202,14 @@ def main():
             })
             print(f'{name:12s} {mname:8s}: test AUROC={best["test"]:.4f} '
                   f'at {best["epochs"]} epochs  (AA={aa.get(name)})', flush=True)
+            have.add((name, mname))
+            write()
 
     if not rows:
         sys.exit('No results produced.')
     df = pd.DataFrame(rows)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    df.to_csv(OUT_DIR / 'link_prediction_embeddings.csv', index=False)
-    print(f'\nwrote {OUT_DIR / "link_prediction_embeddings.csv"}')
+    write()
+    print(f'\nwrote {out_path}')
 
     print('\nDoes the Adamic-Adar ranking survive?')
     for mname in model_names:

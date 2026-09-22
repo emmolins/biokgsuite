@@ -13,6 +13,7 @@ The runs, in the order they depend on each other:
 | B. Grounding benchmark | `run_grounding_analysis.sbatch STAGE=benchmark` | CPU | 10 min | `G01_benchmark.pkl`, Fig G01 |
 | C. Grounding runs, hosted models | `run_grounding_api.sbatch` x 9 | `.env`, B | 3 to 6 h each | `results/tables/G02_run/runs/` |
 | D. Llama ladder, 1B to 70B | `run_llm_ladder.sbatch` x 12 | 1 H100, B | 1 to 8 h each | more run files |
+| F. Table S7 embeddings | `run_lp_embeddings.sbatch` | 1 H100 | hours per graph, MATRIX up to a day; resumable | link_prediction_embeddings.csv |
 | E. Llama 405B | `run_llm_405b.sbatch` x 3 | 4 H100, B | up to 24 h each | more run files |
 | F. Grounding analysis 02 to 05 | `run_grounding_analysis.sbatch` | C (and D, E if wanted) | 30 min | Figs G03 to G05 |
 | G. Embedding supplementary | `run_embeddings.sbatch` | 1 H100, HF login | 2 to 4 h | Figs S1 to Sn |
