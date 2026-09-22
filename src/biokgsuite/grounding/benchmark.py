@@ -74,10 +74,12 @@ def load_benchmark(base, *, kgs, strict=False) -> pd.DataFrame:
         raise ValueError(f'post_cutoff_pair_status.csv has no rows for {sorted(missing)}; '
                          'run tools/build_post_cutoff_approvals.py --kgs all first')
     bench = gold[['drugbank_id', 'mondo_id', 'drug_name', 'disease_name', 'doid', 'mesh_id',
-                  'approval_date', 'agencies', 'n_agencies', 'combination_type']].copy()
+                  'approval_date', 'agency', 'agencies', 'n_agencies', 'combination_type']].copy()
     bench.insert(0, 'pair_id', np.arange(1, len(bench) + 1))
     bench['approval_year'] = bench.approval_date.str[:4].astype(int)
-    bench['first_agency'] = bench.agencies.str.split(';').str[0]
+    # The regulator that decided first. `agencies` is sorted alphabetically, so its
+    # first entry is not the first decision; `agency` is the earliest-dated one.
+    bench['first_agency'] = bench['agency']
 
     flag = 'evaluable_strict' if strict else 'evaluable'
     if 'grounded' not in status.columns:

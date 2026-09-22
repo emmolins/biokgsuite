@@ -1,0 +1,7 @@
+KG,Content,Structure,Inference
+primekg,0.6884,0.8605,0.6118
+hetionet,0.5876,0.8196,0.5156
+drkg,0.6519,0.8054,0.5444
+openbilink,0.6428,0.7967,0.4544
+biokg,0.5536,0.8457,0.439
+matrix,0.9365,0.9153,0.8985

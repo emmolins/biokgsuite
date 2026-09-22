@@ -1,14 +1,14 @@
 Kind,Set,N
-entity,Drug,5485
-entity,Disease,31147
-entity,Gene/Protein,1076
-entity,Pathway,1386
-disease stratum,rare,15656
-disease stratum,drugged,946
-disease stratum,undrugged,30201
-relation,drug_gene,7922
-relation,drug_pathway,22019
+entity,Drug,3793
+entity,Disease,22276
+entity,Gene/Protein,6210
+entity,Pathway,2217
+disease stratum,rare,15634
+disease stratum,drugged,928
+disease stratum,undrugged,21348
+relation,drug_gene,5468
+relation,drug_pathway,16250
 relation,disease_gene,18841
 relation,disease_pathway,72701
-relation,disease_disease,37667
-relation,drug_disease,8343
+relation,disease_disease,26537
+relation,drug_disease,7254

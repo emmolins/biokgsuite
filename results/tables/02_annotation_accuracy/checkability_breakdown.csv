@@ -1,4 +1,7 @@
 KG,Edges,Type out of scope,Out of scope (%),Endpoint unjudgeable,Unjudgeable (%),Checkable,Checkable (%),Costliest out-of-scope types
 primekg,8100498,0,0.0,0,0.0,8100498,100.0,
 hetionet,2250197,0,0.0,0,0.0,2250197,100.0,
+drkg,5874261,0,0.0,17232,0.3,5857029,99.7,
+openbilink,4986521,361095,7.2,1845,0.0,4623581,92.7,"GO x444,934"
 biokg,2067998,0,0.0,0,0.0,2067998,100.0,
+matrix,81149812,13871901,17.1,22750543,28.0,44527368,54.9,"organism x12,316,637; procedure x2,883,666; cohort x730,385; device x480,847"

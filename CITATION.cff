@@ -2,31 +2,40 @@ cff-version: 1.2.0
 message: >
   If you use BioKGSuite in your research, please cite it using the metadata below.
 title: >
-  BioKGSuite: A Systematic Evaluation Framework for Biomedical
-  Knowledge Graphs for Drug-Repurposing Applications
+  BioKGSuite: a multidimensional evaluation framework for biomedical
+  knowledge graphs
 type: software
 authors:
   - family-names: Molins
     given-names: Emily
-    email: emilymolins@gmail.com
+    affiliation: "Department of Statistics, University of Oxford; Ellison Institute of Technology"
+  - family-names: Holmes
+    given-names: Chris
+    affiliation: "Department of Statistics, University of Oxford; Ellison Institute of Technology"
+  - family-names: Orfanoudaki
+    given-names: Agni
+    affiliation: "Saïd Business School, University of Oxford"
+  - family-names: Ktena
+    given-names: Ira
+    affiliation: "Ellison Institute of Technology"
+  - family-names: González
+    given-names: Javier
+    affiliation: "Ellison Institute of Technology"
 version: "1.0.0"
-date-released: "2026-05-19"
+date-released: "2026-09-22"
 license: MIT
 repository-code: "https://github.com/emmolins/biokgsuite-bib"
 url: "https://github.com/emmolins/biokgsuite-bib"
 abstract: >
-  BioKGSuite is a reproducible evaluation framework for assessing biomedical
-  knowledge graphs (KGs) across seven complementary quality dimensions and 18
-  individual metrics: coverage, annotation accuracy, trustworthiness, topology,
-  stability, task performance (link prediction), and generalisation across
-  domains and sparse-entity settings. Six widely-used KGs are evaluated
-  (PrimeKG, Hetionet, DRKG, OpenBioLink, BioKG, and MATRIX from Every Cure)
-  against curated gold standards from DrugBank, UniProt, Disease Ontology,
-  Reactome, Open Targets, and CTD, in the context of drug-repurposing
-  applications. Two supplementary notebooks extend the analysis: one validates
-  the embedding-model choice (TransE vs. RotatE vs. an EmbeddingGemma name
-  prior) with multi-rerun resampling, and one probes whether knowledge-graph
-  context improves a local LLM's drug-disease plausibility judgments.
+  BioKGSuite evaluates biomedical knowledge graphs across seven dimensions
+  (coverage, annotation accuracy, trustworthiness, topology, stability, task
+  performance and generalisation) through 19 metrics computed from each
+  graph's released files and task-specific reference data. This release
+  applies it to six knowledge graphs (Hetionet, DRKG, PrimeKG, BioKG,
+  OpenBioLink and MATRIX) for drug repurposing, with reference data from
+  MONDO, Open Targets and the Comparative Toxicogenomics Database, and
+  includes a prospective experiment grounding large language models in
+  evidence from three of the graphs.
 keywords:
   - biomedical knowledge graph
   - drug repurposing

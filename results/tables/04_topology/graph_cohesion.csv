@@ -1,4 +1,7 @@
 KG,Nodes,LCC nodes,LCC fraction,LCC (%),Components,Isolated,Top types outside LCC
 primekg,129375,129375,1.0,100.0,1,0,-
 hetionet,47031,45158,0.9601752035891221,96.02,1874,1873,"Gene (1,800), Side Effect (33), Symptom (23)"
+drkg,97238,96420,0.9915876509183652,99.16,303,0,"Compound (421), Gene (378), Disease (11)"
+openbilink,185929,185879,0.9997310801434957,99.97,2,0,Anatomy (50)
 biokg,105524,98456,0.9330199764982373,93.3,1451,0,"Gene/Protein (5,738), Pathway (1,157), Drug (87)"
+matrix,7354612,7316507,0.994818897312326,99.48,17524,0,"disease (20,206), clinicalattribute (3,916), procedure (2,581)"

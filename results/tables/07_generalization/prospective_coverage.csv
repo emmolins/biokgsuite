@@ -1,2 +1,5 @@
 KG,n_evaluable,n_gold,coverage,hits@10_all,hits@10_evaluable
 primekg,85,128,0.6641,0.0703,0.1059
+drkg,68,128,0.5312,0.0703,0.1324
+openbilink,22,128,0.1719,0.0625,0.3636
+biokg,59,128,0.4609,0.0547,0.1186

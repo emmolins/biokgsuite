@@ -6,6 +6,16 @@ hetionet,Treats (CtD) vs. Palliates (CpD),755,390,0,0.0
 hetionet,Compound: Up- vs. Downregulates Gene,18756,21102,0,0.0
 hetionet,Anatomy:  Up- vs. Downregulates Gene,97848,102240,0,0.0
 hetionet,Disease:  Up- vs. Downregulates Gene,7731,7623,0,0.0
+openbilink,Activation vs. Inhibition (direct),15954,19233,994,2.907
+openbilink,Bind-Activate vs. Bind-Inhibit,1259,2060,26,0.79
+openbilink,Bind-Activate vs. Inhibition,1259,19233,42,0.205
+openbilink,Activation vs. Bind-Inhibit,15954,2060,86,0.48
+matrix,Treats vs. Contraindicated,1815538,72042,6989,0.372
+matrix,Treats vs. Causes,1815538,1152283,108180,3.783
+matrix,Treats vs. Has-adverse-event,1815538,201266,34665,1.749
+matrix,Strict treats vs. Contraindicated,21669,72042,217,0.232
+matrix,Increases vs. Decreases response,2933,3363,260,4.307
+matrix,Positive vs. Negative correlation,3932,972,69,1.427
 biokg,Target vs. Carrier,15231,804,4,0.025
 biokg,Target vs. Enzyme,15231,5077,106,0.525
 biokg,Target vs. Transporter,15231,3040,66,0.363

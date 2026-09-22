@@ -1,0 +1,7 @@
+KG,best_rank,worst_rank,rank_span,n_first,n_top2,n_bottom2,n_metrics
+matrix,1,6,5,12,14,1,16
+drkg,1,6,5,1,2,5,17
+hetionet,2,6,4,0,2,8,16
+primekg,1,5,4,2,7,2,17
+openbilink,2,6,4,0,4,7,17
+biokg,2,6,4,0,3,6,17

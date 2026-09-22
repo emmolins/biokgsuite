@@ -53,6 +53,141 @@ hetionet,PCiC,1029,1029,1029,0,100.0,100.0,
 hetionet,DpS,3357,3357,3357,0,100.0,100.0,
 hetionet,DrD,543,543,543,0,100.0,100.0,
 hetionet,CpD,390,390,390,0,100.0,100.0,
+drkg,bioarx::HumGenHumGen:Gene:Gene,58094,57932,57932,0,100.0,99.7,
+drkg,bioarx::VirGenHumGen:Gene:Gene,535,0,0,0,,0.0,
+drkg,bioarx::DrugVirGen:Compound:Gene,1165,0,0,0,,0.0,
+drkg,bioarx::DrugHumGen:Compound:Gene,24501,18877,18877,0,100.0,77.0,
+drkg,bioarx::Covid2_acc_host_gene::Disease:Gene,332,0,0,0,,0.0,
+drkg,bioarx::Coronavirus_ass_host_gene::Disease:Gene,129,129,129,0,100.0,100.0,
+drkg,DGIDB::INHIBITOR::Gene:Compound,5971,5971,5971,0,100.0,100.0,
+drkg,DGIDB::ANTAGONIST::Gene:Compound,3006,3006,3006,0,100.0,100.0,
+drkg,DGIDB::OTHER::Gene:Compound,11070,11070,11070,0,100.0,100.0,
+drkg,DGIDB::AGONIST::Gene:Compound,3012,3012,3012,0,100.0,100.0,
+drkg,DGIDB::BINDER::Gene:Compound,143,143,143,0,100.0,100.0,
+drkg,DGIDB::MODULATOR::Gene:Compound,243,243,243,0,100.0,100.0,
+drkg,DGIDB::BLOCKER::Gene:Compound,979,979,979,0,100.0,100.0,
+drkg,DGIDB::CHANNEL BLOCKER::Gene:Compound,352,352,352,0,100.0,100.0,
+drkg,DGIDB::ANTIBODY::Gene:Compound,188,188,188,0,100.0,100.0,
+drkg,DGIDB::POSITIVE ALLOSTERIC MODULATOR::Gene:Compound,618,618,618,0,100.0,100.0,
+drkg,DGIDB::ALLOSTERIC MODULATOR::Gene:Compound,317,317,317,0,100.0,100.0,
+drkg,DGIDB::ACTIVATOR::Gene:Compound,316,316,316,0,100.0,100.0,
+drkg,DGIDB::PARTIAL AGONIST::Gene:Compound,75,75,75,0,100.0,100.0,
+drkg,DRUGBANK::x-atc::Compound:Atc,15750,12600,12600,0,100.0,80.0,
+drkg,DRUGBANK::ddi-interactor-in::Compound:Compound,1379271,1379271,1379271,0,100.0,100.0,
+drkg,DRUGBANK::target::Compound:Gene,19158,14483,14483,0,100.0,75.6,
+drkg,DRUGBANK::enzyme::Compound:Gene,4923,4841,4841,0,100.0,98.3,
+drkg,DRUGBANK::carrier::Compound:Gene,720,718,718,0,100.0,99.7,
+drkg,DRUGBANK::treats::Compound:Disease,4968,4968,4968,0,100.0,100.0,
+drkg,GNBR::E::Compound:Gene,32743,32606,32606,0,100.0,99.6,
+drkg,GNBR::A+::Compound:Gene,1568,1550,1550,0,100.0,98.9,
+drkg,GNBR::N::Compound:Gene,12521,12340,12340,0,100.0,98.6,
+drkg,GNBR::K::Compound:Gene,12411,12385,12385,0,100.0,99.8,
+drkg,GNBR::A-::Compound:Gene,1108,1106,1106,0,100.0,99.8,
+drkg,GNBR::E+::Compound:Gene,1970,1946,1946,0,100.0,98.8,
+drkg,GNBR::B::Compound:Gene,7170,7083,7083,0,100.0,98.8,
+drkg,GNBR::E-::Compound:Gene,2918,2906,2906,0,100.0,99.6,
+drkg,GNBR::O::Compound:Gene,5573,5560,5560,0,100.0,99.8,
+drkg,GNBR::Z::Compound:Gene,2821,2808,2808,0,100.0,99.5,
+drkg,GNBR::T::Compound:Disease,54020,54000,54000,0,100.0,100.0,
+drkg,GNBR::C::Compound:Disease,1739,1735,1735,0,100.0,99.8,
+drkg,GNBR::Sa::Compound:Disease,16923,16906,16906,0,100.0,99.9,
+drkg,GNBR::Pa::Compound:Disease,2619,2618,2618,0,100.0,100.0,
+drkg,GNBR::Mp::Compound:Disease,495,494,494,0,100.0,99.8,
+drkg,GNBR::Pr::Compound:Disease,966,966,966,0,100.0,100.0,
+drkg,GNBR::J::Compound:Disease,1020,1020,1020,0,100.0,100.0,
+drkg,GNBR::L::Gene:Disease,48384,48214,48214,0,100.0,99.6,
+drkg,GNBR::U::Gene:Disease,6432,6415,6415,0,100.0,99.7,
+drkg,GNBR::Y::Gene:Disease,1948,1946,1946,0,100.0,99.9,
+drkg,GNBR::J::Gene:Disease,30234,30166,30166,0,100.0,99.8,
+drkg,GNBR::Te::Gene:Disease,2836,2822,2822,0,100.0,99.5,
+drkg,GNBR::Md::Gene:Disease,1279,1276,1276,0,100.0,99.8,
+drkg,GNBR::G::Gene:Disease,2055,2052,2052,0,100.0,99.9,
+drkg,GNBR::D::Gene:Disease,500,490,490,0,100.0,98.0,
+drkg,GNBR::X::Gene:Disease,1324,1316,1316,0,100.0,99.4,
+drkg,GNBR::Ud::Gene:Disease,407,406,406,0,100.0,99.8,
+drkg,GNBR::V+::Gene:Gene,8689,8555,8555,0,100.0,98.5,
+drkg,GNBR::Q::Gene:Gene,19372,19266,19266,0,100.0,99.5,
+drkg,GNBR::Rg::Gene:Gene,11018,10955,10955,0,100.0,99.4,
+drkg,GNBR::B::Gene:Gene,8164,8096,8096,0,100.0,99.2,
+drkg,GNBR::I::Gene:Gene,5434,5319,5319,0,100.0,97.9,
+drkg,GNBR::E+::Gene:Gene,10838,10764,10764,0,100.0,99.3,
+drkg,GNBR::H::Gene:Gene,2509,2456,2456,0,100.0,97.9,
+drkg,GNBR::W::Gene:Gene,280,275,275,0,100.0,98.2,
+drkg,GNBR::E::Gene:Gene,418,412,412,0,100.0,98.6,
+drkg,GNBR::in_tax::Gene:Tax,14663,14663,14663,0,100.0,100.0,
+drkg,Hetionet::GpBP::Gene:Biological Process,559504,559504,559504,0,100.0,100.0,
+drkg,Hetionet::GiG::Gene:Gene,147164,147164,147164,0,100.0,100.0,
+drkg,Hetionet::CrC::Compound:Compound,6486,6486,6486,0,100.0,100.0,
+drkg,Hetionet::DdG::Disease:Gene,7623,7623,7623,0,100.0,100.0,
+drkg,Hetionet::DpS::Disease:Symptom,3357,3357,3357,0,100.0,100.0,
+drkg,Hetionet::DlA::Disease:Anatomy,3602,3602,3602,0,100.0,100.0,
+drkg,Hetionet::CtD::Compound:Disease,755,755,755,0,100.0,100.0,
+drkg,Hetionet::CbG::Compound:Gene,11571,11571,11571,0,100.0,100.0,
+drkg,Hetionet::CuG::Compound:Gene,18756,18756,18756,0,100.0,100.0,
+drkg,Hetionet::DrD::Disease:Disease,543,543,543,0,100.0,100.0,
+drkg,Hetionet::DaG::Disease:Gene,12623,12623,12623,0,100.0,100.0,
+drkg,Hetionet::CpD::Compound:Disease,390,390,390,0,100.0,100.0,
+drkg,Hetionet::AdG::Anatomy:Gene,102240,102240,102240,0,100.0,100.0,
+drkg,Hetionet::AuG::Anatomy:Gene,97848,97848,97848,0,100.0,100.0,
+drkg,Hetionet::GcG::Gene:Gene,61690,61690,61690,0,100.0,100.0,
+drkg,Hetionet::GpMF::Gene:Molecular Function,97222,97222,97222,0,100.0,100.0,
+drkg,Hetionet::PCiC::Pharmacologic Class:Compound,1029,1029,1029,0,100.0,100.0,
+drkg,Hetionet::GpCC::Gene:Cellular Component,73566,73566,73566,0,100.0,100.0,
+drkg,Hetionet::Gr>G::Gene:Gene,265672,265672,265672,0,100.0,100.0,
+drkg,Hetionet::CdG::Compound:Gene,21102,21102,21102,0,100.0,100.0,
+drkg,Hetionet::DuG::Disease:Gene,7731,7731,7731,0,100.0,100.0,
+drkg,Hetionet::GpPW::Gene:Pathway,84372,84372,84372,0,100.0,100.0,
+drkg,Hetionet::CcSE::Compound:Side Effect,138944,138944,138944,0,100.0,100.0,
+drkg,Hetionet::AeG::Anatomy:Gene,526407,526407,526407,0,100.0,100.0,
+drkg,INTACT::PHYSICAL ASSOCIATION::Compound:Gene,203,203,203,0,100.0,100.0,
+drkg,INTACT::DIRECT INTERACTION::Compound:Gene,155,155,155,0,100.0,100.0,
+drkg,INTACT::ASSOCIATION::Compound:Gene,1447,1446,1446,0,100.0,99.9,
+drkg,INTACT::ASSOCIATION::Gene:Gene,112390,112369,112369,0,100.0,100.0,
+drkg,INTACT::PHYSICAL ASSOCIATION::Gene:Gene,129318,129311,129311,0,100.0,100.0,
+drkg,INTACT::COLOCALIZATION::Gene:Gene,3468,3468,3468,0,100.0,100.0,
+drkg,INTACT::DEPHOSPHORYLATION REACTION::Gene:Gene,303,303,303,0,100.0,100.0,
+drkg,INTACT::CLEAVAGE REACTION::Gene:Gene,93,93,93,0,100.0,100.0,
+drkg,INTACT::DIRECT INTERACTION::Gene:Gene,6950,6950,6950,0,100.0,100.0,
+drkg,INTACT::PHOSPHORYLATION REACTION::Gene:Gene,1328,1328,1328,0,100.0,100.0,
+drkg,INTACT::ADP RIBOSYLATION REACTION::Gene:Gene,58,58,58,0,100.0,100.0,
+drkg,INTACT::UBIQUITINATION REACTION::Gene:Gene,371,371,371,0,100.0,100.0,
+drkg,INTACT::PROTEIN CLEAVAGE::Gene:Gene,67,67,67,0,100.0,100.0,
+drkg,STRING::REACTION::Gene:Gene,400426,400426,400426,0,100.0,100.0,
+drkg,STRING::CATALYSIS::Gene:Gene,343533,343533,343533,0,100.0,100.0,
+drkg,STRING::ACTIVATION::Gene:Gene,81355,81355,81355,0,100.0,100.0,
+drkg,STRING::INHIBITION::Gene:Gene,28959,28959,28959,0,100.0,100.0,
+drkg,STRING::OTHER::Gene:Gene,310690,310690,310690,0,100.0,100.0,
+drkg,STRING::BINDING::Gene:Gene,315875,315875,315875,0,100.0,100.0,
+drkg,STRING::PTMOD::Gene:Gene,15113,15113,15113,0,100.0,100.0,
+drkg,STRING::EXPRESSION::Gene:Gene,757,757,757,0,100.0,100.0,
+openbilink,IS_A,131042,54058,54058,0,100.0,41.3,
+openbilink,PART_OF,16524,9669,9669,0,100.0,58.5,
+openbilink,DIS_DRUG,7164,7164,7164,0,100.0,100.0,
+openbilink,DIS_PHENOTYPE,49556,49556,49556,0,100.0,100.0,
+openbilink,DRUG_ACTIVATION_GENE,15954,15954,15954,0,100.0,100.0,
+openbilink,DRUG_BINDING_GENE,179747,179747,179747,0,100.0,100.0,
+openbilink,DRUG_CATALYSIS_GENE,25249,25249,25249,0,100.0,100.0,
+openbilink,DRUG_INHIBITION_GENE,19233,19233,19233,0,100.0,100.0,
+openbilink,DRUG_BINDACT_GENE,1259,1259,1259,0,100.0,100.0,
+openbilink,DRUG_REACTION_GENE,20164,20164,20164,0,100.0,100.0,
+openbilink,DRUG_BINDINH_GENE,2060,2060,2060,0,100.0,100.0,
+openbilink,DRUG_PHENOTYPE,89096,89096,89096,0,100.0,100.0,
+openbilink,GENE_DIS,93885,93885,93885,0,100.0,100.0,
+openbilink,GENE_EXPRESSED_ANATOMY,1465313,1465313,1465313,0,100.0,100.0,
+openbilink,GENE_GO,277256,0,0,0,,0.0,
+openbilink,GENE_OVEREXPRESSED_ANATOMY,133682,133682,133682,0,100.0,100.0,
+openbilink,GENE_PATHWAY,135809,133964,133964,0,100.0,98.6,
+openbilink,GENE_UNDEREXPRESSED_ANATOMY,129143,129143,129143,0,100.0,100.0,
+openbilink,GENE_DRUG,192757,192757,192757,0,100.0,100.0,
+openbilink,GENE_GENE,824326,824326,824326,0,100.0,100.0,
+openbilink,GENE_BINDING_GENE,285338,285338,285338,0,100.0,100.0,
+openbilink,GENE_PHENOTYPE,161003,161003,161003,0,100.0,100.0,
+openbilink,GENE_CATALYSIS_GENE,299515,299515,299515,0,100.0,100.0,
+openbilink,GENE_INHIBITION_GENE,10612,10612,10612,0,100.0,100.0,
+openbilink,GENE_REACTION_GENE,387109,387109,387109,0,100.0,100.0,
+openbilink,GENE_PTMOD_GENE,5112,5112,5112,0,100.0,100.0,
+openbilink,GENE_ACTIVATION_GENE,28542,28542,28542,0,100.0,100.0,
+openbilink,GENE_EXPRESSION_GENE,71,71,71,0,100.0,100.0,
 biokg,DRUG_TARGET,15231,15231,15231,0,100.0,100.0,
 biokg,DRUG_CARRIER,804,804,804,0,100.0,100.0,
 biokg,DRUG_ENZYME,5077,5077,5077,0,100.0,100.0,
@@ -70,3 +205,94 @@ biokg,DRUG_PATHWAY_ASSOCIATION,5114,5114,5114,0,100.0,100.0,
 biokg,PROTEIN_DISEASE_ASSOCIATION,109276,109276,109276,0,100.0,100.0,
 biokg,COMPLEX_TOP_LEVEL_PATHWAY,15639,15639,15639,0,100.0,100.0,
 biokg,DPI,28033,28033,28033,0,100.0,100.0,
+matrix,has_phenotype,1702992,1630751,1619495,11256,99.31,95.8,Biological Process<-unresolved
+matrix,interacts_with,5950828,4582935,4518753,64182,98.6,77.0,Anatomy<-unresolved
+matrix,disrupts,604130,187133,172005,15128,91.92,31.0,Anatomy<-unresolved
+matrix,has_participant,6268604,195316,185159,10157,94.8,3.1,Pathway<-unresolved
+matrix,occurs_in,5463953,42320,37158,5162,87.8,0.8,Anatomy<-unresolved
+matrix,directly_physically_interacts_with,3706420,3404334,3404334,0,100.0,91.8,
+matrix,subclass_of,7601890,1495976,1458132,37844,97.47,19.7,"Anatomy<-unresolved, Anatomy<-unresolved"
+matrix,affects,7882762,4820697,4776193,44504,99.08,61.2,Anatomy<-unresolved
+matrix,physically_interacts_with,1901165,1885717,1885667,50,100.0,99.2,"Anatomy<-unresolved, Anatomy<-unresolved"
+matrix,coexpressed_with,9197556,9179026,9179026,0,100.0,99.8,
+matrix,treats_or_applied_or_studied_to_treat,1891075,638535,625165,13370,97.91,33.8,Anatomy<-unresolved
+matrix,related_to,3752770,2345100,2323486,21614,99.08,62.5,Pathway<-unresolved
+matrix,expressed_in,4060494,4057186,4027163,30023,99.26,99.9,Anatomy<-unresolved
+matrix,associated_with,1476448,967022,966972,50,99.99,65.5,Biological Process<-unresolved
+matrix,catalyzes,272587,163203,163203,0,100.0,59.9,
+matrix,transcribed_from,269941,7,7,0,100.0,0.0,
+matrix,has_part,1727709,398900,361611,37289,90.65,23.1,Anatomy<-unresolved
+matrix,genetically_interacts_with,147139,147139,147139,0,100.0,100.0,
+matrix,gene_associated_with_condition,1815809,1773777,1773762,15,100.0,97.7,Disease<-unresolved
+matrix,actively_involved_in,1010696,662465,634645,27820,95.8,65.5,Pathway<-unresolved
+matrix,located_in,3356092,1014545,907527,107018,89.45,30.2,Anatomy<-unresolved
+matrix,contributes_to,185258,176437,176339,98,99.94,95.2,Anatomy<-unresolved
+matrix,close_match,1125152,76571,75776,795,98.96,6.8,"Anatomy<-unresolved, Anatomy<-unresolved"
+matrix,regulates,797933,786110,784743,1367,99.83,98.5,Pathway<-unresolved
+matrix,causes,1194100,600601,599067,1534,99.74,50.3,Anatomy<-unresolved
+matrix,predisposes_to_condition,359559,172070,172068,2,100.0,47.9,Biological Process<-unresolved
+matrix,coexists_with,1926064,930168,930015,153,99.98,48.3,Anatomy<-unresolved
+matrix,in_taxon,407429,0,0,0,,0.0,
+matrix,homologous_to,230538,229808,229808,0,100.0,99.7,
+matrix,diagnoses,313066,1733,1720,13,99.25,0.6,Anatomy<-unresolved
+matrix,has_input,967601,12713,12392,321,97.48,1.3,Anatomy<-unresolved
+matrix,is_sequence_variant_of,36316,2964,2964,0,100.0,8.2,
+matrix,preventative_for_condition,240557,91746,91746,0,100.0,38.1,
+matrix,contraindicated_in,169138,158459,158459,0,100.0,93.7,
+matrix,produces,389783,96582,78182,18400,80.95,24.8,Anatomy<-unresolved
+matrix,chemically_similar_to,40738,39360,39343,17,99.96,96.6,Gene/Protein<-unresolved
+matrix,has_adverse_event,201364,162951,162951,0,100.0,80.9,
+matrix,superclass_of,445887,397729,395757,1972,99.5,89.2,"Pathway<-unresolved, Pathway<-unresolved"
+matrix,derives_from,73239,31751,20666,11085,65.09,43.4,Anatomy<-unresolved
+matrix,overlaps,46966,11927,9183,2744,76.99,25.4,Anatomy<-unresolved
+matrix,correlated_with,100758,90006,90003,3,100.0,89.3,Anatomy<-unresolved
+matrix,precedes,238856,55835,55572,263,99.53,23.4,Pathway<-unresolved
+matrix,translates_to,48371,2,2,0,100.0,0.0,
+matrix,has_output,519724,9460,8756,704,92.56,1.8,Anatomy<-unresolved
+matrix,gene_product_of,74841,15701,15701,0,100.0,21.0,
+matrix,genetically_associated_with,169391,164997,164994,3,100.0,97.4,Phenotype<-Disease
+matrix,enables,70765,70765,70764,1,100.0,100.0,Anatomy<-unresolved
+matrix,has_side_effect,128680,121778,121778,0,100.0,94.6,
+matrix,manifestation_of,175896,120988,120977,11,99.99,68.8,Anatomy<-unresolved
+matrix,has_member,11413,193,193,0,100.0,1.7,
+matrix,active_in,18991,18991,18991,0,100.0,100.0,
+matrix,colocalizes_with,40460,40460,40460,0,100.0,100.0,
+matrix,exacerbates_condition,50403,40150,40150,0,100.0,79.7,
+matrix,affected_by,17642,17084,17084,0,100.0,96.8,
+matrix,biomarker_for,52070,6367,6367,0,100.0,12.2,
+matrix,increases_response_to,2936,2877,2877,0,100.0,98.0,
+matrix,treats,42778,39169,39157,12,99.97,91.6,Pathway<-unresolved
+matrix,lacks_part,7789,121,0,121,0.0,1.6,Anatomy<-unresolved
+matrix,develops_from,33919,31063,27311,3752,87.92,91.6,Anatomy<-unresolved
+matrix,applied_to_treat,20554,19507,19507,0,100.0,94.9,
+matrix,same_as,32148,21628,21451,177,99.18,67.3,Pathway<-unresolved
+matrix,temporally_related_to,23806,23784,22056,1728,92.73,99.9,Anatomy<-unresolved
+matrix,decreases_response_to,3367,3211,3211,0,100.0,95.4,
+matrix,drug_regulatory_status_world_wide,9236,8616,8616,0,100.0,93.3,
+matrix,target_for,6218,5776,5776,0,100.0,92.9,
+matrix,composed_primarily_of,1878,1816,1418,398,78.08,96.7,Anatomy<-unresolved
+matrix,similar_to,6934,6934,6934,0,100.0,100.0,
+matrix,capable_of,8475,3249,2048,1201,63.03,38.3,Anatomy<-unresolved
+matrix,positively_correlated_with,3936,3567,3484,83,97.67,90.6,Pathway<-unresolved
+matrix,disease_has_basis_in,2918,863,863,0,100.0,29.6,
+matrix,has_metabolite,1774,975,975,0,100.0,55.0,
+matrix,affects_response_to,5444,5381,5381,0,100.0,98.8,
+matrix,negatively_correlated_with,972,874,856,18,97.94,89.9,Pathway<-unresolved
+matrix,disease_has_location,2119,2111,2007,104,95.07,99.6,Anatomy<-unresolved
+matrix,has_increased_amount,164,39,0,39,0.0,23.8,Anatomy<-unresolved
+matrix,acts_upstream_of,466,466,452,14,97.0,100.0,Pathway<-unresolved
+matrix,has_plasma_membrane_part,1078,155,0,155,0.0,14.4,Anatomy<-unresolved
+matrix,acts_upstream_of_negative_effect,31,31,25,6,80.65,100.0,Pathway<-unresolved
+matrix,model_of,38,0,0,0,,0.0,
+matrix,ameliorates_condition,400,399,399,0,100.0,99.8,
+matrix,has_molecular_consequence,74,0,0,0,,0.0,
+matrix,has_decreased_amount,135,14,0,14,0.0,10.4,Anatomy<-unresolved
+matrix,acts_upstream_of_or_within_negative_effect,9,9,8,1,88.89,100.0,Pathway<-unresolved
+matrix,acts_upstream_of_positive_effect,100,100,97,3,97.0,100.0,Pathway<-unresolved
+matrix,acts_upstream_of_or_within_positive_effect,39,39,34,5,87.18,100.0,Pathway<-unresolved
+matrix,mentions,14,0,0,0,,0.0,
+matrix,has_not_completed,44,44,0,44,0.0,100.0,Anatomy<-unresolved
+matrix,indirectly_physically_interacts_with,3,3,0,3,0.0,100.0,"Anatomy<-unresolved, Anatomy<-unresolved"
+matrix,beneficial_in_models_for,1,0,0,0,,0.0,
+matrix,has_active_ingredient,4,4,4,0,100.0,100.0,
+matrix,in_complex_with,2,2,2,0,100.0,100.0,

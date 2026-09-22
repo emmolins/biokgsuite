@@ -1,4 +1,7 @@
 KG,Provenance level,Level score,Edges attributed (%),Edge traceability
 primekg,node,0.5,100.0,0.5
 hetionet,edge,1.0,69.0,0.6899
+drkg,edge,1.0,100.0,1.0
+openbilink,edge,1.0,100.0,1.0
 biokg,none,0.0,0.0,0.0
+matrix,edge,1.0,100.0,1.0

@@ -66,3 +66,7 @@ data/matrix/_cache_matrix_*
 logs/
 *.tar.gz
 *.tgz
+
+# Manuscript drafts: shared on submission, not in the public code archive
+paper/*.docx
+paper/*.pdf

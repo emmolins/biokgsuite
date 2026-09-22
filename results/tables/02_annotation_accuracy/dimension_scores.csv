@@ -1,4 +1,7 @@
 KG,annotation_accuracy,entity_validity,relational_consistency,nodes_judged_pct,registry_confirmed_pct,edges_checkable_pct
 primekg,1.0,1.0,1.0,100.0,94.3,100.0
 hetionet,1.0,1.0,1.0,100.0,93.3,100.0
+drkg,1.0,1.0,1.0,94.1,51.7,99.7
+openbilink,1.0,1.0,1.0,99.8,87.0,92.7
 biokg,1.0,1.0,1.0,100.0,40.3,100.0
+matrix,0.9665,0.9436,0.9894,69.4,38.6,54.9

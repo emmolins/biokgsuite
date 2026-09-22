@@ -24,6 +24,7 @@ def base(tmp_path):
         'drug_name': ['alpha', 'beta', 'gamma', 'delta'], 'disease_name': ['dis one', 'dis two', 'dis three', 'dis two'],
         'doid': [None] * 4, 'mesh_id': [None] * 4,
         'approval_date': ['2023-02-01', '2024-03-01', '2025-04-01', '2026-05-01'],
+        'agency': ['FDA', 'FDA', 'PMDA', 'TGA'],     # earliest decision; DB2 was FDA before EMA
         'agencies': ['FDA', 'EMA;FDA', 'PMDA', 'TGA'], 'n_agencies': [1, 2, 1, 1],
         'combination_type': ['single agent'] * 4})
     gold.to_csv(root / B.SET_DIR / 'post_cutoff_approvals.csv', index=False)
@@ -214,3 +215,10 @@ def test_fatal_api_error_saves_scored_rows_and_raises(base, tmp_path, monkeypatc
     # the none arm was scored in full; the first failed call stopped the job
     assert saved.groupby('arm').size().to_dict() == {'none': 8}
     assert saved.error.isna().all() and len(calls) == 9
+
+
+def test_first_agency_is_earliest_decision_not_alphabetical(base):
+    """DB2 lists 'EMA;FDA' alphabetically but FDA decided first."""
+    bench = B.load_benchmark(base, kgs=KGS)
+    row = bench.set_index('drugbank_id').loc['DB2']
+    assert row['first_agency'] == 'FDA'

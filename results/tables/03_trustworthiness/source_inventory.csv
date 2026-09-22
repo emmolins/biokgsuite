@@ -1,4 +1,7 @@
 KG,Provenance,Level,Derived,Documented,Agree,Edges attributed (%),Basis for documented,Derived names
 primekg,column,node,9.0,20,False,100.0,20 high-quality resources,CTD; DrugBank; GO; HPO; MONDO; MONDO_grouped; NCBI; REACTOME; UBERON
 hetionet,column,edge,13.0,29,False,69.0,29 publicly available resources,Bgee; Dice similarity of ECFPs; DrugCentral; ERC; LINCS L1000; MEDLINE cooccurrence; NCBI gene2go; PID via Pathway Commons; PharmacotherapyDB; Reactome via Pathway Commons; SIDER 4.1; STARGEO (+1 more)
+drkg,relation_prefix,edge,7.0,7,True,100.0,"6 databases + Bibliography, from the README statistics tables (Bibliography: 9,464 entities, 84,756 triplets)",DGIDB; DRUGBANK; GNBR; Hetionet; INTACT; STRING; bioarx
+openbilink,column,edge,11.0,9,False,100.0,"9 distinct edge-contributing sources (STRING, GO, DisGeNet, HPO, Bgee, STITCH, CTD, DrugCentral, SIDER); 16 names in the table once ontology and id-mapping resources are included",Bgee; CDT; DO; DisGeNet; DrugCentral; GO; HPO; SIDER; STITCH; STRING; UBERON
 biokg,none,-,,13,,,"13 of the 18 databases in Table 1 are ticked in the ""In BioKG?"" column",
+matrix,column,edge,95.0,95,True,100.0,"95 aggregated knowledge sources across RTX-KG2, ROBOKOP and PrimeKG; only 15/95 (16%) overlap between RTX-KG2 and ROBOKOP",infores:atc-codes-umls; infores:bfo; infores:bgee; infores:bindingdb; infores:biolink-ontology; infores:bspo; infores:chebi; infores:chembl; infores:chv-umls; infores:cl; infores:ctd; infores:dda (+83 more)

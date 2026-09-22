@@ -1,4 +1,7 @@
 KG,Sources,Basis,Citation
 hetionet,29,29 publicly available resources,"Himmelstein et al. 2017, eLife 6:e26726; corroborated by Kaniewski et al. 2026, bioRxiv 2026.08.26.747253"
 primekg,20,20 high-quality resources,"Chandak, Huang & Zitnik 2023, Sci Data 10:67; corroborated by Kaniewski et al. 2026"
+drkg,7,"6 databases + Bibliography, from the README statistics tables (Bibliography: 9,464 entities, 84,756 triplets)","DRKG repository README, github.com/gnn4dr/DRKG (tables). NB Kaniewski et al. 2026 report 6, following the README prose"
 biokg,13,"13 of the 18 databases in Table 1 are ticked in the ""In BioKG?"" column","Walsh, Mohamed & Novacek 2020, CIKM ’20, Table 1"
+openbilink,9,"9 distinct edge-contributing sources (STRING, GO, DisGeNet, HPO, Bgee, STITCH, CTD, DrugCentral, SIDER); 16 names in the table once ontology and id-mapping resources are included","OpenBioLink README source table, github.com/OpenBioLink/OpenBioLink; Breit et al. 2020, Bioinformatics 36:4097 (states no total)"
+matrix,95,"95 aggregated knowledge sources across RTX-KG2, ROBOKOP and PrimeKG; only 15/95 (16%) overlap between RTX-KG2 and ROBOKOP","Kaniewski et al. 2026, ""Every Cure Knowledge Graph"", bioRxiv doi:10.64898/2026.08.26.747253"

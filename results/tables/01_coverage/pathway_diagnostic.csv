@@ -1,4 +1,7 @@
 KG,Reactome declared,Pathway nodes,R-HSA accessions,% R-HSA,Distinct names,Name matches,% name match,Entity (%),drug→pathway (%),disease→pathway (%)
-primekg,True,2516,2516,100.0,2498,1890,75.7,86.94,0.0,0.0
+primekg,True,2516,2516,100.0,2498,1890,75.7,86.87,0.0,0.0
 hetionet,False,1822,0,0.0,1808,873,48.3,,,
-biokg,True,14779,1974,13.4,6103,1737,28.5,81.82,0.0,0.0
+drkg,False,1822,0,0.0,1822,0,0.0,,,
+openbilink,True,2363,0,0.0,2363,0,0.0,62.16,0.0,0.0
+biokg,True,14779,1974,13.4,6103,1737,28.5,82.41,0.0,0.0
+matrix,True,116577,2246,1.9,90130,30,0.0,78.48,0.02,0.25

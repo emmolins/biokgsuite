@@ -1,4 +1,7 @@
 KG,Score column,Edges with score (%),Score range
 primekg,-- none found --,0.0,N/A
 hetionet,-- none found --,0.0,N/A
+drkg,-- none found --,0.0,N/A
+openbilink,-- none found --,0.0,N/A
 biokg,-- none found --,0.0,N/A
+matrix,confidence_score,94.1,0.3 to 1

@@ -1,4 +1,7 @@
 KG,trustworthiness,edge_traceability,source_diversity,sources (n),uq_coverage
-primekg,0.4632,0.5,0.8897,20,0.0
-hetionet,0.5633,0.6899,1.0,29,0.0
-biokg,0.2539,0.0,0.7617,13,0.0
+primekg,0.3859,0.5,0.6578,20,0.0
+hetionet,0.4764,0.6899,0.7394,29,0.0
+drkg,0.4758,1.0,0.4273,7,0.0
+openbilink,0.4942,1.0,0.4825,9,0.0
+biokg,0.1877,0.0,0.5632,13,0.0
+matrix,0.9803,1.0,1.0,95,0.9409

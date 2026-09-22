@@ -1,4 +1,7 @@
 KG,Identifiers,Resolvable,Ambiguous,Ambiguous (%),Most common overlap
 primekg,90067,51004,8387,16.44,Disease + Gene/Protein
 hetionet,47031,21320,7804,36.6,Disease + Gene/Protein
+drkg,97238,38574,7956,20.63,Disease + Gene/Protein
+openbilink,185929,95743,0,0.0,
 biokg,105524,33228,0,0.0,
+matrix,7340180,1133381,8389,0.74,Disease + Gene/Protein

@@ -1,0 +1,6 @@
+specification,n_judges,W,mean_rho,null_W,perm_p,note
+All metrics,18,0.265,0.222,0.05,5e-05,
+Discriminating metrics,16,0.334,0.29,0.058,0.0,
+Dimension scores,7,0.277,0.156,0.133,0.0527,
+One metric per dimension,7,0.26,0.137,0.143,,"median of 216 combinations, range 0.165-0.426"
+Leave-one-metric-out,16,0.332,0.288,0.062,,"median over 17 refits, range 0.312-0.429"

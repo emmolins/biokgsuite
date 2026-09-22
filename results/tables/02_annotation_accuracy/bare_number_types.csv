@@ -7,3 +7,7 @@ primekg,disease,Disease,17080,15813,1267,100.0,MONDO
 primekg,gene/protein,Gene/Protein,27671,27671,0,100.0,NCBI Entrez
 primekg,effect/phenotype,Phenotype,15311,15311,0,100.0,HPO
 hetionet,Gene,Gene/Protein,20945,20945,0,100.0,NCBI Entrez
+drkg,Gene,Gene/Protein,39220,36535,0,93.2,NCBI Entrez
+drkg,Tax,Taxon,215,215,0,100.0,NCBI Taxonomy
+matrix,disease,Disease,125110,26380,0,21.1,MONDO
+matrix,gene/protein,Gene/Protein,1057470,331089,0,31.3,NCBI Entrez

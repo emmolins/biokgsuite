@@ -1,4 +1,7 @@
 KG,Node types,Mapped,Unmapped,Nodes,Nodes mapped (%),Unmapped types
 primekg,10,10,0,129375,100.0,-
 hetionet,11,11,0,47031,100.0,-
+drkg,13,13,0,97238,100.0,-
+openbilink,8,7,1,185929,75.8,"GO x44,945"
 biokg,6,6,0,105524,100.0,-
+matrix,36,11,25,7354612,96.7,"namedthing x68,452; biologicalentity x47,270; publication x28,301; device x25,763; informationcontententity x25,090; activity x8,258; clinicalattribute x6,809; physicalentity x6,042; molecular_entity x4,925; populationofindividualorganisms x4,712; geographiclocation x4,705; phenomenon x3,908; behavior x2,841; cohort x2,764; agent x1,936; individualorganism x600; event x115; treatment x73; environmentalprocess x67; human x39; chemicalexposure x15; clinicalintervention x14; materialsample x14; lifestage x11; organismattribute x2"

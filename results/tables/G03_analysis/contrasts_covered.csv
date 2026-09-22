@@ -1,0 +1,10 @@
+family,model,model_label,contrast,kg_a,kg_b,n_units,diff,lo,hi,separates
+main,gemini:gemini-3.5-flash-lite,Gemini-3.5-Flash-Lite,PrimeKG - DRKG,primekg,drkg,43,0.038614084738115735,-0.025468371887945537,0.0975196874615479,False
+main,gemini:gemini-3.5-flash-lite,Gemini-3.5-Flash-Lite,PrimeKG - BioKG,primekg,biokg,43,0.028730363807883172,-0.04211073684426399,0.09795599032033138,False
+main,gemini:gemini-3.5-flash-lite,Gemini-3.5-Flash-Lite,DRKG - BioKG,drkg,biokg,43,-0.009883720930232565,-0.08621429084122882,0.07344371641852261,False
+main,gpt-4.1-mini,GPT-4.1-mini,PrimeKG - DRKG,primekg,drkg,43,0.024677002583979323,-0.026402987982445357,0.07167753578606288,False
+main,gpt-4.1-mini,GPT-4.1-mini,PrimeKG - BioKG,primekg,biokg,43,0.0500594725400927,-0.005781858824494477,0.10667845863582295,False
+main,gpt-4.1-mini,GPT-4.1-mini,DRKG - BioKG,drkg,biokg,43,0.025382469956113374,-0.03810795291415446,0.09421983306673229,False
+main,llama3.3:70b,Llama-3.3-70B,PrimeKG - DRKG,primekg,drkg,43,0.05846458307698619,0.007716767154751662,0.10911855030556578,True
+main,llama3.3:70b,Llama-3.3-70B,PrimeKG - BioKG,primekg,biokg,43,0.08852692670522129,0.02689676387350806,0.15391654874697513,True
+main,llama3.3:70b,Llama-3.3-70B,DRKG - BioKG,drkg,biokg,43,0.030062343628235108,-0.05290000410155448,0.11791684610967555,False

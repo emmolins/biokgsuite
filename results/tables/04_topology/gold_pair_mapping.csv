@@ -1,4 +1,7 @@
 KG,Gold pairs,Drugs resolved,Diseases resolved,Pairs mapped (in LCC),Mapped (%)
-primekg,8343,9222,20817,6315,75.7
-hetionet,8343,3039,136,816,9.8
-biokg,8343,9871,6870,5283,63.3
+primekg,7254,9222,20817,5973,82.3
+hetionet,7254,3039,136,813,11.2
+drkg,7254,14166,3541,5633,77.7
+openbilink,7254,67570,9254,4003,55.2
+biokg,7254,9871,6870,5025,69.3
+matrix,7254,998462,26998,6189,85.3

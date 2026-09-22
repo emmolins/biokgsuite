@@ -1,2 +1,7 @@
 kg_a,kg_b,n_shared,a_better,b_better,ties,a_win_rate,comparable
+drkg,primekg,60,26,32,2,0.4483,True
+biokg,drkg,56,37,19,0,0.6607,True
 biokg,primekg,53,29,24,0,0.5472,True
+openbilink,primekg,20,11,9,0,0.55,True
+drkg,openbilink,19,11,8,0,0.5789,True
+biokg,openbilink,11,6,5,0,0.5455,True

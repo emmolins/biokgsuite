@@ -1,0 +1,40 @@
+# temporal arteritis (MONDO:0008538)  arm=biokg  positive=B
+
+You are assisting a drug repurposing scientist. For the target disease below,
+you are given candidate drugs. Some include evidence retrieved from a
+biomedical knowledge graph, reported as mechanistic links
+(drug -> target -> pathway -> disease) and related annotations.
+
+
+Target disease: temporal arteritis (MONDO:0008538)
+Disease profile (from the knowledge graph): temporal arteritis is associated with gene PTN22; temporal arteritis is associated with gene DRB
+
+Candidates (listed order is arbitrary):
+A. Drug-1
+B. Drug-2
+   Drug profile (from the knowledge graph): Drug-2 targets SO1B1; Drug-2 targets JAK1; Drug-2 targets ABCG2; Drug-2 targets CP2D6; Drug-2 targets MDR1; Drug-2 targets CP3A4
+C. Drug-3
+D. Drug-4
+E. Drug-5
+F. Drug-6
+   Drug profile (from the knowledge graph): Drug-6 targets SACB; Drug-6 targets NTPPA; Drug-6 targets RTCB; Drug-6 targets TS1R2; Drug-6 targets ATOX1; Drug-6 targets LYSC; Drug-6 targets ACTS; Drug-6 targets AMPC
+G. Drug-7
+   Drug profile (from the knowledge graph): Drug-7 targets ESR1
+H. Drug-8
+   Drug profile (from the knowledge graph): Drug-8 targets DHI1
+
+Assess each candidate's mechanistic plausibility for this disease using BOTH
+the knowledge-graph evidence and your own pharmacological knowledge. The
+knowledge graph reports associations; treat them as one source, not as
+established truth. Where its evidence is sparse, or conflicts with what you
+know, say so and weight it accordingly -- do not construct a rationale to fit
+weak evidence. If the evidence is insufficient to judge a candidate, mark it
+"uncertain" rather than forcing a confident rank.
+
+Respond with ONLY a single JSON object (no text before or after) of the form:
+{ "reasoning": "<a few sentences weighing the candidates and flagging any KG-vs-knowledge conflicts>",
+  "ranking": [ { "rank": 1, "drug": "<letter>",
+    "basis": "kg" | "prior" | "both",
+    "evidence_agreement": "consistent" | "conflicting" | "insufficient",
+    "confidence": 1-5, "rationale": "<one sentence>" }, ... ] }
+Rank every candidate. ALL fields are required for EVERY candidate, even when no evidence is shown: set basis="prior" when you used only your own knowledge ("kg"/"both" when you used the provided evidence), evidence_agreement="insufficient" when no evidence was given; confidence (1-5) and a one-sentence rationale are ALWAYS required.
