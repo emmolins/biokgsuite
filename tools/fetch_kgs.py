@@ -141,7 +141,7 @@ SPECS = {
                    'everycure/kg-edges, tracked at main (the commit each resolved to '
                    'is appended by the fetch)',
         'citation': 'Every Cure MATRIX. https://huggingface.co/datasets/everycure/',
-        'licence': 'Custom (see the LICENSE file in each dataset repository)',
+        'licence': 'CC BY 4.0 per the Every Cure public data release notes (Hugging Face tag: custom); attribution to Every Cure and to upstream sources including RTX-KG2 and ROBOKOP',
         'doi': '',
         # Tracked at main, not pinned: MATRIX is the one graph here that is still
         # being republished, so a fetch should get what Every Cure serves on the

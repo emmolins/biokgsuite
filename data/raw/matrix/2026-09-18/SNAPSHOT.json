@@ -2,7 +2,7 @@
   "kg": "matrix",
   "release": "Every Cure integrated KG, Hugging Face everycure/kg-nodes and everycure/kg-edges, tracked at main (the commit each resolved to is appended by the fetch); commits everycure/kg-nodes@c9c60b2c55e7, everycure/kg-edges@fcd0585957ab",
   "doi": "",
-  "licence": "Custom (see the LICENSE file in each dataset repository)",
+  "licence": "CC BY 4.0 per the Every Cure public data release notes (Hugging Face tag: custom); attribution to Every Cure and to upstream sources including RTX-KG2 and ROBOKOP",
   "citation": "Every Cure MATRIX. https://huggingface.co/datasets/everycure/",
   "retrieved_utc": "2026-09-18T16:02:21+00:00",
   "fetched_by": "tools/fetch_kgs.py",

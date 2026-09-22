@@ -55,7 +55,7 @@ Citation:  Open Targets Platform. Nucleic Acids Research 2025;53(D1):D1467.
 | **drkg** | unversioned (2022-04-19 build) | 2026-09-18 | 1 | 5,874,260 | 366.1MB | Apache-2.0 (per-source licences apply; see the DRKG licences table) | `6f6a276e7a5d49c1` |
 | **openbilink** | OpenBioLink2020 v1.0.1 | 2026-09-18 | 2 | 28,982,276 | 1.6GB | CC-BY 4.0 | `c0397d56b96aea3f` |
 | **biokg** | v1.0.0 | 2026-09-14 | 13 | 9,770,076 | 320.3MB | MIT | `70a51ebdbfc2e1cd` |
-| **matrix** | HF main | 2026-09-18 | 6 | 88,504,424 | 21.1GB | Custom (see the LICENSE file in each dataset repository) | `1dd3ee051059dcd7` |
+| **matrix** | HF main | 2026-09-18 | 6 | 88,504,424 | 21.1GB | CC BY 4.0 per the Every Cure public data release notes (Hugging Face tag: custom); attribution to Every Cure and to upstream sources including RTX-KG2 and ROBOKOP | `1dd3ee051059dcd7` |
 
 "Last checked against source" is the date the bytes were downloaded, or, where they were already on disk, the date they were checked against the publisher and the publisher confirmed to have released nothing newer. It is not always the date the file itself was created.
 
