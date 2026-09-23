@@ -33,11 +33,6 @@ analysis_params:
     # raises if it is not, rather than scoring every graph 0.0.
     primary_dropout: 0.10
 
-  validation:            # nb02, semantic validity (live API calls)
-    n_samples: 250       # nodes sampled per entity type for identifier validation
-    api_timeout: 15      # per-request HTTP timeout in seconds
-    api_sleep: 0.15      # inter-request delay (seconds) to respect API rate limits
-
   # --- Promoted from hardcoded notebook fallbacks (2026-09-13 review). ---
   # These four were never in config, so every run silently used the value
   # below. Recorded here so the parameter set is complete and auditable.
