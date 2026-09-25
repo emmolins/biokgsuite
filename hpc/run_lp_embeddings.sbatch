@@ -24,7 +24,8 @@
 # One graph, or a few, per job (MATRIX on its own is wise):
 #   sbatch --export=ALL,KGS=matrix hpc/run_lp_embeddings.sbatch
 #   sbatch --export=ALL,KGS=primekg+drkg+openbilink hpc/run_lp_embeddings.sbatch
-# Redo graphs already in the table (for example ones scored at another dimension):
+# Redo graphs already in the table (for example ones scored at another dimension);
+# other graphs' rows are kept. Do not run two of these jobs at once on the same table:
 #   sbatch --export=ALL,KGS=hetionet+biokg,FORCE=1 hpc/run_lp_embeddings.sbatch
 
 set -euo pipefail

@@ -113,17 +113,30 @@ def main():
     # job that stops at the wall clock keeps what it finished and the next
     # launch skips it. MATRIX alone can take most of a day.
     out_path = OUT_DIR / 'link_prediction_embeddings.csv'
-    prev = pd.read_csv(out_path) if out_path.exists() and not args.force else pd.DataFrame()
-    rows = prev.to_dict('records')
-    have = {(r['kg'], r['model']) for r in rows}
     wanted = [k.strip() for k in args.kgs.split(',') if k.strip()] or list(ckpt['splits'])
     unknown = [k for k in wanted if k not in ckpt['splits']]
     if unknown:
         sys.exit(f'not in the 06 checkpoint: {unknown}; known: {list(ckpt["splits"])}')
+    prev = pd.read_csv(out_path) if out_path.exists() else pd.DataFrame()
+    if args.force and len(prev):
+        # Redo only the requested graphs; keep every other graph's rows.
+        prev = prev[~prev['kg'].isin(wanted)]
+    rows = prev.to_dict('records')
+    produced = []          # rows this job computed; these win on write
+    have = {(r['kg'], r['model']) for r in rows}
 
     def write():
         OUT_DIR.mkdir(parents=True, exist_ok=True)
-        pd.DataFrame(rows).to_csv(out_path, index=False)
+        # Re-read before writing so two jobs on different graphs do not
+        # overwrite each other's rows; this job's rows take precedence.
+        cur = pd.read_csv(out_path) if out_path.exists() else pd.DataFrame(prev)
+        mine = pd.DataFrame(produced)
+        if len(cur) and len(mine):
+            keys = set(zip(mine['kg'], mine['model']))
+            cur = cur[[(k, m) not in keys for k, m in zip(cur['kg'], cur['model'])]]
+        if args.force and len(cur):
+            cur = cur[~cur['kg'].isin(wanted)]
+        pd.concat([cur, mine], ignore_index=True).to_csv(out_path, index=False)
 
     for name in wanted:
         if all((name, m) in have for m in model_names):
@@ -190,7 +203,7 @@ def main():
                       f'Reported as UNCALIBRATED, not as disagreement with '
                       f'Adamic-Adar: an undertrained model tells you about the '
                       f'training budget, not about the graph.')
-            rows.append({
+            produced.append({
                 'kg': name, 'model': mname, 'dim': args.dim,
                 'epochs_selected': best['epochs'],
                 'val_auroc': round(best['val'], 4),
@@ -200,6 +213,7 @@ def main():
                 'epoch_trace': json.dumps(trace),
                 'n_test_pos': len(sp['test_pos']), 'n_neg': len(neg),
             })
+            rows.append(produced[-1])
             print(f'{name:12s} {mname:8s}: test AUROC={best["test"]:.4f} '
                   f'at {best["epochs"]} epochs  (AA={aa.get(name)})', flush=True)
             have.add((name, mname))
