@@ -22,8 +22,10 @@ Epoch calibration
 An untrained or undertrained embedding sits at chance, and reporting a
 chance-level AUROC as "the embedding disagrees" would be a statement about the
 training budget, not about the graph. Epochs are therefore calibrated on a
-VALIDATION split carved out of the training positives, never on the test pairs.
-The test set is scored exactly once, at the epoch count validation chose.
+VALIDATION split carved out of the training positives and withheld from
+training, against validation negatives disjoint from the test negatives; the
+test pairs play no part in the choice. The test set is reported at the epoch
+count validation chose.
 
 Inputs come from notebook 06's checkpoint so the split, the negatives and the
 test pairs are identical to the ones Adamic-Adar was scored on. The script
@@ -146,22 +148,31 @@ def main():
         neg = ckpt['negatives'][name][ANCHOR_STRAT]
         kg_df, _nodes = load_kg(name, cfg)
         ind_rels = indication_rels(name)
-        train_triples, rel_to_idx, _ = build_train_triples(
-            kg_df, set(map(tuple, sp['test_pos'])), ind_rels)
 
-        # Validation carved from TRAIN positives only. The test pairs are not
-        # touched until the epoch count is fixed.
+        # Validation carved from TRAIN positives only, and REMOVED from the
+        # training triples so that validation AUROC is out of sample. The
+        # test pairs are not touched until the epoch count is fixed.
         rng = np.random.RandomState(args.seed)
-        tr = list(sp['train_pos'])
+        tr = list(map(tuple, sp['train_pos']))
         perm = rng.permutation(len(tr))
         n_val = max(10, int(args.val_frac * len(tr)))
         val_pos = [tr[i] for i in perm[:n_val]]
-        # Validation negatives drawn from the same pool shape as the test
-        # negatives, at the same ratio.
+        held_out = set(map(tuple, sp['test_pos'])) | set(val_pos)
+        train_triples, rel_to_idx, _ = build_train_triples(kg_df, held_out, ind_rels)
+
+        # Validation negatives: notebook 06's 'random' negatives are a second,
+        # independent draw of the same drug-disease sampler, so they have the
+        # test negatives' distribution; any pair that also appears among the
+        # test negatives is dropped so the two sets are disjoint.
         ratio = max(1, len(neg) // max(1, len(sp['test_pos'])))
-        val_neg_idx = rng.choice(len(neg), size=min(len(neg), n_val * ratio),
+        test_neg_set = set(map(tuple, neg))
+        pool = [tuple(p) for p in ckpt['negatives'][name]['random']
+                if tuple(p) not in test_neg_set]
+        if len(pool) < n_val:
+            sys.exit(f'{name}: only {len(pool)} validation negatives available')
+        val_neg_idx = rng.choice(len(pool), size=min(len(pool), n_val * ratio),
                                  replace=False)
-        val_neg = [neg[i] for i in sorted(val_neg_idx)]
+        val_neg = [pool[i] for i in sorted(val_neg_idx)]
 
         rel_key = next((r for r in rel_to_idx if r in set(ind_rels)), None)
         rel_idx = rel_to_idx.get(rel_key)
