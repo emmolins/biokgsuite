@@ -54,9 +54,11 @@ from biokgsuite.io.config import load_config                     # noqa: E402
 from biokgsuite.io.loading import load_kg                        # noqa: E402
 from biokgsuite.models.embedding import (                        # noqa: E402
     MODELS, build_train_triples)
+from biokgsuite.stats.evaluation import bootstrap_auroc_ci       # noqa: E402
 
 CKPT = ROOT / 'results' / 'checkpoints' / '06_task_performance.pkl'
 OUT_DIR = ROOT / 'results' / 'tables' / '06_task_performance'
+SCORE_DIR = OUT_DIR / 'embedding_scores'   # per-pair test scores at the selected epoch
 ANCHOR_STRAT = 'type-constrained'
 
 
@@ -98,6 +100,7 @@ def main():
 
     cfg = load_config()
     KG_CONFIG = cfg['knowledge_graphs']
+    n_boot = int(cfg['analysis_params']['n_bootstrap'])   # same as nb06
 
     def indication_rels(name):
         c = KG_CONFIG[name]['relations']['drug_disease']
@@ -193,7 +196,7 @@ def main():
             # the sweep costs the MAX epoch count rather than their sum. Test
             # AUROC is recorded at every checkpoint but never used to choose one;
             # selection is on validation alone.
-            trace, done = [], 0
+            trace, done, test_scores = [], 0, {}
             for n_ep in epoch_grid:
                 if n_ep <= done:
                     continue
@@ -201,13 +204,27 @@ def main():
                 m.fit(train_triples, n_epochs=n_ep - done, verbose=False)
                 done = n_ep
                 v, _, _ = _auroc(m, val_pos, val_neg, rel_idx, rel_idx_inv)
-                t, _, _ = _auroc(m, sp['test_pos'], neg, rel_idx, rel_idx_inv)
+                t, t_scores, t_labels = _auroc(m, sp['test_pos'], neg, rel_idx, rel_idx_inv)
                 trace.append({'epochs': n_ep, 'val': v, 'test': t})
+                test_scores[n_ep] = (t_scores, t_labels)
                 print(f'  {name} {mname} epochs={n_ep:>4}  val={v:.4f}  '
                       f'test={t:.4f}  [{time.time()-t0:.0f}s]', flush=True)
 
             best = max(trace, key=lambda r: r['val'])
             calibrated = best['val'] >= 0.55
+            # Test-set bootstrap at the selected epoch: the same stratified
+            # percentile bootstrap and n_bootstrap that notebook 06 uses for the
+            # Adamic-Adar AUROC, so Table S7 intervals match Table S8's.
+            sel_scores, sel_labels = test_scores[best['epochs']]
+            _, ci_lo, ci_hi = bootstrap_auroc_ci(
+                sel_scores, sel_labels, n_boot=n_boot,
+                rng_=np.random.RandomState(args.seed))
+            SCORE_DIR.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(
+                SCORE_DIR / f'{name}__{mname}.npz',
+                pairs=np.array(list(map(tuple, sp['test_pos'])) + list(map(tuple, neg))),
+                labels=sel_labels, scores=sel_scores, epochs=best['epochs'],
+                dim=args.dim, seed=args.seed)
             if not calibrated:
                 print(f'  {name} {mname}: validation AUROC peaked at '
                       f'{best["val"]:.4f} across {epoch_grid}, i.e. at chance. '
@@ -219,6 +236,7 @@ def main():
                 'epochs_selected': best['epochs'],
                 'val_auroc': round(best['val'], 4),
                 'test_auroc': round(best['test'], 4),
+                'test_auroc_lo': round(ci_lo, 4), 'test_auroc_hi': round(ci_hi, 4),
                 'adamic_adar_auroc': aa.get(name),
                 'calibrated': bool(calibrated),
                 'epoch_trace': json.dumps(trace),
@@ -226,7 +244,8 @@ def main():
             })
             rows.append(produced[-1])
             print(f'{name:12s} {mname:8s}: test AUROC={best["test"]:.4f} '
-                  f'at {best["epochs"]} epochs  (AA={aa.get(name)})', flush=True)
+                  f'[{ci_lo:.4f}, {ci_hi:.4f}] at {best["epochs"]} epochs  '
+                  f'(AA={aa.get(name)})', flush=True)
             have.add((name, mname))
             write()
 
