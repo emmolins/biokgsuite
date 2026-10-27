@@ -1,0 +1,17 @@
+panel,dimension_set,min_gap,reversals,comparisons,rate
+all six graphs,all dimensions,0.0,103,255,0.404
+all six graphs,all dimensions,0.02,75,188,0.399
+all six graphs,all dimensions,0.05,25,114,0.219
+all six graphs,all dimensions,0.1,8,65,0.123
+all six graphs,discriminating dimensions,0.0,73,225,0.324
+all six graphs,discriminating dimensions,0.02,47,160,0.294
+all six graphs,discriminating dimensions,0.05,25,114,0.219
+all six graphs,discriminating dimensions,0.1,8,65,0.123
+MATRIX excluded,all dimensions,0.0,73,150,0.487
+MATRIX excluded,all dimensions,0.02,47,95,0.495
+MATRIX excluded,all dimensions,0.05,25,59,0.424
+MATRIX excluded,all dimensions,0.1,8,19,0.421
+MATRIX excluded,discriminating dimensions,0.0,73,150,0.487
+MATRIX excluded,discriminating dimensions,0.02,47,95,0.495
+MATRIX excluded,discriminating dimensions,0.05,25,59,0.424
+MATRIX excluded,discriminating dimensions,0.1,8,19,0.421

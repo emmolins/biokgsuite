@@ -1,0 +1,16 @@
+kg_a,kg_b,lp_diff,lp_p,lp_q,retrieval_diff,retrieval_p,retrieval_q,opposite_order,significant_reversal
+primekg,hetionet,0.0401,0.0472,0.0644,0.4046,0,0,0,0
+primekg,drkg,0.0147,0.106,0.122,0.1733,9.31e-06,1.16e-05,0,0
+primekg,openbilink,0.1849,0,0,0.0033,0.934,0.934,0,0
+primekg,biokg,0.0297,8.1e-08,1.35e-07,0.38,0,0,0,0
+primekg,matrix,-0.0596,0,0,-0.27,4.22e-14,7.91e-14,0,0
+hetionet,drkg,-0.0254,0.226,0.242,-0.2312,2.98e-08,4.06e-08,0,0
+hetionet,openbilink,0.1448,3.3e-11,6.18e-11,-0.4012,0,0,1,1
+hetionet,biokg,-0.0104,0.597,0.597,-0.0246,0.519,0.556,0,0
+hetionet,matrix,-0.0997,3.56e-07,5.35e-07,-0.6746,0,0,0,0
+drkg,openbilink,0.1702,0,0,-0.17,1.87e-05,2.16e-05,1,1
+drkg,biokg,0.015,0.0591,0.0739,0.2067,2.16e-09,3.24e-09,0,0
+drkg,matrix,-0.0743,0,0,-0.4433,0,0,0,0
+openbilink,biokg,-0.1552,0,0,0.3767,0,0,1,1
+openbilink,matrix,-0.2445,0,0,-0.2733,6.08e-14,1.01e-13,0,0
+biokg,matrix,-0.0893,0,0,-0.65,0,0,0,0
