@@ -17,7 +17,7 @@ supplement comes from. Paths are relative to the repository root; notebooks are
 | Fig. 4a | `results/tables/06_task_performance/link_prediction.csv`, `neighbourhood_retrieval.csv` | `paper/figures/make_fig4.py` |
 | Fig. 4b | `results/tables/04_topology/hop_recovery.csv` (reachability) and `link_prediction.csv` | `paper/figures/make_fig4.py` |
 | Fig. 4c | `results/tables/07_generalization/sparse_tiers.csv` | `paper/figures/make_fig4.py` |
-| Fig. 5 (query design) | `paper/figures/Fig5_evaluation_set.pptx`; counts from `results/tables/G01_benchmark/benchmark.csv`, `graph_status.csv` | notebook G01 |
+| Fig. 5 (grounding design) | `paper/figures/Fig5_grounding_design.pdf` (source pptx alongside); counts from `results/tables/G01_benchmark/benchmark.csv` | drawn by hand |
 | Fig. 6 (grounding) | `results/figures/G03_analysis/G03a_grounding_gain.*`, `G03b_rank_distribution.*`; data `results/tables/G03_analysis/arms_main.csv`, `contrasts_main.csv` | notebook G03 |
 | Fig. 7 (capacity) | `results/figures/G04_scaling/G04a_capacity.*`; data `results/tables/G04_scaling/capacity.csv`, `scaling.csv` | notebook G04 |
 | Fig. 8 (prompt) | `paper/figures/Fig8_example_prompt.*`; query from `results/tables/G01_benchmark/queries_seed0.csv` | `src/biokgsuite/grounding/prompt.py` |
@@ -65,7 +65,7 @@ Key statistics in the Results, by paragraph:
 | Table S9 | `results/tables/id_audit/identifier_namespaces.csv`, `01_coverage/resolvability.csv` | `tools/audit_identifiers.py`, notebook 01 |
 | Fig. S1 | `results/figures/04_topology/hop_recovery.*` | notebook 04 |
 | Fig. S2 | `results/figures/07_generalization/S2_sparse_tiers_and_domain.*` | notebook 07 |
-| Fig. S3 | `results/figures/07_generalization/07i_post_cutoff_flow.*`, `G01_benchmark/G01d_benchmark_overview.*` | `tools/build_post_cutoff_approvals.py --figure`, notebook G01 |
+| Fig. S3 | `paper/figures/FigS3_evaluation_set.pptx`; counts from `results/figures/07_generalization/07i_post_cutoff_flow.*` and `results/tables/07_generalization/prospective_coverage.csv` | drawn by hand from `tools/build_post_cutoff_approvals.py --figure` |
 | Fig. S4 | `results/figures/G03_analysis/G03a_grounding_gain.*` | notebook G03 |
 | Fig. S5 | `results/figures/G03_analysis/G03c_evidence_use.*` | notebook G03 |
 | Fig. S6 | `results/figures/07_generalization/07d_prospective_auroc.*`, `07e_prospective_hits.*` | notebook 07 |

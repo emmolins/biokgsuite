@@ -21,7 +21,7 @@ reproduces from this tree plus the fetched, version-stamped inputs.
 | `tests/` | Unit tests of the metrics, the set builder and the grounding package |
 | `tools/` | Fetch, build and record scripts; `tools/README.md` groups them |
 | `hpc/` | Slurm scripts for the long runs |
-| `paper/` | `figures/`: the main-text display items that are drawn or assembled outside the notebooks (Fig 1 schematic, Fig 4 composite via `make_fig4.py`, Fig 5 and Fig 8), numbered as in the manuscript; everything else is read from `results/figures/` |
+| `paper/` | `figures/`: the main-text display items that are drawn or assembled outside the notebooks (Fig 1 and Fig 5 schematics, Fig 4 composite via `make_fig4.py`, Fig 8, Supplementary Fig S3), numbered as in the manuscript; everything else is read from `results/figures/` |
 
 ## What is in git and what is fetched
 
