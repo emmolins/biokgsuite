@@ -21,8 +21,8 @@ authors:
   - family-names: González
     given-names: Javier
     affiliation: "Ellison Institute of Technology"
-version: "1.0.0"
-date-released: "2026-09-22"
+version: "1.0.1"
+date-released: "2026-10-27"
 license: MIT
 repository-code: "https://github.com/emmolins/biokgsuite-bib"
 url: "https://github.com/emmolins/biokgsuite-bib"
