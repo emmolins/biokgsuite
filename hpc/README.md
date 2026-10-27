@@ -218,7 +218,5 @@ are run there, and the checkpoints just pulled from the cluster carry
 | `GatedRepoError` for Gemma | licence not approved yet | wait for the approval mail, or set `GEMMA_ENABLED = False` in the notebook |
 | job killed at the wall time | MATRIX or a long ladder rung | resubmit; every notebook and every run file resumes from what finished |
 
-## legacy/
-
-`run_llm_ollama.sbatch` and `run_llm_ollama_76.sbatch` drove the 2026-09 runs
-on the superseded 116-pair and 76-pair sets. Kept for the record.
+The Ollama scripts that drove the 2026-09 runs on the superseded 116-pair and
+76-pair sets are preserved at the tag `v0.9-legacy`.

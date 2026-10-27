@@ -37,9 +37,7 @@ docstring gives its usage.
 | `measure_shared_retrieval_set.py` | diagnostic: sizes a shared disease-gene retrieval benchmark; writes nothing |
 | `cleanup.sh` | removes `_to_delete/`, caches and OS files (`--yes` to delete) |
 
-## legacy/
-
 The tools of the superseded 116-pair benchmark (FDA census, PMDA parsing,
 corroboration, cleaning to v5) and the two one-off migration scripts of
-2026-09-18 (`reorganise_gold_standards.py`, `rename_post_cutoff.py`). They read
-and write under `data/gold_standards/legacy/` and are kept for the record.
+2026-09-18 are preserved at the tag `v0.9-legacy`; they read and write under
+`data/gold_standards/legacy/`, which stays on `main`.

@@ -108,7 +108,7 @@ panel_label(ax, 'c', x=-0.42)
 
 OUT.mkdir(parents=True, exist_ok=True)
 for ext in ('png', 'pdf'):
-    fig.savefig(OUT / f'Fig4_task_performance_v4.{ext}', dpi=600, bbox_inches='tight', facecolor='white')
+    fig.savefig(OUT / f'Fig4_task_performance.{ext}', dpi=600, bbox_inches='tight', facecolor='white')
 print('AUROC', {k: round(auroc[k], 3) for k in kgs})
 print('Recall@K', {k: round(recall[k], 3) for k in kgs})
 print('reach', {k: round(reach[k], 3) for k in kgs})

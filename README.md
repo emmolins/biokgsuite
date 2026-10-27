@@ -14,14 +14,14 @@ reproduces from this tree plus the fetched, version-stamped inputs.
 | `config/` | `kgs.yaml` (the six graphs, their files and id schemes), `params.yaml` (every analysis parameter, by notebook), `kg_snapshots.yaml` (content date per graph) |
 | `data/` | Inputs. `MANIFEST.md` says how each was obtained, `PROVENANCE.md` (generated) records release, retrieval date and checksum of every file on disk |
 | `src/biokgsuite/` | The package the notebooks call: `io`, `graph`, `gold`, `grounding`, `stats`, `viz`, `models` |
-| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension, and `00_summary` (Fig 1). `CONVENTIONS.md` is the skeleton they all follow, `FIGURE_STYLE.md` the house style every figure is drawn in |
-| `grounding_experiment/` | Part II: five stage notebooks on the post-cutoff approval set (Figs 2 to 5) |
+| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension (Fig 4, Supplementary Figs), and `00_summary` (Figs 2 and 3). `CONVENTIONS.md` is the skeleton they all follow, `FIGURE_STYLE.md` the house style every figure is drawn in |
+| `grounding_experiment/` | Part II: five stage notebooks on the post-cutoff approval set (Figs 5 to 8) |
 | `supplementary/` | Embedding cross-checks of the heuristic results (needs torch) |
 | `results/` | Everything the notebooks write: `figures/`, `tables/`, `checkpoints/`; `MANIFEST.md` (generated) lists it |
 | `tests/` | Unit tests of the metrics, the set builder and the grounding package |
 | `tools/` | Fetch, build and record scripts; `tools/README.md` groups them |
 | `hpc/` | Slurm scripts for the long runs |
-| `paper/` | Display items assembled by `tools/regenerate_figs.py`, numbered as in the manuscript |
+| `paper/` | `figures/`: the main-text display items that are drawn or assembled outside the notebooks (Fig 1 schematic, Fig 4 composite via `make_fig4.py`, Fig 5 and Fig 8), numbered as in the manuscript; everything else is read from `results/figures/` |
 
 ## What is in git and what is fetched
 
@@ -52,14 +52,14 @@ Hosted-model keys for Part II go in `.env` at the repo root (copy
 1. python tools/fetch_kgs.py --all; python tools/build_crosswalks.py; bash tools/fetch_ctd.sh
    python tools/provenance.py                                   → data/, data/PROVENANCE.md
 2. biokgsuite_dimensions/01_coverage ... 07_generalization      → results/, one checkpoint each
-3. biokgsuite_dimensions/00_summary                             → Fig 1
+3. biokgsuite_dimensions/00_summary                             → Figs 2 and 3
 4. python tools/build_post_cutoff_approvals.py --extract-views <kgs>; then --kgs all --figure
    (the grounding arms' views also carry the grounded flag; re-extract them after a dossier-rule change)
    python tools/build_distractor_pool.py; python tools/build_entrez_symbol_map.py
-5. grounding_experiment/01_benchmark                            → benchmark, selection audit (Fig 2)
+5. grounding_experiment/01_benchmark                            → benchmark, selection audit (Fig 5)
 6. grounding_experiment/02_run            [API keys, hours]     → results/tables/G02_run/runs/
-7. grounding_experiment/03_analysis, 04_scaling, 05_diagnostic  → Figs 3 to 5
-8. supplementary/embeddings               [GPU]                 → Figs S1 to Sn
+7. grounding_experiment/03_analysis, 04_scaling, 05_diagnostic  → Figs 6 and 7, Supplementary Figs
+8. supplementary/embeddings               [GPU]                 → Supplementary Tables S6 and S7
 9. python tools/results_manifest.py; python tools/regenerate_figs.py   → results/MANIFEST.md, paper/
 ```
 
@@ -104,11 +104,11 @@ it differs between graphs, is in `data/MANIFEST.md`.
 
 ## Housekeeping
 
-`_to_delete/` holds files retired during the 2026-09 clean-up (duplicates,
-empty directories, OS files); `bash tools/cleanup.sh --yes` removes it together
-with caches. Superseded work is kept, not deleted, under `legacy/` folders
-(`data/gold_standards/legacy/`, `grounding_experiment/legacy/`, `tools/legacy/`,
-`hpc/legacy/`), each with a README saying what it was and why it was replaced.
+Superseded work (the 2026-09 hand-assembled 116-pair grounding set, the
+Ollama scripts and the first approval-census tools) is not on `main`; it is
+preserved in full at the tag `v0.9-legacy`. `_to_delete/` holds files retired
+during clean-up and is gitignored; `bash tools/cleanup.sh --yes` removes it
+together with caches.
 
 ## Citation
 

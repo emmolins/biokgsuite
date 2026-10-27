@@ -68,5 +68,5 @@ provenance file. `derived/` is empty in a fresh checkout.
 
 Nothing in `src/`, `config/` or the notebooks reads these, except that notebook
 07 falls back to `legacy/fda_drugs_id_mapping.csv` when the post-cutoff set is
-absent. Reorganised 2026-09-18 by `tools/legacy/reorganise_gold_standards.py`; nothing
-was deleted.
+absent. Reorganised 2026-09-18 by `reorganise_gold_standards.py` (tag `v0.9-legacy`);
+nothing was deleted.

@@ -7,6 +7,7 @@
 
 # Environments
 .venv/
+.venv.bak/
 venv/
 
 # Caches
@@ -17,6 +18,7 @@ __pycache__/
 
 # OS
 .DS_Store
+/Screenshot*.png
 
 # The Claude desktop app's output folder, if a session is linked to this tree
 Claude outputs/
@@ -67,6 +69,11 @@ logs/
 *.tar.gz
 *.tgz
 
-# Manuscript drafts: shared on submission, not in the public code archive
+# Manuscript drafts and working notes: shared on submission, not in the public code archive
 paper/*.docx
 paper/*.pdf
+paper/*.pptx
+paper/*.md
+paper/_*
+# exploratory probes that never fed a reported number
+results/matrix_va_probe/
