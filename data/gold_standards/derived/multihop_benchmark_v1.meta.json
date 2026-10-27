@@ -1,13 +1,16 @@
 {
   "built_from_kgs": [
     "biokg",
+    "drkg",
     "hetionet",
+    "matrix",
+    "openbilink",
     "primekg"
   ],
-  "sha256": "d7aa8cf415778d8ab322bce7380cd6755782f981d525900c20a834875a1ef86c",
-  "n_triples": 189,
-  "n_common_support": 29163,
-  "n_removed_drug_gene_edge_present": 1905,
+  "sha256": "c205ae0ee55fa17dc55fccfff638445ecee8b0aa5ed9389f32fcd6e5dc0cc331",
+  "n_triples": 41,
+  "n_common_support": 226,
+  "n_removed_drug_gene_edge_present": 170,
   "max_per_entity": 5,
   "seed": 0,
   "target_n": 500
