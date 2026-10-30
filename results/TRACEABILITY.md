@@ -17,10 +17,10 @@ supplement comes from. Paths are relative to the repository root; notebooks are
 | Fig. 4a | `results/tables/06_task_performance/link_prediction.csv`, `neighbourhood_retrieval.csv` | `paper/figures/make_fig4.py` |
 | Fig. 4b | `results/tables/04_topology/hop_recovery.csv` (reachability) and `link_prediction.csv` | `paper/figures/make_fig4.py` |
 | Fig. 4c | `results/tables/07_generalization/sparse_tiers.csv` | `paper/figures/make_fig4.py` |
-| Fig. 5 (grounding design) | `paper/figures/Fig5_grounding_design.pdf` (source pptx alongside); counts from `results/tables/G01_benchmark/benchmark.csv` | drawn by hand |
+| Fig. 5 (grounding design) | `paper/figures/Fig5_grounding_design.{pptx,pdf,png}`; counts from `results/tables/G01_benchmark/benchmark.csv`; candidates, Drug-k labels and evidence excerpt from `results/tables/G02_run/worked_examples/main__biokg.txt` (pair 7, seed 0, shuffle 0); Drug-6 rank 4 from GPT-4.1-mini seed 0, other ranks illustrative | drawn in pptx from the worked example |
 | Fig. 6 (grounding) | `results/figures/G03_analysis/G03a_grounding_gain.*`, `G03b_rank_distribution.*`; data `results/tables/G03_analysis/arms_main.csv`, `contrasts_main.csv` | notebook G03 |
 | Fig. 7 (capacity) | `results/figures/G04_scaling/G04a_capacity.*`; data `results/tables/G04_scaling/capacity.csv`, `scaling.csv` | notebook G04 |
-| Fig. 8 (prompt) | `paper/figures/Fig8_example_prompt.*`; query from `results/tables/G01_benchmark/queries_seed0.csv` | `src/biokgsuite/grounding/prompt.py` |
+| Fig. 8 (prompt) | `paper/figures/Fig8_example_prompt.{pptx,pdf,png}`; verbatim text of `results/tables/G02_run/worked_examples/main__biokg.txt` (header line removed, wrapped at 118 characters) | `src/biokgsuite/grounding/prompt.py` |
 
 Key statistics in the Results, by paragraph:
 
