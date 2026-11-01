@@ -12,40 +12,25 @@
 # matched first: MONDO:0007254 is a disease on the strength of its prefix,
 # whereas the bare 0007254 is only shape evidence.
 #
-# DISCIPLINE. Each entry states what a real identifier of that scheme looks
-# like. Add a scheme because the scheme exists, never because a graph was
-# failing. The predecessor of this file (VALID_PATTERNS) was grown by appending
-# whatever each KG tripped on until a bare integer was valid as seven entity
-# types and the check meant nothing. tools/check_id_schemes.py reports every
-# shape that is ambiguous across types, so that failure mode stays measurable.
+# Each entry states what a real identifier of that scheme looks like. A scheme
+# is added because the scheme exists, never because a graph fails the check;
+# a shape list grown by appending whatever each graph trips on ends with a bare
+# integer valid as every entity type and the check meaning nothing.
+# tools/audit_identifiers.py reports, per graph and declared type, every
+# identifier shape and the share each registry confirms.
 #
-# CHANGES.
-# 2026-09-14  MeSH corrected. The file declared `^D\d{6}$` as MeSH's only shape.
-#             MeSH in fact uses four: descriptor UIs D+6 and D+9, and
-#             Supplementary Concept Record UIs C+6 and C+9. Each was checked
-#             individually against NLM's MeSH RDF service
-#             (https://id.nlm.nih.gov/mesh/<UI>.json) on that date:
-#               D004194    TopicalDescriptor   "Diabetes Mellitus, Experimental"
-#               D000070625 TopicalDescriptor   "Brain Injuries, Diffuse"
-#               C531609    SCR_Disease         "Diffuse alopecia"
-#               C000600608 SCR_Disease         "Ehlers-Danlos ... type 1"
-#               C000006    SCR_Chemical        "insulin, neutral"
-#             The last of these is why the C shapes are declared under BOTH
-#             Drug and Disease and marked ambiguous: NLM issues chemical and
-#             disease SCRs from one C space, so the shape cannot separate them.
-#             This corrects the arbiter, not any graph's score: identifiers that
-#             match no shape were already outside the scored denominator, so the
-#             change moves `nodes_judged_pct`, not `entity_validity`.
-# 2026-09-21  Type-agnostic schemes. UMLS, MeSH and EFO name concepts of every
-#             kind (a CUI is an anatomical structure, a procedure or a protein
-#             as readily as a disease), so an identifier from one of them says
-#             nothing about the type a graph declares. They stay declared where
-#             graphs write them, so the shape is still recognised, but they are
-#             marked `agnostic: true`: fitting one of them under some OTHER type
-#             is no longer a mislabelling, only an identifier the check cannot
-#             adjudicate. Found on MATRIX, which files 110,327 UMLS CUIs under
-#             AnatomicalEntity and was charged for every one of them; the
-#             change moves those nodes out of the judged denominator.
+# MeSH has four shapes: descriptor UIs D+6 and D+9, and Supplementary Concept
+# Record UIs C+6 and C+9 (each checked against NLM's MeSH RDF service,
+# https://id.nlm.nih.gov/mesh/<UI>.json). NLM issues chemical and disease SCRs
+# from one C space, so the C shapes are declared under both Drug and Disease
+# and marked ambiguous.
+#
+# UMLS, MeSH and EFO name concepts of every kind (a CUI is an anatomical
+# structure, a procedure or a protein as readily as a disease), so an
+# identifier from one of them says nothing about the type a graph declares.
+# They are declared where graphs write them, so the shape is recognised, but
+# marked `agnostic: true`: fitting one under another type is not a
+# mislabelling, only an identifier the check cannot adjudicate.
 
 id_schemes:
 

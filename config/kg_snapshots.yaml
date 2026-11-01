@@ -19,11 +19,10 @@
 # date_ok = unknown in post_cutoff_pair_status.csv and it should not be scored
 # on the prospective axis until the date is known.
 #
-# Scope note, checked 2026-09-18: the post-cutoff approval set spans
-# 2023-01-19 to 2026-08-28. All 128 pairs postdate every content date below
-# except MATRIX's, so for the five older graphs the precise day does not change
-# a single pair; it only has to be established as earlier than 2023-01-19, and
-# each now is.
+# Scope note: the post-cutoff approval set spans 2023-01-19 to 2026-08-28.
+# All 128 pairs postdate every content date below except MATRIX's, so for the
+# five earlier graphs the precise day does not change a single pair; it only
+# has to be established as earlier than 2023-01-19.
 
 snapshots:
   hetionet:
@@ -72,8 +71,8 @@ snapshots:
       discards pairs, while erring early credits a graph for approvals it
       already held.
     verified: true
-    # WARNING, and it is not a small one. The post-cutoff approval set runs to
-    # 2026-08-28, so only 5 of its 128 pairs postdate this date. MATRIX is newer
+    # The post-cutoff approval set runs to 2026-08-28, so only 5 of its 128
+    # pairs postdate this date. MATRIX is newer
     # than almost every approval it would be tested on, and its high raw
     # coverage of the set reflects that it already contains these pairs rather
     # than that it can predict them. It will fall far below min_new_pairs and

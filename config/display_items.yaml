@@ -1,64 +1,125 @@
 # Which pipeline output becomes which manuscript display item.
 #
-# Each dimension README declares its display items in prose ("Fig 1 panel;
-# Table S6"), but nothing connected that to a file. Assembling the manuscript
-# then means mapping figures to panels by hand, and again after every revision.
-#
-# This file makes the mapping explicit so tools/results_manifest.py can print
-# it, and so a display item whose source output is MISSING is reported rather
-# than discovered at submission. Paths are relative to results/ and given
-# without extension; figures are written as both .pdf and .png.
-#
-# Keep in step with the "Display item" line in each dimension's README.
+# tools/results_manifest.py reads this file and reports any item whose source
+# output is missing. Paths are relative to results/ and given without
+# extension; figures are written as both .pdf and .png. Items drawn or
+# assembled outside the notebooks (Fig 1, Fig 4, Fig 5, Fig 7, Fig 8 and
+# Supplementary Fig S3) live under paper/figures/ and are not listed here.
+# results/TRACEABILITY.md gives the full mapping, including the statistics
+# quoted in the text.
 
 display_items:
 
   # ---- main figures
-  Fig1:
-    caption: BioKGSuite dimension scores across the knowledge-graph panel
-    source: figures/00_summary/dimension_scores
-    notebook: 00_summary
-    panels:
-      A: figures/01_coverage/entity_coverage
-      B: figures/02_annotation_accuracy/entity_validity
-      C: figures/03_trustworthiness/source_diversity
-      D: figures/04_topology/graph_cohesion
-
   Fig2:
-    caption: Disease coverage by stratum, including rare and undrugged diseases
-    source: figures/01_coverage/relation_coverage
-    notebook: 01_coverage
+    caption: Quality profiles of the six knowledge graphs across the seven dimensions
+    source: figures/00_summary/quality_profiles
+    notebook: 00_summary
+  Fig3:
+    caption: Metric heatmap, 19 metrics by graph
+    source: figures/00_summary/metric_heatmap
+    notebook: 00_summary
+  Fig6:
+    caption: Grounding gain and rank distribution by knowledge-graph arm
+    source: figures/G03_analysis/G03a_grounding_gain
+    notebook: G03_analysis
+    panels:
+      B: figures/G03_analysis/G03b_rank_distribution
 
-  # ---- supplementary tables
-  TableS1:
-    caption: Reference set sizes and provenance
-    source: tables/01_coverage/reference_sets
-    notebook: 01_coverage
-  TableS2:
-    caption: Entity validity per declared type, with registry confirmation
-    source: tables/02_annotation_accuracy/entity_validity
-    notebook: 02_annotation_accuracy
-  TableS3:
-    caption: Declared identifier schemes and shapes shared across entity types
-    source: tables/02_annotation_accuracy/declared_id_schemes
-    notebook: 02_annotation_accuracy
-  TableS4:
-    caption: Source counts per knowledge graph, with citations
-    source: tables/03_trustworthiness/source_counts
-    notebook: 03_trustworthiness
-  TableS5:
-    caption: Edge traceability, provenance level and share of edges attributed
-    source: tables/03_trustworthiness/edge_traceability
-    notebook: 03_trustworthiness
-  TableS6:
-    caption: Entity and relation coverage against task-derived reference sets
-    source: tables/01_coverage/entity_coverage
-    notebook: 01_coverage
-  TableS7:
-    caption: Schema coverage, and node types not mapped to a canonical type
-    source: tables/01_coverage/schema_coverage
-    notebook: 01_coverage
-  TableS8:
-    caption: Topology raw statistics, including clustering sampling error
+  # ---- main tables
+  Table2:
+    caption: Graph properties
     source: tables/04_topology/raw_statistics
     notebook: 04_topology
+
+  # ---- supplementary figures
+  FigS1:
+    caption: Graph reachability under edge removal
+    source: figures/04_topology/hop_recovery
+    notebook: 04_topology
+  FigS2:
+    caption: Sparse-tier and cross-domain generalisation
+    source: figures/07_generalization/S2_sparse_tiers_and_domain
+    notebook: 07_generalization
+  FigS4:
+    caption: Grounding gain, all arms
+    source: figures/G03_analysis/G03a_grounding_gain
+    notebook: G03_analysis
+  FigS5:
+    caption: Evidence use by the model
+    source: figures/G03_analysis/G03c_evidence_use
+    notebook: G03_analysis
+  FigS6:
+    caption: Prospective AUROC and hits
+    source: figures/07_generalization/07d_prospective_auroc
+    notebook: 07_generalization
+    panels:
+      B: figures/07_generalization/07e_prospective_hits
+  FigS7:
+    caption: Stability under edge dropout
+    source: figures/05_stability/stability
+    notebook: 05_stability
+  FigS8:
+    caption: Link prediction across scorers and negative-sampling strategies
+    source: figures/06_task_performance/link_prediction_heatmap
+    notebook: 06_task_performance
+
+  # ---- supplementary tables
+  TableS2:
+    caption: Reference sets
+    source: tables/01_coverage/reference_sets
+    notebook: 01_coverage
+  TableS3a:
+    caption: Dimension and metric scores
+    source: tables/00_summary/dimension_scores
+    notebook: 00_summary
+  TableS3b-e:
+    caption: Topology panels
+    source: tables/04_topology/graph_cohesion
+    notebook: 04_topology
+    panels:
+      c: tables/04_topology/clustering_coefficient
+      d: tables/04_topology/community_purity
+      e: tables/04_topology/hop_recovery
+  TableS3f:
+    caption: Cross-domain generalisation
+    source: tables/07_generalization/cross_domain
+    notebook: 07_generalization
+  TableS4:
+    caption: Dimension dissociations, rank dispersion, concordance and reversal sensitivity
+    source: tables/00_summary/dimension_dissociations
+    notebook: 00_summary
+    panels:
+      b: tables/00_summary/rank_dispersion
+      c: tables/00_summary/concordance_specifications
+      d: tables/00_summary/reversal_sensitivity
+  TableS5:
+    caption: Benchmark selection audit
+    source: tables/G01_benchmark/selection_audit
+    notebook: G01_benchmark
+  TableS6:
+    caption: Grounding results and capacity ladder
+    source: tables/G03_analysis/arms_main
+    notebook: G03_analysis
+    panels:
+      contrasts: tables/G03_analysis/contrasts_main
+      capacity: tables/G04_scaling/capacity
+  TableS7:
+    caption: Embedding cross-check of link prediction
+    source: tables/06_task_performance/link_prediction_embeddings
+    notebook: 06_task_performance
+  TableS8:
+    caption: Task performance by scorer and strategy, retrieval, multi-hop, stability and task contrasts
+    source: tables/06_task_performance/link_prediction
+    notebook: 06_task_performance
+    panels:
+      b: tables/06_task_performance/neighbourhood_retrieval
+      c: tables/06_task_performance/multihop_reasoning
+      stability: tables/05_stability/stability
+      d: tables/06_task_performance/task_contrasts
+  TableS9:
+    caption: Identifier namespaces and resolvability
+    source: tables/id_audit/identifier_namespaces
+    notebook: 01_coverage
+    panels:
+      b: tables/01_coverage/resolvability

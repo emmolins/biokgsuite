@@ -102,8 +102,7 @@ knowledge_graphs:
       # Two labels, one canonical type. `Disease` is MeSH (D001234, C012345);
       # `GeneticDisorder` is OMIM (MIM:100100), and 3,660 of its 3,678 nodes
       # (99.5%) carry a MONDO disease xref, so MONDO, the same arbiter this
-      # dimension scores against, adjudicates them as diseases. Leaving the
-      # label unmapped made them invisible to every metric. 2026-09-14.
+      # dimension scores against, adjudicates them as diseases.
       Disease: [Disease, GeneticDisorder]
       Gene/Protein: Gene/Protein             # UniProt accessions (e.g. P12345)
       Pathway: Pathway                       # mixed KEGG / Reactome / SMPDB IDs
