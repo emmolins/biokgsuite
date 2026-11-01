@@ -1,91 +1,105 @@
 # BioKGSuite
 
-A systematic evaluation of six biomedical knowledge graphs for drug
-repurposing: seven intrinsic quality dimensions scored on a shared set of
-pinned inputs (Part I), and an experiment asking whether each graph's evidence
-helps a language model rank drugs that were approved for a new indication after
-the graph was built (Part II). Every number and display item in the manuscript
-reproduces from this tree plus the fetched, version-stamped inputs.
+BioKGSuite is a framework for evaluating biomedical knowledge graphs on seven
+quality dimensions (coverage, annotation accuracy, trustworthiness, topology,
+stability, task performance and generalisation) through 19 metrics computed
+from each graph's released files and task-specific reference data. This
+repository is the code and result tree behind the manuscript *Knowledge graph
+choice is a design decision: multidimensional evaluation of biomedical
+knowledge graphs with BioKGSuite* (Molins, Holmes, Orfanoudaki, Ktena and
+González, 2026; preprint on arXiv, submitted to Briefings in Bioinformatics).
+It applies the framework to six graphs built for drug repurposing (Hetionet,
+DRKG, PrimeKG, BioKG, OpenBioLink and MATRIX) and runs an experiment asking
+whether each graph's evidence helps a language model rank drugs approved for
+a new indication after the graph was built. Every number and display item in
+the manuscript is produced by the notebooks and scripts here from pinned,
+version-stamped inputs; `results/TRACEABILITY.md` maps each figure, table and
+reported statistic to the file that holds it. The release the manuscript cites
+is tag `v1.0.2`.
 
 ## Layout
 
 | Path | Contents |
 |---|---|
-| `config/` | `kgs.yaml` (the six graphs, their files and id schemes), `params.yaml` (every analysis parameter, by notebook), `kg_snapshots.yaml` (content date per graph) |
-| `data/` | Inputs. `MANIFEST.md` says how each was obtained, `PROVENANCE.md` (generated) records release, retrieval date and checksum of every file on disk |
+| `config/` | `kgs.yaml` (the six graphs, their files and identifier schemes), `params.yaml` (every analysis parameter, by notebook), `kg_snapshots.yaml` (content date per graph), `display_items.yaml` (which output is which manuscript item) |
+| `data/` | Inputs. `MANIFEST.md` says how each was obtained; `PROVENANCE.md` (generated) records release, retrieval date and checksum of every file on disk |
 | `src/biokgsuite/` | The package the notebooks call: `io`, `graph`, `gold`, `grounding`, `stats`, `viz`, `models` |
-| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension (Fig 4, Supplementary Figs), and `00_summary` (Figs 2 and 3). `CONVENTIONS.md` is the skeleton they all follow, `FIGURE_STYLE.md` the house style every figure is drawn in |
+| `biokgsuite_dimensions/` | Part I: notebooks `01` to `07`, one per dimension, and `00_summary`, which assembles the dimension profiles (Figs 2 and 3). `CONVENTIONS.md` is the structure they share, `FIGURE_STYLE.md` the figure style |
 | `grounding_experiment/` | Part II: five stage notebooks on the post-cutoff approval set (Figs 5 to 8) |
 | `supplementary/` | Embedding cross-checks of the heuristic results (needs torch) |
-| `results/` | Everything the notebooks write: `figures/`, `tables/`, `checkpoints/`; `MANIFEST.md` (generated) lists it |
-| `tests/` | Unit tests of the metrics, the set builder and the grounding package |
+| `results/` | Everything the notebooks write: `figures/`, `tables/`, `checkpoints/`. `MANIFEST.md` (generated) lists every file with its checksum; `TRACEABILITY.md` maps manuscript items to files |
+| `tests/` | Unit tests of the metrics, the reference-set builder and the grounding package |
 | `tools/` | Fetch, build and record scripts; `tools/README.md` groups them |
 | `hpc/` | Slurm scripts for the long runs |
-| `paper/` | `figures/`: the main-text display items that are drawn or assembled outside the notebooks (Fig 1 and Fig 5 schematics, Fig 4 composite via `make_fig4.py`, Fig 8, Supplementary Fig S3), numbered as in the manuscript; everything else is read from `results/figures/` |
+| `paper/figures/` | The display items drawn or assembled outside the notebooks: the Fig 1 and Fig 5 schematics, Fig 4 (`make_fig4.py`), Fig 7 (`make_fig7.py`), Fig 8 and Supplementary Fig S3. Everything else is read from `results/figures/` |
 
 ## What is in git and what is fetched
 
 The graphs (25 GB), ontologies and Open Targets datasets are not committed;
-`.gitignore` keeps only their release notes, checksums and snapshot records.
-`data/MANIFEST.md` gives the fetch commands. Committed inputs are the derived
-bridges, the reference sets and the post-cutoff approval set with its vendored
-source, about 60 MB. Per-graph views under `results/checkpoints/07_kg_views/`
-(300 MB) are rebuilt by `tools/build_post_cutoff_approvals.py --extract-views`.
+`.gitignore` keeps only their release notes, checksums and snapshot records,
+and `data/MANIFEST.md` gives the fetch commands. Committed inputs are the
+derived bridges, the reference sets and the post-cutoff approval set with its
+vendored source, about 60 MB. Per-graph views under
+`results/checkpoints/07_kg_views/` (300 MB) are rebuilt by
+`tools/build_post_cutoff_approvals.py --extract-views`.
 
 ## Environment
 
-Python 3.11. `environment.yml` is the reference set; `requirements.txt`
-mirrors it for pip.
+Python 3.11. `environment.yml` is the reference set and `requirements.txt`
+mirrors it for pip; `requirements-embeddings.txt` adds torch for
+`supplementary/`.
 
 ```bash
-bash setup_local.sh                 # .venv from requirements.txt (add --embeddings for torch)
+bash setup_local.sh                 # creates .venv from requirements.txt (add --embeddings for torch)
 source .venv/bin/activate
-python -m pytest tests -q           # no install step needed: pyproject.toml puts src/ on the path
+python -m pytest tests -q           # no install step: pyproject.toml puts src/ on the path
 ```
 
-Hosted-model keys for Part II go in `.env` at the repo root (copy
-`.env.example`); it is gitignored and read by `grounding_experiment/02_run`.
+Keys for the hosted models in Part II go in `.env` at the repository root
+(copy `.env.example`); the file is gitignored and read by
+`grounding_experiment/02_run`.
 
-## Reproduction order
+## Reproducing the results
 
 ```
 1. python tools/fetch_kgs.py --all; python tools/build_crosswalks.py; bash tools/fetch_ctd.sh
-   python tools/provenance.py                                   → data/, data/PROVENANCE.md
-2. biokgsuite_dimensions/01_coverage ... 07_generalization      → results/, one checkpoint each
-3. biokgsuite_dimensions/00_summary                             → Figs 2 and 3
+   python tools/provenance.py                                   -> data/, data/PROVENANCE.md
+2. biokgsuite_dimensions/01_coverage ... 07_generalization      -> results/, one checkpoint each
+3. biokgsuite_dimensions/00_summary                             -> Figs 2 and 3, Tables S3 and S4
 4. python tools/build_post_cutoff_approvals.py --extract-views <kgs>; then --kgs all --figure
-   (the grounding arms' views also carry the grounded flag; re-extract them after a dossier-rule change)
    python tools/build_distractor_pool.py; python tools/build_entrez_symbol_map.py
-5. grounding_experiment/01_benchmark                            → benchmark, selection audit (Fig 5)
-6. grounding_experiment/02_run            [API keys, hours]     → results/tables/G02_run/runs/
-7. grounding_experiment/03_analysis, 04_scaling, 05_diagnostic  → Figs 6 and 7, Supplementary Figs
-8. supplementary/embeddings               [GPU]                 → Supplementary Tables S6 and S7
-9. python tools/results_manifest.py; python tools/regenerate_figs.py   → results/MANIFEST.md, paper/
+5. grounding_experiment/01_benchmark                            -> benchmark and selection audit (Table S5)
+6. grounding_experiment/02_run            [API keys, hours]     -> results/tables/G02_run/runs/
+7. grounding_experiment/03_analysis, 04_scaling, 05_diagnostic  -> Fig 6, Figs S4 and S5, Table S6
+8. supplementary/embeddings               [GPU]                 -> Table S7
+9. python tools/results_manifest.py; python tools/regenerate_figs.py
+   python paper/figures/make_fig4.py; python paper/figures/make_fig7.py   -> results/MANIFEST.md, Figs 4 and 7
 ```
 
 Step 4 is committed: `data/gold_standards/post_cutoff_approvals/` rebuilds
-byte-identically (its `PROVENANCE.txt` carries the source SHA-256). Only step 6
-is expensive, and it is idempotent per (family, model, seed) file. On a Slurm
-cluster the whole order is `hpc/README.md`, one job script per step. Each
-notebook is run from its own folder:
+byte-identically (its `PROVENANCE.txt` carries the source SHA-256). The
+grounding arms' views also carry the grounded flag, so they are re-extracted
+after any change to the dossier rule. Only step 6 is expensive, and it is
+idempotent per (family, model, seed) file. On a Slurm cluster the whole order
+is `hpc/README.md`, one job script per step. Each notebook is run from its own
+folder:
 
 ```bash
 cd biokgsuite_dimensions/05_stability
 jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=86400 notebook.ipynb
 ```
 
-The notebooks are committed with their outputs cleared; the outputs of the
-run behind the manuscript are committed with the final results, so that every
-number in the tree comes from one run. Figures redraw from the checkpoints
-without re-running anything: `python tools/regenerate_figs.py --only 05`.
+The notebooks are committed with the outputs of the run behind the manuscript,
+so every number in the tree comes from one run. Figures redraw from the
+checkpoints without re-running anything: `python tools/regenerate_figs.py --only 05`.
 
-To trial the notebooks on a laptop without loading the whole panel (MATRIX
-alone is 81 M edges), write the graphs to load into a `.trial_kgs` file at the
-repo root, for example `echo primekg,hetionet > .trial_kgs`, or set `BKG_KGS`
-in the environment before the kernel starts. Every notebook and tool then sees
-only those graphs and prints a trial-run notice; the checkpoint records the run
-as a subset, so it cannot be mistaken for the full panel. `.trial_kgs` is
-gitignored, so a clone on the cluster always runs the full six.
+To trial the notebooks without loading the whole panel (MATRIX alone is 81 M
+edges), write the graphs to load into a `.trial_kgs` file at the repository
+root, for example `echo primekg,hetionet > .trial_kgs`, or set `BKG_KGS` in
+the environment before the kernel starts. Every notebook and tool then sees
+only those graphs and prints a trial-run notice, and the checkpoint records
+the run as a subset. `.trial_kgs` is gitignored, so a clone on the cluster
+always runs the full six.
 
 ## Knowledge graphs
 
@@ -100,17 +114,25 @@ gitignored, so a clone on the cluster always runs the full six.
 
 `data/PROVENANCE.md` is the authoritative record and is regenerated from the
 files on disk; this table is a summary. What backs each version claim, and why
-it differs between graphs, is in `data/MANIFEST.md`.
-
-## Housekeeping
-
-Superseded work (the 2026-09 hand-assembled 116-pair grounding set, the
-Ollama scripts and the first approval-census tools) is not on `main`; it is
-preserved in full at the tag `v0.9-legacy`. `_to_delete/` holds files retired
-during clean-up and is gitignored; `bash tools/cleanup.sh --yes` removes it
-together with caches.
+it differs between graphs, is in `data/MANIFEST.md`. Superseded work is kept
+at the tag `v0.9-legacy` and is not read by anything on `main`.
 
 ## Citation
 
-See `CITATION.cff`. Licence: MIT (`LICENSE`); the data sources carry their own
-licences, listed per file in `data/PROVENANCE.md`.
+If you use BioKGSuite, please cite the manuscript above and the software
+release (`CITATION.cff`):
+
+```bibtex
+@software{biokgsuite2026,
+  author  = {Molins, Emily and Holmes, Chris and Orfanoudaki, Agni and Ktena, Ira and Gonz{\'a}lez, Javier},
+  title   = {BioKGSuite: a multidimensional evaluation framework for biomedical knowledge graphs},
+  version = {1.0.2},
+  year    = {2026},
+  url     = {https://github.com/emmolins/biokgsuite-bib}
+}
+```
+
+## Licence
+
+MIT (`LICENSE`). The data sources carry their own licences, listed per file in
+`data/PROVENANCE.md`.
