@@ -28,7 +28,7 @@ Interactive results: https://emmolins.github.io/biokgsuite/ (built from the resu
 
 ## What is in git and what is fetched
 
-The graphs (25 GB), ontologies and Open Targets datasets are not committed;
+The graphs (25 GB), ontologies, and Open Targets datasets are not committed;
 `.gitignore` keeps only their release notes, checksums and snapshot records,
 and `data/MANIFEST.md` gives the fetch commands. Committed inputs are the
 derived bridges, the reference sets and the post-cutoff approval set with its
@@ -82,9 +82,8 @@ cd biokgsuite_dimensions/05_stability
 jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=86400 notebook.ipynb
 ```
 
-The notebooks are committed with the outputs of the run behind the manuscript,
-so every number in the tree comes from one run. Figures redraw from the
-checkpoints without re-running anything: `python tools/regenerate_figs.py --only 05`.
+The notebooks are committed with the outputs of the run behind the manuscript. 
+Figures redraw from the checkpoints without re-running anything: `python tools/regenerate_figs.py --only 05`.
 
 To trial the notebooks without loading the whole panel (MATRIX alone is 81 M
 edges), write the graphs to load into a `.trial_kgs` file at the repository
