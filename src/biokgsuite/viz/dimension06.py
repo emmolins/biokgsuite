@@ -1,22 +1,10 @@
 """Figures for dimension 06, task performance.
 
 One module per dimension, under the package rather than beside the notebook, so
-there is a single import root and no `sys.path` manipulation. All the dimension
-folders previously defined a module named `figures`, and Python's module cache
-returns whichever was imported first to every notebook that runs afterwards in
-the same kernel.
-
-Each function RETURNS its figure rather than saving it. Saving belongs to
-`biokgsuite.io.Outputs`, so every notebook writes through one path and reports
-what it produced.
-
-Three of these four figures used to live inline in the notebook and save
-themselves, which is why none of them appeared in the results manifest and why
-none could be redrawn without re-running the analysis. The precision-recall
-panel additionally RE-SCORED every pair with every heuristic inside the figure
-cell, duplicating the most expensive work in the notebook and leaving the drawn
-curves free to drift from the AUPRC they were labelled with. It now takes the
-curves computed from the same stored scores the metrics came from.
+there is a single import root and no `sys.path` manipulation. Each function
+returns its figure rather than saving it; saving belongs to
+`biokgsuite.io.Outputs`, so every notebook writes through one path, uses one
+naming convention, and reports what it produced.
 """
 import numpy as np
 import pandas as pd

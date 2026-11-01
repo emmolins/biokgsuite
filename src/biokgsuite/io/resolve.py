@@ -1,14 +1,11 @@
 """One identifier-resolution pipeline, applied identically to every KG.
 
-Why this exists
----------------
-Coverage was previously computed after a per-KG normalisation pipeline whose
-depth varied by graph: MATRIX was wired to six crosswalks in config, BioKG to
-one deliberately lossy bridge, Hetionet to none. Coverage then measured
-bridging effort as much as graph content.
-
-This module resolves by SNIFFING THE NAMESPACE OF THE IDENTIFIER, not by
-looking up which KG it came from, so every graph gets every bridge. It also
+Why one pipeline
+----------------
+A per-graph normalisation pipeline whose depth varies by graph makes coverage
+measure bridging effort as much as graph content. This module resolves by the
+namespace of the identifier, not by which graph it came from, so every graph
+gets every bridge. It also
 returns, for every call, how many inputs resolved and which namespaces failed,
 so resolvability can be reported alongside coverage rather than folded into it.
 

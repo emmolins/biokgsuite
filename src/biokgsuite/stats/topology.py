@@ -10,10 +10,9 @@
                             types, by AMI
 
 The reachability gold standard is the reference set notebook 01 scores against,
-resolved through the shared :class:`~biokgsuite.io.resolve.IdResolver`. This
-notebook previously built its own from a separate directory with hand-written
-per-graph identifier bridges, which made the result depend on how much mapping
-work had been done for each graph.
+resolved through the shared :class:`~biokgsuite.io.resolve.IdResolver`, so
+the result does not depend on how much mapping work has been done for each
+graph.
 
 Used by ``biokgsuite_dimensions/04_topology``.
 """
@@ -233,11 +232,7 @@ def _reachable(indptr, indices, src: int, tgt: int, max_hops: int,
 
 def dropout_curve(edges, pairs: list, drop_rates, rng, max_hops: int,
                   n_trials: int, n_nodes: int) -> tuple:
-    """(mean recovery per rate, per-trial values per rate) under random dropout.
-
-    One implementation. This loop was previously written twice, once as a helper
-    and once inline where the curves are built, so the two could drift apart.
-    """
+    """(mean recovery per rate, per-trial values per rate) under random dropout."""
     means, trials_by_rate = [], {}
     n_edges = len(edges)
     seen = np.zeros(n_nodes, dtype=np.int32)
@@ -279,9 +274,8 @@ def differential_resilience(ri_gold: float, ri_rand: float) -> float:
         DR = (RI_gold - RI_rand) / max(eps, 1 - RI_rand), clipped at 0
 
     Density-invariant: a larger or denser graph that preserves ALL pairs equally
-    gains nothing. Defined ONCE; it was previously computed unclipped where the
-    curves are built and clipped again at scoring time, so the checkpoint could
-    carry a different value from the score.
+    gains nothing. Defined once, so the checkpoint and the score carry the same
+    value.
     """
     return round(max(0.0, (ri_gold - ri_rand) / max(1e-6, 1.0 - ri_rand)), 4)
 
@@ -337,14 +331,10 @@ def communities(G, seed: int, resolution: float = 1.0,
     # Louvain assigns every isolated node its own community, so on a graph with
     # a long tail of singletons the partition being graded is mostly singletons:
     # Hetionet carries 1,873 isolated nodes and the full-graph run returned 1,882
-    # communities. AMI, NMI, ARI and Q were then computed against that. The
-    # threshold below used to be 1,000,000 nodes, so it fired for no graph in the
-    # panel and the restriction never happened; it also made the scored AMI
-    # incomparable between graphs on opposite sides of it.
-    #
-    # `lcc_threshold` is kept so a caller can restore the old behaviour, but the
-    # default is now 0, i.e. always restrict. `nodes_clustered` reports what was
-    # actually partitioned.
+    # communities, and AMI, NMI, ARI and Q would be computed against that.
+    # Restricting every graph to its largest component (the default,
+    # `lcc_threshold` = 0) keeps the scored AMI comparable across the panel.
+    # `nodes_clustered` reports what was actually partitioned.
     target = G
     if G.number_of_nodes() > lcc_threshold and G.number_of_nodes() > 0:
         components = list(nx.connected_components(G))

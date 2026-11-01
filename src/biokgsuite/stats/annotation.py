@@ -248,9 +248,9 @@ def identifier_ambiguity(resolvers: dict) -> pd.DataFrame:
 
     The assumption the accuracy metrics rest on. An identifier that resolves as
     both a gene and a disease cannot witness against a mislabelling, because
-    whichever type the graph declares will be corroborated. The pattern
-    allowlist this replaced failed for exactly that reason: a bare integer
-    satisfied seven entity types at once.
+    whichever type the graph declares will be corroborated. A shape list that
+    admits a bare integer as seven entity types at once fails for exactly that
+    reason.
     """
     rows = []
     for kg, lookup in resolvers.items():

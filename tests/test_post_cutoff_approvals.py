@@ -117,7 +117,7 @@ def test_downstream_shapes(tmp_path):
     assert lut[("DB11652", "colorectal carcinoma")]["doid"] == "DOID:0080199"
 
 
-# --- regressions from the 2026-09-18 dataset ---------------------------------
+# --- cases from the released dataset -----------------------------------------
 
 MONDO_ONLY = [
     dict(drugbank_id="DB11569", drug_name="ixekizumab",

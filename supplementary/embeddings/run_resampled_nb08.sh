@@ -7,11 +7,10 @@
 #   retrains TransE and RotatE from scratch, re-scores Gemma against the new
 #   test set, and saves per-rerun results.
 #
-#   The OLD single-run analysis (cells 2-29) still runs first and produces
-#   bootstrap CIs. The NEW resampled section (cells 30-44) then produces
-#   empirical CIs across the 5 reruns. The "bootstrap-vs-rerun" comparison
-#   table at the end quantifies how much the bootstrap underestimated
-#   variance.
+#   The single-run analysis (cells 2-29) runs first and produces bootstrap
+#   CIs. The resampled section (cells 30-44) then produces empirical CIs
+#   across the 5 reruns, and the comparison table at the end quantifies how
+#   much the bootstrap underestimates variance.
 #
 # Prereqs:
 #   1. cd into the biokgsuite repo root

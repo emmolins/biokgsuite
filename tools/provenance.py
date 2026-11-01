@@ -180,8 +180,7 @@ def release_note(root: Path, kg: str) -> dict:
 def obtained_and_backing(kg: str, snap, note=None):
     """How this snapshot was obtained, and what backs its version claim.
 
-    These are the two questions a reviewer asks of a provenance table and
-    neither is answerable from a release string alone. Both are read from the
+    Neither question is answerable from a release string alone. Both are read from the
     snapshot rather than asserted here, so a graph put in place by hand reports
     exactly that rather than borrowing another graph's guarantee.
     """

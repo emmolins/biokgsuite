@@ -12,8 +12,8 @@ Gene/Protein and deliberately does NOT score -- see REGISTRY_CHECKED in
 ``biokgsuite.stats.annotation`` for why.
 
 The schemes live in ``config/id_schemes.yaml`` rather than in code, so the list
-can be read and argued with. See that file for the discipline that keeps it
-from degenerating into the allowlist it replaced.
+can be read and argued with. See that file for the rule that keeps it from
+growing into a list that admits every shape.
 """
 from __future__ import annotations
 

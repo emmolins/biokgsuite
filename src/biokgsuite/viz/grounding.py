@@ -707,7 +707,7 @@ def fig_bias_composition(df, kept_col, cat_vars, title='Composition of kept vs d
 
 # ───────────────────────── benchmark overview (G01) ─────────────────────────
 def fig_benchmark_overview(bench, content_dates, kgs):
-    """Three panels a reviewer asks for before any result: when the approvals
+    """Three panels describing the benchmark before any result: when the approvals
     fall relative to each graph's content date, what each graph can evaluate,
     and how many graphs can evaluate each pair.
 

@@ -1,24 +1,15 @@
 """
 Loader and validator for the post-cutoff approval set (approvals dated after every graph's content date).
 
-WHY THIS EXISTS
----------------
-The prospective arm used to be assembled inside the notebook from three
-sources: a hand-curated FDA CSV, a Python module of literal EMA/PMDA/TGA
-tuples, and a 269-line alias map translating free-text indication strings
-("Ph+ CML-CP") into Disease Ontology names. Three consequences:
-
-  * Disease resolution went through NAMES, so a term the alias map did not
-    anticipate was silently dropped rather than failing loudly.
-  * The FDA CSV was hand-curated and, when it went missing, the section
-    degraded to a much weaker claim that nothing downstream surfaced.
-  * Nothing checked the gold standard itself. A candidate file with composite
-    DrugBank IDs ("DB08912,DB08911") matches no knowledge-graph node, so such
-    a pair can never be flagged as leaked and never counts as covered; it
-    passes every filter by failing to match anything.
-
-This module replaces all three with one tidy table whose identifiers are
-already resolved, and validates that table before the notebook uses it.
+DESIGN
+------
+The set is one tidy table whose identifiers are already resolved (DrugBank,
+MONDO, DOID, MeSH), and it is validated before the notebook uses it. Disease
+resolution goes through identifiers, not names, so an indication the pipeline
+cannot resolve fails loudly rather than being dropped. A candidate file with
+composite DrugBank IDs ("DB08912,DB08911") matches no knowledge-graph node, so
+such a pair could never be flagged as leaked and never count as covered; the
+validator refuses it.
 
 SCHEMA
 ------
@@ -48,12 +39,11 @@ import pandas as pd
 
 REQUIRED = ["drugbank_id", "drug_name", "disease_name",
             "approval_date", "agency"]
-# At least one of these must be present on every row. DOID alone was required
-# originally, which was wrong: the Disease Ontology has no term for a good
-# number of real indications (enthesitis-related juvenile idiopathic arthritis,
-# isolated short stature, complement 3 glomerulopathy), and MONDO does. MONDO is
-# also what PrimeKG keys diseases by, so requiring DOID rejected rows the
-# pipeline could actually resolve.
+# At least one of these must be present on every row. DOID alone is not
+# required: the Disease Ontology has no term for a good number of real
+# indications (enthesitis-related juvenile idiopathic arthritis, isolated short
+# stature, complement 3 glomerulopathy), and MONDO does. MONDO is also what
+# PrimeKG keys diseases by.
 DISEASE_ID_COLS = ["doid", "mondo_id", "mesh_id"]
 OPTIONAL = ["doid", "mondo_id", "mesh_id", "evidence_ref", "evidence_url",
             "verification", "combination_type"]
@@ -254,9 +244,8 @@ def to_new_indication_approvals(df: pd.DataFrame) -> dict:
     """Shape the table into the structure the notebook's downstream cells expect:
     {drugbank_id: (drug_name, [(disease_term, approval_date, note), ...])}.
 
-    The disease TERM carried here is the ontology-resolved name where one is
-    available, not the free-text indication, so name-based lookup no longer
-    depends on the alias map guessing correctly.
+    The disease term carried here is the ontology-resolved name where one is
+    available, not the free-text indication.
     """
     out: dict = {}
     for r in df.itertuples():

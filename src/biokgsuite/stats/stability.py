@@ -38,8 +38,8 @@ def cles(r: float) -> float:
     probability. (r + 1) / 2 is the probability of concordance for Kendall's
     tau; for Spearman's rho it carries no probabilistic reading, and CLES is a
     different quantity again (the probability that a draw from one group
-    exceeds a draw from another). Scoring the notebook's Spearman r through it
-    and calling the result P(rank preserved) was wrong on both counts.
+    exceeds a draw from another), so the value must not be read as
+    P(rank preserved).
 
     What the transform does provide: a common [0, 1] scale with a chance floor
     of 0.5, so a graph whose rankings are destroyed scores 0.5 and only perfect
@@ -254,8 +254,7 @@ def indexed_edges(G) -> tuple:
     """(edge list, per-edge triple count) in one pass over G.edges().
 
     `n_triples` is the number of rows of the edge table that asserted the pair.
-    Edges built before `build_graph` recorded it fall back to 1, which reproduces
-    the old pair-level behaviour rather than failing.
+    Edges without the attribute fall back to 1, which gives pair-level dropout.
     """
     edges, mult = [], []
     for u, v, d in G.edges(data=True):

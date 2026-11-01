@@ -17,11 +17,7 @@ _ROOT_MARKERS = ('config/kgs.yaml', 'config.yaml', 'pyproject.toml')
 
 
 def find_repo_root(start: Path = None) -> Path:
-    """Walk upward from *start* until a repo-root marker is found.
-
-    Replaces the old two-level search, which could not reach the root from
-    ``biokgsuite_dimensions/<stage>/``.
-    """
+    """Walk upward from *start* until a repo-root marker is found."""
     start = Path(start or Path.cwd()).resolve()
     for d in [start, *start.parents]:
         if any((d / m).exists() for m in _ROOT_MARKERS):

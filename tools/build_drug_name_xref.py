@@ -6,7 +6,7 @@ WHY
 data/gold_standards/bridges/drugbank_drugs.csv was rebuilt from Open Targets and
 contains essentially NO monoclonal antibodies: of the 29 drugs in the
 post-cutoff approval set, 16 fail to resolve and all 16 are biologics. The
-cause is upstream, not a bug in that build: Open Targets simply carries no
+cause is upstream: Open Targets simply carries no
 DrugBank cross-reference for most biologics. Pembrolizumab's crossReferences
 in ot_drug_molecule are EMA and DailyMed only, no drugbank, so any build keyed
 on a DrugBank xref drops it correctly and silently.

@@ -1,12 +1,8 @@
 """Figures for dimension 05, stability.
 
 One module per dimension, under the package rather than beside the notebook, so
-there is a single import root and no `sys.path` manipulation. All the dimension
-folders previously defined a module named `figures`, and Python's module cache
-returns whichever was imported first to every notebook that runs afterwards in
-the same kernel.
-
-Each function RETURNS its figure rather than saving it. Saving belongs to
+there is a single import root and no `sys.path` manipulation. Each function
+returns its figure rather than saving it; saving belongs to
 `biokgsuite.io.Outputs`, so every notebook writes through one path, uses one
 naming convention, and reports what it produced.
 """

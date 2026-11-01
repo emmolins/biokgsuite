@@ -1,19 +1,10 @@
 """Figures for dimension 07, generalisation.
 
 One module per dimension, under the package rather than beside the notebook, so
-there is a single import root and no `sys.path` manipulation. Every dimension
-folder used to define a module named `figures`, and Python's module cache hands
-whichever was imported first to every notebook that runs afterwards in the same
-kernel, so `from figures import ...` in 07 could silently return 03's.
-
-Each function RETURNS its figure. Saving belongs to `biokgsuite.io.Outputs`, so
-every notebook writes through one path and reports what it produced. The former
-`figures.py` called `_save()` itself, which is why these two figures never
-appeared in the results manifest.
-
-The file it replaces also carried a duplicated section header and a trailing
-`03 · source-database diversity` header with no function under it, left over
-from the split of the old shared `eval_figs.py`.
+there is a single import root and no `sys.path` manipulation. Each function
+returns its figure rather than saving it; saving belongs to
+`biokgsuite.io.Outputs`, so every notebook writes through one path and reports
+what it produced.
 
 Every function takes the graphs it is given (``kgs`` or the keys of a results
 dict) and draws them in ``KG_ORDER``; the ``kg_colors`` arguments are kept for

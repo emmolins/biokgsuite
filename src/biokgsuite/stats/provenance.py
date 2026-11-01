@@ -45,8 +45,8 @@ PROVENANCE = {
     'matrix':     {'mode': 'column', 'cols': ('edge_source',), 'level': 'edge'},
 }
 
-# Counts as stated by each resource's own documentation. Verified 2026-09-15;
-# full citations and the counting rule are in data/SOURCE_COUNTS.md.
+# Counts as stated by each resource's own documentation; full citations and
+# the counting rule are in data/SOURCE_COUNTS.md.
 #
 # COUNTING RULE. A source is a distinct upstream body of evidence that
 # contributes edges, as enumerated by the resource itself. Literature-derived
