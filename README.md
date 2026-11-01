@@ -8,8 +8,6 @@ repository is the code behind the paper *Knowledge graph choice is a design
 decision: multidimensional evaluation of biomedical knowledge graphs with 
 BioKGSuite* (Molins, Holmes, Orfanoudaki, Ktena, and González, 2026).
 
-Interactive results: https://emmolins.github.io/biokgsuite/ (built from the result tables by `tools/build_dashboard.py`).
-
 ## Layout
 
 | Path | Contents |
