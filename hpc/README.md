@@ -36,21 +36,11 @@ srun --partition=def --cpus-per-task=8 --mem=64G --time=4:00:00 --pty bash   # i
 
 ## 1. On the laptop: commit and push
 
-The repo has no remote yet. Once, from the laptop (a stale lock from an
-interrupted commit has to go first):
+The cluster works from a clone of the repository; code moves by git and data
+by rsync:
 
 ```bash
-cd ~/Desktop/biokgsuite-bib
-rm -f .git/index.lock && find .git/objects -name 'tmp_obj_*' -delete
-git add -A
-git commit -m "Identifier resolution, reference sets, grounded stage, HPC scripts"
-gh repo create emmolins/biokgsuite-bib --private --source=. --remote=origin --push
-```
-
-Every later change is the usual pair:
-
-```bash
-cd ~/Desktop/biokgsuite-bib && git push origin main          # laptop
+git push origin main                                         # laptop
 cd ~/biokgsuite-bib && git pull --ff-only                    # cluster
 ```
 

@@ -6,8 +6,7 @@
 !.env.example
 
 # Environments
-.venv/
-.venv.bak/
+.venv*/
 venv/
 
 # Caches
@@ -20,11 +19,10 @@ __pycache__/
 .DS_Store
 /Screenshot*.png
 
-# The Claude desktop app's output folder, if a session is linked to this tree
+# Local working folders
 Claude outputs/
-
-# Retired work, removed by tools/cleanup.sh
 _to_delete/
+_x/
 
 # Laptop trial runs: the graphs to load, never committed (see README, Reproduction order)
 .trial_kgs

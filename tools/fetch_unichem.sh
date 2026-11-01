@@ -9,9 +9,7 @@
 # without the second mapping every DrugBank-keyed graph (PrimeKG, Hetionet,
 # DRKG, BioKG) is capped at whatever the xref table happens to hold.
 #
-# Run this from a normal terminal on a machine with unrestricted internet.
-# It will NOT work from the Claude session shells, which sit behind an egress
-# allowlist that blocks ebi.ac.uk.
+# Needs a network that can reach ftp.ebi.ac.uk.
 #
 #   bash tools/fetch_unichem.sh
 #

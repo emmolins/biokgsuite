@@ -17,9 +17,8 @@ cd "$(dirname "$0")"
 WITH_EMB=0
 [ "${1:-}" = "--embeddings" ] && WITH_EMB=1
 
-# The repo ships a bare Python 3.9 Jupyter kernel at .venv; it has ipykernel and
-# nothing else, so it cannot run the notebooks. Rebuild it rather than install
-# into it, so the Python version matches environment.yml (3.11) where possible.
+# A .venv this script did not make is set aside rather than installed into, so
+# the Python version matches environment.yml (3.11) where possible.
 if [ -d .venv ] && [ ! -f .venv/.biokgsuite-setup ]; then
     echo "Existing .venv is not one this script made; moving it to .venv.bak"
     rm -rf .venv.bak && mv .venv .venv.bak

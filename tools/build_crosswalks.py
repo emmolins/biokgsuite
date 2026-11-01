@@ -32,17 +32,14 @@ CHEMBL_RELEASE = 'chembl_36'  # verify against ftp.ebi.ac.uk/pub/databases/chemb
 
 # GO and UBERON supply the entity types the four canonical namespaces do not
 # cover. They are pinned like everything else here: UBERON by release tag, GO by
-# commit SHA, because the GO repository publishes no releases and its own
-# download host (release.geneontology.org) is unreachable behind the egress
-# allowlist, as is the OBO PURL.
+# commit SHA, because the GO repository publishes no releases.
 UBERON_TAG = 'v2026-06-23'
 GO_COMMIT  = 'f90ad02eb5c6072eb90bf73b84123eda087e16c7'   # go-edit.obo, 2026-09-14
 # HPO is the registry behind PrimeKG's effect/phenotype nodes, which are written
 # as bare numbers ('118' for HP:0000118) and would otherwise be unverifiable.
 HPO_TAG = 'v2026-09-01'
 # WikiPathways publishes one directory per pathway; the git tree is the registry.
-# data.wikipathways.org is unreachable behind the egress allowlist, as is
-# pathwaycommons.org, so PathwayCommons PC7 accessions cannot be verified at all.
+# PathwayCommons publishes no comparable registry, so PC7 accessions are not verified.
 WIKIPATHWAYS_TREE = '970b71ee0bedabb5025c2f3b4cc6dfcb2e475bb5'   # pathways/, 2026-09
 
 SOURCES = {

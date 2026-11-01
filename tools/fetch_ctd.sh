@@ -15,9 +15,7 @@
 # https://ctdbase.org/about/legal.jsp before redistributing these files, and do
 # NOT commit them; data/ is inputs, not outputs.
 #
-# EGRESS: ctdbase.org is outside the allowlist on the analysis container and on
-# the desktop sandbox. Run this from an unrestricted network (your laptop, or the
-# HPC login node) and copy data/gold_standards/ across.
+# Needs a network that can reach ctdbase.org.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

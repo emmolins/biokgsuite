@@ -290,12 +290,9 @@ relation. Hetionet's `DrD` mixes resemblance semantics — say which you mean.
 
 ## Getting the newest version
 
-One command, from any terminal with normal internet (your Mac, or the cluster).
-It will not work from the Claude session shells, which are behind an egress
-allowlist that blocks ebi.ac.uk.
+From the repository root, on a network that can reach ftp.ebi.ac.uk:
 
 ```bash
-cd ~/Desktop/biokgsuite-bib
 
 # 1. Open Targets 26.06 — all six relation + entity sources (~1.2 GB;
 #    CORE_ONLY=1 fetches just the ~110 MB core, without target-disease associations)
@@ -417,13 +414,6 @@ Mattingly CJ. *Comparative Toxicogenomics Database (CTD): update 2023.* Nucleic
 Acids Research 2023;51(D1):D1257–D1262. Confirm the current citation at
 https://ctdbase.org/about/publications/ and the terms at
 https://ctdbase.org/about/legal.jsp before redistributing anything.
-
-### Egress
-
-`ctdbase.org` and the EBI Open Targets FTP are outside the allowlist on both the
-analysis container and the desktop sandbox; `raw.githubusercontent.com` is
-reachable. `fetch_ctd.sh` therefore has to be run from an unrestricted network
-and the result copied into `data/gold_standards/ctd/`.
 
 ### An open decision
 

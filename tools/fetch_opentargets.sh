@@ -3,15 +3,10 @@
 #
 #   bash tools/fetch_opentargets.sh [dest_dir]
 #
-# Run from a terminal with normal internet (your Mac, or the cluster). It will
-# NOT work inside the Claude session shells, which sit behind an egress
-# allowlist that blocks ebi.ac.uk.
-#
-# Uses curl only, so it works on macOS out of the box (no wget needed).
-# ~125 MB with the default GENE_DISEASE=curated. See the block below for the
-# other gene-disease evidence options. Names verified against the live index on
-# 2026-09-14; they changed from earlier releases (no `known_drug`, no
-# `drug_indication`).
+# Needs a network that can reach ftp.ebi.ac.uk. Uses curl only.
+# About 125 MB with the default GENE_DISEASE=curated; see the block below for
+# the other gene-disease evidence options. Dataset names follow the 26.06
+# index (there is no `known_drug` or `drug_indication` dataset in that release).
 set -euo pipefail
 
 REL="${OT_RELEASE:-26.06}"
