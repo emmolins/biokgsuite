@@ -8,7 +8,7 @@ every pair and the lift on the pairs the graph actually covers.
 `grounding.capacity_models`), `results/checkpoints/G01_benchmark.pkl`,
 `config/params.yaml` (`grounding`)
 **Outputs.** `results/{figures,tables}/G04_scaling/`, `results/checkpoints/G04_scaling.pkl`
-**Display item.** Supplementary figure (capacity series)
+**Display item.** Fig 7 (via `paper/figures/make_fig7.py`); Supplementary Table S6
 
 ## What is scored
 

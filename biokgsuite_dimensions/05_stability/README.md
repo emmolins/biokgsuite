@@ -9,7 +9,7 @@ come from `config/params.yaml: analysis_params.robustness`.
 `kgs.yaml`
 **Outputs.** `results/{figures,tables}/05_stability/`,
 `results/checkpoints/05_stability.pkl`
-**Display item.** Fig 1 panel
+**Display item.** Supplementary Fig S7, Tables S3a and S8c
 
 ## What is scored
 
@@ -52,7 +52,7 @@ equally peripheral by this metric's own definition, so which goes first is
 arbitrary rather than a fact about the graph. Each trial shuffles inside the
 degree band under a seeded permutation, so the reported SD says how much the
 periphery score depends on the draw. Every sub-metric therefore carries an
-uncertainty; previously half the score had none.
+uncertainty.
 
 ### Periphery order is fully determined by the graph
 

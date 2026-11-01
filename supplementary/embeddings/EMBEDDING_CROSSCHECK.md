@@ -1,7 +1,8 @@
 # Embedding cross-check for notebook 06 link prediction
 
-Run 2026-09-16. `supplementary/embeddings/run_link_prediction_embeddings.py`,
-output `results/tables/06_task_performance/link_prediction_embeddings.csv`.
+Script `supplementary/embeddings/run_link_prediction_embeddings.py`; output
+`results/tables/06_task_performance/link_prediction_embeddings.csv`
+(Supplementary Table S7).
 
 ## Why
 

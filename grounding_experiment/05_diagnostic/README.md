@@ -8,7 +8,7 @@ agreement with the evidence.
 **Inputs.** `results/tables/G02_run/runs/` (the headline models, `main`
 family), `results/checkpoints/G01_benchmark.pkl`, `config/params.yaml` (`grounding`)
 **Outputs.** `results/{figures,tables}/G05_diagnostic/`, `results/checkpoints/G05_diagnostic.pkl`
-**Display item.** Supplementary figure (hard pairs)
+**Display item.** None; the tables support the Discussion
 
 ## What is measured
 

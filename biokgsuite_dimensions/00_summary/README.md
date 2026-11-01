@@ -10,7 +10,7 @@ dissociation counts. Run last.
 **Inputs.** `config/kgs.yaml`, `results/checkpoints/01_coverage.pkl` through
 `results/checkpoints/07_generalization.pkl`
 **Outputs.** `results/{figures,tables}/00_summary/`
-**Display item.** Fig 1 (main)
+**Display item.** Figs 2 and 3; Supplementary Tables S3a and S4
 
 ## What is scored
 

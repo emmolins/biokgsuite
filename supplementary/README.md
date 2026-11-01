@@ -1,13 +1,13 @@
-# Part III · Supplementary
+# Supplementary: embedding cross-checks
 
-| Path | Contents | Status |
-|---|---|---|
-| `embeddings/` | TransE / RotatE vs an EmbeddingGemma name-prior, resampled CIs | complete |
-| `embeddings/run_stability_embeddings.py` | Does notebook 05's stability result survive a learned readout? | runnable, not yet run at full scale |
+| Path | Contents |
+|---|---|
+| `embeddings/` | TransE and RotatE link prediction on the same held-out pairs as notebook 06, and an EmbeddingGemma name prior; Supplementary Table S7. `EMBEDDING_CROSSCHECK.md` describes the design |
+| `embeddings/run_stability_embeddings.py` | whether notebook 05's stability result survives a learned readout; not run at full scale for the manuscript |
 
-All embedding code now lives in `src/biokgsuite/models/embedding.py` and its
-figures in `src/biokgsuite/viz/embeddings.py`, so the supplementary imports the
-same implementation the rest of the repo does. `torch` is imported only by
+The embedding code is `src/biokgsuite/models/embedding.py` and its figures
+`src/biokgsuite/viz/embeddings.py`, so the supplementary uses the same
+implementation as the rest of the repository. `torch` is imported only by
 `biokgsuite.models.embedding`; the seven dimension notebooks do not need it.
 
 ## Stability under a learned readout
@@ -36,5 +36,3 @@ r = -0.02, meaning two runs on the identical graph agree no better than chance,
 and every perturbed number sits above the floor and means nothing. A real run
 needs enough epochs for the floor to be high before any perturbation reading is
 interpretable.
-
-six KGs, not the current three.

@@ -8,7 +8,7 @@ graphs ingests.
 the KG files named in `kgs.yaml`
 **Outputs.** `results/{figures,tables}/01_coverage/`,
 `results/checkpoints/01_coverage.pkl`
-**Display item.** Fig 1 panel; Table S6
+**Display item.** Figs 2 and 3 (via `00_summary`); Supplementary Tables S2, S3a and S9
 
 ## What is scored
 

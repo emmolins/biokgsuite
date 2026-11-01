@@ -8,7 +8,7 @@ the graph. The graph asserts a node is a Drug, or that an edge joins two Drugs;
 the KG files named in `kgs.yaml`
 **Outputs.** `results/{figures,tables}/02_annotation_accuracy/`,
 `results/checkpoints/02_annotation_accuracy.pkl`
-**Display item.** Fig 1 panel; Table S2
+**Display item.** Figs 2 and 3 (via `00_summary`); Supplementary Table S3a
 
 ## What is scored
 

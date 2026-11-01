@@ -10,7 +10,7 @@ tables this stage writes.
 **Inputs.** `results/tables/G02_run/runs/`,
 `results/checkpoints/{G01_benchmark, G02_run}.pkl`, `config/params.yaml` (`grounding`)
 **Outputs.** `results/{figures,tables}/G03_analysis/`, `results/checkpoints/G03_analysis.pkl`
-**Display item.** Fig G03a (main text), G03b and G03c (supplement)
+**Display item.** Fig 6 (`G03a`, `G03b`); Supplementary Figs S4 and S5; Supplementary Table S6
 
 ## What is scored
 

@@ -10,7 +10,7 @@ up with entity types.
 `data/crosswalks/`, the KG files named in `kgs.yaml`
 **Outputs.** `results/{figures,tables}/04_topology/`,
 `results/checkpoints/04_topology.pkl`
-**Display item.** Fig 1 panel
+**Display item.** Table 2; Fig 4b (via `paper/figures/make_fig4.py`); Supplementary Fig S1, Tables S3a to S3e
 
 ## What is scored
 

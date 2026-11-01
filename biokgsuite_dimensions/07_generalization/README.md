@@ -15,7 +15,7 @@ the KG files named in `kgs.yaml`, `data/gold_standards/bridges/do_diseases.csv`,
 `tools/build_post_cutoff_approvals.py`; see `data/POST_CUTOFF_APPROVALS.md`)
 **Outputs.** `results/{figures,tables}/07_generalization/`,
 `results/checkpoints/07_generalization.pkl`
-**Display item.** Fig 1 panel
+**Display item.** Fig 4c (via `paper/figures/make_fig4.py`); Supplementary Figs S2 and S6, Tables S3a and S3f
 
 ## What is scored
 
@@ -74,7 +74,7 @@ cannot be applied selectively after seeing which graphs it costs.
 The threshold follows from the set rather than from any result: the
 approvals begin 2023-01-19, so 2022-12-31 is the latest content date at which
 every pair in the set is still genuinely prospective. It was set before any
-prospective score existed for the four graphs added on 2026-09-18.
+prospective score had been seen.
 
 NaN and 0 are different claims. A graph that postdates the approvals has not
 failed the test; it cannot take it. Averaging a 0 into the dimension score would
@@ -88,9 +88,8 @@ Its high raw coverage of the post-cutoff set, 124 of 128 by identifier, reflects
 that it already contains these pairs rather than any ability to predict them, and
 the date check removes almost all of them. It will fall below `min_new_pairs` and
 score N/A, which is what should happen: a graph cannot be evaluated prospectively
-against approvals that predate it. Fixing this needs a set of approvals
-after 2026-05-28, not a later content date, and the manuscript should say so
-rather than leaving a blank cell unexplained.
+against approvals that predate it. Scoring MATRIX on this axis would need a
+set of approvals after 2026-05-28, not a later content date.
 
 ### Coverage, retrieval and ranking are three questions, not one
 
@@ -258,40 +257,23 @@ laptop. Metric definitions live in `src/biokgsuite/stats/prospective.py` and
 `src/biokgsuite/gold/post_cutoff_approvals.py`, covered by
 `tests/test_post_cutoff_approvals.py` and `tests/test_prospective_metrics.py`.
 
-### Original run notes
+Rendering is in `src/biokgsuite/viz/dimension07.py`;
+`python tools/regenerate_figs.py --only 07` redraws the figures from the
+checkpoint.
+
+## The status table must cover the whole panel
+
+The notebook refuses to run against a graph absent from
+`post_cutoff_pair_status.csv`, because such a graph would keep the pairs the
+content-date and leakage checks remove, making its post-cutoff set larger for a
+reason that has nothing to do with the graph. The table is rebuilt for every
+graph in the panel by:
+
 ```bash
-# post-cutoff approval set and per-graph checks (once per graph snapshot; loads the graphs)
-python tools/build_post_cutoff_approvals.py --extract-views hetionet biokg
+python tools/build_post_cutoff_approvals.py --extract-views hetionet primekg drkg openbilink biokg matrix
 python tools/build_post_cutoff_approvals.py --kgs all --figure
-
-jupyter nbconvert --execute --inplace notebook.ipynb
-# or, headless:
-python tools/run_notebook.py biokgsuite_dimensions/07_generalization/notebook.ipynb
-
-python tools/regenerate_figs.py --only 07     # redraw from the checkpoint
-python -m pytest tests/test_post_cutoff_approvals.py tests/test_build_post_cutoff_approvals.py tests/test_clustered_bootstrap.py
 ```
 
-Metric definitions live in `src/biokgsuite/stats/evaluation.py`, the gold-standard
-loader in `src/biokgsuite/gold/post_cutoff_approvals.py`, rendering in `src/biokgsuite/viz/dimension07.py`.
-
-## Before the six-graph run
-
-`post_cutoff_pair_status.csv` currently covers only `hetionet` and `biokg`, the
-two graphs that existed in `data/` when it was built. Notebook 07 now refuses to
-run against a panel it has not all been checked for, because a graph absent from
-that table keeps the pairs the content-date and leakage checks would have
-removed, making its post-cutoff set larger for a reason that has nothing to do
-with the graph.
-
-Rebuild it for the whole panel first:
-
-```bash
-python tools/build_post_cutoff_approvals.py --extract-views primekg drkg openbilink matrix
-python tools/build_post_cutoff_approvals.py --kgs all
-```
-
-The first step loads those four graphs and writes compact views to
-`results/checkpoints/07_kg_views/`; MATRIX makes it a cluster job. The second
-runs the evaluability checks over every view present and rewrites the status
-table. Then run the notebook.
+The first step loads each graph and writes a compact view to
+`results/checkpoints/07_kg_views/` (MATRIX makes it a cluster job); the second
+runs the evaluability checks over every view present and rewrites the table.

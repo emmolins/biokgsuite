@@ -13,7 +13,7 @@ the graph. Sample sizes, bootstrap count and the random seed all come from
 `data/gold_standards/ctd/CTD_curated_genes_diseases.tsv.gz`
 **Outputs.** `results/{figures,tables}/06_task_performance/`,
 `results/checkpoints/06_task_performance.pkl`
-**Display item.** Fig 1 panel
+**Display item.** Fig 4a and 4b (via `paper/figures/make_fig4.py`); Supplementary Fig S8, Tables S3a, S7 and S8
 
 ## What is scored
 

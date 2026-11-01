@@ -6,11 +6,11 @@ supplied the evidence? Five stages, run in order; only `02_run` calls models.
 
 | Stage | Notebook | Produces |
 |---|---|---|
-| `01_benchmark/` | the 128 post-cutoff pairs, their per-graph status, the candidate pools, the selection audit | `G01_benchmark.pkl`, Fig 5 |
+| `01_benchmark/` | the 128 post-cutoff pairs, their per-graph status, the candidate pools, the selection audit | `G01_benchmark.pkl`, the counts in Fig 5, Supplementary Table S5 |
 | `02_run/` | the ranking loop over models, arms, seeds and shuffles (`mock` or `real`) | `results/tables/G02_run/runs/` |
 | `03_analysis/` | paired bootstrap, graph contrasts, evidence control, absence penalty, FDR | tables and Fig 6 (main text), Supplementary Fig S4 |
 | `04_scaling/` | the Llama capacity ladder, pooled versus grounded lift | Fig 7 |
-| `05_diagnostic/` | which pairs are hard and why | supplementary tables and figures |
+| `05_diagnostic/` | which pairs are hard and why | diagnostic tables |
 
 The benchmark is the same post-cutoff approval set notebook 07 scores
 (`data/POST_CUTOFF_APPROVALS.md`), so the two parts of the paper share one
@@ -47,5 +47,3 @@ stand-in for the model and writes to `runs_mock/`, and every run row carries a
 `mode` column; the analysis stages read `runs/` and refuse a mock row unless
 they are themselves launched with `BKG_MODE=mock`.
 
-The 2026-09 experiment on the hand-assembled 116-pair set is preserved at
-the tag `v0.9-legacy`; nothing current reads it.

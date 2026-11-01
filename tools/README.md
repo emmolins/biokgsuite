@@ -33,11 +33,12 @@ docstring gives its usage.
 | `results_manifest.py` | regenerates `results/MANIFEST.md` from the files on disk |
 | `regenerate_figs.py` | redraws every dimension figure from the checkpoints, without re-running the notebooks |
 | `run_notebook.py` | executes a notebook headlessly where jupyter is not installed |
+| `reversal_sensitivity.py`, `concordance_panels.py` | Supplementary Table S4d and the five-graph concordance rows, from the `00_summary` tables |
+| `task_contrasts.py` | Supplementary Table S8d, pairwise graph contrasts between the two tasks, from the `06_task_performance` tables |
 | `audit_identifiers.py` | per graph and declared type, every identifier shape and the share each registry confirms; the check behind reading a bare number as the type the graph declares. Writes `results/tables/id_audit/` |
 | `measure_shared_retrieval_set.py` | diagnostic: sizes a shared disease-gene retrieval benchmark; writes nothing |
 | `cleanup.sh` | removes `_to_delete/`, caches and OS files (`--yes` to delete) |
 
-The tools of the superseded 116-pair benchmark (FDA census, PMDA parsing,
-corroboration, cleaning to v5) and the two one-off migration scripts of
-2026-09-18 are preserved at the tag `v0.9-legacy`; they read and write under
-`data/gold_standards/legacy/`, which stays on `main`.
+The tools of the superseded 116-pair benchmark are preserved at the tag
+`v0.9-legacy`; they read and write under `data/gold_standards/legacy/`, which
+stays on `main` as the record of that earlier set.

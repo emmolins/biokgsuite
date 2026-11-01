@@ -11,7 +11,7 @@ seed) file.
 **Outputs.** `results/tables/G02_run/runs/<family>__<model>__seed<k>.csv`,
 `results/tables/G02_run/worked_examples/`, `results/tables/G02_run/run_summary.csv`,
 `results/checkpoints/G02_run.pkl`
-**Display item.** None (the worked examples go in the supplement)
+**Display item.** The worked example behind Fig 5 and Fig 8 (`worked_examples/main__biokg.txt`)
 
 ## What is measured
 

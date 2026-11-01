@@ -9,7 +9,7 @@ confidence.
 `kgs.yaml`
 **Outputs.** `results/{figures,tables}/03_trustworthiness/`,
 `results/checkpoints/03_trustworthiness.pkl`
-**Display item.** Fig 1 panel
+**Display item.** Figs 2 and 3 (via `00_summary`); Supplementary Table S3a
 
 ## What is scored
 
