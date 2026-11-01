@@ -145,7 +145,7 @@ knowledge_graphs:
     # so they can join to DrugBank-keyed and Entrez-keyed gold standards.
     pubchem_to_drugbank_path: data/openbilink/pubchem_to_drugbank.csv
     uniprot_to_entrez_path: data/gold_standards/bridges/uniprot_genesproteins.csv
-    # Comprehensive DrugBank xref (UNII / RxCUI / ATC / KEGG.DRUG / ChEBI /
+    # Full DrugBank xref (UNII / RxCUI / ATC / KEGG.DRUG / ChEBI /
     # ChEMBL / CAS / etc.). Build via:
     #   python scripts/build_drugbank_xref.py
     # which combines DrugBank's external_links.csv with the existing PubChem

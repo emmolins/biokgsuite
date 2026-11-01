@@ -1,4 +1,4 @@
-"""Build a comprehensive DrugBank cross-reference table for Matrix.
+"""Build a full DrugBank cross-reference table for MATRIX.
 
 Output: ``data/gold_standards/bridges/drugbank_xref.csv`` with columns
     drugbank_id, namespace, external_id
@@ -156,7 +156,7 @@ def main() -> None:
 
         dw = DedupWriter(writer)
 
-        # Source 1: DrugBank external_links.csv (most comprehensive)
+        # Source 1: DrugBank external_links.csv (the fullest)
         if Path(args.drugbank_links).exists():
             n = _emit_links(dw, Path(args.drugbank_links))
             print(f"  [drugbank_external_links]  {n:,} rows")
