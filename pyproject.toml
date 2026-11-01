@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "biokgsuite"
-version = "1.0.2"
+version = "1.0.3"
 description = "A multidimensional evaluation framework for biomedical knowledge graphs"
 requires-python = ">=3.11"
 license = { text = "MIT" }
