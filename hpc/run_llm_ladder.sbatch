@@ -35,7 +35,7 @@ FAMILIES="${FAMILIES:-main}"; FAMILIES="${FAMILIES//+/,}"   # main = all 128 pai
 SAFE="$(echo "$MODEL" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/_/g; s/^_//; s/_$//')"   # same slug as runner.model_slug
 OUT="results/tables/G02_run/runs/main__${SAFE}__seed${SEED}.csv"   # written by grounding_experiment/02_run
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"; mkdir -p logs
 echo "HOST $(hostname)  DATE $(date)  JOB ${SLURM_JOB_ID:-none}  MODEL $MODEL  SEED $SEED  -> $OUT"
 

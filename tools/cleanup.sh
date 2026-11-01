@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Remove accumulated cruft from biokgsuite-bib.
+# Remove accumulated cruft from biokgsuite.
 #
 # The agent sandbox cannot delete on this mount, so everything it retired was
 # moved to _to_delete/ instead. This script does the actual removal, plus the

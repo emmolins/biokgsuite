@@ -29,10 +29,10 @@
 
 set -euo pipefail
 STAGE="${STAGE:-analysis}"
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"; mkdir -p logs
 for marker in config/kgs.yaml grounding_experiment src/biokgsuite; do
-    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite-bib (missing $marker)"; exit 1; }
+    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite (missing $marker)"; exit 1; }
 done
 [ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 echo "HOST $(hostname)  DATE $(date)  JOB ${SLURM_JOB_ID:-none}  STAGE $STAGE"

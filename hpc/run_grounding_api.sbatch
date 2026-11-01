@@ -19,7 +19,7 @@
 # a time, so the three seeds of a provider run in sequence against its rate
 # limit while the three providers run in parallel.
 #
-#   cd ~/biokgsuite-bib
+#   cd ~/biokgsuite
 #   for S in 0 1 2; do
 #     sbatch --job-name=ground-gpt    --export=ALL,MODEL=gpt-4.1-mini,SEED=$S                    hpc/run_grounding_api.sbatch
 #     sbatch --job-name=ground-gemini --export=ALL,MODEL=gemini:gemini-3.5-flash-lite,SEED=$S    hpc/run_grounding_api.sbatch
@@ -39,10 +39,10 @@ SEED="${SEED:?set SEED, e.g. --export=ALL,MODEL=gpt-4.1-mini,SEED=0}"
 FAMILIES="${FAMILIES:-main,common}"
 SAFE="$(echo "$MODEL" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/_/g; s/^_//; s/_$//')"   # same slug as runner.model_slug
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"; mkdir -p logs
 for marker in config/kgs.yaml grounding_experiment/02_run/notebook.ipynb src/biokgsuite; do
-    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite-bib (missing $marker)"; exit 1; }
+    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite (missing $marker)"; exit 1; }
 done
 [ -f .env ] || { echo "FATAL: no .env at $REPO_DIR (copy it from the laptop; see hpc/README.md)"; exit 1; }
 [ -f results/checkpoints/G01_benchmark.pkl ] || { echo "FATAL: run grounding_experiment/01_benchmark first (hpc/run_grounding_analysis.sbatch STAGE=benchmark)"; exit 1; }

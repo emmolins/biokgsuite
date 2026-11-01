@@ -30,7 +30,7 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"
 mkdir -p logs
 [ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
@@ -93,9 +93,9 @@ echo
 # --log-level=INFO to get a "Executing notebook..." marker at start.
 #
 # To monitor progress while running, in another SSH session:
-#   ls -la ~/biokgsuite-bib/results/cache/   # cache files grow as cells finish
-#   ls -la ~/biokgsuite-bib/supplementary/embeddings/notebook.ipynb   # mtime updates as cells finish
-#   ls -la ~/biokgsuite-bib/results/figures/  # new figures appear as cells finish
+#   ls -la ~/biokgsuite/results/cache/   # cache files grow as cells finish
+#   ls -la ~/biokgsuite/supplementary/embeddings/notebook.ipynb   # mtime updates as cells finish
+#   ls -la ~/biokgsuite/results/figures/  # new figures appear as cells finish
 jupyter nbconvert \
     --to notebook --execute --inplace \
     --log-level=INFO \
@@ -112,5 +112,5 @@ echo "  - results/figures/08_heuristic_vs_embedding_scatter.{pdf,png}"
 echo "  - results/checkpoints/08_embedding_validation.pkl"
 echo
 echo "To pull results back to your Mac:"
-echo "  rsync -avz ashburn-login:biokgsuite-bib/results/ ~/biokgsuite-bib/results/"
+echo "  rsync -avz ashburn-login:biokgsuite/results/ ~/biokgsuite/results/"
 echo "================================================================="

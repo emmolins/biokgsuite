@@ -2,7 +2,7 @@
 # One-time HPC setup. Run ONCE on the login node, from the repo root, before
 # submitting any job. Idempotent: safe to rerun if it fails partway.
 #
-#   cd ~/biokgsuite-bib && bash hpc/setup.sh
+#   cd ~/biokgsuite && bash hpc/setup.sh
 #
 # Creates .venv (uv, Python 3.12) and installs requirements.txt plus the
 # embedding stack (requirements-embeddings.txt, torch) that only
@@ -12,10 +12,10 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"
 for marker in config/kgs.yaml biokgsuite_dimensions src/biokgsuite requirements.txt; do
-    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite-bib (missing $marker)"; exit 1; }
+    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite (missing $marker)"; exit 1; }
 done
 
 echo "== BioKGSuite HPC setup in $REPO_DIR"
@@ -40,9 +40,9 @@ echo
 echo "== Done. Before submitting:"
 echo "   1. KG data: from the laptop,"
 echo "        rsync -avz --progress --exclude '_cache_matrix_*' --exclude 'raw' \\"
-echo "              ~/Desktop/biokgsuite-bib/data/ ashburn-login:biokgsuite-bib/data/"
+echo "              ~/Desktop/biokgsuite/data/ ashburn-login:biokgsuite/data/"
 echo "   2. API keys for the grounding runs: from the laptop,"
-echo "        scp ~/Desktop/biokgsuite-bib/.env ashburn-login:biokgsuite-bib/.env"
+echo "        scp ~/Desktop/biokgsuite/.env ashburn-login:biokgsuite/.env"
 echo "   3. Embedding supplementary only: huggingface-cli login, and accept the"
 echo "      EmbeddingGemma licence at https://huggingface.co/google/embeddinggemma-300m"
 echo "   4. Check the graphs arrived:  du -sh data/*/"

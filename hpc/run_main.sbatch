@@ -23,7 +23,7 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"
 mkdir -p logs
 [ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
@@ -34,7 +34,7 @@ mkdir -p logs
 # results that looked valid. Fail loudly instead.
 for marker in config/kgs.yaml biokgsuite_dimensions src/biokgsuite; do
     if [ ! -e "$REPO_DIR/$marker" ]; then
-        echo "FATAL: $REPO_DIR does not look like biokgsuite-bib (missing $marker)."
+        echo "FATAL: $REPO_DIR does not look like biokgsuite (missing $marker)."
         echo "       Set REPO_DIR to the checkout you mean to run."
         exit 1
     fi
@@ -100,6 +100,6 @@ echo "Done. Outputs in results/figures, results/tables, results/checkpoints,"
 echo "and the executed notebooks (00-07) with inline cell outputs."
 echo
 echo "Pull results back to your Mac:"
-echo "  rsync -avz ashburn-login:biokgsuite-bib/results/ ~/Desktop/biokgsuite-bib/results/"
-echo "  rsync -avz ashburn-login:biokgsuite-bib/biokgsuite_dimensions/ ~/Desktop/biokgsuite-bib/biokgsuite_dimensions/"
+echo "  rsync -avz ashburn-login:biokgsuite/results/ ~/Desktop/biokgsuite/results/"
+echo "  rsync -avz ashburn-login:biokgsuite/biokgsuite_dimensions/ ~/Desktop/biokgsuite/biokgsuite_dimensions/"
 echo "================================================================="

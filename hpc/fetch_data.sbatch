@@ -28,10 +28,10 @@
 
 set -euo pipefail
 KGS="${KGS:-primekg openbilink matrix}"
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"; mkdir -p logs
 for marker in config/kgs.yaml tools/fetch_kgs.py src/biokgsuite; do
-    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite-bib (missing $marker)"; exit 1; }
+    [ -e "$marker" ] || { echo "FATAL: $REPO_DIR is not biokgsuite (missing $marker)"; exit 1; }
 done
 echo "HOST $(hostname)  DATE $(date)  JOB ${SLURM_JOB_ID:-none}  KGS $KGS"
 df -h "$HOME" | tail -1

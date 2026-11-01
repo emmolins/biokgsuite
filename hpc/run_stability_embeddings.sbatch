@@ -28,14 +28,14 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"
 mkdir -p logs
 [ ! -f .trial_kgs ] || { echo "FATAL: .trial_kgs is present; the cluster runs the full panel. Remove it."; exit 1; }
 
 for marker in config/kgs.yaml src/biokgsuite/models/embedding.py; do
     if [ ! -e "$REPO_DIR/$marker" ]; then
-        echo "FATAL: $REPO_DIR does not look like biokgsuite-bib (missing $marker)."
+        echo "FATAL: $REPO_DIR does not look like biokgsuite (missing $marker)."
         exit 1
     fi
 done

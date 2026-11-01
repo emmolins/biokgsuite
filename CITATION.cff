@@ -24,8 +24,8 @@ authors:
 version: "1.0.3"
 date-released: "2026-11-02"
 license: MIT
-repository-code: "https://github.com/emmolins/biokgsuite-bib"
-url: "https://github.com/emmolins/biokgsuite-bib"
+repository-code: "https://github.com/emmolins/biokgsuite"
+url: "https://github.com/emmolins/biokgsuite"
 abstract: >
   BioKGSuite evaluates biomedical knowledge graphs across seven dimensions
   (coverage, annotation accuracy, trustworthiness, topology, stability, task

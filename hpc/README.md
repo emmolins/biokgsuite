@@ -2,7 +2,7 @@
 
 Target: Oracle Cloud HPC (Ashburn), Slurm, partition `def`. CPU nodes have 96
 cores and 125 GB or more; GPU nodes carry H100 80 GB cards. The repo lives at
-`~/biokgsuite-bib` on the cluster and every script below assumes that path
+`~/biokgsuite` on the cluster and every script below assumes that path
 (`REPO_DIR` overrides it).
 
 The runs, in the order they depend on each other:
@@ -41,7 +41,7 @@ by rsync:
 
 ```bash
 git push origin main                                         # laptop
-cd ~/biokgsuite-bib && git pull --ff-only                    # cluster
+cd ~/biokgsuite && git pull --ff-only                    # cluster
 ```
 
 `.env`, `.trial_kgs`, the graphs under `data/` and the loader caches are
@@ -54,8 +54,8 @@ to start if it finds one.
 
 ```bash
 ssh ashburn-login
-git clone https://github.com/emmolins/biokgsuite-bib.git ~/biokgsuite-bib
-cd ~/biokgsuite-bib
+git clone https://github.com/emmolins/biokgsuite.git ~/biokgsuite
+cd ~/biokgsuite
 bash hpc/setup.sh            # uv venv at .venv, requirements.txt + the embedding stack; ~10 min
 ```
 
@@ -79,8 +79,8 @@ is fetchable too, but its publisher posts no checksum). From the laptop:
 rsync -avz --partial --progress --exclude '_cache_matrix_*' --exclude 'raw' \
       --include='/hetionet/***' --include='/biokg/***' --include='/drkg/***' --include='/crosswalks/***' \
       --include='/gold_standards/***' --include='/*.md' --exclude='*' \
-      ~/Desktop/biokgsuite-bib/data/ ashburn-login:biokgsuite-bib/data/
-scp ~/Desktop/biokgsuite-bib/.env ashburn-login:biokgsuite-bib/.env
+      ~/Desktop/biokgsuite/data/ ashburn-login:biokgsuite/data/
+scp ~/Desktop/biokgsuite/.env ashburn-login:biokgsuite/.env
 ```
 
 Pushing everything from the laptop instead (about 25 GB) also works and is
@@ -89,7 +89,7 @@ left behind because their file name is keyed on the laptop's absolute paths
 and would not be reused, and `data/raw` holds only the fetch snapshots the
 notebooks never read.
 
-Then on the cluster: `du -sh ~/biokgsuite-bib/data/*/` should show matrix
+Then on the cluster: `du -sh ~/biokgsuite/data/*/` should show matrix
 about 12 GB, openbilink 1.7 GB, primekg 0.9 GB, and `cat .env` should show the
 three keys. The first job that loads MATRIX rebuilds its cache on the cluster
 (20 minutes or so, once).
@@ -99,7 +99,7 @@ token, and accept the EmbeddingGemma licence in a browser.
 
 ## 3. Submit
 
-Everything from `~/biokgsuite-bib`. Each `sbatch` prints a job id; the log is
+Everything from `~/biokgsuite`. Each `sbatch` prints a job id; the log is
 `logs/<name>-<jobid>.out`.
 
 ```bash
@@ -180,10 +180,10 @@ adds 3 (`main` only for the ladder).
 When `squeue -u $USER` is empty, from the laptop:
 
 ```bash
-rsync -avz ashburn-login:biokgsuite-bib/results/ ~/Desktop/biokgsuite-bib/results/
-rsync -avz ashburn-login:biokgsuite-bib/biokgsuite_dimensions/ ~/Desktop/biokgsuite-bib/biokgsuite_dimensions/
-rsync -avz ashburn-login:biokgsuite-bib/grounding_experiment/ ~/Desktop/biokgsuite-bib/grounding_experiment/
-rsync -avz ashburn-login:biokgsuite-bib/supplementary/ ~/Desktop/biokgsuite-bib/supplementary/
+rsync -avz ashburn-login:biokgsuite/results/ ~/Desktop/biokgsuite/results/
+rsync -avz ashburn-login:biokgsuite/biokgsuite_dimensions/ ~/Desktop/biokgsuite/biokgsuite_dimensions/
+rsync -avz ashburn-login:biokgsuite/grounding_experiment/ ~/Desktop/biokgsuite/grounding_experiment/
+rsync -avz ashburn-login:biokgsuite/supplementary/ ~/Desktop/biokgsuite/supplementary/
 ```
 
 That brings the figures, tables, checkpoints, run files and the executed
@@ -198,8 +198,8 @@ are run there, and the checkpoints just pulled from the cluster carry
 | Symptom | Cause | Fix |
 |---|---|---|
 | `module: command not found` | login environment not loaded | `source /etc/profile.d/modules.sh` first |
-| `FATAL: ... is not biokgsuite-bib` | `REPO_DIR` points elsewhere | `export REPO_DIR=~/biokgsuite-bib` or run from that directory |
-| `FATAL: .trial_kgs is present` | the laptop's trial switch was copied | `rm ~/biokgsuite-bib/.trial_kgs` |
+| `FATAL: ... is not biokgsuite` | `REPO_DIR` points elsewhere | `export REPO_DIR=~/biokgsuite` or run from that directory |
+| `FATAL: .trial_kgs is present` | the laptop's trial switch was copied | `rm ~/biokgsuite/.trial_kgs` |
 | `FATAL: no .env` | keys not copied | `scp` step in section 2 |
 | `FATAL: run grounding_experiment/01_benchmark first` | B has not run | submit B, wait, resubmit |
 | grounding job ends with `incomplete (rate-limited) arms` | provider rate limit | resubmit the same command; only the missing arms rerun |

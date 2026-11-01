@@ -29,7 +29,7 @@
 #   sbatch --export=ALL,KGS=hetionet+biokg,FORCE=1 hpc/run_lp_embeddings.sbatch
 
 set -euo pipefail
-REPO_DIR="${REPO_DIR:-$HOME/biokgsuite-bib}"
+REPO_DIR="${REPO_DIR:-$HOME/biokgsuite}"
 cd "$REPO_DIR"; mkdir -p logs
 KGS="${KGS:-}"; KGS="${KGS//+/,}"          # + not comma: --export splits on commas
 FORCE="${FORCE:-}"
