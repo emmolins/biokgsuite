@@ -1,6 +1,11 @@
-specification,n_judges,W,mean_rho,null_W,perm_p,note
-All metrics,18,0.265,0.222,0.05,5e-05,
-Discriminating metrics,16,0.334,0.29,0.058,0.0,
-Dimension scores,7,0.277,0.156,0.133,0.0527,
-One metric per dimension,7,0.26,0.137,0.143,,"median of 216 combinations, range 0.165-0.426"
-Leave-one-metric-out,16,0.332,0.288,0.062,,"median over 17 refits, range 0.312-0.429"
+panel,specification,n_judges,W,mean_rho,null_W,perm_p,note
+all six graphs,All metrics,18,0.265,0.222,0.05,5e-05,
+all six graphs,Discriminating metrics,16,0.334,0.29,0.058,0.0,
+all six graphs,Dimension scores,7,0.277,0.156,0.133,0.0527,
+all six graphs,One metric per dimension,7,0.26,0.137,0.143,,"median of 216 combinations, range 0.165-0.426"
+all six graphs,Leave-one-metric-out,16,0.332,0.288,0.062,,"median over 17 refits, range 0.312-0.429"
+MATRIX excluded,All metrics,18,0.093,0.039,0.046,0.08295,
+MATRIX excluded,Discriminating metrics,14,0.148,0.082,0.072,0.07755,
+MATRIX excluded,Dimension scores,7,0.102,-0.048,0.121,0.5323,
+MATRIX excluded,One metric per dimension,6,0.184,0.021,0.167,,"median of 144 combinations, range 0.030-0.496"
+MATRIX excluded,Leave-one-metric-out,14,0.148,0.082,0.071,,"median over 15 refits, range 0.126-0.194"
