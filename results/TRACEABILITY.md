@@ -29,7 +29,7 @@ Key statistics in the Results, by paragraph:
 | Dimension scores (MATRIX 0.920, PrimeKG 0.716, ...) and coverage 0.68 / 0.48 / 0.47 | `results/tables/00_summary/dimension_scores.csv` |
 | Reversal rates 49% (five graphs), 40% and 32% (six), per dimension pair | `results/tables/00_summary/dimension_dissociations.csv` |
 | Gap-restricted reversal rates (42% at 0.05 and 0.10, five graphs) | `results/tables/00_summary/reversal_sensitivity.csv` (`tools/reversal_sensitivity.py`) |
-| Kendall's W, mean rho, permutation p | `results/tables/00_summary/concordance_specifications.csv`; permutation null (20,000 draws, seed 0) in notebook 00 |
+| Kendall's W, mean rho, permutation p | `results/tables/00_summary/concordance_specifications.csv (both panels; `tools/concordance_panels.py`)`; permutation null (20,000 draws, seed 0) in notebook 00 |
 | Rank span per graph | `results/tables/00_summary/rank_dispersion.csv` |
 | Link prediction AUROC 0.998 / 0.754 etc. | `results/tables/06_task_performance/link_prediction.csv` (Adamic-Adar, type-constrained) |
 | Retrieval Recall@0.5% (0.823, 0.553, 0.550, 0.380, 0.173, 0.149) | `results/tables/06_task_performance/neighbourhood_retrieval.csv` |
