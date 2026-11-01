@@ -77,3 +77,7 @@ paper/*.md
 paper/_*
 # exploratory probes that never fed a reported number
 results/matrix_va_probe/
+
+# release archives and Office lock files
+*.zip
+~$*
