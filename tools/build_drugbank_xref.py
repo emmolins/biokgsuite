@@ -26,21 +26,21 @@ GOLD = REPO_ROOT / "data" / "gold_standards" / "bridges"
 OUT  = GOLD / "drugbank_xref.csv"
 
 # DrugCentral's downloads page lives at https://drugcentral.org/Downloads
-# The identifier crosswalk is `identifier.tsv.gz` — a TSV with columns:
+# The identifier crosswalk is `identifier.tsv.gz`, a TSV with columns:
 #   identifier, id_type, struct_id, parent_match
 # struct_id corresponds to a DrugCentral structure; we need the join to the
 # `structure_external_id` table. Easier path: download `drug.target.interaction.tsv`
 # which already includes DrugBank IDs and external_id pairs in one row. Or pull
-# the full Postgres dump (drugcentral.dump.07292024.sql.gz) — too big for here.
+# the full Postgres dump (drugcentral.dump.07292024.sql.gz), too big for here.
 #
 # For a self-contained free pull we use the public **Drugs@FDA / RxNorm
-# crosswalk** maintained by NIH at https://rxnav.nlm.nih.gov — accessible via
+# crosswalk** maintained by NIH at https://rxnav.nlm.nih.gov, accessible via
 # their REST API but requires per-drug calls. Skip that for batch builds.
 #
 # Pragmatic compromise: this script reads three local files if present:
 #   1. data/openbilink/pubchem_to_drugbank.csv  (always present in this repo)
 #   2. data/gold_standards/bridges/drugbank_external_links.csv  (user downloads from
-#      drugbank.com — has all 16k DrugBank drugs with UNII/RxNorm/ATC/KEGG/
+#      drugbank.com, has all 16k DrugBank drugs with UNII/RxNorm/ATC/KEGG/
 #      ChEBI/ChEMBL/CAS columns)
 #   3. data/gold_standards/bridges/drugcentral_xref.csv  (optional, from DrugCentral)
 # It then unions them into the canonical drugbank_xref.csv format.

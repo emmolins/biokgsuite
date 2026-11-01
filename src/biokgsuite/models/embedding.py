@@ -234,7 +234,7 @@ class TransE:
                 neg_heads_t = torch.as_tensor(neg_heads, device=dev)
                 neg_tails_t = torch.as_tensor(neg_tails, device=dev)
 
-                # Forward — embeddings (with gradient tracking via nn.Embedding)
+                # Forward, embeddings (with gradient tracking via nn.Embedding)
                 h  = self._ent(heads_t)
                 r  = self._rel(rels_t)
                 t  = self._ent(tails_t)
@@ -245,7 +245,7 @@ class TransE:
                 d_neg = (nh + r - nt).norm(p=2, dim=1)
                 # F.relu gives zero gradient for non-violated pairs,
                 # matching the original ``mask = violation > 0`` logic.
-                # NOTE: .sum() — NOT .mean(). The validated NumPy reference
+                # NOTE: .sum(), NOT .mean(). The validated NumPy reference
                 # applies a per-sample update of scale ~lr to each touched
                 # entity. With .mean(), autograd divides every entity's
                 # gradient by batch_size, shrinking the effective step
@@ -469,7 +469,7 @@ class RotatE:
 
                 d_pos = self._dist_tensors(h_re,  h_im,  rp, t_re,  t_im)
                 d_neg = self._dist_tensors(nh_re, nh_im, rp, nt_re, nt_im)
-                # .sum() not .mean() — see TransE.fit: .mean() divides each
+                # .sum() not .mean(), see TransE.fit: .mean() divides each
                 # entity's gradient by batch_size and undertrains the model.
                 loss  = F.relu(self.margin + d_pos - d_neg).sum()
 

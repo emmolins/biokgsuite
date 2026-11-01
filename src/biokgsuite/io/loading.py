@@ -586,7 +586,7 @@ def _build_node_table(kg):
             columns={'y_index': 'idx', 'y_id': 'id', 'y_type': 'type', 'y_name': 'name'}),
     ]).drop_duplicates(subset=['idx'])
     nodes = nodes.reset_index(drop=True)
-    # Type-qualified unique ID — safe for dict lookups across node types.
+    # Type-qualified unique ID, safe for dict lookups across node types.
     nodes['uid'] = nodes['type'].astype(str) + '/' + nodes['id'].astype(str)
     return nodes
 
@@ -955,7 +955,7 @@ def load_matrix(nodes_path, edges_path,
     mesh_to_mondo: dict[str, str] = {}
     if mesh_to_doid_path and doid_to_mondo:
         # mesh_to_doid.csv contains rows with unquoted commas inside annotation
-        # braces (e.g. ``{source="X", source="Y"}``). Skip those bad rows — same
+        # braces (e.g. ``{source="X", source="Y"}``). Skip those bad rows, same
         # behaviour as nb01's gold-standard load.
         _mh = (
             pd.read_csv(mesh_to_doid_path, on_bad_lines='skip')
@@ -986,7 +986,7 @@ def load_matrix(nodes_path, edges_path,
         _ss = pd.read_csv(mondo_sssom_path, sep='\t', comment='#', dtype=str,
                           low_memory=False).fillna('')
         # Keep only equivalence-class mappings (close & exact). 'broadMatch' / 'narrowMatch'
-        # are intentionally excluded — they could collapse non-equivalent diseases.
+        # are intentionally excluded, they could collapse non-equivalent diseases.
         equiv_predicates = {'skos:exactMatch', 'skos:closeMatch',
                             'owl:equivalentClass'}
         _ss = _ss[_ss['predicate_id'].isin(equiv_predicates)]
@@ -1030,7 +1030,7 @@ def load_matrix(nodes_path, edges_path,
             name     = row.name
             haystack = curie + ' ' + (row.equivalent_identifiers or '')
             # Per-NODE upstream pipeline (rtxkg2 / robokop / primekg / ...).
-            # This is true node-level provenance — distinct from the edge-level
+            # This is true node-level provenance, distinct from the edge-level
             # primary_knowledge_source carried by edge_source.
             raw_node_upstream = getattr(row, 'upstream_data_source', '') or ''
             node_upstream = '|'.join(re.findall(r"[a-zA-Z][\w-]*", raw_node_upstream))
@@ -1103,7 +1103,7 @@ def load_matrix(nodes_path, edges_path,
                     canonical_id = bridged
                 elif keep_all:
                     # keep_categories=all: retain disease even without MONDO
-                    # bridge — it just won't join MONDO-keyed gold standards.
+                    # bridge, it just won't join MONDO-keyed gold standards.
                     canonical_id = curie
                 else:
                     n_disease_no_mondo += 1
@@ -1195,7 +1195,7 @@ def load_matrix(nodes_path, edges_path,
             'x_type':    sub['_s'].map(lambda r: r[2]),
             'x_name':    sub['_s'].map(lambda r: r[3]),
             # Per-NODE upstream pipeline (slot 8 in node_records). True
-            # node-level provenance — analogous to PrimeKG's x_source / y_source.
+            # node-level provenance, analogous to PrimeKG's x_source / y_source.
             'x_source':  sub['_s'].map(lambda r: r[8]),
             'y_index':   sub['_t'].map(lambda r: r[0]),
             'y_id':      sub['_t'].map(lambda r: r[1]),
@@ -1205,7 +1205,7 @@ def load_matrix(nodes_path, edges_path,
         })
         # ── Edge-level provenance (per-edge, NOT per-endpoint) ──────────────
         if 'primary_knowledge_source' in sub.columns:
-            # Asserting database for the relationship — Biolink infores: CURIE.
+            # Asserting database for the relationship, Biolink infores: CURIE.
             # Lives in its own column so x_source/y_source remain pure node-level.
             out['edge_source'] = sub['primary_knowledge_source'].values
         if 'aggregator_knowledge_source' in sub.columns:
@@ -1227,7 +1227,7 @@ def load_matrix(nodes_path, edges_path,
         if 'agent_type' in sub.columns:
             out['agent_type'] = sub['agent_type'].values
         if 'num_references' in sub.columns:
-            # Numeric — count of supporting publications.
+            # Numeric, count of supporting publications.
             out['num_references'] = pd.to_numeric(
                 sub['num_references'], errors='coerce'
             ).values
@@ -1258,7 +1258,7 @@ def load_matrix(nodes_path, edges_path,
     nodes_df['drugbank_ids_all'] = nodes_df['drugbank_id']
 
     # ── Trim isolated nodes (default) ────────────────────────────────────────
-    # The other BioKGSuite loaders emit only nodes participating in edges —
+    # The other BioKGSuite loaders emit only nodes participating in edges , 
     # so for apples-to-apples topology / clustering / LCC metrics, drop Matrix
     # nodes that ended up with zero edges in the retained edge set. Keeps
     # x_index / y_index integer values intact (no re-indexing needed).

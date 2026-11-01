@@ -55,7 +55,7 @@ def generate_negatives(pos_pairs, n_neg, strategy,
 
     elif strategy == 'shared-target':
         # Hard negatives: drug shares ≥1 protein target with a positive drug
-        # but is NOT known to treat the sampled disease — tests whether the KG
+        # but is NOT known to treat the sampled disease, tests whether the KG
         # can distinguish therapeutically similar but non-indicated pairs.
         drug_targets_inv: dict[int, set] = {}
         for d, targets in drug_targets.items():

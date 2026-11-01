@@ -12,7 +12,7 @@
 # Top rung of the ladder: Llama-3.1-405B via Ollama, sharded across 4xH100.
 # Llama-3.1-405B at q4 is ~230 GB of weights, so it needs >=4xH100 (320 GB) to
 # hold weights + KV cache, and a one-time ~230 GB model pull. Ollama auto-shards
-# across all visible GPUs (layer split) — slower per token than a single-GPU 70B,
+# across all visible GPUs (layer split), slower per token than a single-GPU 70B,
 # hence the 24h wall and longer queue. Throughput-critical? swap Ollama for vLLM
 # with tensor-parallel (TP=4); this script keeps the same harness for simplicity.
 #

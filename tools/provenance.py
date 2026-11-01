@@ -109,7 +109,7 @@ GENE_DISEASE_ALTERNATIVES = {
 OT_CITATION = ('Open Targets Platform. Nucleic Acids Research 2025;53(D1):D1467.')
 OT_LICENCE = 'CC0 1.0'
 
-# Knowledge graphs under data/<name>/ — the objects being evaluated.
+# Knowledge graphs under data/<name>/, the objects being evaluated.
 KG_REGISTRY = {
     'hetionet': ('Hetionet v1.0', 'CC0 1.0',
                  'Himmelstein DS, et al. Systematic integration of biomedical '

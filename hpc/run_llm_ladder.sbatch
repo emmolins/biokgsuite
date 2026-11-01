@@ -9,7 +9,7 @@
 #SBATCH --output=logs/ladder-%j.out
 #SBATCH --error=logs/ladder-%j.err
 #
-# Same-family Llama 3.x capability-scaling sweep — ONE (model, seed) per job, single H100.
+# Same-family Llama 3.x capability-scaling sweep, ONE (model, seed) per job, single H100.
 # Use for the rungs a single GPU can serve: llama3.2:1b, llama3.2:3b, llama3.1:8b, llama3.3:70b.
 # 405B needs the multi-GPU script run_llm_405b.sbatch. Seeds are those in config/params.yaml
 # (grounding.seeds); one job per (model, seed) writes one run file, so jobs are independent.

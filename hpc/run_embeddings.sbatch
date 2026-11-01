@@ -63,7 +63,7 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HOME="$HOME/.cache/huggingface"
 
 # ── Progress-bar friendliness for Slurm log files ──────────────────
-# Slurm captures stdout to a flat log file — carriage-return-overwrite
+# Slurm captures stdout to a flat log file, carriage-return-overwrite
 # progress bars (tqdm default) render as garbled lines. These flags
 # make tqdm write a periodic NEW LINE instead, so `tail -f` shows
 # clean progress updates every ~30s.

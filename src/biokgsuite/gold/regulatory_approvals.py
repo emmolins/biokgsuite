@@ -29,11 +29,11 @@ import pandas as pd
 
 EMA_APPROVALS = [
     # ── Oncology ─────────────────────────────────────────────────────────
-    # Trastuzumab deruxtecan — HER2-low breast cancer
+    # Trastuzumab deruxtecan, HER2-low breast cancer
     ('DB14962', 'trastuzumab deruxtecan', 'breast cancer',
      'DOID:1612', '2023-01-25', 'EMA', 'Oncology',
      'HER2-low unresectable/metastatic breast cancer'),
-    # Pembrolizumab — multiple new indications
+    # Pembrolizumab, multiple new indications
     ('DB09037', 'pembrolizumab', 'biliary tract cancer',
      'DOID:4607', '2024-10-24', 'EMA', 'Oncology',
      'Locally advanced/metastatic BTC with gemcitabine/cisplatin'),
@@ -66,7 +66,7 @@ EMA_APPROVALS = [
     ('DB11714', 'durvalumab', 'biliary tract cancer',
      'DOID:4607', '2024-09-26', 'EMA', 'Oncology',
      'Locally advanced/unresectable/metastatic BTC 1L'),
-    # Tucatinib — HER2+ colorectal cancer
+    # Tucatinib, HER2+ colorectal cancer
     ('DB11652', 'tucatinib', 'colorectal cancer',
      'DOID:9256', '2023-02-17', 'EMA', 'Oncology',
      'HER2+ unresectable/metastatic CRC with trastuzumab'),
@@ -77,52 +77,52 @@ EMA_APPROVALS = [
     ('DB09074', 'olaparib', 'breast cancer',
      'DOID:1612', '2024-04-25', 'EMA', 'Oncology',
      'Adjuvant HER2- BRCA-mutated early breast cancer'),
-    # Sacituzumab govitecan — HR+/HER2- breast cancer
+    # Sacituzumab govitecan, HR+/HER2- breast cancer
     ('DB12893', 'sacituzumab govitecan', 'breast cancer',
      'DOID:1612', '2024-02-22', 'EMA', 'Oncology',
      'HR+/HER2- unresectable/metastatic breast cancer'),
-    # Capivasertib — HR+/HER2- breast cancer
+    # Capivasertib, HR+/HER2- breast cancer
     ('DB12218', 'capivasertib', 'breast cancer',
      'DOID:1612', '2024-04-25', 'EMA', 'Oncology',
      'HR+/HER2- locally advanced/metastatic breast cancer'),
-    # Glofitamab — DLBCL
+    # Glofitamab, DLBCL
     ('DB16371', 'glofitamab', 'diffuse large B-cell lymphoma',
      'DOID:0050745', '2023-06-15', 'EMA', 'Oncology',
      'Relapsed/refractory DLBCL after 2+ lines'),
-    # Epcoritamab — DLBCL
+    # Epcoritamab, DLBCL
     ('DB16672', 'epcoritamab', 'diffuse large B-cell lymphoma',
      'DOID:0050745', '2023-09-21', 'EMA', 'Oncology',
      'Relapsed/refractory DLBCL after 2+ lines'),
-    # Talquetamab — multiple myeloma
+    # Talquetamab, multiple myeloma
     ('DB16678', 'talquetamab', 'multiple myeloma',
      'DOID:9538', '2023-08-24', 'EMA', 'Oncology',
      'Relapsed/refractory MM after 3+ prior lines'),
-    # Teclistamab — multiple myeloma
+    # Teclistamab, multiple myeloma
     ('DB16655', 'teclistamab', 'multiple myeloma',
      'DOID:9538', '2023-08-24', 'EMA', 'Oncology',
      'Relapsed/refractory MM after 3+ prior lines'),
-    # Zanubrutinib — CLL/SLL, marginal zone lymphoma
+    # Zanubrutinib, CLL/SLL, marginal zone lymphoma
     ('DB15035', 'zanubrutinib', 'chronic lymphocytic leukemia',
      'DOID:1040', '2024-11-14', 'EMA', 'Oncology',
      'CLL/SLL treatment-naive and relapsed'),
     ('DB15035', 'zanubrutinib', 'marginal zone lymphoma',
      'DOID:0050748', '2024-06-27', 'EMA', 'Oncology',
      'Relapsed/refractory MZL'),
-    # Cabozantinib — HCC
+    # Cabozantinib, HCC
     ('DB08875', 'cabozantinib', 'hepatocellular carcinoma',
      'DOID:684', '2024-03-21', 'EMA', 'Oncology',
      'Previously treated advanced HCC'),
-    # Everolimus — GI NETs (expanded)
+    # Everolimus, GI NETs (expanded)
     ('DB01590', 'everolimus', 'gastrointestinal neuroendocrine tumor',
      'DOID:0080909', '2024-05-16', 'EMA', 'Oncology',
      'Advanced progressive GI/lung NETs'),
-    # Lenvatinib — endometrial
+    # Lenvatinib, endometrial
     ('DB09078', 'lenvatinib', 'endometrial cancer',
      'DOID:1380', '2024-06-27', 'EMA', 'Oncology',
      'Advanced endometrial carcinoma with pembrolizumab'),
 
     # ── Immunology / Inflammation ────────────────────────────────────────
-    # Dupilumab — COPD, prurigo nodularis
+    # Dupilumab, COPD, prurigo nodularis
     ('DB12159', 'dupilumab', 'chronic obstructive pulmonary disease',
      'DOID:3083', '2024-11-07', 'EMA', 'Respiratory',
      'COPD with raised eosinophils'),
@@ -146,52 +146,52 @@ EMA_APPROVALS = [
     ('DB14762', 'risankizumab', 'ulcerative colitis',
      'DOID:8577', '2024-10-24', 'EMA', 'Immunology',
      'Moderately-to-severely active UC'),
-    # Baricitinib — alopecia areata (EMA, 2023)
+    # Baricitinib, alopecia areata (EMA, 2023)
     ('DB11817', 'baricitinib', 'alopecia areata',
      'DOID:986', '2023-06-22', 'EMA', 'Immunology',
      'Severe alopecia areata in adults'),
-    # Belimumab — lupus nephritis
+    # Belimumab, lupus nephritis
     ('DB08879', 'belimumab', 'lupus nephritis',
      'DOID:0080162', '2024-06-13', 'EMA', 'Immunology',
      'Active lupus nephritis (expanded)'),
-    # Adalimumab — HS in adolescents
+    # Adalimumab, HS in adolescents
     ('DB00051', 'adalimumab', 'hidradenitis suppurativa',
      'DOID:0060480', '2024-05-23', 'EMA', 'Immunology',
      'HS in adolescents 12+ years'),
-    # Tocilizumab — expanded autoimmune
+    # Tocilizumab, expanded autoimmune
     ('DB06273', 'tocilizumab', 'polymyalgia rheumatica',
      'DOID:853', '2023-03-23', 'EMA', 'Immunology',
      'Relapsing/refractory polymyalgia rheumatica'),
 
     # ── Cardiovascular / Metabolic ───────────────────────────────────────
-    # Semaglutide — CV risk, OSA
+    # Semaglutide, CV risk, OSA
     ('DB13928', 'semaglutide', 'cardiovascular disease',
      'DOID:1287', '2025-01-16', 'EMA', 'Cardiovascular',
      'CV risk reduction in overweight/obese adults'),
-    # Dapagliflozin — heart failure
+    # Dapagliflozin, heart failure
     ('DB06292', 'dapagliflozin', 'congestive heart failure',
      'DOID:6000', '2023-02-09', 'EMA', 'Cardiovascular',
      'Heart failure across LVEF spectrum'),
-    # REMOVED: empagliflozin HF EMA — actual LVEF expansion was March 2022 (pre-cutoff)
+    # REMOVED: empagliflozin HF EMA, actual LVEF expansion was March 2022 (pre-cutoff)
 
     # ── Haematology (non-oncology) ───────────────────────────────────────
-    # Venetoclax — AML, MDS
+    # Venetoclax, AML, MDS
     ('DB11581', 'venetoclax', 'acute myeloid leukemia',
      'DOID:9119', '2024-02-22', 'EMA', 'Oncology',
      'Newly diagnosed AML with azacitidine'),
-    # REMOVED: ibrutinib CLL/SLL — original EMA approval pre-2022
-    # Acalabrutinib — CLL/SLL
+    # REMOVED: ibrutinib CLL/SLL, original EMA approval pre-2022
+    # Acalabrutinib, CLL/SLL
     ('DB11703', 'acalabrutinib', 'chronic lymphocytic leukemia',
      'DOID:1040', '2024-06-06', 'EMA', 'Oncology',
      'CLL/SLL 1L and relapsed'),
-    # Daratumumab — MM expanded
+    # Daratumumab, MM expanded
     ('DB09331', 'daratumumab', 'multiple myeloma',
      'DOID:9538', '2024-04-25', 'EMA', 'Oncology',
      'Newly diagnosed transplant-eligible MM'),
 
     # ── Dermatology ──────────────────────────────────────────────────────
-    # REMOVED: ruxolitinib alopecia areata — not approved for AA (only AD & vitiligo)
-    # Ruxolitinib — vitiligo (EMA April 2023; FDA was July 2022 so pre-cutoff)
+    # REMOVED: ruxolitinib alopecia areata, not approved for AA (only AD & vitiligo)
+    # Ruxolitinib, vitiligo (EMA April 2023; FDA was July 2022 so pre-cutoff)
     ('DB08877', 'ruxolitinib', 'vitiligo',
      'DOID:12306', '2023-04-20', 'EMA', 'Dermatology',
      'Non-segmental vitiligo (topical)'),
@@ -201,47 +201,47 @@ EMA_APPROVALS = [
 # ── PMDA (Japan) post-2022 indication approvals ─────────────────────────────
 
 PMDA_APPROVALS = [
-    # Pembrolizumab — biliary tract cancer
+    # Pembrolizumab, biliary tract cancer
     ('DB09037', 'pembrolizumab', 'biliary tract cancer',
      'DOID:4607', '2023-12-25', 'PMDA', 'Oncology',
      'Unresectable BTC with gemcitabine/cisplatin'),
-    # Nivolumab — MSI-H CRC, HCC
+    # Nivolumab, MSI-H CRC, HCC
     ('DB09035', 'nivolumab', 'colorectal cancer',
      'DOID:9256', '2024-02-22', 'PMDA', 'Oncology',
      'MSI-H/dMMR unresectable advanced CRC'),
-    # Durvalumab — biliary tract cancer
+    # Durvalumab, biliary tract cancer
     ('DB11714', 'durvalumab', 'biliary tract cancer',
      'DOID:4607', '2023-03-27', 'PMDA', 'Oncology',
      'Unresectable BTC with gemcitabine/cisplatin'),
-    # Trastuzumab deruxtecan — HER2-low breast cancer
+    # Trastuzumab deruxtecan, HER2-low breast cancer
     ('DB14962', 'trastuzumab deruxtecan', 'breast cancer',
      'DOID:1612', '2023-04-12', 'PMDA', 'Oncology',
      'HER2-low unresectable/metastatic breast cancer'),
-    # Olaparib — BRCA+ prostate cancer
+    # Olaparib, BRCA+ prostate cancer
     ('DB09074', 'olaparib', 'prostate cancer',
      'DOID:10283', '2023-03-27', 'PMDA', 'Oncology',
      'BRCA-mutated mCRPC'),
-    # Dupilumab — COPD
+    # Dupilumab, COPD
     ('DB12159', 'dupilumab', 'chronic obstructive pulmonary disease',
      'DOID:3083', '2024-09-24', 'PMDA', 'Respiratory',
      'COPD with type 2 inflammation'),
-    # Semaglutide — cardiovascular
+    # Semaglutide, cardiovascular
     ('DB13928', 'semaglutide', 'cardiovascular disease',
      'DOID:1287', '2024-12-27', 'PMDA', 'Cardiovascular',
      'CV risk reduction in obese/overweight adults'),
-    # Dapagliflozin — CKD (expanded indication)
+    # Dapagliflozin, CKD (expanded indication)
     ('DB06292', 'dapagliflozin', 'chronic kidney disease',
      'DOID:784', '2023-06-26', 'PMDA', 'Metabolic',
      'CKD regardless of diabetes status'),
-    # Risankizumab — ulcerative colitis
+    # Risankizumab, ulcerative colitis
     ('DB14762', 'risankizumab', 'ulcerative colitis',
      'DOID:8577', '2024-12-27', 'PMDA', 'Immunology',
      'Moderately-to-severely active UC'),
-    # Zanubrutinib — CLL/SLL
+    # Zanubrutinib, CLL/SLL
     ('DB15035', 'zanubrutinib', 'chronic lymphocytic leukemia',
      'DOID:1040', '2024-06-24', 'PMDA', 'Oncology',
      'CLL/SLL'),
-    # Baricitinib — alopecia areata
+    # Baricitinib, alopecia areata
     ('DB11817', 'baricitinib', 'alopecia areata',
      'DOID:986', '2023-01-23', 'PMDA', 'Immunology',
      'Severe alopecia areata in adults'),
@@ -251,46 +251,46 @@ PMDA_APPROVALS = [
 # ── TGA (Australia) post-2022 indication approvals ──────────────────────────
 
 TGA_APPROVALS = [
-    # Pembrolizumab — cervical cancer, endometrial
+    # Pembrolizumab, cervical cancer, endometrial
     ('DB09037', 'pembrolizumab', 'cervical cancer',
      'DOID:4362', '2024-04-15', 'TGA', 'Oncology',
      'Persistent/recurrent/metastatic cervical cancer'),
     ('DB09037', 'pembrolizumab', 'endometrial carcinoma',
      'DOID:2870', '2024-07-22', 'TGA', 'Oncology',
      'Advanced endometrial carcinoma 1L'),
-    # Nivolumab — esophageal
+    # Nivolumab, esophageal
     ('DB09035', 'nivolumab', 'esophageal cancer',
      'DOID:5041', '2024-05-14', 'TGA', 'Oncology',
      'Resectable esophageal/GEJ cancer neoadjuvant'),
-    # Trastuzumab deruxtecan — HER2-low breast cancer
+    # Trastuzumab deruxtecan, HER2-low breast cancer
     ('DB14962', 'trastuzumab deruxtecan', 'breast cancer',
      'DOID:1612', '2023-06-06', 'TGA', 'Oncology',
      'HER2-low unresectable/metastatic breast cancer'),
-    # Dupilumab — COPD
+    # Dupilumab, COPD
     ('DB12159', 'dupilumab', 'chronic obstructive pulmonary disease',
      'DOID:3083', '2024-11-28', 'TGA', 'Respiratory',
      'COPD with type 2 inflammation'),
-    # Semaglutide — CV risk
+    # Semaglutide, CV risk
     ('DB13928', 'semaglutide', 'cardiovascular disease',
      'DOID:1287', '2025-02-20', 'TGA', 'Cardiovascular',
      'CV risk reduction in overweight/obese adults'),
-    # Dapagliflozin — heart failure
+    # Dapagliflozin, heart failure
     ('DB06292', 'dapagliflozin', 'congestive heart failure',
      'DOID:6000', '2023-05-15', 'TGA', 'Cardiovascular',
      'Heart failure across LVEF spectrum'),
-    # Risankizumab — Crohn disease
+    # Risankizumab, Crohn disease
     ('DB14762', 'risankizumab', 'Crohn disease',
      'DOID:8778', '2023-09-11', 'TGA', 'Immunology',
      'Moderately-to-severely active Crohn disease'),
-    # Upadacitinib — Crohn disease
+    # Upadacitinib, Crohn disease
     ('DB15091', 'upadacitinib', 'Crohn disease',
      'DOID:8778', '2024-08-05', 'TGA', 'Immunology',
      'Moderately-to-severely active CD'),
-    # Baricitinib — alopecia areata
+    # Baricitinib, alopecia areata
     ('DB11817', 'baricitinib', 'alopecia areata',
      'DOID:986', '2023-04-17', 'TGA', 'Immunology',
      'Severe alopecia areata in adults'),
-    # Olaparib — breast cancer adjuvant
+    # Olaparib, breast cancer adjuvant
     ('DB09074', 'olaparib', 'breast cancer',
      'DOID:1612', '2024-06-03', 'TGA', 'Oncology',
      'Adjuvant HER2- BRCA-mutated early breast cancer'),
@@ -342,16 +342,16 @@ FDA_APPROVALS = [
     ('DB11714', 'durvalumab', 'biliary tract cancer',
      'DOID:4607', '2024-09-05', 'FDA', 'Oncology',
      'Biliary tract cancer 1L'),
-    # REMOVED: atezolizumab HCC — original approval was May 2020 (pre-2022)
+    # REMOVED: atezolizumab HCC, original approval was May 2020 (pre-2022)
     ('DB00051', 'adalimumab', 'hidradenitis suppurativa',
      'DOID:0060480', '2024-04-30', 'FDA', 'Immunology',
      'HS in adolescents 12+ years'),
-    # REMOVED: ibrutinib CLL — original approval 2014; 2023 was oral suspension formulation only
-    # REMOVED: ibrutinib FL — never approved; MCL/MZL indications withdrawn 2023
+    # REMOVED: ibrutinib CLL, original approval 2014; 2023 was oral suspension formulation only
+    # REMOVED: ibrutinib FL, never approved; MCL/MZL indications withdrawn 2023
     ('DB11581', 'venetoclax', 'acute myeloid leukemia',
      'DOID:9119', '2024-01-12', 'FDA', 'Oncology',
      'Newly diagnosed AML with azacitidine'),
-    # REMOVED: venetoclax MDS — only has Breakthrough Therapy Designation, not approval
+    # REMOVED: venetoclax MDS, only has Breakthrough Therapy Designation, not approval
     ('DB11703', 'acalabrutinib', 'chronic lymphocytic leukemia',
      'DOID:1040', '2024-05-20', 'FDA', 'Oncology',
      'CLL/SLL 1L and relapsed'),
@@ -361,16 +361,16 @@ FDA_APPROVALS = [
     ('DB09074', 'olaparib', 'breast cancer',
      'DOID:1612', '2024-03-11', 'FDA', 'Oncology',
      'Adjuvant HER2- high-risk early breast cancer'),
-    # REMOVED: trastuzumab gastric — original approval 2010, not a new indication
+    # REMOVED: trastuzumab gastric, original approval 2010, not a new indication
     ('DB09078', 'lenvatinib', 'endometrial cancer',
      'DOID:1380', '2024-06-07', 'FDA', 'Oncology',
      'Advanced endometrial carcinoma with pembrolizumab'),
     ('DB06292', 'dapagliflozin', 'congestive heart failure',
      'DOID:6000', '2023-05-09', 'FDA', 'Cardiovascular',
      'Heart failure across LVEF spectrum'),
-    # REMOVED: empagliflozin HF FDA — actual LVEF expansion was Feb 2022 (pre-cutoff)
-    # REMOVED: ruxolitinib alopecia areata — not approved for AA
-    # REMOVED: ruxolitinib vitiligo FDA — actual approval was July 2022 (pre-cutoff)
+    # REMOVED: empagliflozin HF FDA, actual LVEF expansion was Feb 2022 (pre-cutoff)
+    # REMOVED: ruxolitinib alopecia areata, not approved for AA
+    # REMOVED: ruxolitinib vitiligo FDA, actual approval was July 2022 (pre-cutoff)
     ('DB08879', 'belimumab', 'lupus nephritis',
      'DOID:0080162', '2024-06-01', 'FDA', 'Immunology',
      'Active lupus nephritis expanded'),
@@ -447,7 +447,7 @@ def get_unique_pairs(deduplicate_agencies=True):
     if not deduplicate_agencies:
         return df
 
-    # Group by (drug_id, disease_id) — take earliest date, merge agencies
+    # Group by (drug_id, disease_id), take earliest date, merge agencies
     grouped = (df.groupby(['drug_id', 'disease_id'])
                .agg(
                    drug_name=('drug_name', 'first'),

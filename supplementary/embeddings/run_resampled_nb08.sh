@@ -28,7 +28,7 @@
 #
 # Per model totals: ~7-8 hr for small KGs + MATRIX combined.
 # With 2 models (TransE + RotatE): ~15 hr on CPU.
-# Gemma reruns are cheap (~30 min total — encoding is cached).
+# Gemma reruns are cheap (~30 min total, encoding is cached).
 #
 # On a GPU you can expect ~3-6 hr total.
 #

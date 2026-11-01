@@ -1,4 +1,4 @@
-# Reference sets — complete specification
+# Reference sets: complete specification
 
 Every reference set (the coverage dimension's gold standards) in `data/reference_sets/`, what it means, where it
 comes from, and whether it is independent of the graphs being scored.
@@ -106,7 +106,7 @@ plus drug-disease which the link-prediction tasks in nb06/nb07 require.
 
 | # | Relation | Gold standard | Source | Release | Independent? | In score? |
 |---|---|---|---|---|---|---|
-| 1 | **drug → gene** | drug and its molecular target | OT `drug_mechanism_of_action` | 26.06 | **Yes** — ChEMBL | scored |
+| 1 | **drug → gene** | drug and its molecular target | OT `drug_mechanism_of_action` | 26.06 | **Yes**, ChEMBL | scored |
 | 2 | **drug → pathway** | *derived*: drug→gene ∘ gene→pathway | OT `drug_mechanism_of_action` + Reactome | 26.06 | **Yes** | *reported, not scored* |
 | 3 | **disease → gene** | gene implicated in disease | union of 7 curated `evidence_*` datasets | 26.06 | **Yes** | scored |
 | 4 | **disease → pathway** | *derived*: disease→gene ∘ gene→pathway | as #3 + Reactome | 26.06 | **Yes** | *reported, not scored* |
@@ -248,7 +248,7 @@ The dossier reads drug→pathway and disease→pathway as *direct* edges, so
 gene→pathway is not scored. But it is needed to CONSTRUCT golds #2 and #4.
 Source: Reactome `UniProt2Reactome.txt` / `NCBI2Reactome.txt`
 (https://reactome.org/download/current/), or the pathway annotations carried in
-OT `target` — check the schema printed by `build_reference_sets.py` first; if
+OT `target`, check the schema printed by `build_reference_sets.py` first; if
 `target` carries them, no separate Reactome download is needed.
 
 ### Three decisions that must be stated in Methods
@@ -286,7 +286,7 @@ bulk use.
 
 **#5 is subtype, not comorbidity.** MONDO `is_a` gives ontological
 parent/child. Comorbidity would need EHR or claims data and is a different
-relation. Hetionet's `DrD` mixes resemblance semantics — say which you mean.
+relation. Hetionet's `DrD` mixes resemblance semantics, say which you mean.
 
 ## Getting the newest version
 
@@ -294,7 +294,7 @@ From the repository root, on a network that can reach ftp.ebi.ac.uk:
 
 ```bash
 
-# 1. Open Targets 26.06 — all six relation + entity sources (~1.2 GB;
+# 1. Open Targets 26.06: all six relation + entity sources (~1.2 GB;
 #    CORE_ONLY=1 fetches just the ~110 MB core, without target-disease associations)
 bash tools/fetch_opentargets.sh
 
@@ -307,7 +307,7 @@ python tools/build_crosswalks.py
 #    and OpenBioLink is scored as holding no approved drugs.
 bash tools/fetch_unichem.sh
 
-# 4. DDInter 2.0, only if you keep drug_drug — manual, no stable API
+# 4. DDInter 2.0, only if you keep drug_drug: manual, no stable API
 #    https://ddinter.scbdd.com/download/  ->  data/crosswalks/ddinter/
 
 # 5. Build the reference sets from whatever is present
@@ -327,7 +327,7 @@ pass as a coverage result.
 | UniProt, Entrez, HGNC, symbol | Ensembl | HGNC + OT `target.proteinIds` | yes |
 | MONDO, DOID, MeSH, OMIM, Orphanet | MONDO | MONDO SSSOM | yes |
 | Reactome | Reactome | native | yes |
-| KEGG, SMPDB, PathwayCommons PC7 | — | none (by design) | pathways are not scored |
+| KEGG, SMPDB, PathwayCommons PC7 | n/a | none (by design) | pathways are not scored |
 
 Steps 1 and 2 each write a release file and SHA-256 checksums, so every
 reported number traces to a named, re-fetchable version. To move to a newer
@@ -341,7 +341,7 @@ and the diff shows it.
 | MONDO | **v2026-08-04** | `mondo.obo` is a release asset; `mondo.sssom.tsv` is **not**, pin it by tag path |
 | Human Disease Ontology | **v2026-08-31** | only needed if you keep a DOID-keyed view |
 | DDInter | 2.0 | manual download |
-| ChEMBL | 36 | **not verified as current** — check `ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest` before citing |
+| ChEMBL | 36 | **not verified as current**, check `ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest` before citing |
 
 ### Citations
 - Open Targets Platform. *Nucleic Acids Research* 2025;53(D1):D1467.
@@ -368,7 +368,7 @@ set, so it is the authority if this table and the code ever diverge.
 
 ---
 
-## data/gold_standards/ — the sets notebooks 06 and 07 read
+## data/gold_standards/: the sets notebooks 06 and 07 read
 
 Everything above describes `data/reference_sets/`, built from Open Targets by
 `tools/build_reference_sets.py`. Notebooks 01, 04 and 05 use it. Notebooks 06 and
@@ -390,7 +390,7 @@ every superseded file.
 | `ctd/CTD_curated_genes_diseases.tsv.gz` | CTD gene–disease, `DirectEvidence ∈ {marker/mechanism, therapeutic}` | `bash tools/fetch_ctd.sh` |
 | `bridges/mesh_to_doid.csv` | `MESH:*` → `DOID:*` | `python tools/build_gold_standard_aux.py` (from `doid.obo`) |
 | `bridges/do_diseases.csv` | `DOID:*` → MONDO id and label | same (from `mondo.sssom.tsv` + `mondo.obo`) |
-| `bridges/drugbank_drugs.csv` | DrugBank id → drug name | same (from `ot_drug_molecule`; no DrugBank account needed). **Contains essentially no biologics** — see the note below. |
+| `bridges/drugbank_drugs.csv` | DrugBank id → drug name | same (from `ot_drug_molecule`; no DrugBank account needed). **Contains essentially no biologics**, see the note below. |
 | `bridges/uniprot_genesproteins.csv` | UniProt accession → symbol, Ensembl | same (from `ot_target`) |
 | `bridges/mondo.sssom.tsv` | MONDO cross-map | same (copied from `data/crosswalks/`) |
 | `bridges/drug_name_to_drugbank.csv` | drug name → DrugBank id, biologics included | `python tools/build_drug_name_xref.py` |

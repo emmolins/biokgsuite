@@ -158,7 +158,7 @@ def node_id_lookup(nodes: pd.DataFrame, node_type: str, node_id: str):
     if len(match) == 1:
         return int(match.iloc[0])
     elif len(match) > 1:
-        # Multiple matches (shouldn't happen but be safe) — return first.
+        # Multiple matches (shouldn't happen but be safe), return first.
         return int(match.iloc[0])
     return None
 
