@@ -8,7 +8,6 @@ post_cutoff_approvals.csv), so the figure cannot drift from the data.
 """
 import argparse
 import collections
-import re
 import sys
 from pathlib import Path
 

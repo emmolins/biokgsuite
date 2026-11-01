@@ -7,7 +7,6 @@ biokgsuite.io.loading.load_matrix reads.
 """
 import importlib.util
 import re
-import sys
 from pathlib import Path
 
 import pandas as pd

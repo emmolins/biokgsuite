@@ -17,7 +17,7 @@ account and is deliberately NOT a dependency: UniChem supplies the same
 DrugBank cross-references under CC-BY-SA.
 """
 from __future__ import annotations
-import argparse, datetime as dt, gzip, hashlib, io, json, sys, urllib.request
+import argparse, datetime as dt, gzip, hashlib, json, sys, urllib.request
 from pathlib import Path
 
 UA = {'User-Agent': 'biokgsuite-crosswalk-builder/1.0'}

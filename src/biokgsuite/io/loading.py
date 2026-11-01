@@ -12,7 +12,6 @@ where:
 import gzip
 import re
 import pandas as pd
-import yaml
 from pathlib import Path
 
 

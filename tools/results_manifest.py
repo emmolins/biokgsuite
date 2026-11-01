@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import datetime as _dt
 import hashlib
-import json
 import pickle
 import sys
 from pathlib import Path

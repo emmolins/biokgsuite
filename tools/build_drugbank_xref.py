@@ -19,9 +19,6 @@ Re-running is idempotent — safe to invoke after each DrugBank refresh.
 from __future__ import annotations
 import argparse
 import csv
-import sys
-import urllib.request
-import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent

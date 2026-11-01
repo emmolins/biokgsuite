@@ -9,7 +9,7 @@ assert the pair?
 
 Run from the repo root. Reads only data/ and data/gold_standards/.
 """
-import collections, csv, gzip, os, sys
+import collections, csv, gzip, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GS   = os.path.join(ROOT, 'data', 'gold_standards')

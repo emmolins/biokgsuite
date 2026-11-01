@@ -10,7 +10,7 @@ References:
 """
 
 import numpy as np
-from sklearn.metrics import roc_auc_score, average_precision_score, roc_curve
+from sklearn.metrics import roc_auc_score, average_precision_score
 
 
 def compute_metrics(scores, labels):

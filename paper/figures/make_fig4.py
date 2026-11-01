@@ -14,7 +14,7 @@ ROOT = Path(sys.argv[1])
 OUT = Path(sys.argv[2])
 sys.path.insert(0, str(ROOT / 'src'))
 from biokgsuite.viz.style import (setup_style, clean_ax, panel_label, KG_ORDER, KG_NAMES,
-                                  KG_PALETTE, NEUTRAL, FAINT, MUTED, TEXT_COLOR, fig_size)
+                                  KG_PALETTE, FAINT, MUTED, TEXT_COLOR, fig_size)
 
 setup_style()
 T = ROOT / 'results' / 'tables'

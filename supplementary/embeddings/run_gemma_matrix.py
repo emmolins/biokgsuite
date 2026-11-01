@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from biokgsuite.models.embedding import GemmaNameEmbedder, compute_embedding_metrics
-from biokgsuite.io import find_config, load_config, load_kg
+from biokgsuite.io import load_config, load_kg
 from biokgsuite.graph.negative_sampling import generate_negatives
 from biokgsuite.models.embedding import build_train_triples
 

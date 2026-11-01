@@ -8,8 +8,7 @@ ROOT = next(p for p in Path(__file__).resolve().parents
 sys.path.insert(0, str(ROOT / 'src'))
 
 from biokgsuite.models.embedding import (TransE, RotatE, GemmaNameEmbedder,
-                           build_train_triples, kg_to_triples,
-                           compute_embedding_metrics)
+                           build_train_triples, compute_embedding_metrics)
 from biokgsuite.graph.negative_sampling import generate_negatives
 
 

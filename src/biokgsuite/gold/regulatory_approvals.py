@@ -21,7 +21,6 @@ Reference:
 """
 
 import pandas as pd
-from pathlib import Path
 
 
 # ── EMA post-2022 indication approvals ──────────────────────────────────────
