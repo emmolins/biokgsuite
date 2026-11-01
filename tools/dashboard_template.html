@@ -74,7 +74,20 @@
   .chips { display: flex; gap: 6px; flex-wrap: wrap; }
   .chip { padding: 2px 9px; border-radius: 999px; border: 1px solid var(--border); font-size: 12px; background: var(--surface2); }
   .chip.pos { background: #c0622b; color: #fff; border-color: #c0622b; font-weight: 700; }
-  .explorer { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 16px; }
+  .explorer { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(320px, 1fr); gap: 16px; }
+  .hmwrap { overflow-x: auto; }
+  .rm { border-collapse: collapse; font-size: 11px; }
+  .rm th { font-weight: 600; color: var(--muted); padding: 2px 3px; text-align: center; border: 0; font-size: 10px; white-space: nowrap; }
+  .rm th.lab { text-align: left; }
+  .rm td { padding: 0; border: 0; height: 9px; }
+  .rm td.c { width: 22px; min-width: 22px; border: 1px solid #fff; }
+  .rm td.lab { padding: 0 6px 0 2px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--muted); cursor: pointer; }
+  .rm tr:hover td.lab { color: var(--text); } .rm tr.on td.lab { color: var(--text); font-weight: 700; }
+  .rm tr.on td.c { outline: 1.5px solid var(--text); outline-offset: -1px; }
+  .rm td.gap { width: 8px; min-width: 8px; }
+  .rankdots { position: relative; height: 150px; }
+  .sw { display: inline-block; width: 12px; height: 10px; vertical-align: -1px; margin-right: 3px; }
+  details summary { cursor: pointer; font-size: 12.5px; color: var(--muted); margin-top: 10px; }
   @media (max-width: 860px) { .explorer { grid-template-columns: 1fr; } }
   .plist { max-height: 560px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); }
   .prow { padding: 8px 12px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; }
@@ -163,18 +176,18 @@
 
 <section id="explorer">
   <h2>Query explorer</h2>
-  <p class="lead">Every prospective pair, with the candidates shown to the models, which graphs held evidence for the approved drug, and where each LLM ranked it under each arm (mean over three seeds and three candidate orders).</p>
+  <p class="lead">Where each LLM placed the approved drug among the eight candidates, for every prospective pair and arm. Columns are the no-KG arm (0) and the PrimeKG (P), DRKG (D) and BioKG (B) arms for each LLM. Orange is rank 1; grey is the bottom of the list. Click a row for the pair.</p>
   <div class="controls">
     <input type="search" id="q" placeholder="Search drug or disease">
     <select id="farea"><option value="">All therapeutic areas</option></select>
-    <select id="fmod"><option value="">All modalities</option></select>
+    <select id="fsort"><option value="rank">Sort by mean grounded rank</option><option value="date">Sort by approval date</option><option value="area">Sort by therapeutic area</option><option value="none">Sort by no-KG rank</option></select>
     <label><input type="checkbox" id="fcommon"> common family only</label>
-    <label><input type="checkbox" id="fladder"> show Llama size ladder</label>
     <span id="pcount" style="color:var(--muted)"></span>
   </div>
   <div class="explorer">
-    <div class="plist" id="plist"></div>
-    <div class="card" id="pdetail"><p style="color:var(--muted)">Select a pair.</p></div>
+    <div class="card" style="padding:10px 12px"><div class="hmwrap" id="rankmap"></div>
+      <div class="legend" id="ranklegend"></div></div>
+    <div><div class="card" id="pdetail" style="position:sticky;top:64px"><p style="color:var(--muted)">Select a pair.</p></div></div>
   </div>
 </section>
 
@@ -387,41 +400,56 @@ function renderGrounding() {
 // ── explorer ─────────────────────────────────────────────────────────────
 const E = D.explorer; let selected = null;
 const MODEL_LABEL = m => ({ 'gemini:gemini-3.5-flash-lite': 'Gemini-3.5-Flash-Lite', 'gpt-4.1-mini': 'GPT-4.1-mini', 'llama3.3:70b': 'Llama-3.3-70B', 'llama3.2:1b': 'Llama-3.2-1B', 'llama3.2:3b': 'Llama-3.2-3B', 'llama3.1:8b': 'Llama-3.1-8B', 'llama3.1:405b': 'Llama-3.1-405B' })[m] || m;
-let showLadder = false;
+const SHORT = m => ({ 'gemini:gemini-3.5-flash-lite': 'Gemini', 'gpt-4.1-mini': 'GPT-4.1', 'llama3.3:70b': 'Llama 70B' })[m] || m;
+// rank colour: 1 = approval orange, 8 = light grey
+function rankColour(r) { if (r == null) return '#f3f3f3'; const t = Math.max(0, Math.min(1, (r - 1) / 7)); const a = [192, 98, 43], b = [225, 225, 225]; return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(',')})`; }
 (function initFilters() {
-  const areas = [...new Set(E.pairs.map(p => p.area))].sort(); const mods = [...new Set(E.pairs.map(p => p.modality))].sort();
+  const areas = [...new Set(E.pairs.map(p => p.area))].sort();
   document.getElementById('farea').innerHTML += areas.map(a => `<option>${a}</option>`).join('');
-  document.getElementById('fmod').innerHTML += mods.map(a => `<option>${a}</option>`).join('');
-  ['q', 'farea', 'fmod', 'fcommon'].forEach(id => document.getElementById(id).addEventListener('input', renderList));
-  document.getElementById('fladder').addEventListener('input', e => { showLadder = e.target.checked; renderDetail(); });
+  ['q', 'farea', 'fsort', 'fcommon'].forEach(id => document.getElementById(id).addEventListener('input', renderMap));
+  document.getElementById('ranklegend').innerHTML = [1, 2, 3, 4, 5, 6, 7, 8].map(r => `<span><span class="sw" style="background:${rankColour(r)}"></span>${r === 1 ? 'rank 1' : r === 8 ? 'rank 8' : ''}</span>`).join('') + '<span><span class="sw" style="background:#f3f3f3"></span>not evaluable</span>';
 })();
+const meanRank = (p, arms) => { const v = []; E.models.forEach(m => arms.forEach(a => { const r = (p.results[m] || {})[a]; if (r) v.push(r.rank); })); return v.length ? v.reduce((x, y) => x + y, 0) / v.length : 9; };
 function filtered() {
-  const q = document.getElementById('q').value.toLowerCase(), ar = document.getElementById('farea').value, mo = document.getElementById('fmod').value, co = document.getElementById('fcommon').checked;
-  return E.pairs.filter(p => (!q || p.drug.toLowerCase().includes(q) || p.disease.toLowerCase().includes(q)) && (!ar || p.area === ar) && (!mo || p.modality === mo) && (!co || p.common));
+  const q = document.getElementById('q').value.toLowerCase(), ar = document.getElementById('farea').value, co = document.getElementById('fcommon').checked, so = document.getElementById('fsort').value;
+  let rows = E.pairs.filter(p => (!q || p.drug.toLowerCase().includes(q) || p.disease.toLowerCase().includes(q)) && (!ar || p.area === ar) && (!co || p.common));
+  if (so === 'rank') rows = rows.slice().sort((a, b) => meanRank(a, GROUND_KGS) - meanRank(b, GROUND_KGS));
+  if (so === 'none') rows = rows.slice().sort((a, b) => meanRank(a, ['none']) - meanRank(b, ['none']));
+  if (so === 'date') rows = rows.slice().sort((a, b) => a.date.localeCompare(b.date));
+  if (so === 'area') rows = rows.slice().sort((a, b) => a.area.localeCompare(b.area) || meanRank(a, GROUND_KGS) - meanRank(b, GROUND_KGS));
+  return rows;
 }
-function renderList() {
+function renderMap() {
   const rows = filtered(); document.getElementById('pcount').textContent = `${rows.length} of ${E.pairs.length} pairs`;
-  document.getElementById('plist').innerHTML = rows.map(p => `<div class="prow ${selected === p.id ? 'on' : ''}" data-id="${p.id}"><b>${p.drug}</b> for ${p.disease}<div class="d">${p.date} · ${p.area} · ${GROUND_KGS.map(k => `<span class="ev ${p.shown[k] ? 'yes' : ''}" style="--c:${PAL[k]}" title="${NAMES[k]}: ${p.shown[k] ? 'evidence shown' : 'no evidence'}"></span>`).join('')}</div></div>`).join('');
-  document.querySelectorAll('.prow').forEach(el => el.onclick = () => { selected = +el.dataset.id; renderList(); renderDetail(); });
+  const armLab = a => a === 'none' ? 'No KG' : NAMES[a];
+  let h = '<table class="rm"><thead><tr><th class="lab"></th>' + E.models.map(m => `<th colspan="${E.arms.length}">${SHORT(m)}</th><th class="gap"></th>`).join('') + '</tr><tr><th class="lab">Approved drug for disease</th>' + E.models.map(() => E.arms.map(a => `<th title="${armLab(a)}">${a === 'none' ? '0' : armLab(a).slice(0, 1)}</th>`).join('') + '<th class="gap"></th>').join('') + '</tr></thead><tbody>';
+  rows.forEach(p => {
+    h += `<tr class="${selected === p.id ? 'on' : ''}" data-id="${p.id}"><td class="lab" title="${p.drug} for ${p.disease}">${p.drug} <span style="color:var(--faint)">for</span> ${p.disease}</td>`;
+    E.models.forEach(m => { E.arms.forEach(a => { const r = (p.results[m] || {})[a]; h += `<td class="c" style="background:${rankColour(r ? r.rank : null)}" title="${MODEL_LABEL(m)}, ${armLab(a)}: ${r ? 'mean rank ' + fmt(r.rank, 1) : 'not evaluable'}"></td>`; }); h += '<td class="gap"></td>'; });
+    h += '</tr>';
+  });
+  document.getElementById('rankmap').innerHTML = h + '</tbody></table>';
+  document.querySelectorAll('.rm tbody tr').forEach(el => el.onclick = () => { selected = +el.dataset.id; renderMap(); renderDetail(); });
 }
 function renderDetail() {
   const p = E.pairs.find(x => x.id === selected); if (!p) return;
-  const models = showLadder ? [...E.models, ...E.ladder] : E.models;
-  let h = `<h4 style="font-size:15px">${p.drug} for ${p.disease}</h4><div class="kv"><b>Approved</b><span>${p.date} (${p.agencies})</span><b>Identifiers</b><span>${p.drugbank}, ${p.mondo}</span><b>Area</b><span>${p.area}</span><b>Modality</b><span>${p.modality}</span><b>Common family</b><span>${p.common ? 'yes' : 'no'}</span></div>`;
-  h += `<h4 style="margin-top:12px">Candidates (shuffled and relabelled Drug-1 to Drug-8 in the prompt)</h4><div class="chips"><span class="chip pos">${p.drug}</span>${p.distractors.map(d => `<span class="chip">${d}</span>`).join('')}</div>`;
-  h += `<h4 style="margin-top:12px">Evidence for the approved drug</h4><div class="chips">${GROUND_KGS.map(k => `<span class="chip" style="border-color:${PAL[k]};${p.shown[k] ? `background:${alpha(PAL[k], 0.15)}` : ''}">${NAMES[k]}: ${p.shown[k] ? 'profile shown' : (p.evaluable[k] ? 'held, no gene or pathway' : 'not evaluable')}</span>`).join('')}</div>`;
-  h += `<h4 style="margin-top:12px">Mean rank of the approved drug (1 is best; chance 4.5)</h4><div class="tscroll"><table><thead><tr><th>LLM</th>${E.arms.map(a => `<th>${a === 'none' ? 'No KG' : NAMES[a]}</th>`).join('')}</tr></thead><tbody>`;
-  models.forEach(m => { h += `<tr><td>${MODEL_LABEL(m)}</td>` + E.arms.map(a => { const r = (p.results[m] || {})[a]; if (!r) return '<td style="color:var(--faint)">n/a</td>'; return `<td><span class="rank ${r.rank <= 1.5 ? 'r1' : ''}" title="MRR ${r.rr}, rank-1 rate ${r.hit1}, ${r.n} runs">${fmt(r.rank, 1)}</span></td>`; }).join('') + '</tr>'; });
-  h += '</tbody></table></div>';
-  h += `<h4 style="margin-top:12px">What the model said about the approved drug (seed 0, first order)</h4>`;
-  models.forEach(m => { E.arms.forEach(a => { const r = (p.results[m] || {})[a]; if (!r || !r.rationale) return; h += `<div class="rationale"><b>${MODEL_LABEL(m)}, ${a === 'none' ? 'no KG' : NAMES[a]}</b> (basis: ${r.basis || 'n/a'}; evidence: ${r.agreement || 'n/a'}; confidence ${r.confidence ?? 'n/a'}): ${r.rationale}</div>`; }); });
+  const armLab = a => a === 'none' ? 'No KG' : NAMES[a];
+  let h = `<h4 style="font-size:15px">${p.drug} for ${p.disease}</h4><div style="color:var(--muted);font-size:12.5px;margin-bottom:10px">Approved ${p.date} (${p.agencies}) · ${p.area} · ${p.modality}${p.common ? ' · common family' : ''}</div>`;
+  h += `<div class="chips"><span class="chip pos">${p.drug}</span>${p.distractors.map(d => `<span class="chip">${d}</span>`).join('')}</div><div class="note">The eight candidates, shown to the models shuffled and relabelled Drug-1 to Drug-8.</div>`;
+  h += `<div class="chips" style="margin-top:10px">${GROUND_KGS.map(k => `<span class="chip" style="border-color:${PAL[k]};${p.shown[k] ? `background:${alpha(PAL[k], 0.18)};font-weight:700` : 'color:var(--muted)'}">${NAMES[k]}: ${p.shown[k] ? 'evidence shown' : (p.evaluable[k] ? 'no gene or pathway' : 'not evaluable')}</span>`).join('')}</div>`;
+  h += `<h4 style="margin-top:14px">Rank of the approved drug</h4><div class="rankdots"><canvas id="rankdots"></canvas></div><div class="note">Mean over three seeds and three candidate orders; 1 is best, 4.5 is chance.</div>`;
+  h += `<details><summary>What each model said about the approved drug (seed 0, first order)</summary>`;
+  E.models.forEach(m => { E.arms.forEach(a => { const r = (p.results[m] || {})[a]; if (!r || !r.rationale) return; h += `<div class="rationale"><b>${MODEL_LABEL(m)}, ${armLab(a)}</b> (basis ${r.basis || 'n/a'}; evidence ${r.agreement || 'n/a'}; confidence ${r.confidence ?? 'n/a'}): ${r.rationale}</div>`; }); });
+  h += '</details>';
   document.getElementById('pdetail').innerHTML = h;
+  mk('rankdots', { type: 'scatter', data: { datasets: E.arms.map(a => ({ label: armLab(a), data: E.models.map((m, i) => { const r = (p.results[m] || {})[a]; return r ? { x: r.rank, y: i } : null; }).filter(Boolean), backgroundColor: a === 'none' ? NEUTRAL : PAL[a], pointRadius: 6, pointHoverRadius: 7 })) },
+    options: { scales: { x: axis('Mean rank', 1, 8, { ticks: { stepSize: 1, color: MUTED } }), y: { min: -0.5, max: E.models.length - 0.5, ticks: { stepSize: 1, callback: v => MODEL_LABEL(E.models[v] || ''), color: INK }, grid: { color: '#eeeeee' }, border: { color: FAINT } } }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: rank ${fmt(c.parsed.x, 1)}` } } } } });
 }
-
 // ── render all ───────────────────────────────────────────────────────────
 function render() { renderCards(); renderOverview(); renderHeatmap(); renderDims(); renderGrounding(); }
-buildDimTabs(); render(); renderList();
-if (E.pairs.length) { selected = E.pairs.find(p => p.drug === 'miglustat')?.id ?? E.pairs[0].id; renderList(); renderDetail(); }
+buildDimTabs(); render();
+if (E.pairs.length) { selected = E.pairs.find(p => p.drug === 'miglustat')?.id ?? E.pairs[0].id; }
+renderMap(); renderDetail();
 </script>
 </body>
 </html>
