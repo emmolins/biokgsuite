@@ -6,6 +6,7 @@
 <title>BioKGSuite results</title>
 <meta name="description" content="Interactive results of BioKGSuite: a multidimensional evaluation of six biomedical knowledge graphs and a prospective LLM grounding experiment.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <style>
   :root {
     --bg: #ffffff; --surface: #ffffff; --surface2: #f6f6f6; --border: #e3e3e3;
@@ -87,6 +88,10 @@
   .rm td.gap { width: 8px; min-width: 8px; }
   .rankdots { position: relative; height: 150px; }
   .sw { display: inline-block; width: 12px; height: 10px; vertical-align: -1px; margin-right: 3px; }
+  .evgraph { width: 100%; height: 420px; border: 1px solid var(--border); border-radius: var(--radius); background: #fcfcfc; }
+  .evgraph text { font-family: Arial, Helvetica, sans-serif; pointer-events: none; }
+  .evlegend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 6px; align-items: center; }
+  .evlegend svg { vertical-align: -2px; margin-right: 3px; }
   details summary { cursor: pointer; font-size: 12.5px; color: var(--muted); margin-top: 10px; }
   @media (max-width: 860px) { .explorer { grid-template-columns: 1fr; } }
   .plist { max-height: 560px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); }
@@ -398,7 +403,7 @@ function renderGrounding() {
 }
 
 // ── explorer ─────────────────────────────────────────────────────────────
-const E = D.explorer; let selected = null;
+const E = D.explorer; let selected = null; let evKG = 'primekg';
 const MODEL_LABEL = m => ({ 'gemini:gemini-3.5-flash-lite': 'Gemini-3.5-Flash-Lite', 'gpt-4.1-mini': 'GPT-4.1-mini', 'llama3.3:70b': 'Llama-3.3-70B', 'llama3.2:1b': 'Llama-3.2-1B', 'llama3.2:3b': 'Llama-3.2-3B', 'llama3.1:8b': 'Llama-3.1-8B', 'llama3.1:405b': 'Llama-3.1-405B' })[m] || m;
 const SHORT = m => ({ 'gemini:gemini-3.5-flash-lite': 'Gemini', 'gpt-4.1-mini': 'GPT-4.1', 'llama3.3:70b': 'Llama 70B' })[m] || m;
 // rank colour: 1 = approval orange, 8 = light grey
@@ -438,13 +443,72 @@ function renderDetail() {
   h += `<div class="chips"><span class="chip pos">${p.drug}</span>${p.distractors.map(d => `<span class="chip">${d}</span>`).join('')}</div><div class="note">The eight candidates, shown to the models shuffled and relabelled Drug-1 to Drug-8.</div>`;
   h += `<div class="chips" style="margin-top:10px">${GROUND_KGS.map(k => `<span class="chip" style="border-color:${PAL[k]};${p.shown[k] ? `background:${alpha(PAL[k], 0.18)};font-weight:700` : 'color:var(--muted)'}">${NAMES[k]}: ${p.shown[k] ? 'evidence shown' : (p.evaluable[k] ? 'no gene or pathway' : 'not evaluable')}</span>`).join('')}</div>`;
   h += `<h4 style="margin-top:14px">Rank of the approved drug</h4><div class="rankdots"><canvas id="rankdots"></canvas></div><div class="note">Mean over three seeds and three candidate orders; 1 is best, 4.5 is chance.</div>`;
+  h += `<h4 style="margin-top:14px">What the model saw <span class="seg" id="evkg" style="margin-left:8px;font-weight:400">${GROUND_KGS.map(k => `<span data-v="${k}" class="${k === evKG ? 'on' : ''}">${NAMES[k]}</span>`).join('')}</span></h4><svg class="evgraph" id="evgraph"></svg><div class="evlegend" id="evlegend"></div><div class="note" id="evnote"></div>`;
   h += `<details><summary>What each model said about the approved drug (seed 0, first order)</summary>`;
   E.models.forEach(m => { E.arms.forEach(a => { const r = (p.results[m] || {})[a]; if (!r || !r.rationale) return; h += `<div class="rationale"><b>${MODEL_LABEL(m)}, ${armLab(a)}</b> (basis ${r.basis || 'n/a'}; evidence ${r.agreement || 'n/a'}; confidence ${r.confidence ?? 'n/a'}): ${r.rationale}</div>`; }); });
   h += '</details>';
   document.getElementById('pdetail').innerHTML = h;
+  document.querySelectorAll('#evkg span').forEach(el => el.onclick = () => { evKG = el.dataset.v; renderDetail(); });
+  drawEvidence(p);
   mk('rankdots', { type: 'scatter', data: { datasets: E.arms.map(a => ({ label: armLab(a), data: E.models.map((m, i) => { const r = (p.results[m] || {})[a]; return r ? { x: r.rank, y: i } : null; }).filter(Boolean), backgroundColor: a === 'none' ? NEUTRAL : PAL[a], pointRadius: 6, pointHoverRadius: 7 })) },
     options: { scales: { x: axis('Mean rank', 1, 8, { ticks: { stepSize: 1, color: MUTED } }), y: { min: -0.5, max: E.models.length - 0.5, ticks: { stepSize: 1, callback: v => MODEL_LABEL(E.models[v] || ''), color: INK }, grid: { color: '#eeeeee' }, border: { color: FAINT } } }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: rank ${fmt(c.parsed.x, 1)}` } } } } });
 }
+
+// ── evidence graph (what the prompt carried) ─────────────────────────────
+function drawEvidence(p) {
+  const svg = d3.select('#evgraph'); svg.selectAll('*').remove();
+  const ev = (E.evidence[evKG] || {})[String(p.id)];
+  const note = document.getElementById('evnote'), legend = document.getElementById('evlegend');
+  if (!ev) { note.textContent = 'No evidence graph recorded for this pair in ' + NAMES[evKG] + '.'; legend.innerHTML = ''; return; }
+  const W = svg.node().clientWidth || 600, H = 420;
+  const nodes = [], links = [], byKey = new Map();
+  const addNode = (key, o) => { if (!byKey.has(key)) { byKey.set(key, Object.assign({ id: key }, o)); nodes.push(byKey.get(key)); } return byKey.get(key); };
+  const dis = addNode('target:' + p.disease, { label: p.disease, kind: 'disease', r: 14, main: true });
+  const nbKey = (nm, kind) => kind + ':' + nm;
+  Object.entries(ev.disease || {}).forEach(([phrase, items]) => items.forEach(([nm, kind]) => { const n = addNode(nbKey(nm, kind), { label: nm, kind, r: kind === 'gene' ? 5 : 6, fromDisease: true }); links.push({ source: dis.id, target: n.id, phrase, side: 'disease' }); }));
+  ev.candidates.forEach(c => {
+    const d = addNode('drug:' + c.name, { label: c.name, kind: 'drug', pos: c.pos, inKG: c.in_kg, hasEv: !!c.ev, r: c.pos ? 12 : 9 });
+    Object.entries(c.ev || {}).forEach(([phrase, items]) => items.forEach(([nm, kind]) => { const n = addNode(nbKey(nm, kind), { label: nm, kind, r: kind === 'gene' ? 5 : 6 }); n.fromDrug = true; links.push({ source: d.id, target: n.id, phrase, side: 'drug', pos: c.pos }); }));
+  });
+  nodes.forEach(n => { n.shared = n.fromDisease && n.fromDrug; });
+  const nShared = nodes.filter(n => n.shared).length, nNoEv = ev.candidates.filter(c => !c.ev).length;
+  const colour = n => n.main ? INK : n.kind === 'drug' ? (n.pos ? APPROVED : (n.hasEv ? '#8c8c8c' : '#ffffff')) : n.shared ? PAL[evKG] : (n.kind === 'pathway' ? '#d9d9d9' : '#e9e9e9');
+  const stroke = n => n.kind === 'drug' ? (n.pos ? APPROVED : '#8c8c8c') : n.shared ? PAL[evKG] : '#bdbdbd';
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(l => l.side === 'disease' ? 70 : 45).strength(0.6))
+    .force('charge', d3.forceManyBody().strength(n => n.kind === 'drug' || n.kind === 'disease' ? -220 : -30))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collide', d3.forceCollide(n => n.r + 3))
+    .force('x', d3.forceX(n => n.kind === 'disease' ? W * 0.72 : n.kind === 'drug' ? W * 0.25 : W * 0.5).strength(n => n.kind === 'disease' ? 0.25 : n.kind === 'drug' ? 0.12 : 0.02))
+    .force('y', d3.forceY(H / 2).strength(0.04));
+  const g = svg.append('g');
+  const zoom = d3.zoom().scaleExtent([0.4, 3]).on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoom);
+  const link = g.append('g').selectAll('line').data(links).join('line')
+    .attr('stroke', l => l.side === 'disease' ? '#9a9a9a' : (l.pos ? APPROVED : '#c8c8c8')).attr('stroke-width', l => l.pos ? 1.4 : 0.9).attr('stroke-opacity', 0.8);
+  link.append('title').text(l => `${l.source.label || l.source} ${l.phrase} ${l.target.label || l.target}`);
+  const node = g.append('g').selectAll('g').data(nodes).join('g').style('cursor', 'grab')
+    .call(d3.drag().on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }).on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; }).on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+  node.each(function (n) {
+    const el = d3.select(this);
+    if (n.kind === 'pathway') el.append('rect').attr('x', -n.r).attr('y', -n.r).attr('width', 2 * n.r).attr('height', 2 * n.r).attr('fill', colour(n)).attr('stroke', stroke(n)).attr('stroke-width', 1);
+    else if (n.kind === 'disease' && !n.main) el.append('path').attr('d', d3.symbol(d3.symbolDiamond, 90)()).attr('fill', '#e9e9e9').attr('stroke', '#bdbdbd');
+    else el.append('circle').attr('r', n.r).attr('fill', colour(n)).attr('stroke', stroke(n)).attr('stroke-width', n.kind === 'drug' && !n.hasEv ? 1 : 1.2).attr('stroke-dasharray', n.kind === 'drug' && !n.hasEv ? '2,2' : null);
+    el.append('title').text(n.kind === 'drug' ? `${n.label}${n.pos ? ' (approved)' : ''}: ${n.hasEv ? 'evidence shown' : (n.inKG ? 'in the graph, no gene or pathway' : 'not in the graph')}` : `${n.label} (${n.kind})${n.shared ? ', linked to both the disease and a candidate' : ''}`);
+    if (n.kind === 'drug' || n.main || n.shared) el.append('text').text(n.label.length > 28 ? n.label.slice(0, 27) + '…' : n.label).attr('x', n.r + 4).attr('y', 4).attr('font-size', n.main ? 12 : 11).attr('font-weight', n.pos || n.main ? 700 : 400).attr('fill', INK);
+  });
+  const tick = () => { link.attr('x1', l => l.source.x).attr('y1', l => l.source.y).attr('x2', l => l.target.x).attr('y2', l => l.target.y); node.attr('transform', n => `translate(${n.x},${n.y})`); };
+  sim.stop(); for (let i = 0; i < 300; i++) sim.tick(); tick();
+  const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y);
+  const x0 = Math.min(...xs) - 30, x1 = Math.max(...xs) + 110, y0 = Math.min(...ys) - 20, y1 = Math.max(...ys) + 20;
+  const k = Math.min(1.6, 0.95 / Math.max((x1 - x0) / W, (y1 - y0) / H));
+  svg.call(zoom.transform, d3.zoomIdentity.translate(W / 2 - k * (x0 + x1) / 2, H / 2 - k * (y0 + y1) / 2).scale(k));
+  sim.on('tick', tick); sim.alpha(0.05).restart();
+  const sw = (fill, strokeC, shape = 'circle', dash = '') => `<svg width="12" height="12">${shape === 'rect' ? `<rect x="2" y="2" width="8" height="8" fill="${fill}" stroke="${strokeC}"/>` : `<circle cx="6" cy="6" r="4.5" fill="${fill}" stroke="${strokeC}" stroke-dasharray="${dash}"/>`}</svg>`;
+  legend.innerHTML = `<span>${sw(APPROVED, APPROVED)}approved drug</span><span>${sw('#8c8c8c', '#8c8c8c')}distractor with evidence</span><span>${sw('#fff', '#8c8c8c', 'circle', '2,2')}distractor without</span><span>${sw(INK, INK)}target disease</span><span>${sw('#e9e9e9', '#bdbdbd')}gene</span><span><svg width="12" height="12"><path d="M6 1 L11 6 L6 11 L1 6 Z" fill="#e9e9e9" stroke="#bdbdbd"/></svg>related disease</span><span>${sw('#d9d9d9', '#bdbdbd', 'rect')}pathway</span><span>${sw(PAL[evKG], PAL[evKG])}linked to both disease and a candidate</span>`;
+  note.textContent = `${nodes.length} nodes and ${links.length} edges: the neighbours ${NAMES[evKG]} supplied for this query (at most ${8} per relation, least connected first). ${nShared ? nShared + (nShared === 1 ? ' node is' : ' nodes are') + ' shared between the disease and a candidate.' : 'No neighbour is shared between the disease and any candidate.'} ${nNoEv ? nNoEv + ' of 8 candidates had no evidence.' : ''} Drag nodes; scroll to zoom.`;
+}
+
 // ── render all ───────────────────────────────────────────────────────────
 function render() { renderCards(); renderOverview(); renderHeatmap(); renderDims(); renderGrounding(); }
 buildDimTabs(); render();

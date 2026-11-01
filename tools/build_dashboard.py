@@ -1,5 +1,8 @@
 """Build the interactive results dashboard, docs/index.html.
 
+The query explorer draws the evidence neighbourhood each prompt carried, read
+from results/tables/G02_run/evidence_graphs.json (tools/extract_evidence_graphs.py).
+
 Reads the result tables under results/tables, assembles one JSON payload
 and injects it into tools/dashboard_template.html. The output is a single
 self-contained page (Chart.js from cdnjs is the only external file), served
@@ -207,9 +210,11 @@ def explorer():
             evaluable={k: bool(r[f'evaluable_{k}']) for k in ['primekg', 'drkg', 'biokg']},
             shown={k: bool(r[f'shown_{k}']) for k in ['primekg', 'drkg', 'biokg']},
             common=bool(r['common']), results=res))
+    ev_path = T / 'G02_run' / 'evidence_graphs.json'
+    evidence = json.load(open(ev_path)) if ev_path.exists() else {}
     main_models = ['gpt-4.1-mini', 'gemini:gemini-3.5-flash-lite', 'llama3.3:70b']
     ladder = [m for m in sorted(runs['model'].unique().tolist()) if m not in main_models]
-    return dict(pairs=pairs, models=main_models, ladder=ladder, arms=['none', 'primekg', 'drkg', 'biokg'])
+    return dict(pairs=pairs, models=main_models, ladder=ladder, arms=['none', 'primekg', 'drkg', 'biokg'], evidence=evidence)
 
 
 def main():

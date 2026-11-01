@@ -44,3 +44,4 @@ The tools of the superseded 116-pair benchmark are preserved at the tag
 stays on `main` as the record of that earlier set.
 
 - `build_dashboard.py`: builds `docs/index.html`, the interactive results page served by GitHub Pages, from the tables under `results/tables` and the template `dashboard_template.html`.
+- `extract_evidence_graphs.py`: records, per prospective pair and grounding KG, the evidence neighbourhood the prompt carried (`results/tables/G02_run/evidence_graphs.json`), drawn by the dashboard's query explorer.
