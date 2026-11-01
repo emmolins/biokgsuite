@@ -1,21 +1,12 @@
 # BioKGSuite
 
-BioKGSuite is a framework for evaluating biomedical knowledge graphs on seven
-quality dimensions (coverage, annotation accuracy, trustworthiness, topology,
-stability, task performance and generalisation) through 19 metrics computed
-from each graph's released files and task-specific reference data. This
-repository is the code and result tree behind the manuscript *Knowledge graph
-choice is a design decision: multidimensional evaluation of biomedical
-knowledge graphs with BioKGSuite* (Molins, Holmes, Orfanoudaki, Ktena and
-González, 2026; preprint on arXiv, submitted to Briefings in Bioinformatics).
-It applies the framework to six graphs built for drug repurposing (Hetionet,
-DRKG, PrimeKG, BioKG, OpenBioLink and MATRIX) and runs an experiment asking
-whether each graph's evidence helps a language model rank drugs approved for
-a new indication after the graph was built. Every number and display item in
-the manuscript is produced by the notebooks and scripts here from pinned,
-version-stamped inputs; `results/TRACEABILITY.md` maps each figure, table and
-reported statistic to the file that holds it. The release the manuscript cites
-is tag `v1.0.2`.
+BioKGSuite is a framework for evaluating biomedical knowledge graphs (KGs) on 
+seven quality dimensions (coverage, annotation accuracy, trustworthiness, 
+topology, stability, task performance, and generalisation) through 19 metrics 
+computed from each KG's released files and task-specific reference data. This
+repository is the code behind the paper *Knowledge graph choice is a design 
+decision: multidimensional evaluation of biomedical knowledge graphs with 
+BioKGSuite* (Molins, Holmes, Orfanoudaki, Ktena, and González, 2026).
 
 Interactive results: https://emmolins.github.io/biokgsuite/ (built from the result tables by `tools/build_dashboard.py`).
 
