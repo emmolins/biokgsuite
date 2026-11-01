@@ -56,7 +56,6 @@
   th:first-child, td:first-child { text-align: left; }
   .tscroll { overflow-x: auto; }
   .hm td.v { color: #1a1a1a; }
-  .hm td.dim { font-weight: 700; background: var(--surface2); }
   .hm tr.dimrow td { font-weight: 700; border-top: 2px solid var(--neutral); }
   .hm td.lead { font-weight: 700; }
   .hm .mname { color: var(--text); }
@@ -107,7 +106,7 @@
 
 <nav class="bar"><div class="wrap">
   <div class="sections">
-    <a href="#overview">Overview</a><a href="#profile">Profile</a><a href="#rankings">Rankings</a>
+    <a href="#overview">Overview</a><a href="#profile">Profile</a>
     <a href="#dimensions">Dimensions</a><a href="#grounding">Grounding</a><a href="#explorer">Query explorer</a>
   </div>
   <div class="pills" id="pills"></div>
@@ -133,19 +132,6 @@
   <div class="card tscroll hm" id="heatmap"></div>
 </section>
 
-<section id="rankings">
-  <h2>Rankings do not transfer</h2>
-  <p class="lead">A reversal is a pair of graphs whose order flips between two dimensions. Rates near 0.5 mean the two dimensions say unrelated things about the graphs; 0 means they are redundant.</p>
-  <div class="grid g2">
-    <div class="card"><h4>Reversal rate between dimensions</h4><div class="tscroll" id="revmatrix"></div>
-      <div class="note">Share of the 15 graph pairs that reverse, over all six graphs. Ties and missing scores excluded.</div></div>
-    <div class="card"><h4>Sensitivity to near ties and to MATRIX</h4><div class="tscroll" id="sens"></div>
-      <h4 style="margin-top:14px">Concordance (Kendall's W)</h4><div class="tscroll" id="conc"></div>
-      <div class="note">W treats each metric as a judge ranking the graphs. P is from 20,000 permutations of graph labels within each metric.</div></div>
-  </div>
-  <div class="card" style="margin-top:16px"><h4>Rank dispersion across the discriminating metrics</h4><div class="chart short"><canvas id="dispersion"></canvas></div>
-    <div class="note">Best and worst rank each graph attains across the metrics whose range exceeds 0.05. Every graph spans at least four of the six positions.</div></div>
-</section>
 
 <section id="dimensions">
   <h2>By dimension</h2>
@@ -171,11 +157,8 @@
     <div class="card"><h4>Lift across model size (Llama 1B to 405B)</h4><div class="chart"><canvas id="capacity"></canvas></div>
       <div class="note">Points are offset horizontally so every interval is visible.</div></div>
     <div class="card"><h4>What drives the lift</h4><div class="tscroll" id="levers"></div>
-      <h4 style="margin-top:14px">When the approved drug has no profile</h4><div class="tscroll" id="absence"></div>
-      <div class="note">Lift when the graph holds no gene or pathway evidence for the approved drug, against when it does.</div></div>
+      <div class="note">Shares of the variation in MRR between the nine grounded conditions (three graphs by three LLMs) attributable to the graph, the LLM and their interaction, with 95% bootstrap intervals over pairs.</div></div>
   </div>
-  <div class="card" style="margin-top:16px"><h4>Pairwise KG contrasts</h4><div class="tscroll" id="sigtests"></div>
-    <div class="note">Wilcoxon signed-rank tests on per-pair differences, Benjamini-Hochberg corrected within each subset.</div></div>
 </section>
 
 <section id="explorer">
@@ -304,33 +287,14 @@ function renderHeatmap() {
   let h = '<table><thead><tr><th>Metric</th>' + ks.map(k => `<th><span class="swatch" style="background:${PAL[k]}"></span>${NAMES[k]}</th>`).join('') + '</tr></thead><tbody>';
   S.dims.forEach(d => {
     const dv = ks.map(k => byKG[k].dims[d]); const dmax = Math.max(...dv);
-    h += `<tr class="dimrow"><td>${d}</td>` + ks.map((k, i) => `<td class="${dv[i] === dmax ? 'lead' : ''}">${fmt(dv[i])}</td>`).join('') + '</tr>';
+    h += `<tr class="dimrow"><td>${d}</td>` + ks.map((k, i) => `<td class="v ${dv[i] === dmax ? 'lead' : ''}" style="${shade(dv[i])}">${fmt(dv[i])}</td>`).join('') + '</tr>';
     S.metrics.filter(m => S.metric_dim[m] === d).forEach(m => {
       const vals = ks.map(k => byKG[k].metrics[m]); const mx = Math.max(...vals.filter(v => v != null));
       h += `<tr><td class="mname" title="${METRIC_DEFS[m] || ''}">&nbsp;&nbsp;${m}</td>` + ks.map((k, i) => vals[i] == null ? '<td class="na">n/e</td>' : `<td class="v ${vals[i] === mx ? 'lead' : ''}" style="${shade(vals[i])}">${fmt(vals[i])}</td>`).join('') + '</tr>';
     });
   });
-  h += '<tr class="dimrow"><td>Overall mean</td>' + ks.map(k => `<td>${fmt(byKG[k].overall)}</td>`).join('') + '</tr></tbody></table>';
+  h += '<tr class="dimrow"><td>Overall mean</td>' + ks.map(k => `<td class="v" style="${shade(byKG[k].overall)}">${fmt(byKG[k].overall)}</td>`).join('') + '</tr></tbody></table>';
   document.getElementById('heatmap').innerHTML = h;
-}
-
-// ── rankings ─────────────────────────────────────────────────────────────
-function renderRankings() {
-  const R = D.rankings; const dims = S.dims;
-  const cell = {}; R.dissociations.forEach(r => { cell[r.dimension_1 + '|' + r.dimension_2] = r; cell[r.dimension_2 + '|' + r.dimension_1] = r; });
-  const sh = d => d.split(' ').map(w => w.slice(0, 5)).join(' ');
-  let h = '<table class="rev"><thead><tr><th></th>' + dims.map(d => `<th title="${d}">${sh(d)}</th>`).join('') + '</tr></thead><tbody>';
-  dims.forEach(a => { h += `<tr><td>${a}</td>` + dims.map(b => { if (a === b) return '<td class="cell" style="background:#f6f6f6"></td>'; const r = cell[a + '|' + b]; if (!r) return '<td class="cell"></td>'; const f = r.fraction; return `<td class="cell" title="${r.reversals} of ${r.comparisons}" style="background: rgba(213,94,0,${0.05 + 0.6 * f})">${fmt(f)}</td>`; }).join('') + '</tr>'; });
-  document.getElementById('revmatrix').innerHTML = h + '</tbody></table>';
-  let s = '<table><thead><tr><th>Panel</th><th>Dimension set</th><th>Min gap</th><th>Reversals</th><th>Rate</th></tr></thead><tbody>';
-  R.sensitivity.forEach(r => { s += `<tr><td>${r.panel}</td><td>${r.dimension_set}</td><td>${r.min_gap}</td><td>${r.reversals} / ${r.comparisons}</td><td>${fmt(r.rate)}</td></tr>`; });
-  document.getElementById('sens').innerHTML = s + '</tbody></table>';
-  let c = '<table><thead><tr><th>Panel</th><th>Specification</th><th>Judges</th><th>W</th><th>Mean ρ</th><th>Chance</th><th>P</th></tr></thead><tbody>';
-  R.concordance.forEach(r => { c += `<tr><td>${r.panel}</td><td>${r.specification}</td><td>${r.n_judges}</td><td>${fmt(r.W)}</td><td>${fmt(r.mean_rho)}</td><td>${fmt(r.null_W)}</td><td>${fmtP(r.perm_p)}</td></tr>`; });
-  document.getElementById('conc').innerHTML = c + '</tbody></table>';
-  const disp = S.rank_dispersion.filter(r => on(r.KG));
-  mk('dispersion', { type: 'bar', data: { labels: disp.map(r => NAMES[r.KG]), datasets: [{ label: 'Rank range (best to worst)', data: disp.map(r => [r.best_rank, r.worst_rank]), backgroundColor: disp.map(r => alpha(PAL[r.KG], 0.75)), borderWidth: 0, barPercentage: 0.5 }] },
-    options: { indexAxis: 'y', scales: { x: axis('Rank (1 = best)', 1, 6, { reverse: false, ticks: { stepSize: 1, color: MUTED } }), y: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const r = disp[ctx.dataIndex]; return `best ${r.best_rank}, worst ${r.worst_rank}, leads ${r.n_first} of ${r.n_metrics} metrics`; } } } } } });
 }
 
 // ── dimensions ───────────────────────────────────────────────────────────
@@ -357,24 +321,24 @@ function tbl(cols, rows, fmtMap = {}) {
 function renderDims() {
   const ks = kgs(); const body = id => document.getElementById('body-' + id);
   if (dimOn === 'coverage') {
-    const C = D.coverage; const types = [...new Set(C.entity.map(r => r['Entity Type']))];
-    body('coverage').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity coverage by type</h4><div class="chart"><canvas id="c-ent"></canvas></div></div><div class="card"><h4>Relation coverage</h4><div class="chart"><canvas id="c-rel"></canvas></div></div></div><div class="card" style="margin-top:16px"><h4>Identifier resolution</h4>${tbl([['KG', 'Graph'], ['Entity', 'Entity'], ['raw', 'Nodes'], ['resolved', 'Resolved'], ['resolvability', 'Fraction']], C.resolvability.filter(r => on(r.KG)))}</div>`;
+    const C = D.coverage; const types = [...new Set(C.entity.map(r => r['Entity Type']))].filter(t => t !== 'Pathway');
+    body('coverage').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity coverage by type</h4><div class="chart"><canvas id="c-ent"></canvas></div></div><div class="card"><h4>Relation coverage</h4><div class="chart"><canvas id="c-rel"></canvas></div></div></div><div class="note" style="margin-top:10px">Pathways are reported in the repository but not scored, because the graphs use incompatible pathway vocabularies, so they are omitted here.</div>`;
     mk('c-ent', { type: 'bar', data: { labels: types, datasets: ks.map(k => ({ label: NAMES[k], data: types.map(t => { const r = C.entity.find(x => x.KG === k && x['Entity Type'] === t); return r ? r['Coverage (%)'] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('Coverage (%)', 0, 100), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
-    const rels = [...new Set(C.relation.map(r => r.Relation))];
+    const rels = [...new Set(C.relation.map(r => r.Relation))].filter(r => !r.includes('pathway'));
     mk('c-rel', { type: 'bar', data: { labels: rels, datasets: ks.map(k => ({ label: NAMES[k], data: rels.map(t => { const r = C.relation.find(x => x.KG === k && x.Relation === t); return r ? r['Coverage (%)'] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('Coverage (%)', 0, 100), x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, plugins: { legend: { position: 'bottom' } } } });
   }
   if (dimOn === 'annotation') {
     const A = D.annotation.scores.filter(r => on(r.KG));
-    body('annotation').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity validity and relational consistency</h4><div class="chart"><canvas id="c-ann"></canvas></div></div><div class="card"><h4>Scope of the check</h4>${tbl([['KG', 'Graph'], ['nodes_judged_pct', 'Nodes judged (%)'], ['registry_confirmed_pct', 'Registry confirmed (%)'], ['edges_checkable_pct', 'Edges checkable (%)']], A, { nodes_judged_pct: v => fmt(v, 1), registry_confirmed_pct: v => fmt(v, 1), edges_checkable_pct: v => fmt(v, 1) })}<div class="note">Registry confirmation is reported, not scored: a well-formed identifier can still be absent from the registry.</div></div></div>`;
+    body('annotation').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity validity and relational consistency</h4><div class="chart"><canvas id="c-ann"></canvas></div></div><div class="card"><h4>Scope of the check</h4>${tbl([['KG', 'Graph'], ['nodes_judged_pct', 'Nodes judged (%)'], ['registry_confirmed_pct', 'Registry confirmed (%)'], ['edges_checkable_pct', 'Edges checkable (%)']], A, { nodes_judged_pct: v => fmt(v, 1), registry_confirmed_pct: v => fmt(v, 1), edges_checkable_pct: v => fmt(v, 1) })}<div class="note">Nodes judged: share of nodes whose identifier can be checked at all, because a scheme is declared for their type. Registry confirmed: share of those identifiers that exist in the corresponding registry (MONDO, HGNC, ChEMBL and others); reported, not scored, since a well-formed identifier can still be absent. Edges checkable: share of edges whose endpoint types fall within the relation schema and so can be tested for consistency.</div></div></div>`;
     mk('c-ann', { type: 'bar', data: { labels: ['Entity validity', 'Relational consistency'], datasets: A.map(r => ({ label: NAMES[r.KG], data: [r.entity_validity, r.relational_consistency], backgroundColor: PAL[r.KG], borderWidth: 0 })) }, options: { scales: { y: axis('Score', 0, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
   }
   if (dimOn === 'trust') {
     const Tr = D.trust;
-    body('trust').innerHTML = `<div class="grid g2"><div class="card"><h4>Edge provenance</h4>${tbl([['KG', 'Graph'], ['Provenance level', 'Level'], ['Edges attributed (%)', 'Edges attributed (%)'], ['Edge traceability', 'Score']], Tr.traceability.filter(r => on(r.KG)), { 'Edges attributed (%)': v => fmt(v, 0) })}</div><div class="card"><h4>Sources and uncertainty</h4>${tbl([['KG', 'Graph'], ['Sources', 'Sources'], ['Basis', 'Basis']], Tr.sources.filter(r => on(r.KG)))}${tbl([['KG', 'Graph'], ['Score column', 'Confidence field'], ['Edges with score (%)', 'Edges scored (%)']], Tr.uncertainty.filter(r => on(r.KG)))}</div></div>`;
+    body('trust').innerHTML = `<div class="grid g2"><div class="card"><h4>Edge provenance</h4>${tbl([['KG', 'Graph'], ['Provenance level', 'Level'], ['Edges attributed (%)', 'Edges attributed (%)'], ['Edge traceability', 'Score']], Tr.traceability.filter(r => on(r.KG)), { 'Edges attributed (%)': v => fmt(v, 0), 'Edge traceability': v => fmt(v, 2) })}<div class="note">Level: whether provenance is recorded per edge, per node only, or not at all. Score: level weight (edge 1, node 0.5, none 0) times the share of edges attributed.</div></div><div class="card"><h4>Integrated sources</h4>${tbl([['KG', 'Graph'], ['Sources', 'Sources']], ORDER.filter(on).map(k => Tr.sources.find(r => r.KG === k)).filter(Boolean))}<div class="note">Distinct source databases the graph integrates, as documented by its builders. Source diversity is this count normalised to the panel maximum.</div></div></div><div class="card" style="margin-top:16px"><h4>Uncertainty quantification</h4>${tbl([['KG', 'Graph'], ['Score column', 'Confidence field'], ['Edges with score (%)', 'Edges scored (%)']], ORDER.filter(on).map(k => Tr.uncertainty.find(r => r.KG === k)).filter(Boolean), { 'Score column': v => String(v).includes('none') ? 'none' : v, 'Edges with score (%)': v => fmt(v, 1) })}<div class="note">Whether edges carry a confidence score. Only MATRIX records one.</div></div>`;
   }
   if (dimOn === 'topology') {
     const To = D.topology; const hops = ['1-hop', '2-hop', '3-hop', '4-hop', '5-hop'];
-    body('topology').innerHTML = `<div class="grid g2"><div class="card"><h4>Recovery of validated drug-disease pairs by hop distance</h4><div class="chart"><canvas id="c-hop"></canvas></div></div><div class="card"><h4>Cohesion and community structure</h4>${tbl([['KG', 'Graph'], ['LCC (%)', 'LCC (%)'], ['Components', 'Components'], ['Isolated', 'Isolated']], To.cohesion.filter(r => on(r.KG)), { 'LCC (%)': v => fmt(v, 1) })}${tbl([['KG', 'Graph'], ['C (empirical)', 'Clustering'], ['C / C_ER', 'vs random'], ['AMI (scored)', 'Community purity (AMI)'], ['Q (modularity)', 'Modularity']], To.clustering.filter(r => on(r.KG)).map(r => Object.assign({}, r, To.purity.find(p => p.KG === r.KG) || {})), { 'C / C_ER': v => fmt(v, 0) })}</div></div>`;
+    body('topology').innerHTML = `<div class="grid g2"><div class="card"><h4>Recovery of approved drug-disease pairs by hop distance</h4><div class="chart"><canvas id="c-hop"></canvas></div><div class="note">Pairs are the approved indications in Open Targets (the coverage reference set) whose drug and disease both resolve into the graph's largest component: 813 for Hetionet, 4,003 to 6,189 for the others. The curve is the share connected by a path of at most that many hops.</div></div><div class="card"><h4>Cohesion</h4>${tbl([['KG', 'Graph'], ['LCC (%)', 'LCC (%)'], ['Components', 'Components'], ['Isolated', 'Isolated']], To.cohesion.filter(r => on(r.KG)), { 'LCC (%)': v => fmt(v, 1) })}<h4 style="margin-top:14px">Small-world structure</h4>${tbl([['KG', 'Graph'], ['C (empirical)', 'Clustering coefficient'], ['C / C_ER', 'Times a random graph']], To.clustering.filter(r => on(r.KG)), { 'C / C_ER': v => Number(v).toLocaleString(undefined, { maximumFractionDigits: 0 }) })}<h4 style="margin-top:14px">Community structure</h4>${tbl([['KG', 'Graph'], ['Communities', 'Communities'], ['AMI (scored)', 'Match to entity types (AMI)'], ['Q (modularity)', 'Modularity (Q)']], To.purity.filter(r => on(r.KG)))}<div class="note">Clustering coefficient: how often two neighbours of a node are themselves linked. Times a random graph: that coefficient divided by the value expected in a random graph of the same size and density; large values indicate small-world structure. AMI: agreement between Louvain communities and entity types, from 0 (unrelated) to 1 (identical). Modularity: how cleanly the graph divides into communities.</div></div></div>`;
     mk('c-hop', { type: 'line', data: { labels: hops.map(h => h.replace('-hop', '')), datasets: To.hops.filter(r => on(r.KG)).map(r => lineDs(r.KG, hops.map(h => r[h]))) }, options: { scales: { y: axis('Fraction of pairs connected', 0, 1), x: axis('Maximum hops') }, plugins: { legend: { position: 'bottom' } } } });
   }
   if (dimOn === 'stability') {
@@ -388,7 +352,7 @@ function renderDims() {
   }
   if (dimOn === 'tasks') {
     const Tk = D.tasks; const strats = ['type-constrained', 'random', 'shared-target'];
-    body('tasks').innerHTML = `<div class="grid g2"><div class="card"><h4>Link prediction AUROC by negative set</h4><div class="chart"><canvas id="c-lp"></canvas></div><div class="note">Type-constrained is the scored specification. Whiskers: 95% bootstrap intervals.</div></div><div class="card"><h4>Retrieval and multi-hop at K = 0.5% of the pool</h4><div class="chart"><canvas id="c-ret"></canvas></div></div></div><div class="grid g2" style="margin-top:16px"><div class="card"><h4>Pairwise task contrasts</h4>${tbl([['pair', 'Pair'], ['lp_diff', 'ΔAUROC'], ['lp_q', 'q'], ['retrieval_diff', 'ΔRecall'], ['retrieval_q', 'q'], ['rev', 'Reversal']], Tk.contrasts.filter(r => on(r.kg_a) && on(r.kg_b)).map(r => ({ pair: `${NAMES[r.kg_a]} vs ${NAMES[r.kg_b]}`, lp_diff: (r.lp_diff > 0 ? '+' : '') + fmt(r.lp_diff, 3), lp_q: fmtP(r.lp_q), retrieval_diff: (r.retrieval_diff > 0 ? '+' : '') + fmt(r.retrieval_diff, 3), retrieval_q: fmtP(r.retrieval_q), rev: r.significant_reversal ? 'yes' : '' })))}<div class="note">Two-sample z-tests from bootstrap intervals, Benjamini-Hochberg over 15 pairs. A reversal is a significant lead on one task and a significant deficit on the other.</div></div><div class="card"><h4>Embedding scorers (supplement)</h4>${tbl([['kg', 'Graph'], ['model', 'Model'], ['dim', 'Dim'], ['test_auroc', 'Test AUROC'], ['adamic_adar_auroc', 'Adamic-Adar AUROC']], Tk.embeddings.filter(r => on(r.kg)))}<div class="note">Run where compute allowed; see Supplementary Table S7.</div></div></div>`;
+    body('tasks').innerHTML = `<div class="grid g2"><div class="card"><h4>Link prediction AUROC by negative set</h4><div class="chart"><canvas id="c-lp"></canvas></div><div class="note">Type-constrained is the scored specification. Whiskers: 95% bootstrap intervals.</div></div><div class="card"><h4>Retrieval and multi-hop at K = 0.5% of the pool</h4><div class="chart"><canvas id="c-ret"></canvas></div></div></div><div class="grid g2" style="margin-top:16px"><div class="card"><h4>Embedding scorers (supplement)</h4>${tbl([['kg', 'Graph'], ['model', 'Model'], ['dim', 'Dim'], ['test_auroc', 'Test AUROC'], ['adamic_adar_auroc', 'Adamic-Adar AUROC']], Tk.embeddings.filter(r => on(r.kg)))}<div class="note">Run where compute allowed; see Supplementary Table S7.</div></div></div>`;
     mk('c-lp', { type: 'bar', data: { labels: strats, datasets: ks.map(k => ({ label: NAMES[k], data: strats.map(s => { const r = Tk.link_prediction.find(x => x.kg === k && x.neg_strategy === s); return r ? r.auroc : null; }), ci: strats.map(s => { const r = Tk.link_prediction.find(x => x.kg === k && x.neg_strategy === s); return r ? [r.auroc_ci_lo, r.auroc_ci_hi] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('AUROC', 0.5, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
     mk('c-ret', { type: 'bar', data: { labels: ['Neighbourhood retrieval (Recall@K)', 'Multi-hop reasoning (Hits@K)'], datasets: ks.map(k => { const r = Tk.retrieval.find(x => x.KG === k), m = Tk.multihop.find(x => x.KG === k); return { label: NAMES[k], data: [r ? r['recall@frac'] : null, m ? m['hits@frac'] : null], backgroundColor: PAL[k], borderWidth: 0 }; }) }, options: { scales: { y: axis('Score', 0, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
   }
@@ -418,15 +382,6 @@ function renderGrounding() {
   const lv = Object.fromEntries(Gr.levers.map(r => [r.quantity, r]));
   const pct = r => `${fmt(r.value * 100, 0)}% (${fmt(r.lo * 100, 0)} to ${fmt(r.hi * 100, 0)})`;
   document.getElementById('levers').innerHTML = `<table><tbody><tr><td>Variation due to the KG</td><td>${pct(lv.share_arm)}</td></tr><tr><td>Variation due to the LLM</td><td>${pct(lv.share_model)}</td></tr><tr><td>Interaction</td><td>${pct(lv.share_interaction)}</td></tr><tr><td>KG effect, paired scale (MRR)</td><td>${fmt(lv.arm_range.value)} (${fmt(lv.arm_range.lo)} to ${fmt(lv.arm_range.hi)})</td></tr><tr><td>LLM effect, paired scale (MRR)</td><td>${fmt(lv.model_range.value)} (${fmt(lv.model_range.lo)} to ${fmt(lv.model_range.hi)})</td></tr><tr><td>Ratio KG : LLM</td><td>${fmt(lv.ratio.value, 1)} (${fmt(lv.ratio.lo, 1)} to ${fmt(lv.ratio.hi, 1)})</td></tr></tbody></table>`;
-  const ab = Gr.absence.filter(r => on(r.arm));
-  let a = '<table><thead><tr><th>LLM</th><th>Graph</th><th>Approved drug</th><th>Pairs</th><th>Lift</th><th>95% CI</th></tr></thead><tbody>';
-  ab.forEach(r => { a += `<tr><td>${r.model_label}</td><td><span class="swatch" style="background:${PAL[r.arm]}"></span>${NAMES[r.arm]}</td><td>${r.positive}</td><td>${r.n_pairs}</td><td>${(r.lift >= 0 ? '+' : '') + fmt(r.lift, 2)}</td><td>${fmt(r.lift_lo, 2)} to ${fmt(r.lift_hi, 2)}</td></tr>`; });
-  document.getElementById('absence').innerHTML = a + '</tbody></table>';
-  const subsetName = { main: 'all pairs', covered: 'evaluable in every graph', common: 'common family' }[subset];
-  const sig = Gr.significance.filter(r => r.subset === subsetName);
-  let s = '<table><thead><tr><th>LLM</th><th>Contrast</th><th>n</th><th>ΔMRR</th><th>P (Wilcoxon)</th><th>q</th></tr></thead><tbody>';
-  sig.forEach(r => { s += `<tr><td>${r.model_label}</td><td>${r.contrast}</td><td>${r.n}</td><td>${(r.diff >= 0 ? '+' : '') + fmt(r.diff, 3)}</td><td>${fmtP(r.p_wilcoxon)}</td><td>${r.sig_fdr ? '<b>' + fmtP(r.q_bh) + '</b>' : fmtP(r.q_bh)}</td></tr>`; });
-  document.getElementById('sigtests').innerHTML = s + '</tbody></table>';
 }
 
 // ── explorer ─────────────────────────────────────────────────────────────
@@ -464,7 +419,7 @@ function renderDetail() {
 }
 
 // ── render all ───────────────────────────────────────────────────────────
-function render() { renderCards(); renderOverview(); renderHeatmap(); renderRankings(); renderDims(); renderGrounding(); }
+function render() { renderCards(); renderOverview(); renderHeatmap(); renderDims(); renderGrounding(); }
 buildDimTabs(); render(); renderList();
 if (E.pairs.length) { selected = E.pairs.find(p => p.drug === 'miglustat')?.id ?? E.pairs[0].id; renderList(); renderDetail(); }
 </script>
