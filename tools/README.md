@@ -42,3 +42,5 @@ docstring gives its usage.
 The tools of the superseded 116-pair benchmark are preserved at the tag
 `v0.9-legacy`; they read and write under `data/gold_standards/legacy/`, which
 stays on `main` as the record of that earlier set.
+
+- `build_dashboard.py`: builds `docs/index.html`, the interactive results page served by GitHub Pages, from the tables under `results/tables` and the template `dashboard_template.html`.

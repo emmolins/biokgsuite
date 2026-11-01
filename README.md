@@ -17,6 +17,8 @@ version-stamped inputs; `results/TRACEABILITY.md` maps each figure, table and
 reported statistic to the file that holds it. The release the manuscript cites
 is tag `v1.0.2`.
 
+Interactive results: https://emmolins.github.io/biokgsuite-bib/ (built from the result tables by `tools/build_dashboard.py`).
+
 ## Layout
 
 | Path | Contents |

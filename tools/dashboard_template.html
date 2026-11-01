@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioKGSuite results</title>
+<meta name="description" content="Interactive results of BioKGSuite: a multidimensional evaluation of six biomedical knowledge graphs and a prospective LLM grounding experiment.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #ffffff; --surface2: #f6f6f6; --border: #e3e3e3;
+    --text: #1a1a1a; --muted: #6e6e6e; --faint: #bdbdbd; --neutral: #8c8c8c;
+    --link: #0072b2; --radius: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; } html, body { overflow-x: hidden; }
+  .grid > *, .explorer > * { min-width: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: var(--text); background: var(--bg); }
+  a { color: var(--link); text-decoration: none; } a:hover { text-decoration: underline; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  header.top { padding: 28px 0 18px; border-bottom: 1px solid var(--border); }
+  header.top h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  header.top p { color: var(--muted); max-width: 820px; margin-top: 6px; }
+  header.top .links { margin-top: 10px; font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+  nav.bar { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); }
+  nav.bar .wrap { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+  nav.bar .sections { display: flex; gap: 2px; flex-wrap: wrap; }
+  nav.bar .sections a { padding: 4px 9px; border-radius: 4px; font-size: 13px; color: var(--muted); }
+  nav.bar .sections a:hover { background: var(--surface2); text-decoration: none; color: var(--text); }
+  .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); font-size: 12.5px; font-weight: 600; color: var(--muted); cursor: pointer; user-select: none; background: #fff; }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); opacity: 0.35; }
+  .pill.on { color: var(--c); border-color: var(--c); } .pill.on .dot { opacity: 1; }
+  section { padding: 34px 0 10px; }
+  section h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  section .lead { color: var(--muted); max-width: 820px; margin-bottom: 18px; }
+  h3 { font-size: 14px; font-weight: 700; margin: 18px 0 8px; }
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .card .note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .chart { position: relative; width: 100%; height: 300px; }
+  .chart.tall { height: 360px; } .chart.short { height: 220px; }
+  .kgcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .kgcard { border: 1px solid var(--border); border-left: 4px solid var(--c); border-radius: var(--radius); padding: 10px 12px; }
+  .kgcard .name { font-weight: 700; font-size: 14px; }
+  .kgcard .rel { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+  .kgcard .stat { display: flex; justify-content: space-between; font-size: 12.5px; }
+  .kgcard .stat b { font-variant-numeric: tabular-nums; }
+  .kgcard.off { opacity: 0.35; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  th, td { padding: 4px 7px; border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  th { font-weight: 700; color: var(--muted); font-size: 12px; }
+  th:first-child, td:first-child { text-align: left; }
+  .tscroll { overflow-x: auto; }
+  .hm td.v { color: #1a1a1a; }
+  .hm td.dim { font-weight: 700; background: var(--surface2); }
+  .hm tr.dimrow td { font-weight: 700; border-top: 2px solid var(--neutral); }
+  .hm td.lead { font-weight: 700; }
+  .hm .mname { color: var(--text); }
+  .hm td.na { color: var(--faint); }
+  .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tab { padding: 5px 11px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; cursor: pointer; color: var(--muted); background: #fff; }
+  .tab.on { color: var(--text); border-color: var(--text); font-weight: 700; }
+  .panel { display: none; } .panel.on { display: block; }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-size: 12.5px; }
+  .seg span { padding: 4px 10px; cursor: pointer; color: var(--muted); }
+  .seg span.on { background: var(--text); color: #fff; }
+  .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; font-size: 13px; }
+  select, input[type=search] { font: inherit; font-size: 13px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; background: #fff; }
+  .rev td.cell { text-align: center; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { padding: 2px 9px; border-radius: 999px; border: 1px solid var(--border); font-size: 12px; background: var(--surface2); }
+  .chip.pos { background: #c0622b; color: #fff; border-color: #c0622b; font-weight: 700; }
+  .explorer { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 16px; }
+  @media (max-width: 860px) { .explorer { grid-template-columns: 1fr; } }
+  .plist { max-height: 560px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+  .prow { padding: 8px 12px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; }
+  .prow:hover { background: var(--surface2); } .prow.on { background: #eef4fa; }
+  .prow .d { color: var(--muted); font-size: 12px; }
+  .ev { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; border: 1px solid var(--faint); }
+  .ev.yes { background: var(--c); border-color: var(--c); }
+  .rank { display: inline-block; min-width: 34px; text-align: center; padding: 1px 6px; border-radius: 4px; background: var(--surface2); font-weight: 700; }
+  .rank.r1 { background: #c0622b; color: #fff; }
+  .rationale { font-size: 12.5px; color: var(--muted); margin-top: 4px; padding-left: 10px; border-left: 2px solid var(--border); }
+  footer { margin-top: 40px; padding: 20px 0 40px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--muted); }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; font-size: 13px; }
+  .kv b { color: var(--muted); font-weight: 600; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--neutral); margin-right: 5px; vertical-align: 3px; }
+  .legend i.dash { border-top-style: dashed; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>BioKGSuite: results explorer</h1>
+  <p>Seven quality dimensions and nineteen metrics for six biomedical knowledge graphs, and a prospective drug repurposing experiment that grounds three LLMs in their evidence. Every number on this page is read from the result tables in the repository; the manuscript figures are drawn from the same files.</p>
+  <div class="links">
+    <a href="https://github.com/emmolins/biokgsuite-bib">Repository</a>
+    <a href="https://github.com/emmolins/biokgsuite-bib/blob/main/results/TRACEABILITY.md">Traceability map</a>
+    <a id="arxiv-link" href="#" hidden>Preprint</a>
+  </div>
+</div></header>
+
+<nav class="bar"><div class="wrap">
+  <div class="sections">
+    <a href="#overview">Overview</a><a href="#profile">Profile</a><a href="#rankings">Rankings</a>
+    <a href="#dimensions">Dimensions</a><a href="#grounding">Grounding</a><a href="#explorer">Query explorer</a>
+  </div>
+  <div class="pills" id="pills"></div>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>Overview</h2>
+  <p class="lead">Five earlier graphs released between 2017 and 2022, and MATRIX, a 2026 snapshot from Every Cure. Toggle graphs with the pills above; every chart follows.</p>
+  <div class="kgcards" id="kgcards"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h4>Dimension profile</h4><div class="chart tall"><canvas id="radar"></canvas></div>
+      <div class="note">Each dimension is the mean of its metrics, on [0, 1]. The shape is the point: no graph leads everywhere.</div></div>
+    <div class="card"><h4>Dimension scores</h4><div class="chart tall"><canvas id="dimbars"></canvas></div>
+      <div class="note">Grouped by dimension. Annotation accuracy is saturated (all six at or near 1), so it separates nothing.</div></div>
+  </div>
+</section>
+
+<section id="profile">
+  <h2>Metric profile</h2>
+  <p class="lead">All nineteen metrics, grouped by dimension. Cells are shaded by value; the leader in each row is in bold. Hover a metric name for its definition.</p>
+  <div class="card tscroll hm" id="heatmap"></div>
+</section>
+
+<section id="rankings">
+  <h2>Rankings do not transfer</h2>
+  <p class="lead">A reversal is a pair of graphs whose order flips between two dimensions. Rates near 0.5 mean the two dimensions say unrelated things about the graphs; 0 means they are redundant.</p>
+  <div class="grid g2">
+    <div class="card"><h4>Reversal rate between dimensions</h4><div class="tscroll" id="revmatrix"></div>
+      <div class="note">Share of the 15 graph pairs that reverse, over all six graphs. Ties and missing scores excluded.</div></div>
+    <div class="card"><h4>Sensitivity to near ties and to MATRIX</h4><div class="tscroll" id="sens"></div>
+      <h4 style="margin-top:14px">Concordance (Kendall's W)</h4><div class="tscroll" id="conc"></div>
+      <div class="note">W treats each metric as a judge ranking the graphs. P is from 20,000 permutations of graph labels within each metric.</div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h4>Rank dispersion across the discriminating metrics</h4><div class="chart short"><canvas id="dispersion"></canvas></div>
+    <div class="note">Best and worst rank each graph attains across the metrics whose range exceeds 0.05. Every graph spans at least four of the six positions.</div></div>
+</section>
+
+<section id="dimensions">
+  <h2>By dimension</h2>
+  <p class="lead">What each dimension measures and the underlying tables.</p>
+  <div class="tabs" id="dimtabs"></div>
+  <div id="dimpanels"></div>
+</section>
+
+<section id="grounding">
+  <h2>Grounding experiment</h2>
+  <p class="lead">128 drug and disease pairs approved between 2023 and 2026, after every graph was built. Each query shows a disease and eight anonymised candidate drugs; arms differ only in the KG evidence attached. The lift is the gain in mean reciprocal rank over the no-KG arm.</p>
+  <div class="controls">
+    <span>Pairs:</span>
+    <div class="seg" id="subset"><span data-v="main" class="on">All 128</span><span data-v="covered">43 evaluable in every KG</span><span data-v="common">43, common family</span></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h4>Lift in MRR by KG and LLM</h4><div class="chart"><canvas id="lifts"></canvas></div>
+      <div class="note">Bars are the paired difference from the no-KG arm; whiskers are 95% bootstrap intervals over pairs.</div></div>
+    <div class="card"><h4>MRR by arm</h4><div class="chart"><canvas id="arms"></canvas></div>
+      <div class="note">Chance MRR with eight candidates is 0.34. The no-KG arm sits at chance because candidates are anonymised.</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h4>Lift across model size (Llama 1B to 405B)</h4><div class="chart"><canvas id="capacity"></canvas></div>
+      <div class="note">Points are offset horizontally so every interval is visible.</div></div>
+    <div class="card"><h4>What drives the lift</h4><div class="tscroll" id="levers"></div>
+      <h4 style="margin-top:14px">When the approved drug has no profile</h4><div class="tscroll" id="absence"></div>
+      <div class="note">Lift when the graph holds no gene or pathway evidence for the approved drug, against when it does.</div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h4>Pairwise KG contrasts</h4><div class="tscroll" id="sigtests"></div>
+    <div class="note">Wilcoxon signed-rank tests on per-pair differences, Benjamini-Hochberg corrected within each subset.</div></div>
+</section>
+
+<section id="explorer">
+  <h2>Query explorer</h2>
+  <p class="lead">Every prospective pair, with the candidates shown to the models, which graphs held evidence for the approved drug, and where each LLM ranked it under each arm (mean over three seeds and three candidate orders).</p>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search drug or disease">
+    <select id="farea"><option value="">All therapeutic areas</option></select>
+    <select id="fmod"><option value="">All modalities</option></select>
+    <label><input type="checkbox" id="fcommon"> common family only</label>
+    <label><input type="checkbox" id="fladder"> show Llama size ladder</label>
+    <span id="pcount" style="color:var(--muted)"></span>
+  </div>
+  <div class="explorer">
+    <div class="plist" id="plist"></div>
+    <div class="card" id="pdetail"><p style="color:var(--muted)">Select a pair.</p></div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <p>Built from <code>results/tables</code> by <code>tools/build_dashboard.py</code>. Knowledge graphs and reference data are the property of their maintainers and are not redistributed. Colours follow the Okabe-Ito palette used in the manuscript.</p>
+</div></footer>
+
+<script id="data" type="application/json">/*__DATA__*/</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const ORDER = D.order, NAMES = D.names, PAL = D.palette;
+const GROUND_KGS = ['primekg', 'drkg', 'biokg'];
+const active = new Set(ORDER);
+const charts = {};
+const MUTED = '#6e6e6e', FAINT = '#bdbdbd', NEUTRAL = '#8c8c8c', INK = '#1a1a1a', APPROVED = '#c0622b';
+Chart.defaults.font.family = 'Arial, Helvetica, sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.color = INK;
+Chart.defaults.plugins.legend.labels.boxWidth = 10;
+Chart.defaults.plugins.legend.labels.boxHeight = 10;
+const fmt = (v, d = 2) => v == null || Number.isNaN(v) ? 'n/a' : Number(v).toFixed(d);
+const fmtP = v => v == null || v === '' ? '' : (v < 0.001 ? '<0.001' : Number(v).toFixed(3));
+const on = k => active.has(k);
+const kgs = () => ORDER.filter(on);
+const alpha = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+
+// error-bar plugin: dataset.ci = [[lo,hi],...] in data units
+const errorBars = {
+  id: 'errorBars',
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    chart.data.datasets.forEach((ds, i) => {
+      if (!ds.ci) return;
+      const meta = chart.getDatasetMeta(i); if (meta.hidden) return;
+      const scale = chart.scales[meta.yAxisID || 'y'];
+      ctx.save(); ctx.strokeStyle = ds.ciColor || INK; ctx.lineWidth = 1;
+      meta.data.forEach((el, j) => {
+        const ci = ds.ci[j]; if (!ci || ci[0] == null) return;
+        const x = el.x, y0 = scale.getPixelForValue(ci[0]), y1 = scale.getPixelForValue(ci[1]);
+        ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1);
+        ctx.moveTo(x - 3, y0); ctx.lineTo(x + 3, y0); ctx.moveTo(x - 3, y1); ctx.lineTo(x + 3, y1); ctx.stroke();
+      });
+      ctx.restore();
+    });
+  }
+};
+Chart.register(errorBars);
+
+function mk(id, cfg) {
+  if (charts[id]) charts[id].destroy();
+  cfg.options = Object.assign({ responsive: true, maintainAspectRatio: false, animation: false }, cfg.options || {});
+  charts[id] = new Chart(document.getElementById(id), cfg);
+}
+const axis = (title, min, max, extra = {}) => Object.assign({ title: { display: !!title, text: title, color: MUTED }, grid: { color: '#eeeeee' }, border: { color: FAINT }, min, max, ticks: { color: MUTED } }, extra);
+
+// ── pills and KG cards ───────────────────────────────────────────────────
+const pills = document.getElementById('pills');
+ORDER.forEach(k => {
+  const el = document.createElement('span'); el.className = 'pill on'; el.style.setProperty('--c', PAL[k]);
+  el.innerHTML = `<span class="dot"></span>${NAMES[k]}`;
+  el.onclick = () => { if (on(k) && active.size === 1) return; on(k) ? active.delete(k) : active.add(k); el.classList.toggle('on'); render(); };
+  pills.appendChild(el);
+});
+function renderCards() {
+  document.getElementById('kgcards').innerHTML = D.kgs.map(k => `
+    <div class="kgcard ${on(k.key) ? '' : 'off'}" style="--c:${k.colour}">
+      <div class="name">${k.name}</div><div class="rel">${k.release}</div>
+      <div class="stat"><span>Nodes</span><b>${k.nodes.toLocaleString()}</b></div>
+      <div class="stat"><span>Edges</span><b>${k.edges.toLocaleString()}</b></div>
+      <div class="stat"><span>Node types</span><b>${k.node_types}</b></div>
+      <div class="stat"><span>Sources</span><b>${k.sources}</b></div>
+    </div>`).join('');
+}
+
+// ── overview charts ──────────────────────────────────────────────────────
+const S = D.summary; const byKG = Object.fromEntries(S.rows.map(r => [r.kg, r]));
+function renderOverview() {
+  mk('radar', { type: 'radar', data: { labels: S.dims, datasets: kgs().map(k => ({ label: NAMES[k], data: S.dims.map(d => byKG[k].dims[d]), borderColor: PAL[k], backgroundColor: alpha(PAL[k], 0.06), pointBackgroundColor: PAL[k], pointRadius: 2.5, borderWidth: 1.5 })) },
+    options: { scales: { r: { min: 0, max: 1, ticks: { stepSize: 0.25, color: MUTED, backdropColor: 'transparent' }, grid: { color: '#e6e6e6' }, angleLines: { color: '#e6e6e6' }, pointLabels: { font: { size: 11 } } } }, plugins: { legend: { position: 'bottom' } } } });
+  mk('dimbars', { type: 'bar', data: { labels: S.dims.map(d => d.replace('Annotation accuracy', 'Annotation acc.')), datasets: kgs().map(k => ({ label: NAMES[k], data: S.dims.map(d => byKG[k].dims[d]), backgroundColor: PAL[k], borderWidth: 0, categoryPercentage: 0.8, barPercentage: 0.9 })) },
+    options: { scales: { y: axis('Dimension score', 0, 1), x: { grid: { display: false }, ticks: { font: { size: 11 } } } }, plugins: { legend: { position: 'bottom' } } } });
+}
+
+// ── heatmap ──────────────────────────────────────────────────────────────
+const METRIC_DEFS = {
+  'Entity coverage': 'Fraction of reference diseases, drugs and genes present in the graph',
+  'Relation coverage': 'Fraction of reference drug-target, disease-gene and indication relations present',
+  'Entity validity': 'Fraction of nodes whose identifier fits a scheme declared for its type',
+  'Relational consistency': 'Fraction of edges whose endpoint types match the relation schema',
+  'Edge traceability': 'Whether and at what level edges carry provenance',
+  'Source diversity': 'Number of integrated sources, normalised to the panel maximum',
+  'Uncertainty quantification': 'Fraction of edges carrying a confidence score',
+  'Graph cohesion': 'Share of nodes in the largest connected component',
+  'Clustering coefficient': 'Small-world score from clustering relative to a random graph',
+  'Graph reachability': 'Validated drug-disease pairs still connected within two hops under edge removal',
+  'Community purity': 'Adjusted mutual information between Louvain communities and entity types',
+  'Random-dropout stability': 'Rank correlation of Adamic-Adar scores after 10% random edge removal',
+  'Periphery-dropout stability': 'Same, removing edges from the lowest-degree nodes first',
+  'Link prediction': 'Adamic-Adar AUROC on held-out indications against type-constrained negatives (2 AUROC - 1)',
+  'Neighbourhood retrieval': 'Recall of a disease\'s known genes among its nearest neighbours, K = 0.5% of the pool',
+  'Multi-hop reasoning': 'Hits@K on CTD drug-gene-disease triples via two-hop paths',
+  'Data-sparse generalisation': 'Link-prediction AUROC on the least-annotated disease quartile',
+  'Cross-domain generalisation': 'Mean AUROC across therapeutic areas',
+  'Prospective generalisation': 'AUROC on indications approved after the graph was built',
+};
+function shade(v) { if (v == null) return ''; const t = Math.max(0, Math.min(1, v)); return `background: rgba(0,114,178,${0.04 + 0.42 * t})`; }
+function renderHeatmap() {
+  const ks = kgs();
+  let h = '<table><thead><tr><th>Metric</th>' + ks.map(k => `<th><span class="swatch" style="background:${PAL[k]}"></span>${NAMES[k]}</th>`).join('') + '</tr></thead><tbody>';
+  S.dims.forEach(d => {
+    const dv = ks.map(k => byKG[k].dims[d]); const dmax = Math.max(...dv);
+    h += `<tr class="dimrow"><td>${d}</td>` + ks.map((k, i) => `<td class="${dv[i] === dmax ? 'lead' : ''}">${fmt(dv[i])}</td>`).join('') + '</tr>';
+    S.metrics.filter(m => S.metric_dim[m] === d).forEach(m => {
+      const vals = ks.map(k => byKG[k].metrics[m]); const mx = Math.max(...vals.filter(v => v != null));
+      h += `<tr><td class="mname" title="${METRIC_DEFS[m] || ''}">&nbsp;&nbsp;${m}</td>` + ks.map((k, i) => vals[i] == null ? '<td class="na">n/e</td>' : `<td class="v ${vals[i] === mx ? 'lead' : ''}" style="${shade(vals[i])}">${fmt(vals[i])}</td>`).join('') + '</tr>';
+    });
+  });
+  h += '<tr class="dimrow"><td>Overall mean</td>' + ks.map(k => `<td>${fmt(byKG[k].overall)}</td>`).join('') + '</tr></tbody></table>';
+  document.getElementById('heatmap').innerHTML = h;
+}
+
+// ── rankings ─────────────────────────────────────────────────────────────
+function renderRankings() {
+  const R = D.rankings; const dims = S.dims;
+  const cell = {}; R.dissociations.forEach(r => { cell[r.dimension_1 + '|' + r.dimension_2] = r; cell[r.dimension_2 + '|' + r.dimension_1] = r; });
+  const sh = d => d.split(' ').map(w => w.slice(0, 5)).join(' ');
+  let h = '<table class="rev"><thead><tr><th></th>' + dims.map(d => `<th title="${d}">${sh(d)}</th>`).join('') + '</tr></thead><tbody>';
+  dims.forEach(a => { h += `<tr><td>${a}</td>` + dims.map(b => { if (a === b) return '<td class="cell" style="background:#f6f6f6"></td>'; const r = cell[a + '|' + b]; if (!r) return '<td class="cell"></td>'; const f = r.fraction; return `<td class="cell" title="${r.reversals} of ${r.comparisons}" style="background: rgba(213,94,0,${0.05 + 0.6 * f})">${fmt(f)}</td>`; }).join('') + '</tr>'; });
+  document.getElementById('revmatrix').innerHTML = h + '</tbody></table>';
+  let s = '<table><thead><tr><th>Panel</th><th>Dimension set</th><th>Min gap</th><th>Reversals</th><th>Rate</th></tr></thead><tbody>';
+  R.sensitivity.forEach(r => { s += `<tr><td>${r.panel}</td><td>${r.dimension_set}</td><td>${r.min_gap}</td><td>${r.reversals} / ${r.comparisons}</td><td>${fmt(r.rate)}</td></tr>`; });
+  document.getElementById('sens').innerHTML = s + '</tbody></table>';
+  let c = '<table><thead><tr><th>Panel</th><th>Specification</th><th>Judges</th><th>W</th><th>Mean ρ</th><th>Chance</th><th>P</th></tr></thead><tbody>';
+  R.concordance.forEach(r => { c += `<tr><td>${r.panel}</td><td>${r.specification}</td><td>${r.n_judges}</td><td>${fmt(r.W)}</td><td>${fmt(r.mean_rho)}</td><td>${fmt(r.null_W)}</td><td>${fmtP(r.perm_p)}</td></tr>`; });
+  document.getElementById('conc').innerHTML = c + '</tbody></table>';
+  const disp = S.rank_dispersion.filter(r => on(r.KG));
+  mk('dispersion', { type: 'bar', data: { labels: disp.map(r => NAMES[r.KG]), datasets: [{ label: 'Rank range (best to worst)', data: disp.map(r => [r.best_rank, r.worst_rank]), backgroundColor: disp.map(r => alpha(PAL[r.KG], 0.75)), borderWidth: 0, barPercentage: 0.5 }] },
+    options: { indexAxis: 'y', scales: { x: axis('Rank (1 = best)', 1, 6, { reverse: false, ticks: { stepSize: 1, color: MUTED } }), y: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const r = disp[ctx.dataIndex]; return `best ${r.best_rank}, worst ${r.worst_rank}, leads ${r.n_first} of ${r.n_metrics} metrics`; } } } } } });
+}
+
+// ── dimensions ───────────────────────────────────────────────────────────
+const DIM_TABS = [
+  { id: 'coverage', title: 'Coverage', text: 'Entity and relation coverage against reference sets from MONDO, Open Targets and ChEMBL. Coverage is what the grounding experiment later turns out to depend on.' },
+  { id: 'annotation', title: 'Annotation accuracy', text: 'Do identifiers fit a scheme declared for their type, and do edges connect the types their relation expects? A check of form, not truth.' },
+  { id: 'trust', title: 'Trustworthiness', text: 'Provenance level, number of sources and whether edges carry a confidence score.' },
+  { id: 'topology', title: 'Topology', text: 'Cohesion, small-world structure, how quickly validated drug-disease pairs are recovered by hop distance, and whether communities follow entity types.' },
+  { id: 'stability', title: 'Stability', text: 'How the Adamic-Adar ranking of 500 indication pairs changes as 5% to 30% of edges are removed, at random or from the periphery first. Dashed lines are degree-matched null pairs scored on the same perturbed graph.' },
+  { id: 'tasks', title: 'Task performance', text: 'Link prediction, neighbourhood retrieval and multi-hop reasoning. The first two make different demands, and graphs reverse between them.' },
+  { id: 'general', title: 'Generalisation', text: 'Performance on the least-annotated diseases, across therapeutic areas, and on indications approved after the graph was built.' },
+];
+let dimOn = 'coverage';
+function buildDimTabs() {
+  document.getElementById('dimtabs').innerHTML = DIM_TABS.map(t => `<span class="tab ${t.id === dimOn ? 'on' : ''}" data-id="${t.id}">${t.title}</span>`).join('');
+  document.querySelectorAll('#dimtabs .tab').forEach(el => el.onclick = () => { dimOn = el.dataset.id; buildDimTabs(); renderDims(); });
+  document.getElementById('dimpanels').innerHTML = DIM_TABS.map(t => `<div class="panel ${t.id === dimOn ? 'on' : ''}" id="panel-${t.id}"><p class="lead">${t.text}</p><div id="body-${t.id}"></div></div>`).join('');
+}
+const lineDs = (k, data, extra = {}) => Object.assign({ label: NAMES[k], data, borderColor: PAL[k], backgroundColor: PAL[k], pointRadius: 3, borderWidth: 1.5, tension: 0 }, extra);
+function tbl(cols, rows, fmtMap = {}) {
+  return '<div class="tscroll"><table><thead><tr>' + cols.map(c => `<th>${c[1]}</th>`).join('') + '</tr></thead><tbody>' +
+    rows.map(r => '<tr>' + cols.map(c => { let v = r[c[0]]; if (c[0] === 'KG' || c[0] === 'kg') v = `<span class="swatch" style="background:${PAL[v]}"></span>${NAMES[v] || v}`; else if (fmtMap[c[0]]) v = fmtMap[c[0]](v); else if (typeof v === 'number') v = Number.isInteger(v) ? v.toLocaleString() : fmt(v, 3); return `<td>${v == null ? '' : v}</td>`; }).join('') + '</tr>').join('') + '</tbody></table></div>';
+}
+function renderDims() {
+  const ks = kgs(); const body = id => document.getElementById('body-' + id);
+  if (dimOn === 'coverage') {
+    const C = D.coverage; const types = [...new Set(C.entity.map(r => r['Entity Type']))];
+    body('coverage').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity coverage by type</h4><div class="chart"><canvas id="c-ent"></canvas></div></div><div class="card"><h4>Relation coverage</h4><div class="chart"><canvas id="c-rel"></canvas></div></div></div><div class="card" style="margin-top:16px"><h4>Identifier resolution</h4>${tbl([['KG', 'Graph'], ['Entity', 'Entity'], ['raw', 'Nodes'], ['resolved', 'Resolved'], ['resolvability', 'Fraction']], C.resolvability.filter(r => on(r.KG)))}</div>`;
+    mk('c-ent', { type: 'bar', data: { labels: types, datasets: ks.map(k => ({ label: NAMES[k], data: types.map(t => { const r = C.entity.find(x => x.KG === k && x['Entity Type'] === t); return r ? r['Coverage (%)'] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('Coverage (%)', 0, 100), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
+    const rels = [...new Set(C.relation.map(r => r.Relation))];
+    mk('c-rel', { type: 'bar', data: { labels: rels, datasets: ks.map(k => ({ label: NAMES[k], data: rels.map(t => { const r = C.relation.find(x => x.KG === k && x.Relation === t); return r ? r['Coverage (%)'] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('Coverage (%)', 0, 100), x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, plugins: { legend: { position: 'bottom' } } } });
+  }
+  if (dimOn === 'annotation') {
+    const A = D.annotation.scores.filter(r => on(r.KG));
+    body('annotation').innerHTML = `<div class="grid g2"><div class="card"><h4>Entity validity and relational consistency</h4><div class="chart"><canvas id="c-ann"></canvas></div></div><div class="card"><h4>Scope of the check</h4>${tbl([['KG', 'Graph'], ['nodes_judged_pct', 'Nodes judged (%)'], ['registry_confirmed_pct', 'Registry confirmed (%)'], ['edges_checkable_pct', 'Edges checkable (%)']], A, { nodes_judged_pct: v => fmt(v, 1), registry_confirmed_pct: v => fmt(v, 1), edges_checkable_pct: v => fmt(v, 1) })}<div class="note">Registry confirmation is reported, not scored: a well-formed identifier can still be absent from the registry.</div></div></div>`;
+    mk('c-ann', { type: 'bar', data: { labels: ['Entity validity', 'Relational consistency'], datasets: A.map(r => ({ label: NAMES[r.KG], data: [r.entity_validity, r.relational_consistency], backgroundColor: PAL[r.KG], borderWidth: 0 })) }, options: { scales: { y: axis('Score', 0, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
+  }
+  if (dimOn === 'trust') {
+    const Tr = D.trust;
+    body('trust').innerHTML = `<div class="grid g2"><div class="card"><h4>Edge provenance</h4>${tbl([['KG', 'Graph'], ['Provenance level', 'Level'], ['Edges attributed (%)', 'Edges attributed (%)'], ['Edge traceability', 'Score']], Tr.traceability.filter(r => on(r.KG)), { 'Edges attributed (%)': v => fmt(v, 0) })}</div><div class="card"><h4>Sources and uncertainty</h4>${tbl([['KG', 'Graph'], ['Sources', 'Sources'], ['Basis', 'Basis']], Tr.sources.filter(r => on(r.KG)))}${tbl([['KG', 'Graph'], ['Score column', 'Confidence field'], ['Edges with score (%)', 'Edges scored (%)']], Tr.uncertainty.filter(r => on(r.KG)))}</div></div>`;
+  }
+  if (dimOn === 'topology') {
+    const To = D.topology; const hops = ['1-hop', '2-hop', '3-hop', '4-hop', '5-hop'];
+    body('topology').innerHTML = `<div class="grid g2"><div class="card"><h4>Recovery of validated drug-disease pairs by hop distance</h4><div class="chart"><canvas id="c-hop"></canvas></div></div><div class="card"><h4>Cohesion and community structure</h4>${tbl([['KG', 'Graph'], ['LCC (%)', 'LCC (%)'], ['Components', 'Components'], ['Isolated', 'Isolated']], To.cohesion.filter(r => on(r.KG)), { 'LCC (%)': v => fmt(v, 1) })}${tbl([['KG', 'Graph'], ['C (empirical)', 'Clustering'], ['C / C_ER', 'vs random'], ['AMI (scored)', 'Community purity (AMI)'], ['Q (modularity)', 'Modularity']], To.clustering.filter(r => on(r.KG)).map(r => Object.assign({}, r, To.purity.find(p => p.KG === r.KG) || {})), { 'C / C_ER': v => fmt(v, 0) })}</div></div>`;
+    mk('c-hop', { type: 'line', data: { labels: hops.map(h => h.replace('-hop', '')), datasets: To.hops.filter(r => on(r.KG)).map(r => lineDs(r.KG, hops.map(h => r[h]))) }, options: { scales: { y: axis('Fraction of pairs connected', 0, 1), x: axis('Maximum hops') }, plugins: { legend: { position: 'bottom' } } } });
+  }
+  if (dimOn === 'stability') {
+    const St = D.stability.curves; const rates = [...new Set(St.map(r => r.Dropout))].sort((a, b) => a - b);
+    body('stability').innerHTML = `<div class="grid g2"><div class="card"><h4>Random edge dropout</h4><div class="chart"><canvas id="c-st1"></canvas></div></div><div class="card"><h4>Periphery-first dropout</h4><div class="chart"><canvas id="c-st2"></canvas></div></div></div><div class="legend"><span><i></i>indication pairs</span><span><i class="dash"></i>degree-matched null pairs</span></div>`;
+    ['Random edge dropout', 'Periphery-first dropout'].forEach((strat, i) => {
+      const ds = [];
+      ks.forEach(k => { ['gold', 'null'].forEach(ps => { const rows = St.filter(r => r.KG === k && r.Strategy === strat && r['Pair set'] === ps); if (!rows.length) return; ds.push(lineDs(k, rates.map(x => { const r = rows.find(z => z.Dropout === x); return r ? r['Spearman r'] : null; }), ps === 'null' ? { borderDash: [4, 3], pointRadius: 0, borderWidth: 1, label: NAMES[k] + ' (null)' } : {})); }); });
+      mk('c-st' + (i + 1), { type: 'line', data: { labels: rates.map(x => (x * 100) + '%'), datasets: ds }, options: { scales: { y: axis('Spearman r with intact ranking', 0, 1), x: axis('Edges removed') }, plugins: { legend: { position: 'bottom', labels: { filter: it => !it.text.includes('(null)') } } } } });
+    });
+  }
+  if (dimOn === 'tasks') {
+    const Tk = D.tasks; const strats = ['type-constrained', 'random', 'shared-target'];
+    body('tasks').innerHTML = `<div class="grid g2"><div class="card"><h4>Link prediction AUROC by negative set</h4><div class="chart"><canvas id="c-lp"></canvas></div><div class="note">Type-constrained is the scored specification. Whiskers: 95% bootstrap intervals.</div></div><div class="card"><h4>Retrieval and multi-hop at K = 0.5% of the pool</h4><div class="chart"><canvas id="c-ret"></canvas></div></div></div><div class="grid g2" style="margin-top:16px"><div class="card"><h4>Pairwise task contrasts</h4>${tbl([['pair', 'Pair'], ['lp_diff', 'ΔAUROC'], ['lp_q', 'q'], ['retrieval_diff', 'ΔRecall'], ['retrieval_q', 'q'], ['rev', 'Reversal']], Tk.contrasts.filter(r => on(r.kg_a) && on(r.kg_b)).map(r => ({ pair: `${NAMES[r.kg_a]} vs ${NAMES[r.kg_b]}`, lp_diff: (r.lp_diff > 0 ? '+' : '') + fmt(r.lp_diff, 3), lp_q: fmtP(r.lp_q), retrieval_diff: (r.retrieval_diff > 0 ? '+' : '') + fmt(r.retrieval_diff, 3), retrieval_q: fmtP(r.retrieval_q), rev: r.significant_reversal ? 'yes' : '' })))}<div class="note">Two-sample z-tests from bootstrap intervals, Benjamini-Hochberg over 15 pairs. A reversal is a significant lead on one task and a significant deficit on the other.</div></div><div class="card"><h4>Embedding scorers (supplement)</h4>${tbl([['kg', 'Graph'], ['model', 'Model'], ['dim', 'Dim'], ['test_auroc', 'Test AUROC'], ['adamic_adar_auroc', 'Adamic-Adar AUROC']], Tk.embeddings.filter(r => on(r.kg)))}<div class="note">Run where compute allowed; see Supplementary Table S7.</div></div></div>`;
+    mk('c-lp', { type: 'bar', data: { labels: strats, datasets: ks.map(k => ({ label: NAMES[k], data: strats.map(s => { const r = Tk.link_prediction.find(x => x.kg === k && x.neg_strategy === s); return r ? r.auroc : null; }), ci: strats.map(s => { const r = Tk.link_prediction.find(x => x.kg === k && x.neg_strategy === s); return r ? [r.auroc_ci_lo, r.auroc_ci_hi] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('AUROC', 0.5, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
+    mk('c-ret', { type: 'bar', data: { labels: ['Neighbourhood retrieval (Recall@K)', 'Multi-hop reasoning (Hits@K)'], datasets: ks.map(k => { const r = Tk.retrieval.find(x => x.KG === k), m = Tk.multihop.find(x => x.KG === k); return { label: NAMES[k], data: [r ? r['recall@frac'] : null, m ? m['hits@frac'] : null], backgroundColor: PAL[k], borderWidth: 0 }; }) }, options: { scales: { y: axis('Score', 0, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
+  }
+  if (dimOn === 'general') {
+    const G = D.generalisation; const tiers = [...new Set(G.sparse.map(r => r.tier))];
+    const areas = [...new Set(G.areas.map(r => r.area))];
+    body('general').innerHTML = `<div class="grid g2"><div class="card"><h4>AUROC by disease annotation quartile</h4><div class="chart"><canvas id="c-sp"></canvas></div><div class="note">Q1 is the least-annotated quartile. Whiskers: 95% bootstrap intervals.</div></div><div class="card"><h4>Prospective indications (approved after the graph)</h4><div class="chart"><canvas id="c-pro"></canvas></div><div class="note">Graphs built before 2023 with at least ten evaluable pairs. Hetionet (2 pairs) and MATRIX (postdates the approvals) are not evaluable.</div></div></div><div class="card" style="margin-top:16px"><h4>AUROC by therapeutic area</h4><div class="chart tall"><canvas id="c-area"></canvas></div><div class="note">Areas with at least 25 indication pairs in the graph; blanks are below that threshold.</div></div>`;
+    mk('c-sp', { type: 'line', data: { labels: tiers, datasets: ks.map(k => { const rows = tiers.map(t => G.sparse.find(x => x.KG === k && x.tier === t)); return lineDs(k, rows.map(r => r ? r.auroc : null), { ci: rows.map(r => r ? [r.auroc_ci_lo, r.auroc_ci_hi] : null), ciColor: PAL[k] }); }) }, options: { scales: { y: axis('AUROC', 0.5, 1), x: axis('') }, plugins: { legend: { position: 'bottom' } } } });
+    const pro = G.prospective.filter(r => on(r.KG));
+    mk('c-pro', { type: 'bar', data: { labels: pro.map(r => NAMES[r.KG]), datasets: [{ label: 'AUROC', data: pro.map(r => r.auroc), ci: pro.map(r => [r.auroc_ci_lo, r.auroc_ci_hi]), backgroundColor: pro.map(r => PAL[r.KG]), borderWidth: 0, barPercentage: 0.6 }] }, options: { scales: { y: axis('AUROC', 0.5, 1), x: { grid: { display: false } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { afterLabel: ctx => { const c = G.prospective_coverage.find(x => x.KG === pro[ctx.dataIndex].KG); return c ? `${c.n_evaluable} evaluable pairs` : ''; } } } } } });
+    mk('c-area', { type: 'bar', data: { labels: areas, datasets: ks.map(k => ({ label: NAMES[k], data: areas.map(a => { const r = G.areas.find(x => x.KG === k && x.area === a); return r && r.auroc !== '' ? r.auroc : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('AUROC', 0.5, 1), x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, plugins: { legend: { position: 'bottom' } } } });
+  }
+}
+
+// ── grounding ────────────────────────────────────────────────────────────
+let subset = 'main';
+document.querySelectorAll('#subset span').forEach(el => el.onclick = () => { subset = el.dataset.v; document.querySelectorAll('#subset span').forEach(x => x.classList.toggle('on', x === el)); renderGrounding(); });
+function renderGrounding() {
+  const Gr = D.grounding; const arms = Gr['arms_' + subset];
+  const models = [...new Set(arms.map(r => r.model_label))];
+  const gk = GROUND_KGS.filter(on);
+  mk('lifts', { type: 'bar', data: { labels: models, datasets: gk.map(k => ({ label: NAMES[k], data: models.map(m => { const r = arms.find(x => x.model_label === m && x.arm === k); return r ? r.lift : null; }), ci: models.map(m => { const r = arms.find(x => x.model_label === m && x.arm === k); return r ? [r.lift_lo, r.lift_hi] : null; }), backgroundColor: PAL[k], borderWidth: 0 })) }, options: { scales: { y: axis('Lift in MRR over no KG', 0, 0.5), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' } } } });
+  const armOrder = ['none', ...gk];
+  mk('arms', { type: 'bar', data: { labels: models, datasets: armOrder.map(a => ({ label: a === 'none' ? 'No KG' : NAMES[a], data: models.map(m => { const r = arms.find(x => x.model_label === m && x.arm === a); return r ? r.mrr : null; }), ci: models.map(m => { const r = arms.find(x => x.model_label === m && x.arm === a); return r ? [r.lo, r.hi] : null; }), backgroundColor: a === 'none' ? NEUTRAL : PAL[a], borderWidth: 0 })) }, options: { scales: { y: axis('MRR', 0, 1), x: { grid: { display: false } } }, plugins: { legend: { position: 'bottom' }, annotation: undefined } } });
+  const cap = Gr.capacity.filter(r => r.arm !== 'none'); const sizes = [...new Set(cap.map(r => r.params_b))].sort((a, b) => a - b);
+  mk('capacity', { type: 'line', data: { labels: sizes.map(s => s + 'B'), datasets: gk.map((k, i) => { const rows = sizes.map(s => cap.find(x => x.arm === k && x.params_b === s)); return lineDs(k, rows.map(r => r ? r.lift : null), { ci: rows.map(r => r ? [r.lift_lo, r.lift_hi] : null), ciColor: PAL[k] }); }) }, options: { scales: { y: axis('Lift in MRR over no KG', -0.05, 0.4), x: axis('Parameters') }, plugins: { legend: { position: 'bottom' } } } });
+  const lv = Object.fromEntries(Gr.levers.map(r => [r.quantity, r]));
+  const pct = r => `${fmt(r.value * 100, 0)}% (${fmt(r.lo * 100, 0)} to ${fmt(r.hi * 100, 0)})`;
+  document.getElementById('levers').innerHTML = `<table><tbody><tr><td>Variation due to the KG</td><td>${pct(lv.share_arm)}</td></tr><tr><td>Variation due to the LLM</td><td>${pct(lv.share_model)}</td></tr><tr><td>Interaction</td><td>${pct(lv.share_interaction)}</td></tr><tr><td>KG effect, paired scale (MRR)</td><td>${fmt(lv.arm_range.value)} (${fmt(lv.arm_range.lo)} to ${fmt(lv.arm_range.hi)})</td></tr><tr><td>LLM effect, paired scale (MRR)</td><td>${fmt(lv.model_range.value)} (${fmt(lv.model_range.lo)} to ${fmt(lv.model_range.hi)})</td></tr><tr><td>Ratio KG : LLM</td><td>${fmt(lv.ratio.value, 1)} (${fmt(lv.ratio.lo, 1)} to ${fmt(lv.ratio.hi, 1)})</td></tr></tbody></table>`;
+  const ab = Gr.absence.filter(r => on(r.arm));
+  let a = '<table><thead><tr><th>LLM</th><th>Graph</th><th>Approved drug</th><th>Pairs</th><th>Lift</th><th>95% CI</th></tr></thead><tbody>';
+  ab.forEach(r => { a += `<tr><td>${r.model_label}</td><td><span class="swatch" style="background:${PAL[r.arm]}"></span>${NAMES[r.arm]}</td><td>${r.positive}</td><td>${r.n_pairs}</td><td>${(r.lift >= 0 ? '+' : '') + fmt(r.lift, 2)}</td><td>${fmt(r.lift_lo, 2)} to ${fmt(r.lift_hi, 2)}</td></tr>`; });
+  document.getElementById('absence').innerHTML = a + '</tbody></table>';
+  const subsetName = { main: 'all pairs', covered: 'evaluable in every graph', common: 'common family' }[subset];
+  const sig = Gr.significance.filter(r => r.subset === subsetName);
+  let s = '<table><thead><tr><th>LLM</th><th>Contrast</th><th>n</th><th>ΔMRR</th><th>P (Wilcoxon)</th><th>q</th></tr></thead><tbody>';
+  sig.forEach(r => { s += `<tr><td>${r.model_label}</td><td>${r.contrast}</td><td>${r.n}</td><td>${(r.diff >= 0 ? '+' : '') + fmt(r.diff, 3)}</td><td>${fmtP(r.p_wilcoxon)}</td><td>${r.sig_fdr ? '<b>' + fmtP(r.q_bh) + '</b>' : fmtP(r.q_bh)}</td></tr>`; });
+  document.getElementById('sigtests').innerHTML = s + '</tbody></table>';
+}
+
+// ── explorer ─────────────────────────────────────────────────────────────
+const E = D.explorer; let selected = null;
+const MODEL_LABEL = m => ({ 'gemini:gemini-3.5-flash-lite': 'Gemini-3.5-Flash-Lite', 'gpt-4.1-mini': 'GPT-4.1-mini', 'llama3.3:70b': 'Llama-3.3-70B', 'llama3.2:1b': 'Llama-3.2-1B', 'llama3.2:3b': 'Llama-3.2-3B', 'llama3.1:8b': 'Llama-3.1-8B', 'llama3.1:405b': 'Llama-3.1-405B' })[m] || m;
+let showLadder = false;
+(function initFilters() {
+  const areas = [...new Set(E.pairs.map(p => p.area))].sort(); const mods = [...new Set(E.pairs.map(p => p.modality))].sort();
+  document.getElementById('farea').innerHTML += areas.map(a => `<option>${a}</option>`).join('');
+  document.getElementById('fmod').innerHTML += mods.map(a => `<option>${a}</option>`).join('');
+  ['q', 'farea', 'fmod', 'fcommon'].forEach(id => document.getElementById(id).addEventListener('input', renderList));
+  document.getElementById('fladder').addEventListener('input', e => { showLadder = e.target.checked; renderDetail(); });
+})();
+function filtered() {
+  const q = document.getElementById('q').value.toLowerCase(), ar = document.getElementById('farea').value, mo = document.getElementById('fmod').value, co = document.getElementById('fcommon').checked;
+  return E.pairs.filter(p => (!q || p.drug.toLowerCase().includes(q) || p.disease.toLowerCase().includes(q)) && (!ar || p.area === ar) && (!mo || p.modality === mo) && (!co || p.common));
+}
+function renderList() {
+  const rows = filtered(); document.getElementById('pcount').textContent = `${rows.length} of ${E.pairs.length} pairs`;
+  document.getElementById('plist').innerHTML = rows.map(p => `<div class="prow ${selected === p.id ? 'on' : ''}" data-id="${p.id}"><b>${p.drug}</b> for ${p.disease}<div class="d">${p.date} · ${p.area} · ${GROUND_KGS.map(k => `<span class="ev ${p.shown[k] ? 'yes' : ''}" style="--c:${PAL[k]}" title="${NAMES[k]}: ${p.shown[k] ? 'evidence shown' : 'no evidence'}"></span>`).join('')}</div></div>`).join('');
+  document.querySelectorAll('.prow').forEach(el => el.onclick = () => { selected = +el.dataset.id; renderList(); renderDetail(); });
+}
+function renderDetail() {
+  const p = E.pairs.find(x => x.id === selected); if (!p) return;
+  const models = showLadder ? [...E.models, ...E.ladder] : E.models;
+  let h = `<h4 style="font-size:15px">${p.drug} for ${p.disease}</h4><div class="kv"><b>Approved</b><span>${p.date} (${p.agencies})</span><b>Identifiers</b><span>${p.drugbank}, ${p.mondo}</span><b>Area</b><span>${p.area}</span><b>Modality</b><span>${p.modality}</span><b>Common family</b><span>${p.common ? 'yes' : 'no'}</span></div>`;
+  h += `<h4 style="margin-top:12px">Candidates (shuffled and relabelled Drug-1 to Drug-8 in the prompt)</h4><div class="chips"><span class="chip pos">${p.drug}</span>${p.distractors.map(d => `<span class="chip">${d}</span>`).join('')}</div>`;
+  h += `<h4 style="margin-top:12px">Evidence for the approved drug</h4><div class="chips">${GROUND_KGS.map(k => `<span class="chip" style="border-color:${PAL[k]};${p.shown[k] ? `background:${alpha(PAL[k], 0.15)}` : ''}">${NAMES[k]}: ${p.shown[k] ? 'profile shown' : (p.evaluable[k] ? 'held, no gene or pathway' : 'not evaluable')}</span>`).join('')}</div>`;
+  h += `<h4 style="margin-top:12px">Mean rank of the approved drug (1 is best; chance 4.5)</h4><div class="tscroll"><table><thead><tr><th>LLM</th>${E.arms.map(a => `<th>${a === 'none' ? 'No KG' : NAMES[a]}</th>`).join('')}</tr></thead><tbody>`;
+  models.forEach(m => { h += `<tr><td>${MODEL_LABEL(m)}</td>` + E.arms.map(a => { const r = (p.results[m] || {})[a]; if (!r) return '<td style="color:var(--faint)">n/a</td>'; return `<td><span class="rank ${r.rank <= 1.5 ? 'r1' : ''}" title="MRR ${r.rr}, rank-1 rate ${r.hit1}, ${r.n} runs">${fmt(r.rank, 1)}</span></td>`; }).join('') + '</tr>'; });
+  h += '</tbody></table></div>';
+  h += `<h4 style="margin-top:12px">What the model said about the approved drug (seed 0, first order)</h4>`;
+  models.forEach(m => { E.arms.forEach(a => { const r = (p.results[m] || {})[a]; if (!r || !r.rationale) return; h += `<div class="rationale"><b>${MODEL_LABEL(m)}, ${a === 'none' ? 'no KG' : NAMES[a]}</b> (basis: ${r.basis || 'n/a'}; evidence: ${r.agreement || 'n/a'}; confidence ${r.confidence ?? 'n/a'}): ${r.rationale}</div>`; }); });
+  document.getElementById('pdetail').innerHTML = h;
+}
+
+// ── render all ───────────────────────────────────────────────────────────
+function render() { renderCards(); renderOverview(); renderHeatmap(); renderRankings(); renderDims(); renderGrounding(); }
+buildDimTabs(); render(); renderList();
+if (E.pairs.length) { selected = E.pairs.find(p => p.drug === 'miglustat')?.id ?? E.pairs[0].id; renderList(); renderDetail(); }
+</script>
+</body>
+</html>
