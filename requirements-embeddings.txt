@@ -1,2 +1,5 @@
-# Only for the embedding arms. The seven dimension notebooks never import torch.
+# Only for the embedding arms (supplementary/embeddings, biokgsuite.models).
+# The seven dimension notebooks never import these.
 torch>=2.2
+sentence-transformers>=3.0   # EmbeddingGemma name prior
+transformers>=4.40

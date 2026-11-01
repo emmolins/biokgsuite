@@ -3,6 +3,8 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  # The results in the tree were produced on Python 3.12.11 (hpc/) with
+  # networkx 3.6.1; the notebooks run unchanged on 3.11.
   - python=3.11
   - pip
 
@@ -29,6 +31,9 @@ dependencies:
   # ── Configuration ─────────────────────────────────────────────────────────
   - pyyaml>=6.0
 
+  # ── Hosted-model clients (grounding_experiment/02_run) ────────────────────
+  - requests>=2.31
+
   # ── Styled tables ─────────────────────────────────────────────────────────
   # pandas renders `DataFrame.style` through jinja2 and needs 3.1.2 or newer for
   # it. Notebook 00 displays the benchmark summary that way, so an older jinja2
@@ -49,6 +54,8 @@ dependencies:
   # Only the embedding arms import torch; the seven dimension notebooks do not,
   # and biokgsuite.models.embedding is the only module that imports it.
   - pytorch>=2.2
+  - sentence-transformers>=3.0
+  - transformers>=4.40
 
   # ── pip-only packages ─────────────────────────────────────────────────────
   - pip:
@@ -56,3 +63,4 @@ dependencies:
     # tools/fetch_kgs.py pulls the MATRIX KG from Hugging Face, pinned by
     # commit. Only that one fetch needs it; nothing in src/ imports it.
     - huggingface_hub>=0.23
+    - ijson>=3.2             # tools/convert_hetionet_json.py
