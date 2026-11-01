@@ -2,7 +2,8 @@
 
 Where every figure, table and reported number in the BiB manuscript and its
 supplement comes from. Paths are relative to the repository root; notebooks are
-`biokgsuite_dimensions/NN_*/notebook.ipynb` and `grounding_experiment/G0N_*/notebook.ipynb`.
+`biokgsuite_dimensions/NN_*/notebook.ipynb` and `grounding_experiment/0N_*/notebook.ipynb`
+(their outputs are written under `results/*/G0N_*/`).
 `results/MANIFEST.md` lists every file with its checksum.
 
 ## Main text
